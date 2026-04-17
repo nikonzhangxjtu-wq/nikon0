@@ -1,1 +1,1 @@
-"""Pydantic schema package."""
+"""Pydantic 模型子包。"""

@@ -1,6 +1,6 @@
-"""Generation service wrapper.
+"""生成服务封装。
 
-This uses LangChain's Ollama integration to call qwen2.
+通过 LangChain 的 Ollama 集成调用本地 qwen2。
 """
 
 from __future__ import annotations
@@ -8,15 +8,15 @@ from __future__ import annotations
 from langchain_ollama import ChatOllama
 
 from app.core.config import settings
-
+import time
 
 class Qwen2Generator:
-    """LLM generator wrapper for answer synthesis.
+    """大模型生成封装，用于合成最终回答。
 
-    TODO (you):
-    - Tune temperature/top_p for your benchmark.
-    - Add retry logic and timeout handling.
-    - Add optional structured output format enforcement.
+    TODO（你来补）：
+    - 按评测调 temperature / top_p
+    - 增加重试、超时
+    - 可选：强制结构化输出格式
     """
 
     def __init__(self) -> None:
@@ -27,6 +27,12 @@ class Qwen2Generator:
         )
 
     def generate(self, prompt: str) -> str:
-        """Run the generation model and return plain text."""
-        result = self.client.invoke(prompt)
+        """调用生成模型，返回纯文本。"""
+        time_start = time.time()
+        try:
+            result = self.client.invoke(prompt)
+        except Exception as e:
+            raise Exception(f"生成失败: {e}")
+        time_end = time.time()
+        print(result)
         return getattr(result, "content", "").strip()

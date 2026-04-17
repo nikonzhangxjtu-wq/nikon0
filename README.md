@@ -42,6 +42,17 @@ app/
 scripts/
   build_index.py
   run_batch_submission.py
+eval/
+  dataset/dev_eval.jsonl
+  run_eval.py
+  README.md
+```
+
+离线对比优化效果：见 [eval/README.md](eval/README.md)，一键命令示例：
+
+```bash
+python -m eval.run_eval --version v0.1-baseline
+python -m eval.run_eval --version v0.2-rerank --no-judge
 ```
 
 ## 3. Tech Stack (Your Selected Direction)

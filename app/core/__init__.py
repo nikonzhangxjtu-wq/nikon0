@@ -1,1 +1,1 @@
-"""Core config package."""
+"""核心配置子包。"""

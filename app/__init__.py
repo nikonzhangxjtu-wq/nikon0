@@ -1,1 +1,1 @@
-"""Application package for the V1 scaffold."""
+"""V1 骨架应用包。"""

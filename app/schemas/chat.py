@@ -1,4 +1,4 @@
-"""Schema definitions for the `/chat` API."""
+"""`/chat` 接口相关的 Pydantic 模型定义。"""
 
 from __future__ import annotations
 
@@ -9,30 +9,30 @@ from pydantic import BaseModel, Field, field_validator
 
 
 class ChatRequest(BaseModel):
-    """Incoming request body for the competition-compatible endpoint."""
+    """与赛题一致的请求体。"""
 
-    question: str = Field(..., description="User question string, non-empty.")
-    images: list[str] = Field(default_factory=list, description="Optional base64 image list (0-3).")
-    session_id: Optional[str] = Field(default=None, description="Conversation session id.")
-    stream: bool = Field(default=False, description="Whether to stream response.")
+    question: str = Field(..., description="用户问题，非空字符串。")
+    images: list[str] = Field(default_factory=list, description="可选 Base64 图片列表，0～3 张。")
+    session_id: Optional[str] = Field(default=None, description="会话 ID，多轮对话用。")
+    stream: bool = Field(default=False, description="是否流式返回。")
 
     @field_validator("question")
     @classmethod
     def validate_question(cls, value: str) -> str:
         if not value or not value.strip():
-            raise ValueError("`question` must be a non-empty string.")
+            raise ValueError("`question` 必须为非空字符串。")
         return value.strip()
 
     @field_validator("images")
     @classmethod
     def validate_images(cls, value: list[str]) -> list[str]:
         if len(value) > 3:
-            raise ValueError("`images` supports up to 3 items.")
+            raise ValueError("`images` 最多 3 张。")
         return value
 
 
 class ChatResponseData(BaseModel):
-    """Business payload for successful responses."""
+    """成功时返回的业务数据。"""
 
     answer: str
     session_id: str
@@ -40,7 +40,7 @@ class ChatResponseData(BaseModel):
 
 
 class ChatResponse(BaseModel):
-    """Standardized API response envelope."""
+    """统一响应外壳。"""
 
     code: int
     msg: str
