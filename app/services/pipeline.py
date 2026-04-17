@@ -12,6 +12,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from app.services.generator import Qwen2Generator
+from app.services.rag_skill.query_construction import query_construction
 from app.services.retriever import RetrievalTrace, VectorRetriever, retriever_context_filter
 from app.services.router import QuestionRouter, RouteDecision
 from app.utils.prompt_builder import build_context_block
@@ -71,7 +72,10 @@ class ChatPipeline:
         top_k = 4
 
         if decision.needs_rag:
-            chunks = self.retriever.retrieve(question, top_k=top_k)
+            manual_name = query_construction(question)
+            chunks = self.retriever.retrieve(
+                question, top_k=top_k, manual_name=manual_name or None
+            )
             filter_context = retriever_context_filter(chunks)
             context_block = build_context_block(filter_context)
             retrieval_trace = self.retriever.build_trace(

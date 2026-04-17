@@ -111,10 +111,14 @@ def _create_vector_index(client: MilvusClient) -> None:
 
     if "sparse_vector" in field_names:
         try:
+            # Milvus 2.6+ 对 BM25 Function 的输出 sparse 字段要求 metric_type="BM25",
+            # 使用旧的 IP 会报 "index metric type of BM25 function output field must be BM25".
+            # params 里 bm25_k1 / bm25_b 采用 Milvus 官方推荐默认值.
             index_params.add_index(
                 field_name="sparse_vector",
                 index_type="SPARSE_INVERTED_INDEX",
-                metric_type="IP",
+                metric_type="BM25",
+                params={"bm25_k1": 1.2, "bm25_b": 0.75},
             )
         except Exception as exc:  # noqa: BLE001
             print(f"[WARN] sparse_vector 索引添加失败, 忽略: {exc}")

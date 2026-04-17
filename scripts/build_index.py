@@ -161,9 +161,28 @@ def main() -> None:
         index_ok = False
         print(f"[ERROR] 创建向量索引或 load 失败（数据可能已写入）: {exc}")
 
+    load_ok = False
+    if index_ok:
+        try:
+            client.load_collection(collection_name=settings.milvus_collection)
+            state = None
+            try:
+                state = client.get_load_state(collection_name=settings.milvus_collection)
+            except Exception:
+                state = "<unknown>"
+            print(f"[INFO] load_collection 成功, state={state}")
+            load_ok = True
+        except Exception as exc:  # noqa: BLE001
+            print(
+                f"[ERROR] load_collection 失败: {exc}. "
+                "常见原因：某个 vector 字段未建索引（Milvus 2.6 要求所有向量字段都建索引才能 load）。"
+            )
+
     total = success + failed
     print(f"[INFO] 集合名: {settings.milvus_collection} | Milvus: {settings.milvus_uri}")
-    print(f"[INFO] 写入成功: {success} 条，失败: {failed} 条 | index_ok={index_ok}")
+    print(
+        f"[INFO] 写入成功: {success} 条，失败: {failed} 条 | index_ok={index_ok} | load_ok={load_ok}"
+    )
     if total > 0:
         print(f"[INFO] 失败占比: {failed / total:.2%}")
 

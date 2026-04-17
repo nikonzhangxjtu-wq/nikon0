@@ -6,6 +6,8 @@ V2 要点：
 - 只有当集合里真的存在 ``sparse_vector`` 字段、且 Milvus 支持 BM25 文本查询时，
   才走 sparse 召回；否则 **dense-only**，避免 Milvus Lite 上报
   ``search_data ... illegal``。
+- ``manual_name`` 上的 TRIE 索引只在带 **标量 filter** 的 ``search`` 中才会被利用；
+  可通过 :meth:`retrieve` 的 ``manual_name=`` 限定单本手册后再做向量/BM25 召回。
 """
 
 from __future__ import annotations
@@ -56,6 +58,13 @@ def retriever_context_filter(chunks: list[RetrievedChunk]) -> list[RetrievedChun
 _DENSE_FIELD_CANDIDATES = ("dense_vector", "vector", "embedding")
 
 
+def _milvus_manual_name_filter_expr(manual_name: str) -> str:
+    """构造 ``manual_name == "..."`` 过滤表达式（转义 Milvus 字符串字面量）。"""
+    v = manual_name.strip()
+    escaped = v.replace("\\", "\\\\").replace('"', '\\"')
+    return f'manual_name == "{escaped}"'
+
+
 class VectorRetriever:
     """Milvus 检索封装。
 
@@ -84,10 +93,29 @@ class VectorRetriever:
                 "[WARN] describe_collection 未能获取字段列表，"
                 f"默认使用 dense 字段名 '{self.dense_field}' 与 sparse_enabled={self.sparse_enabled}。"
             )
+
+        # 启动时显式 load，提前暴露「没建索引 / load 不了」这类问题，避免每次 search
+        # 才报 "collection not loaded"。失败不直接抛：留给后续 search 兜底并打印明确 WARN。
+        self._ensure_loaded(force=True)
+
         print(
             f"[INFO] VectorRetriever: collection={self.collection_name} "
             f"dense_field={self.dense_field} sparse_enabled={self.sparse_enabled}"
         )
+
+    def _ensure_loaded(self, *, force: bool = False) -> bool:
+        """尝试 load collection；成功返回 True，失败打印 WARN 并返回 False。"""
+        try:
+            self.client.load_collection(collection_name=self.collection_name)
+            return True
+        except Exception as exc:  # noqa: BLE001
+            print(
+                f"[WARN] load_collection 失败 (collection={self.collection_name}): {exc}. "
+                "这通常意味着索引未建成功（例如 sparse_vector 字段存在但未建 "
+                "SPARSE_INVERTED_INDEX，或 dense_vector 未建 HNSW）。"
+                "请确认 `python scripts/build_index.py` 末尾 index_ok=True 后再重试。"
+            )
+            return False
 
     def _probe_schema(self) -> tuple[str, bool, list[str]]:
         """返回 (dense 字段名, 是否有 sparse_vector, 全部字段名)。"""
@@ -135,18 +163,32 @@ class VectorRetriever:
             return [str(decoded)]
         return [str(value)]
 
-    def retrieve(self, query: str, top_k: int = 4) -> list[RetrievedChunk]:
-        """dense 主召回；若 ``sparse_enabled=True``，再与 sparse 结果做加权融合。"""
+    def retrieve(
+        self, query: str, top_k: int = 4, *, manual_name: str | None = None
+    ) -> list[RetrievedChunk]:
+        """dense 主召回；若 ``sparse_enabled=True``，再与 sparse 结果做加权融合。
+
+        若传入 ``manual_name``，两路 search 会带上 ``manual_name == "..."`` 过滤，
+        从而用上 TRIE 索引并缩小候选集（典型「结构化约束 + 多尺度检索」的第一步）。
+        """
         query = query.strip()
         if not query:
             return []
 
+        filter_expr = (
+            _milvus_manual_name_filter_expr(manual_name) if manual_name and manual_name.strip() else None
+        )
+
         query_vector = self.embed_model.embed_query(query)
-        dense_hits = self._search_dense(query_vector=query_vector, limit=max(top_k, 10))
+        dense_hits = self._search_dense(
+            query_vector=query_vector, limit=max(top_k, 10), filter_expr=filter_expr
+        )
 
         sparse_hits: list[dict] = []
         if self.sparse_enabled:
-            sparse_hits = self._search_sparse_text(query=query, limit=max(top_k, 10))
+            sparse_hits = self._search_sparse_text(
+                query=query, limit=max(top_k, 10), filter_expr=filter_expr
+            )
 
         if self.sparse_enabled:
             fused_hits = self._fuse_hits_by_rank(
@@ -177,41 +219,68 @@ class VectorRetriever:
             )
         return list_results
 
-    def _search_dense(self, *, query_vector: list[float], limit: int) -> list[dict]:
+    def _search_dense(
+        self, *, query_vector: list[float], limit: int, filter_expr: str | None = None
+    ) -> list[dict]:
         output_fields = ["chunk_id", "text", "manual_name", "image_ids"]
+        search_kw: dict = {
+            "collection_name": self.collection_name,
+            "anns_field": self.dense_field,
+            "data": [query_vector],
+            "limit": limit,
+            "output_fields": output_fields,
+        }
+        if filter_expr:
+            search_kw["filter"] = filter_expr
         try:
-            results = self.client.search(
-                collection_name=self.collection_name,
-                anns_field=self.dense_field,
-                data=[query_vector],
-                limit=limit,
-                output_fields=output_fields,
-            )
+            results = self.client.search(**search_kw)
         except Exception as exc:  # noqa: BLE001
-            print(f"[WARN] dense 检索失败 (field={self.dense_field}): {exc}")
-            return []
+            # 典型恢复点：集合未 load。尝试一次 load + retry，再失败就放弃。
+            msg = str(exc)
+            if "not loaded" in msg and self._ensure_loaded():
+                try:
+                    results = self.client.search(**search_kw)
+                except Exception as exc2:  # noqa: BLE001
+                    print(f"[WARN] dense 检索重试失败 (field={self.dense_field}): {exc2}")
+                    return []
+            else:
+                print(f"[WARN] dense 检索失败 (field={self.dense_field}): {exc}")
+                return []
         return list(results[0]) if results and results[0] else []
 
-    def _search_sparse_text(self, *, query: str, limit: int) -> list[dict]:
-        """走 BM25 Function 的 sparse 文本检索（仅在 sparse_enabled 时调用）。"""
+    def _search_sparse_text(
+        self, *, query: str, limit: int, filter_expr: str | None = None
+    ) -> list[dict]:
+        """走 BM25 Function 的 sparse 文本检索（仅在 sparse_enabled 时调用）。
+
+        Milvus 2.5/2.6 + pymilvus 2.5+ 的正确入参格式是 ``data=[query_string]``，
+        pymilvus 客户端会直接拒绝 ``[{"text": ...}]`` 这种 dict 形式
+        (ParamError: search_data value is illegal)。
+        """
         output_fields = ["chunk_id", "text", "manual_name", "image_ids"]
-        # 不同 Milvus / pymilvus 版本对 BM25 文本检索入参格式略有差异，做兼容兜底
-        payload_candidates: tuple[object, ...] = ([query], [{"text": query}], [query.strip()])
-        for payload in payload_candidates:
-            try:
-                results = self.client.search(
-                    collection_name=self.collection_name,
-                    anns_field="sparse_vector",
-                    data=payload,
-                    limit=limit,
-                    output_fields=output_fields,
-                )
-                if results and results[0]:
-                    return list(results[0])
-            except Exception:
-                continue
-        # 这里到达一次后就不再打 WARN，避免评测时刷屏；真出问题可在集合无 sparse 字段时由调用侧感知
-        return []
+        search_kw: dict = {
+            "collection_name": self.collection_name,
+            "anns_field": "sparse_vector",
+            "data": [query],
+            "limit": limit,
+            "output_fields": output_fields,
+        }
+        if filter_expr:
+            search_kw["filter"] = filter_expr
+        try:
+            results = self.client.search(**search_kw)
+        except Exception as exc:  # noqa: BLE001
+            msg = str(exc)
+            if "not loaded" in msg and self._ensure_loaded():
+                try:
+                    results = self.client.search(**search_kw)
+                except Exception as exc2:  # noqa: BLE001
+                    print(f"[WARN] sparse BM25 检索重试失败: {exc2}")
+                    return []
+            else:
+                print(f"[WARN] sparse BM25 检索失败: {exc}")
+                return []
+        return list(results[0]) if results and results[0] else []
 
     @staticmethod
     def _fuse_hits_by_rank(
