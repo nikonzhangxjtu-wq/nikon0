@@ -10,14 +10,13 @@ from pathlib import Path
 _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
-
 from langchain_ollama import OllamaEmbeddings
 from llama_index.core import Document
-from pymilvus import DataType, MilvusClient
+from pymilvus import MilvusClient
 
 from app.core.config import settings
 from app.services.ingestion import ManualChunk, ManualIngestionService
-
+from app.services.milvus_create import build_collection, _create_vector_index
 # 与切块默认上限对齐并留余量（VARCHAR 上限受 Milvus 版本限制，一般 ≤ 65535）
 TEXT_MAX_LEN = 16384
 IMAGE_IDS_MAX_LEN = 8192
@@ -58,38 +57,6 @@ def _truncate(text: str, max_len: int, label: str, warned: list[bool]) -> str:
         warned[0] = True
     return text[:max_len]
 
-
-def build_collection(client: MilvusClient, vector_dim: int) -> None:
-    name = settings.milvus_collection
-    if client.has_collection(collection_name=name):
-        client.drop_collection(collection_name=name)
-
-    schema = MilvusClient.create_schema(auto_id=False, enable_dynamic_field=False)
-    schema.add_field(
-        field_name="chunk_id",
-        datatype=DataType.VARCHAR,
-        max_length=256,
-        is_primary=True,
-    )
-    schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=vector_dim)
-    schema.add_field(field_name="text", datatype=DataType.VARCHAR, max_length=TEXT_MAX_LEN)
-    schema.add_field(
-        field_name="image_ids",
-        datatype=DataType.VARCHAR,
-        max_length=IMAGE_IDS_MAX_LEN,
-    )
-    schema.add_field(field_name="manual_name", datatype=DataType.VARCHAR, max_length=256)
-
-    client.create_collection(collection_name=name, schema=schema)
-
-
-def _create_vector_index(client: MilvusClient) -> None:
-    index_params = MilvusClient.prepare_index_params()
-    index_params.add_index(field_name="vector", index_type="AUTOINDEX", metric_type="COSINE")
-    client.create_index(collection_name=settings.milvus_collection, index_params=index_params)
-    client.load_collection(collection_name=settings.milvus_collection)
-
-
 def main() -> None:
     embeddings = OllamaEmbeddings(
         model=settings.embed_model,
@@ -117,6 +84,28 @@ def main() -> None:
 
     client = _milvus_client()
     build_collection(client, vector_dim=dim)
+
+    # 建完库立刻做一次 schema 自检：避免「create 像是成功了，但服务端实际没有 dense_vector
+    # 字段」的沉默失败（在 Milvus Lite 上开启 BM25 Function 时曾观察到此类状态）。
+    try:
+        desc = client.describe_collection(collection_name=settings.milvus_collection)
+        fields = desc.get("fields") if isinstance(desc, dict) else getattr(desc, "fields", None)
+        field_names: list[str] = []
+        if fields:
+            for f in fields:
+                if isinstance(f, dict):
+                    field_names.append(str(f.get("name", "")))
+                else:
+                    field_names.append(str(getattr(f, "name", "")))
+        print(f"[INFO] 集合字段: {field_names}")
+        if "dense_vector" not in field_names:
+            raise RuntimeError(
+                "集合缺少 dense_vector 字段，build_collection 未按预期创建。"
+                "在 Milvus Lite 上请确认 MILVUS_ENABLE_BM25=False，并删除旧的 .db 文件后重建。"
+            )
+    except Exception as exc:  # noqa: BLE001
+        print(f"[ERROR] 建库自检失败: {exc}")
+        return
 
     success = 0
     failed = 0
@@ -150,13 +139,12 @@ def main() -> None:
             rows.append(
                 {
                     "chunk_id": chunk.chunk_id,
-                    "vector": vec,
+                    "dense_vector": vec,
                     "text": text,
                     "image_ids": ids_json,
                     "manual_name": chunk.manual_name,
                 }
             )
-
         if not rows:
             continue
         try:
@@ -166,14 +154,16 @@ def main() -> None:
             failed += len(rows)
             print(f"[ERROR] Milvus insert 失败: {exc}")
 
+    index_ok = True
     try:
         _create_vector_index(client)
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001
+        index_ok = False
         print(f"[ERROR] 创建向量索引或 load 失败（数据可能已写入）: {exc}")
 
     total = success + failed
     print(f"[INFO] 集合名: {settings.milvus_collection} | Milvus: {settings.milvus_uri}")
-    print(f"[INFO] 写入成功: {success} 条，失败: {failed} 条")
+    print(f"[INFO] 写入成功: {success} 条，失败: {failed} 条 | index_ok={index_ok}")
     if total > 0:
         print(f"[INFO] 失败占比: {failed / total:.2%}")
 

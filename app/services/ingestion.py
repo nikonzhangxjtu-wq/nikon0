@@ -7,22 +7,27 @@
 - 正文里用 `<PIC>` 占位表示插图位置；
 - 尾部列表按 **出现顺序** 与每个 `<PIC>` 一一对应（若数量不一致，按较短一侧对齐并记录警告）。
 
-切块策略（V1 实用版）：
+切块策略（V2）：
 1. 用 `ast.literal_eval` 解析整文件；
 2. 扫描全文记录每个 `<PIC>` 的起始下标，顺序绑定 `image_ids[i]`；
-3. 按最大字符数滑动切块，并尽量在换行处截断，避免硬切句中；
-4. 每个块携带「落在该块字符区间内的」图片 ID（去重、保序）。
+3. 使用 `RecursiveCharacterTextSplitter`（与 `app/test/test_splite.py` 相同的 separators / chunk_size / overlap）切分正文；
+4. 每个块按块内 `<PIC>` 出现顺序，从全局 `<PIC>` 序列中依次取对应的图片 ID（去重、保序）。
 """
 
 from __future__ import annotations
 
 import ast
 import logging
-from operator import truth
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
+
+from typing import TYPE_CHECKING
+
 from app.core.config import settings
+
+if TYPE_CHECKING:
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 logger = logging.getLogger(__name__)
 
@@ -96,42 +101,56 @@ def _pic_positions_and_binding(text: str, image_ids: list[str]) -> list[tuple[in
     return positions
 
 
-def _chunk_spans(text: str, max_chars: int, min_chunk_chars: int) -> list[tuple[int, int]]:
-    """将全文切成 [start, end) 区间列表。尽量在换行处断开。"""
-    if max_chars < 200:
-        max_chars = 200
-    n = len(text)
-    if n == 0:
+_CUSTOM_SPLIT_SEPARATORS = [
+    r"\n+#\s+",  # 匹配带有一个或多个换行的标题
+    r"\n+\d+[\.）\)]?\s+",  # 匹配正常步骤
+    r"\n+[a-zA-Z][\.）\)]\s+",  # 匹配字母步骤
+    r"\n+[·\-\u00b7\u25cf\u2022]\s+",  # 匹配带换行的无序列表
+    r"\s+[·\u00b7\u25cf\u2022]\s+",  # 专门抓取没换行的内联无序列表
+    r"\n\n",
+    r"\n",
+    r" ",
+    r"",
+]
+
+
+def _make_recursive_splitter(*, chunk_size: int, chunk_overlap: int) -> "RecursiveCharacterTextSplitter":
+    try:
+        from langchain_text_splitters import RecursiveCharacterTextSplitter as _RecursiveCharacterTextSplitter
+    except ModuleNotFoundError as exc:  # pragma: no cover
+        raise ModuleNotFoundError(
+            "缺少依赖 `langchain-text-splitters`：请按 README 安装后再运行建索引/切块流程。"
+        ) from exc
+
+    return _RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        separators=_CUSTOM_SPLIT_SEPARATORS,
+        is_separator_regex=True,
+        keep_separator=True,
+    )
+
+
+def _image_ids_for_chunk_by_pic_occurrence(
+    chunk_text: str,
+    pic_positions: list[tuple[int, str]],
+    occ_index: list[int],
+) -> list[str]:
+    """按 chunk 内 `<PIC>` 的出现顺序，从全局 `<PIC>` 序列依次取绑定 ID。"""
+    if not chunk_text or not pic_positions:
         return []
 
-    spans: list[tuple[int, int]] = []
-    start = 0
-    while start < n:
-        end = min(start + max_chars, n)
-        if end < n:
-            # 在 (start, end] 内从后往前找换行，避免切得太碎
-            window_start = start + min_chunk_chars
-            nl = text.rfind("\n", window_start, end)
-            if nl != -1 and nl > start:
-                end = nl + 1
-        spans.append((start, end))
-        start = end
-    return spans
-
-
-def _image_ids_for_span(
-    pic_positions: list[tuple[int, str]],
-    span_start: int,
-    span_end: int,
-) -> list[str]:
-    """落在 [span_start, span_end) 内的 PIC 所绑定的图片 ID，去重保序。"""
     seen: set[str] = set()
     ordered: list[str] = []
-    for pos, pid in pic_positions:
-        if span_start <= pos < span_end and pid:
-            if pid not in seen:
-                seen.add(pid)
-                ordered.append(pid)
+    idx = occ_index[0]
+    for _ in re.finditer(re.escape(PIC_MARKER), chunk_text):
+        pid = pic_positions[idx][1] if idx < len(pic_positions) else ""
+        idx += 1
+        if pid and pid not in seen:
+            seen.add(pid)
+            ordered.append(pid)
+
+    occ_index[0] = idx
     return ordered
 
 
@@ -170,15 +189,20 @@ class ManualIngestionService:
 
         # 从正文中提取 `<PIC>` 位置，与尾部列表做顺序/局部对齐（先实现一种简单规则即可）
         pic_positions = _pic_positions_and_binding(body, image_ids)
-        spans = _chunk_spans(body, max_chars=max_chars, min_chunk_chars=min_chunk_chars)
+
+        # 使用与 `app/test/test_splite.py` 相同的 RecursiveCharacterTextSplitter 配置。
+        # 说明：`max_chars` / `min_chunk_chars` 参数保留以兼容旧调用签名，但当前策略以 splitter 参数为准。
+        _ = (max_chars, min_chunk_chars)
+        splitter = _make_recursive_splitter(chunk_size=800, chunk_overlap=120)
+        split_texts = splitter.split_text(body)
 
         chunks: list[ManualChunk] = []
-        for i, (s, e) in enumerate(spans):
-            chunk_text = body[s:e]
+        occ_index = [0]
+        for i, chunk_text in enumerate(split_texts):
             chunk_text = _sanitize_chunk_text(chunk_text, keep_pic=not strip_pic_markers)
             if not chunk_text:
                 continue
-            ids = _image_ids_for_span(pic_positions, s, e)
+            ids = _image_ids_for_chunk_by_pic_occurrence(chunk_text, pic_positions, occ_index)
             cid = f"{manual_name}_{i:04d}"
             chunks.append(
                 ManualChunk(

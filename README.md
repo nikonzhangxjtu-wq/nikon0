@@ -78,6 +78,7 @@ Version pins (stable for a V1 scaffold):
 - `python-dotenv==1.0.1`
 - `langchain==0.2.16`
 - `langchain-core==0.2.38`
+- `langchain-text-splitters==0.2.2`
 - `langchain-ollama==0.1.3`
 - `llama-index==0.11.16`
 - `llama-index-vector-stores-milvus==0.2.3`
@@ -98,6 +99,7 @@ pip install \
   "python-dotenv==1.0.1" \
   "langchain==0.2.16" \
   "langchain-core==0.2.38" \
+  "langchain-text-splitters==0.2.2" \
   "langchain-ollama==0.1.3" \
   "llama-index==0.11.16" \
   "llama-index-vector-stores-milvus==0.2.3" \

@@ -24,10 +24,13 @@ class Settings(BaseSettings):
     gen_model: str = Field(default="qwen2:latest", alias="GEN_MODEL")
     embed_model: str = Field(default="nomic-embed-text:latest", alias="EMBED_MODEL")
 
-    milvus_uri: str = Field(default="./milvus_demo.db", alias="MILVUS_URI")
+    milvus_uri: str = Field(default="http://127.0.0.1:19530", alias="MILVUS_URI")
     milvus_token: str = Field(default="", alias="MILVUS_TOKEN")
     milvus_db_name: str = Field(default="default", alias="MILVUS_DB_NAME")
     milvus_collection: str = Field(default="manual_chunks_v1", alias="MILVUS_COLLECTION")
+    # 是否启用 Milvus BM25 Function（内置 sparse_vector + 文本查询）。
+    # Milvus Lite（URI 为本地 .db 文件）目前对 BM25 Function 支持有限，保守默认关闭。
+    milvus_enable_bm25: bool = Field(default=True, alias="MILVUS_ENABLE_BM25")
     vector_dim: int = Field(default=768, alias="VECTOR_DIM")
     manual_dir: str = Field(default="./手册", alias="MANUAL_DIR")
     generator_timeout: int = Field(default=10, alias="GENERATOR_TIMEOUT")

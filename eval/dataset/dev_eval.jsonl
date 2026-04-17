@@ -1,0 +1,12 @@
+{"id": "cs-01", "category": "customer_service", "question": "请问你们家的商品支持7天无理由退换货吗？需要自己承担运费吗？", "rubric_keywords": ["7天", "运费"]}
+{"id": "cs-02", "category": "customer_service", "question": "请问你们的商品能开发票吗？发票类型是什么？多久能收到呢？", "rubric_keywords": ["发票"]}
+{"id": "cs-03", "category": "customer_service", "question": "我想了解一下你们的退款政策，退款多久能到账？信用卡会原路返回吗？", "rubric_keywords": ["退款"]}
+{"id": "manual-01", "category": "manual", "question": "如何清洁空调的空气滤网？", "rubric_keywords": ["滤网", "清洁"]}
+{"id": "manual-02", "category": "manual", "question": "如何使用空调的自清洁运行功能？", "rubric_keywords": ["自清洁"]}
+{"id": "manual-03", "category": "manual", "question": "首次使用时，如何将洗碗机连接到排水口？", "rubric_keywords": ["排水", "洗碗机"]}
+{"id": "manual-04", "category": "manual", "question": "使用前如何为洗碗机添加专用盐？", "rubric_keywords": ["盐", "洗碗机"]}
+{"id": "manual-05", "category": "manual", "question": "健身追踪器包装盒里有哪些物品？", "rubric_keywords": ["表带", "充电"]}
+{"id": "manual-06", "category": "manual", "question": "DCB107、DCB112 充电器上红灯闪烁分别表示什么状态？", "rubric_keywords": ["充电", "灯"]}
+{"id": "manual-07", "category": "manual", "question": "如何为健身追踪器更换表带？", "rubric_keywords": ["表带"]}
+{"id": "cs-04", "category": "customer_service", "question": "物流一直显示待揽收是什么原因？", "rubric_keywords": ["揽收", "物流"]}
+{"id": "manual-08", "category": "manual", "question": "无遥控器时如何操作空调？", "rubric_keywords": ["遥控器", "空调"]}

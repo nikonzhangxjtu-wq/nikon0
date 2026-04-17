@@ -49,6 +49,9 @@ logs/
 # Generated submissions (regenerate with scripts)
 submission_v*.csv
 
+# Offline eval outputs
+eval/results/
+
 # Milvus / local vector DB dumps (if any)
 milvus_data/
 *.db
