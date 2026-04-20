@@ -1,14 +1,18 @@
 """手册解析与切块：将 `手册/*.txt` 转为可建索引的 `ManualChunk`。
 
-每份手册文件约定为 **单行 Python 字面量**，形如::
+支持的文件格式：
+
+1. **单行**：与其它手册一致，整文件一行 Python list/tuple 字面量::
 
     [\"长文本...<PIC>...\", [\"Manual1_0\", \"drill0_01\", ...]]
+
+2. **多行汇总**：每行一条独立的 `[正文, image_ids]` 字面量（常见于 ``汇总*.txt``），解析后按顺序拼接正文并串联 ``image_ids``，当作一本虚拟手册参与切块。
 
 - 正文里用 `<PIC>` 占位表示插图位置；
 - 尾部列表按 **出现顺序** 与每个 `<PIC>` 一一对应（若数量不一致，按较短一侧对齐并记录警告）。
 
 切块策略（V2）：
-1. 用 `ast.literal_eval` 解析整文件；
+1. 用 `ast.literal_eval` 解析字面量（单行 / 合法折行单行 / 或多行汇总合并后）；
 2. 扫描全文记录每个 `<PIC>` 的起始下标，顺序绑定 `image_ids[i]`；
 3. 使用 `RecursiveCharacterTextSplitter`（与 `app/test/test_splite.py` 相同的 separators / chunk_size / overlap）切分正文；
 4. 每个块按块内 `<PIC>` 出现顺序，从全局 `<PIC>` 序列中依次取对应的图片 ID（去重、保序）。
@@ -44,34 +48,63 @@ class ManualChunk:
     image_ids: list[str] = field(default_factory=list)
 
 
-def _parse_manual_file_raw(content: str) -> tuple[str, list[str]]:
-    """解析单行 Python 列表字面量，返回 (正文, 图片ID列表)。"""
-    content = content.strip();
-    if(not content):
-        raise ValueError("文件为空")
-    try:
-        # 使用 ast.literal_eval 解析字符串为 Python 对象
-        data = ast.literal_eval(content)
-    except (ValueError, SyntaxError) as e:
-        raise ValueError(f"无法用 ast.literal_eval 解析: {e}") from e
-
+def _root_literal_to_body_and_ids(data: object) -> tuple[str, list[str]]:
+    """把 ``ast.literal_eval`` 得到的 list/tuple 根节点转为 (正文, image_ids)。"""
     if not isinstance(data, (list, tuple)) or len(data) < 1:
         raise ValueError("根节点应为长度>=1的 list/tuple")
-    # 取第一个元素作为整本手册的正文字符串。
     body = data[0]
-    # 第一个元素应为 str
     if not isinstance(body, str):
         raise ValueError(f"第一个元素应为 str，实际为 {type(body)}")
-
-    # 第二个元素应为图片 ID 列表，先声明「图片 ID 是字符串列表」，并默认成空
     image_ids: list[str] = []
-
     if len(data) >= 2 and data[1] is not None:
         if not isinstance(data[1], list):
             raise ValueError("第二个元素应为图片 ID 列表")
         image_ids = [str(x) for x in data[1]]
-
     return body, image_ids
+
+
+def _parse_manual_file_raw(content: str) -> tuple[str, list[str]]:
+    """解析文件为 (合并后正文, 合并后 image_ids)。
+
+    - 单行：整文件一个 ``[str, list]`` 字面量（与其它 ``*.txt`` 一致）。
+    - 多行汇总：每行一个完整字面量；多行合法的「单条 list 折行」整文件仍可被
+      ``literal_eval`` 接受时走整文件路径。
+    """
+    content = content.strip()
+    if not content:
+        raise ValueError("文件为空")
+
+    lines = [ln.strip() for ln in content.splitlines() if ln.strip()]
+
+    # 最常见：单行字面量（含一行结束无换行的文件）
+    if len(lines) == 1:
+        try:
+            data = ast.literal_eval(lines[0])
+            return _root_literal_to_body_and_ids(data)
+        except (ValueError, SyntaxError) as e:
+            raise ValueError(f"无法用 ast.literal_eval 解析: {e}") from e
+
+    # 多物理行：先尝试「整文件作为一个表达式」（合法折行的单个 list/tuple）
+    try:
+        data = ast.literal_eval(content)
+        return _root_literal_to_body_and_ids(data)
+    except (ValueError, SyntaxError):
+        pass
+
+    # 多行汇总：每行一条 [正文, ids]，顺序合并为一本手册
+    bodies: list[str] = []
+    all_ids: list[str] = []
+    for lineno, line in enumerate(lines, start=1):
+        try:
+            data = ast.literal_eval(line)
+        except (ValueError, SyntaxError) as e:
+            raise ValueError(f"无法用 ast.literal_eval 解析（第 {lineno} 行）: {e}") from e
+        body, ids = _root_literal_to_body_and_ids(data)
+        bodies.append(body)
+        all_ids.extend(ids)
+
+    merged_body = "\n\n".join(bodies)
+    return merged_body, all_ids
 
 
 def _pic_positions_and_binding(text: str, image_ids: list[str]) -> list[tuple[int, str]]:
@@ -182,7 +215,6 @@ class ManualIngestionService:
     ) -> list[ManualChunk]:
         """解析单个手册文件为 `ManualChunk` 列表。"""
         raw = path.read_text(encoding="utf-8")
-        # 解析单行 Python 列表字面量，返回 (正文, 图片ID列表)。
         body, image_ids = _parse_manual_file_raw(raw)
         # 文件名作为手册名称
         manual_name = path.stem

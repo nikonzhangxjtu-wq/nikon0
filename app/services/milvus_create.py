@@ -59,7 +59,16 @@ def build_collection(client: MilvusClient, vector_dim: int) -> None:
         is_primary=True,
     )
     schema.add_field(field_name="dense_vector", datatype=DataType.FLOAT_VECTOR, dim=vector_dim)
-    schema.add_field(field_name="text", datatype=DataType.VARCHAR, max_length=TEXT_MAX_LEN,enable_analyzer=True)
+    
+    # 🌟 修改点：增加 analyzer_params 显式指定分词器为 chinese
+    schema.add_field(
+        field_name="text", 
+        datatype=DataType.VARCHAR, 
+        max_length=TEXT_MAX_LEN,
+        enable_analyzer=True,
+        analyzer_params={"type": "chinese"} 
+    )
+    
     schema.add_field(
         field_name="image_ids",
         datatype=DataType.VARCHAR,

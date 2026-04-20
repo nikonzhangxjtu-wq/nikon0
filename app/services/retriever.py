@@ -20,6 +20,8 @@ from langchain_ollama import OllamaEmbeddings
 from pymilvus import MilvusClient
 
 from app.core.config import settings
+from app.services.rag_skill.rerank import rerank_fused_hits
+from app.utils.manual_lang import query_prefers_chinese_embedding
 
 
 @dataclass
@@ -76,8 +78,12 @@ class VectorRetriever:
 
     def __init__(self) -> None:
         self.collection_name: str = settings.milvus_collection
-        self.embed_model = OllamaEmbeddings(
-            model=settings.embed_model,
+        self._embed_zh = OllamaEmbeddings(
+            model=settings.embed_model_zh,
+            base_url=settings.ollama_base_url,
+        )
+        self._embed_en = OllamaEmbeddings(
+            model=settings.embed_model_en,
             base_url=settings.ollama_base_url,
         )
         kwargs: dict = {"uri": settings.milvus_uri, "db_name": settings.milvus_db_name}
@@ -179,7 +185,10 @@ class VectorRetriever:
             _milvus_manual_name_filter_expr(manual_name) if manual_name and manual_name.strip() else None
         )
 
-        query_vector = self.embed_model.embed_query(query)
+        embedder = (
+            self._embed_zh if query_prefers_chinese_embedding(query) else self._embed_en
+        )
+        query_vector = embedder.embed_query(query)
         dense_hits = self._search_dense(
             query_vector=query_vector, limit=max(top_k, 10), filter_expr=filter_expr
         )
@@ -192,13 +201,15 @@ class VectorRetriever:
 
         if self.sparse_enabled:
             fused_hits = self._fuse_hits_by_rank(
-                dense_hits=dense_hits, sparse_hits=sparse_hits, top_k=top_k
+                dense_hits=dense_hits, sparse_hits=sparse_hits, top_k=max(10,top_k)
             )
         else:
             fused_hits = dense_hits[:top_k]
 
         if not fused_hits:
             return []
+        # 进行rerank
+        fused_hits = self._rerank(fused_hits,query,top_k)
 
         list_results: list[RetrievedChunk] = []
         for hit in fused_hits:
@@ -281,6 +292,11 @@ class VectorRetriever:
                 print(f"[WARN] sparse BM25 检索失败: {exc}")
                 return []
         return list(results[0]) if results and results[0] else []
+    
+    def _rerank(self, fused_hits: list[dict], query: str, top_k: int) -> list[dict]:
+        """Cross-encoder 精排（见 ``rag_skill.rerank``）。"""
+        return rerank_fused_hits(fused_hits, query, top_k)
+
 
     @staticmethod
     def _fuse_hits_by_rank(

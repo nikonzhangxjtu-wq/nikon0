@@ -1,4 +1,8 @@
-"""从手册构建向量索引：解析切块 → Ollama 嵌入 → 写入 Milvus。"""
+"""从手册构建向量索引：解析切块 → Ollama 嵌入 → 写入 Milvus。
+
+嵌入：英文手册 stem（见 ``english_manual_naming`` 白名单）用 ``EMBED_MODEL_EN``，
+其余中文手册用 ``EMBED_MODEL_ZH``；两模型输出维数必须一致，否则无法写入同一
+``dense_vector`` 字段。"""
 
 from __future__ import annotations
 
@@ -17,6 +21,7 @@ from pymilvus import MilvusClient
 from app.core.config import settings
 from app.services.ingestion import ManualChunk, ManualIngestionService
 from app.services.milvus_create import build_collection, _create_vector_index
+from app.utils.manual_lang import manual_stem_uses_english_embedding
 # 与切块默认上限对齐并留余量（VARCHAR 上限受 Milvus 版本限制，一般 ≤ 65535）
 TEXT_MAX_LEN = 16384
 IMAGE_IDS_MAX_LEN = 8192
@@ -49,6 +54,32 @@ def _chunks_to_documents(chunks: list[ManualChunk]) -> list[Document]:
     ]
 
 
+def _embed_batch_bilingual(
+    embeddings_en: OllamaEmbeddings,
+    embeddings_zh: OllamaEmbeddings,
+    batch_chunks: list[ManualChunk],
+    texts: list[str],
+) -> list[list[float]]:
+    """同一 batch 内按 chunk.manual_name 分流到两个嵌入客户端（中英不同模型时使用）。"""
+    if len(batch_chunks) != len(texts):
+        raise ValueError("chunks 与 texts 长度不一致")
+    n = len(texts)
+    out: list[list[float] | None] = [None] * n
+    en_indices = [i for i, c in enumerate(batch_chunks) if manual_stem_uses_english_embedding(c.manual_name)]
+    zh_indices = [i for i, c in enumerate(batch_chunks) if not manual_stem_uses_english_embedding(c.manual_name)]
+    if en_indices:
+        vecs = embeddings_en.embed_documents([texts[i] for i in en_indices])
+        for k, idx in enumerate(en_indices):
+            out[idx] = vecs[k]
+    if zh_indices:
+        vecs = embeddings_zh.embed_documents([texts[i] for i in zh_indices])
+        for k, idx in enumerate(zh_indices):
+            out[idx] = vecs[k]
+    if any(v is None for v in out):
+        raise RuntimeError("中英嵌入分流未覆盖全部切片")
+    return [v for v in out]  # type: ignore[misc]
+
+
 def _truncate(text: str, max_len: int, label: str, warned: list[bool]) -> str:
     if len(text) <= max_len:
         return text
@@ -58,10 +89,28 @@ def _truncate(text: str, max_len: int, label: str, warned: list[bool]) -> str:
     return text[:max_len]
 
 def main() -> None:
-    embeddings = OllamaEmbeddings(
-        model=settings.embed_model,
+    embeddings_en = OllamaEmbeddings(
+        model=settings.embed_model_en,
         base_url=settings.ollama_base_url,
     )
+    embeddings_zh = OllamaEmbeddings(
+        model=settings.embed_model_zh,
+        base_url=settings.ollama_base_url,
+    )
+    dim_en = _probe_dim(embeddings_en)
+    dim_zh = _probe_dim(embeddings_zh)
+    if dim_en != dim_zh:
+        print(
+            f"[ERROR] EMBED_MODEL_EN 维数={dim_en} 与 EMBED_MODEL_ZH 维数={dim_zh} 不一致，"
+            "无法在单一 Milvus dense_vector 字段中共存；请改用输出维数相同的两个模型，"
+            "或拆成两套 collection。"
+        )
+        return
+    dim = dim_en
+    print(
+        f"[INFO] 双路嵌入 dim={dim} | EN={settings.embed_model_en} | ZH={settings.embed_model_zh}"
+    )
+
     ingestion = ManualIngestionService(settings.manual_dir)
     chunks = ingestion.parse_and_chunk()
 
@@ -69,16 +118,6 @@ def main() -> None:
     if not chunks:
         print("[WARN] 未解析到任何切片，请检查 `手册/` 下是否有可解析的 `.txt`。")
         return
-    # 检查向量维度（兼容 settings 中未定义 vector_dim 的场景）
-    dim = _probe_dim(embeddings)
-    configured_dim = getattr(settings, "vector_dim", None)
-    if configured_dim is None:
-        print(f"[WARN] 未配置 VECTOR_DIM，已按模型向量维数 {dim} 建表。")
-    elif dim != configured_dim:
-        print(
-            f"[WARN] VECTOR_DIM={configured_dim} 与当前模型向量维数 {dim} 不一致，"
-            f"已按模型维数 {dim} 建表；可在 `.env` 中设置 VECTOR_DIM={dim}。"
-        )
 
     documents = _chunks_to_documents(chunks)
 
@@ -116,7 +155,7 @@ def main() -> None:
         batch_docs = documents[start : start + EMBED_BATCH]
         texts = [d.text for d in batch_docs]
         try:
-            vectors = embeddings.embed_documents(texts)
+            vectors = _embed_batch_bilingual(embeddings_en, embeddings_zh, batch, texts)
         except Exception as exc:
             failed += len(batch)
             print(f"[ERROR] 批量嵌入失败（本批 {len(batch)} 条）: {exc}")

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from app.utils.manual_lang import generation_reply_language_rule
 from app.utils.prompts.context import PromptContext
 
 
@@ -9,9 +10,11 @@ class RagManualPromptBuilder:
     """有检索片段时：要求模型严格依据上下文作答。"""
 
     def build(self, ctx: PromptContext) -> str:
+        lang = generation_reply_language_rule(ctx.question)
         return f"""你是电商/设备客服助手。
 
 规则：
+0）{lang}
 1）直接回答用户问题。
 2）优先使用下方「上下文」中的信息；引用时可提及片段编号或 chunk_id。
 3）若上下文不足以回答，明确说明缺少哪些信息，不要编造型号、步骤、故障码或政策细节。
