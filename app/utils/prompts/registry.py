@@ -7,6 +7,8 @@ from __future__ import annotations
 
 from app.utils.prompts.builders.no_rag_customer_service import NoRagCustomerServicePromptBuilder
 from app.utils.prompts.builders.no_rag_generic import NoRagGenericPromptBuilder
+from app.utils.prompts.builders.no_rag_order_status import NoRagOrderStatusPromptBuilder
+from app.utils.prompts.builders.no_rag_web_review import NoRagWebReviewPromptBuilder
 from app.utils.prompts.builders.rag_manual import RagManualPromptBuilder
 from app.utils.prompts.builders.base import PromptBuilder
 from app.utils.prompts.context import PromptContext
@@ -14,13 +16,19 @@ from app.utils.prompts.context import PromptContext
 _REGISTRY: dict[str, PromptBuilder] = {
     "rag_manual": RagManualPromptBuilder(),
     "no_rag_customer_service": NoRagCustomerServicePromptBuilder(),
+    "no_rag_order_status": NoRagOrderStatusPromptBuilder(),
+    "no_rag_web_review": NoRagWebReviewPromptBuilder(),
     "no_rag_generic": NoRagGenericPromptBuilder(),
 }
 
 
 def resolve_prompt_key(ctx: PromptContext) -> str:
-    if ctx.need_rag:
+    if ctx.need_rag and ctx.evidence_status == "ok":
         return "rag_manual"
+    if ctx.domain_hint == "order_status":
+        return "no_rag_order_status"
+    if ctx.domain_hint == "web_review":
+        return "no_rag_web_review"
     if ctx.domain_hint == "customer_service":
         return "no_rag_customer_service"
     return "no_rag_generic"

@@ -35,6 +35,7 @@ class ChatResponseData(BaseModel):
     """成功时返回的业务数据。"""
 
     answer: str
+    images: list[str] = Field(default_factory=list)
     session_id: str
     timestamp: int
 
@@ -47,10 +48,12 @@ class ChatResponse(BaseModel):
     data: ChatResponseData
 
     @staticmethod
-    def success(answer: str, session_id: str) -> "ChatResponse":
+    def success(answer: str, session_id: str, images: list[str] | None = None) -> "ChatResponse":
         now_ts = int(datetime.now(tz=timezone.utc).timestamp())
         return ChatResponse(
             code=0,
             msg="success",
-            data=ChatResponseData(answer=answer, session_id=session_id, timestamp=now_ts),
+            data=ChatResponseData(
+                answer=answer, images=images or [], session_id=session_id, timestamp=now_ts
+            ),
         )

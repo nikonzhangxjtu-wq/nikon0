@@ -13,9 +13,11 @@ def english_product_stems() -> frozenset[str]:
     """拆分后的英文手册文件名 stem 集合（如 ``Coffee_Machine``、``Boat``）。"""
     global _ENGLISH_PRODUCT_STEMS
     if _ENGLISH_PRODUCT_STEMS is None:
-        from scripts.english_manual_naming import MANUAL_PREFIX_TO_PRODUCT_STEM
-
-        _ENGLISH_PRODUCT_STEMS = frozenset(MANUAL_PREFIX_TO_PRODUCT_STEM.values())
+        try:
+            from scripts.english_manual_naming import MANUAL_PREFIX_TO_PRODUCT_STEM
+            _ENGLISH_PRODUCT_STEMS = frozenset(MANUAL_PREFIX_TO_PRODUCT_STEM.values())
+        except ImportError:
+            _ENGLISH_PRODUCT_STEMS = frozenset()
     return _ENGLISH_PRODUCT_STEMS
 
 
@@ -35,8 +37,10 @@ def generation_reply_language_rule(question: str) -> str:
     if not q:
         return "语言：若用户使用中文提问请用中文作答，若用户使用英文提问请用英文作答。"
     if query_prefers_chinese_embedding(q):
-        return "语言要求：用户问题主要为中文，请全程使用中文回答，语气温和、专业。"
+        return "语言要求：请全程使用中文回答，语气温和、专业。"
     return (
-        "Language: The user's question is in English; write your entire reply in English, "
-        "clearly and professionally."
+        "OUTPUT LANGUAGE: The user's question is in English. "
+        "You MUST write your entire response in English only. "
+        "Do NOT output Chinese, do NOT mix languages. "
+        "Reply in clear, professional English."
     )

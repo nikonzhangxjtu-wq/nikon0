@@ -1,5 +1,3 @@
-version: '3.5'
-
 services:
   etcd:
     container_name: milvus-etcd
@@ -62,4 +60,5 @@ services:
 
 networks:
   default:
-    name: milvus
+    # 与仓库根目录绑定，避免与其它项目的 `name: milvus` 冲突
+    name: compeletion_milvus

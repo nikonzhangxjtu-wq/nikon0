@@ -1,0 +1,12 @@
+[
+  {
+    "product_id": "demo-001",
+    "product_name": "示例蓝牙耳机 Pro",
+    "rating": 4.2,
+    "title": "降噪够用",
+    "snippet": "地铁里人声过滤不错；佩戴两小时略胀，充电盒偏大。",
+    "source": "本地评价表",
+    "published_at": "2024-12",
+    "url": "local://review/demo-001/a"
+  }
+]

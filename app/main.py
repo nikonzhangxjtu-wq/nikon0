@@ -63,5 +63,5 @@ def chat(
     # 确保 session_id 存在（无则生成）
     sid = ensure_session_id(req.session_id)
     # 执行主流程
-    result = pipeline.run(question=req.question, images=req.images)
-    return ChatResponse.success(answer=result.answer, session_id=sid)
+    result = pipeline.run(question=req.question, images=req.images, session_id=sid)
+    return ChatResponse.success(answer=result.answer, session_id=sid, images=result.images)

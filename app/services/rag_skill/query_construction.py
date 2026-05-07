@@ -1,6 +1,6 @@
 """从用户问题推断 ``manual_name``（与 ``手册/*.txt`` 的 stem 一致）。
 
-使用本地 Ollama（与主生成同一 ``GEN_MODEL``）在**当前目录下已有手册名**中做
+使用本地 Ollama（``SIMPLE_LLM_MODEL``）在**当前目录下已有手册名**中做
 单选分类；解析失败或模型输出不在列表中时返回 ``""``，由检索端走全库。
 """
 
@@ -21,13 +21,16 @@ import re
 
 from app.core.config import settings
 
-_SYSTEM = """你是手册路由助手。你的任务：根据用户问题，判断最可能对应哪一本「操作手册」。
+_SYSTEM = """你是手册路由助手。根据用户问题中提到的**主体设备/产品**，判断最可能对应哪一本「操作手册」。
 
 规则：
 1. 你必须且只能从给定的「允许的手册名」列表中**原样**选出一个作为 manual_name。
-2. 如果问题中包含中文，则选择中文手册。如果该问题是一个纯英文问题，则选择英文手册。
-2. 若问题与任何一本都不相关、或无法判断、或属于通用客服而非具体某本手册，则 manual_name 置为空字符串。
-3. 只输出一行合法 JSON，不要 Markdown、不要解释。格式严格为：{"manual_name":"..."} 其中值为列表中的某一字符串，或为空字符串。
+2. 以问题中的**主体设备名词**（如"空调""水泵""冰箱"）为依据匹配手册，不要被功能描述词带偏。例如：
+   - "如何使用空调的等离子净化功能？" → 主体是"空调"，选"空调手册"，不要因为"等离子净化"选"空气净化器手册"
+   - "水泵安全排放燃油" → 主体是"水泵"，选"水泵手册"
+3. 中文问题必须输出中文手册名（如"水泵手册"），严禁输出英文翻译（如"pump"）。纯英文问题才可输出英文手册名。
+4. 若问题与任何一本都不相关、或无法判断、或属于通用客服而非具体某本手册，则 manual_name 置为空字符串。
+5. 只输出一行合法 JSON，不要 Markdown、不要解释。格式严格为：{"manual_name":"..."} 其中值为列表中的某一字符串，或为空字符串。
 
 """
 
@@ -62,6 +65,24 @@ def _parse_llm_manual_name(raw: str, stems: set[str]) -> str:
     return name if name in stems else ""
 
 
+def _keyword_fallback(question: str, stems: set[str]) -> str:
+    """Fallback: 用问题中的关键词匹配手册名（LLM 输出不在列表中时使用）。"""
+    q_lower = question.lower()
+    best = ""
+    best_len = 0
+    for stem in stems:
+        candidates = [stem]
+        # 剥离常见后缀作为搜索关键词
+        for sfx in ("手册", "Manual", "manual"):
+            if stem.endswith(sfx) and len(stem) > len(sfx):
+                candidates.append(stem[: -len(sfx)])
+        for kw in candidates:
+            if kw.lower() in q_lower and len(kw) > best_len:
+                best_len = len(kw)
+                best = stem
+    return best
+
+
 def query_construction(question: str) -> str:
     """返回模型选中的 ``manual_name``（手册 txt stem），无法判断则 ``""``。"""
     q = question.strip()
@@ -77,10 +98,7 @@ def query_construction(question: str) -> str:
     if len(stems_list) == 1:
         return stems_list[0]
 
-    try:
-        from langchain_ollama import ChatOllama
-    except ModuleNotFoundError:
-        return ""
+    import requests as _req
 
     human = (
         "允许的手册名（JSON 数组，必须原样匹配其一）：\n"
@@ -88,24 +106,31 @@ def query_construction(question: str) -> str:
         f"用户问题：\n{q}\n"
     )
 
-    client = ChatOllama(
-        model=settings.gen_model,
-        base_url=settings.ollama_base_url,
-        temperature=0.0,
-    )
+    payload = {
+        "model": settings.simple_llm_model,
+        "messages": [
+            {"role": "system", "content": _SYSTEM},
+            {"role": "user", "content": human},
+        ],
+        "stream": False,
+        "options": {"temperature": 0.0, "num_predict": 128},
+    }
     try:
-        msg = client.invoke(
-            [
-                ("system", _SYSTEM),
-                ("human", human),
-            ]
+        resp = _req.post(
+            f"{settings.ollama_base_url}/api/chat",
+            json=payload,
+            timeout=15,
         )
+        resp.raise_for_status()
+        raw = resp.json().get("message", {}).get("content", "")
     except Exception:
         return ""
 
-    raw = getattr(msg, "content", "") or ""
-    return _parse_llm_manual_name(raw, stems_set)
+    result = _parse_llm_manual_name(raw, stems_set)
+    if not result:
+        result = _keyword_fallback(q, stems_set)
+    return result
 
 
 if __name__ == "__main__":
-    print(query_construction("如何使用vr头显?"))
+    print(query_construction("无遥控器时如何操作空调"))

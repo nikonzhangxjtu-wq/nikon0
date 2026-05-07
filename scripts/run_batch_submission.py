@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import time
 from pathlib import Path
@@ -46,23 +47,75 @@ def run_batch(
     *,
     sleep_seconds: float = 0.0,
     progress_every: int = 50,
+    print_each: bool = True,
+    output_path: Path = OUTPUT_PATH,
 ) -> pd.DataFrame:
     rows: list[dict[str, object]] = []
+    failed_ids: list[tuple[int, str]] = []
     total = len(df)
     for idx, row in enumerate(df.itertuples(index=False), start=1):
         qid = row.id
         question = str(row.question)
 
-        result = pipeline.run(question=question, images=[])
-        rows.append({"id": qid, "ret": result.answer})
+        success = True
+        try:
+            result = pipeline.run(
+                question=question, images=[], session_id=f"batch_{qid}"
+            )
+            if result.images:
+                images_str = json.dumps(result.images, ensure_ascii=False)
+                ret_value = f"{result.answer}, {images_str}"
+            else:
+                ret_value = result.answer
+        except Exception as exc:
+            success = False
+            err_msg = str(exc)[:300]
+            failed_ids.append((qid, err_msg))
+            ret_value = f"【生成失败】请求超时或模型服务异常，请稍后重试。({err_msg})"
+            if print_each:
+                print(
+                    f"\n[ERROR] [{idx}/{total}] id={qid}: {err_msg}",
+                    flush=True,
+                )
+        rows.append({"id": qid, "ret": ret_value})
+
+        if print_each and success:
+            print(f"\n{'=' * 60}\n[{idx}/{total}] id={qid}", flush=True)
+            print(f"question:\n{question}\n", flush=True)
+            print(f"answer:\n{result.answer}\n", flush=True)
+            if result.images:
+                print(f"images: {result.images}\n", flush=True)
 
         if progress_every > 0 and (idx % progress_every == 0 or idx == total):
-            print(f"[INFO] 已处理 {idx}/{total}")
+            print(f"[INFO] 已处理 {idx}/{total}", flush=True)
+            # 增量保存，防止中途崩溃丢失已处理结果
+            _checkpoint(output_path, rows, idx, total)
         if sleep_seconds > 0:
             time.sleep(sleep_seconds)
 
+    if failed_ids:
+        print(f"\n[WARN] 共 {len(failed_ids)} 条失败:", flush=True)
+        for qid, err in failed_ids:
+            print(f"  id={qid}: {err}", flush=True)
+
     out_df = pd.DataFrame(rows, columns=["id", "ret"])
     return out_df
+
+
+def _checkpoint(
+    path: Path,
+    rows: list[dict[str, object]],
+    idx: int,
+    total: int,
+) -> None:
+    """增量保存当前进度到 CSV。"""
+    try:
+        pd.DataFrame(rows, columns=["id", "ret"]).to_csv(
+            path, index=False, encoding="utf-8"
+        )
+        print(f"[CHECKPOINT] 已保存 {idx}/{total} 条到 {path.resolve()}", flush=True)
+    except Exception as exc:
+        print(f"[CHECKPOINT] 保存进度失败: {exc}", flush=True)
 
 
 def validate_submission(input_df: pd.DataFrame, out_df: pd.DataFrame) -> None:
@@ -110,6 +163,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH, help="输出 CSV，默认 submission_v1.csv")
     parser.add_argument("--sleep", type=float, default=0.0, help="每条请求间 sleep 秒数（限流）")
     parser.add_argument("--progress-every", type=int, default=50, help="进度打印间隔")
+    parser.add_argument(
+        "--quiet",
+        action="store_true",
+        help="不逐条打印 question/answer（仅保留进度与收尾日志）",
+    )
     return parser.parse_args()
 
 
@@ -124,6 +182,8 @@ def main() -> None:
         pipeline,
         sleep_seconds=args.sleep,
         progress_every=args.progress_every,
+        print_each=not args.quiet,
+        output_path=args.output,
     )
     validate_submission(input_df, out_df)
 

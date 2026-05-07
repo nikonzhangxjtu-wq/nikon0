@@ -27,15 +27,17 @@ if str(_ROOT) not in sys.path:
 from app.core.config import settings
 from app.services.pipeline import ChatPipeline
 
-JUDGE_SYSTEM = """你是客服对话质量评测员，只根据「用户问题」和「助手回答」打分，不要编造事实。
-评分区间 1～5，含义与赛题类似：
-1 差：未回应、混乱、明显跑题
-2 一般：部分回应、结构弱
-3 中等：有回应但浅、结构尚可
-4 良好：较清晰完整
-5 优秀：清晰有深度、结构好
+JUDGE_SYSTEM = """你是多模态客服赛题的自动评委。只根据「用户问题」与「助手回答」文本打分，不要编造题目或回答中不存在的事实。
+若题目暗示应有图片而回答中未体现图文配合，可按「图文结合较差」在 2～3 分段酌情降分；若仅有文本材料则主要依据文本完整性、结构与深度评分。
 
-输出要求：最后一行必须且只能为如下格式（数字 1～5）：
+评分区间 1～5，含义与正式赛题一致：
+1 分，质量差：回答未回应问题，结构混乱或缺失，或图片相关表述明显无关、无帮助（若从文本可判断）。
+2 分，质量一般：回答部分回应问题但不完整；结构较弱；条理与覆盖子问题不足。
+3 分，质量中等：回答回应了问题但缺乏深度；结构基本清晰但可优化；覆盖面尚可。
+4 分，质量良好：回答清晰、较为全面；结构逻辑清晰、组织合理；对多子问题有较好覆盖。
+5 分，质量优秀：回答详细、有深度；结构严谨连贯；若能从回答看出与题意高度贴合、信息组织优秀，可给满分。
+
+输出要求：最后一行必须且只能为如下格式（数字 1～5），不要其它文字在同一行：
 SCORE:4
 """
 
@@ -136,6 +138,8 @@ class RowResult:
     route_domain_hint: str
     route_confidence: float
     route_strategy: str
+    route_low_confidence: str
+    post_retrieval_gate: str
     latency_ms: float
     score: str | None
     rubric_pass: str
@@ -151,6 +155,8 @@ class RowResult:
     top1_score: str
     context_chars: int
     context_chunk_count: int
+    images_count: int
+    pic_marker_count: int
 
 
 def _json_compact(value: object) -> str:
@@ -180,7 +186,7 @@ def main() -> None:
     parser.add_argument(
         "--dataset",
         type=Path,
-        default=_ROOT / "eval" / "dataset" / "dev_eval.jsonl",
+        default=_ROOT / "eval" / "dataset" / "public_eval_30.jsonl",
         help="JSONL 评测集路径",
     )
     parser.add_argument(
@@ -252,6 +258,8 @@ def main() -> None:
                 route_domain_hint=pr.debug.route_domain_hint,
                 route_confidence=pr.debug.route_confidence,
                 route_strategy=pr.debug.route_strategy,
+                route_low_confidence="1" if pr.debug.route_low_confidence else "0",
+                post_retrieval_gate=pr.debug.post_retrieval_gate or "",
                 latency_ms=dt_ms,
                 score=score_val,
                 rubric_pass=rp,
@@ -275,6 +283,8 @@ def main() -> None:
                 top1_score="" if not pr.debug.retrieval or pr.debug.retrieval.top1_score is None else f"{pr.debug.retrieval.top1_score:.6f}",
                 context_chars=pr.debug.context_chars,
                 context_chunk_count=pr.debug.context_chunk_count,
+                images_count=len(pr.images),
+                pic_marker_count=pr.answer.count("<PIC>"),
             )
         )
 
@@ -293,6 +303,8 @@ def main() -> None:
         "route_domain_hint",
         "route_confidence",
         "route_strategy",
+        "route_low_confidence",
+        "post_retrieval_gate",
         "should_use_rag",
         "gold_manual_name",
         "gold_chunk_keywords",
@@ -304,6 +316,8 @@ def main() -> None:
         "top1_score",
         "context_chars",
         "context_chunk_count",
+        "images_count",
+        "pic_marker_count",
         "score",
         "rubric_pass",
         "judge_raw",
@@ -327,6 +341,8 @@ def main() -> None:
                     "route_domain_hint": r.route_domain_hint,
                     "route_confidence": f"{r.route_confidence:.4f}",
                     "route_strategy": r.route_strategy,
+                    "route_low_confidence": r.route_low_confidence,
+                    "post_retrieval_gate": r.post_retrieval_gate,
                     "should_use_rag": r.should_use_rag,
                     "gold_manual_name": r.gold_manual_name,
                     "gold_chunk_keywords": r.gold_chunk_keywords,
@@ -338,6 +354,8 @@ def main() -> None:
                     "top1_score": r.top1_score,
                     "context_chars": r.context_chars,
                     "context_chunk_count": r.context_chunk_count,
+                    "images_count": r.images_count,
+                    "pic_marker_count": r.pic_marker_count,
                     "score": r.score or "",
                     "rubric_pass": r.rubric_pass,
                     "judge_raw": r.judge_raw,
@@ -396,6 +414,8 @@ def main() -> None:
         "manual_hit_denominator": len(manual_gold_rows),
         "answer_must_include_rate": f"{must_include_hits / must_include_den:.4f}" if must_include_den else "",
         "answer_must_include_denominator": must_include_den,
+        "avg_images_count": f"{sum(r.images_count for r in row_results) / len(row_results):.2f}" if row_results else "",
+        "avg_pic_marker_count": f"{sum(r.pic_marker_count for r in row_results) / len(row_results):.2f}" if row_results else "",
         "dataset": _relpath(dataset_path),
         "detail_csv": _relpath(detail_path),
     }

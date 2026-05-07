@@ -36,6 +36,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 PIC_MARKER = "<PIC>"
+_IMG_ID_PATTERN = re.compile(r"<IMG:([^>]+)>")
 
 
 @dataclass
@@ -134,6 +135,48 @@ def _pic_positions_and_binding(text: str, image_ids: list[str]) -> list[tuple[in
     return positions
 
 
+def _embed_image_ids_in_text(text: str, image_ids: list[str]) -> str:
+    """分块前将 `<PIC>` 替换为 `<IMG:actual_id>`，从后往前避免位置偏移。"""
+    pic_positions = _pic_positions_and_binding(text, image_ids)
+    result = text
+    for pos, img_id in reversed(pic_positions):
+        if not img_id:
+            continue
+        result = result[:pos] + f"<IMG:{img_id}>" + result[pos + len(PIC_MARKER):]
+    return result
+
+
+def _repair_split_img_tags(chunks: list[str]) -> list[str]:
+    """修复分块导致的 `<IMG:...>` 标签断裂（末尾未闭合则接到下一块开头）。"""
+    repaired: list[str] = []
+    carry = ""
+    for chunk in chunks:
+        chunk = carry + chunk
+        carry = ""
+        last_open = chunk.rfind("<IMG:")
+        if last_open >= 0:
+            close = chunk.find(">", last_open)
+            if close == -1:
+                carry = chunk[last_open:]
+                chunk = chunk[:last_open]
+        repaired.append(chunk)
+    if carry:
+        repaired[-1] += carry
+    return [c for c in repaired if c.strip()]
+
+
+def _image_ids_from_chunk_text(chunk_text: str) -> list[str]:
+    """从已嵌入 `<IMG:xxx>` 的文本中提取 image_id 列表（保序去重）。"""
+    ids = _IMG_ID_PATTERN.findall(chunk_text)
+    seen: set[str] = set()
+    result: list[str] = []
+    for iid in ids:
+        if iid and iid not in seen:
+            seen.add(iid)
+            result.append(iid)
+    return result
+
+
 _CUSTOM_SPLIT_SEPARATORS = [
     r"\n+#\s+",  # 匹配带有一个或多个换行的标题
     r"\n+\d+[\.）\)]?\s+",  # 匹配正常步骤
@@ -219,22 +262,23 @@ class ManualIngestionService:
         # 文件名作为手册名称
         manual_name = path.stem
 
-        # 从正文中提取 `<PIC>` 位置，与尾部列表做顺序/局部对齐（先实现一种简单规则即可）
-        pic_positions = _pic_positions_and_binding(body, image_ids)
+        # 分块前：将 `<PIC>` 替换为 `<IMG:actual_id>`，图片信息直接嵌入文本
+        body_with_imgs = _embed_image_ids_in_text(body, image_ids)
 
-        # 使用与 `app/test/test_splite.py` 相同的 RecursiveCharacterTextSplitter 配置。
-        # 说明：`max_chars` / `min_chunk_chars` 参数保留以兼容旧调用签名，但当前策略以 splitter 参数为准。
         _ = (max_chars, min_chunk_chars)
         splitter = _make_recursive_splitter(chunk_size=800, chunk_overlap=120)
-        split_texts = splitter.split_text(body)
+        split_texts = splitter.split_text(body_with_imgs)
+
+        # 修复分块可能导致的 `<IMG:...>` 标签断裂
+        split_texts = _repair_split_img_tags(split_texts)
 
         chunks: list[ManualChunk] = []
-        occ_index = [0]
         for i, chunk_text in enumerate(split_texts):
             chunk_text = _sanitize_chunk_text(chunk_text, keep_pic=not strip_pic_markers)
             if not chunk_text:
                 continue
-            ids = _image_ids_for_chunk_by_pic_occurrence(chunk_text, pic_positions, occ_index)
+            # 从文本中直接提取 image_ids，天然一致
+            ids = _image_ids_from_chunk_text(chunk_text)
             cid = f"{manual_name}_{i:04d}"
             chunks.append(
                 ManualChunk(
