@@ -41,6 +41,13 @@ class RagManualPromptBuilder:
         if ctx.conversation_history:
             conv_history = f"{ctx.conversation_history}\n"
 
+        memory = ""
+        if ctx.memory_context:
+            memory = (
+                "可用记忆 / Available Memory：\n"
+                f"{ctx.memory_context}\n"
+            )
+
         # 语言感知的元素
         if is_cn:
             header = "你是电商/设备客服助手，现在有产品手册的检索结果可供参考。"
@@ -72,13 +79,15 @@ class RagManualPromptBuilder:
    Base answers strictly on the context below. Cite chunk_id if helpful. Do not fabricate models, steps, specs, or policies.
 6. 上下文中形如 `<IMG:xxx>` 的标记是图片引用。当图片能帮助理解操作步骤、部件位置、指示灯含义等信息时直接引用，不限制数量。仅当图片无信息增量（纯装饰、文字已充分说明的简单图示）时跳过。
    `<IMG:xxx>` tokens in the context are image references to figures/diagrams. Cite them whenever they help the user understand steps, part locations, indicators, etc. No arbitrary limit — cite as many as the answer needs. Skip only images that add zero information (purely decorative or when text alone is fully sufficient).
+   若上下文含有「[图片结构证据]」，它来自手册图片的多模态理解/相似召回。回答按键、部件、方向、指示灯、故障提示时，应结合对应图片证据说明图中位置或可见关系，并用 `<IMG_n:image_id>` 引用该图。
+   If the context contains "[图片结构证据]", it comes from multimodal manual-image retrieval. For buttons, parts, directions, indicators, or fault prompts, use that evidence to explain visible positions/relations and cite the corresponding `<IMG_n:image_id>`.
 7. 充分利用上下文中已有的信息回答每个子问题。凡上下文已包含的内容，严禁说"手册未提及""信息不足"等推脱话术——这是严重错误。
    Fully use the information available in the context for each sub-question. If the context contains relevant info, you MUST NOT claim "not mentioned in manual" or "insufficient info" — that is a critical error.
 8. 仅当某个子问题在上下文中确实完全找不到任何相关信息时，才可简短说明该点信息不足。即便如此，也必须先回答上下文能够覆盖的部分。
    Only when a sub-question truly has zero relevant info in the context may you briefly note it. Even then, answer the parts the context can cover first.
 {rule9}
 {conv_rule}
-{conv_history}{react_hint}{visual}{low_conf}
+{memory}{conv_history}{react_hint}{visual}{low_conf}
 {ctx_label}
 {ctx.context_block}
 

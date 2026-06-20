@@ -153,6 +153,19 @@ _CS_PHRASES: tuple[str, ...] = (
     "生产日期",
     "寄到国外",
     "国际配送",
+    "网上评价",
+    "网络评价",
+    "用户评价",
+    "用户口碑",
+    "真实反馈",
+    "值不值得买",
+    "值得买吗",
+    "优缺点",
+    "测评",
+    "评测",
+    "review",
+    "rating",
+    "worth buying",
 )
 
 _CS_STRONG: frozenset[str] = frozenset(
@@ -178,38 +191,6 @@ _CS_STRONG: frozenset[str] = frozenset(
 )
 
 _CS_WEAK: frozenset[str] = frozenset({"优惠券", "差价"})
-
-# 联网口碑：由外部来源提供证据，不走手册 RAG
-_WEB_REVIEW_PHRASES: tuple[str, ...] = (
-    "网上评价",
-    "网络评价",
-    "用户评价",
-    "用户口碑",
-    "真实反馈",
-    "值不值得买",
-    "值得买吗",
-    "优缺点",
-    "测评",
-    "评测",
-    "review",
-    "rating",
-    "worth buying",
-)
-
-_ORDER_STATUS_PHRASES: tuple[str, ...] = (
-    "查订单",
-    "订单状态",
-    "订单进度",
-    "物流到哪",
-    "快递到哪",
-    "配送进度",
-    "什么时候到",
-    "预计送达",
-    "催单",
-    "催发货",
-    "order status",
-    "track order",
-)
 
 _CASE_INTAKE_PHRASES: tuple[str, ...] = (
     "报修",
@@ -368,19 +349,10 @@ def _parse_llm_arbiter_output(raw: str) -> tuple[bool | None, str | None]:
 
 
 def _llm_arbitrate_unknown(question: str) -> tuple[bool, str]:
-    """调用本地 LLM，仅判断 unknown 场景下是否需要检索手册。"""
-    try:
-        from langchain_ollama import ChatOllama
-    except ImportError as exc:
-        print(f"[WARN] LLM 路由仲裁跳过：无法导入 langchain_ollama ({exc})")
-        return True, "LLM 仲裁不可用，默认尝试检索"
+    """调用轻量 LLM，仅判断 unknown 场景下是否需要检索手册。"""
+    from app.services.llm_clients import chat_text
 
     model = (settings.router_arbiter_model or "").strip() or settings.gen_model
-    client = ChatOllama(
-        model=model,
-        base_url=settings.ollama_base_url,
-        temperature=0.0,
-    )
     system = (
         "你是对话系统的路由仲裁模块。用户问题无法由关键词明确归类为"
         "「产品说明书/安装故障」或「订单/售后/发票」等客服政策。"
@@ -392,12 +364,19 @@ def _llm_arbitrate_unknown(question: str) -> tuple[bool, str]:
     )
     user = f"用户问题：\n{question.strip()}\n"
     try:
-        msg = client.invoke([("system", system), ("human", user)])
+        raw = chat_text(
+            model=model,
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            temperature=0.0,
+            max_tokens=256,
+            timeout=30,
+        )
     except Exception as exc:  # noqa: BLE001
         print(f"[WARN] LLM 路由仲裁失败，默认尝试检索: {exc}")
         return True, f"LLM 仲裁失败，默认尝试检索（{exc}）"
-
-    raw = getattr(msg, "content", "") or ""
     parsed = _parse_llm_arbiter_output(raw)
     if parsed[0] is None:
         print(f"[WARN] LLM 路由仲裁无法解析输出，默认尝试检索。原始输出: {raw[:200]!r}")
@@ -435,26 +414,6 @@ class QuestionRouter:
                 reason="命中售后受理意图，转工单收集 skill",
                 confidence=0.9,
                 strategy="heuristic_case_intake",
-            )
-
-        # web_review 走独立 skill：优先于 manual/cs 评分，避免误进 RAG。
-        if q and any(phrase in q for phrase in _WEB_REVIEW_PHRASES):
-            return RouteDecision(
-                needs_rag=False,
-                domain_hint="web_review",
-                reason="命中口碑/测评意图，转联网评价 skill",
-                confidence=0.88,
-                strategy="heuristic_web_review",
-            )
-
-        # order_status 走 MCP 订单查询 skill：优先于通用客服 no-rag。
-        if q and any(phrase in q for phrase in _ORDER_STATUS_PHRASES):
-            return RouteDecision(
-                needs_rag=False,
-                domain_hint="order_status",
-                reason="命中订单进度查询意图，转订单状态 skill",
-                confidence=0.9,
-                strategy="heuristic_order_status",
             )
 
         manual_score = 0.0

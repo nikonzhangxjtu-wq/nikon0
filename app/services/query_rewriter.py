@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from app.core.config import settings
+from app.services.llm_clients import chat_text
 
 _REWRITE_SYSTEM = (
     "你是查询改写助手。结合对话历史，将用户的当前问题改写为一个独立完整的检索查询。\n"
@@ -34,14 +35,15 @@ class QueryRewriter:
     def __init__(self, model: str | None = None) -> None:
         self._model = (model or settings.simple_llm_model).strip()
 
-    def rewrite(self, question: str, enrichment: str) -> str:
+    def rewrite(self, question: str, enrichment: str, memory_context: str = "") -> str:
         """返回改写后的 query；失败时返回空字符串让调用方回退。"""
         q = (question or "").strip()
         e = (enrichment or "").strip()
-        if not q or not e:
+        m = (memory_context or "").strip()
+        if not q or not (e or m):
             return ""
 
-        prompt = self._build_prompt(q, e)
+        prompt = self._build_prompt(q, e, memory_context=m)
         try:
             raw = self._call_llm(prompt)
         except Exception as exc:
@@ -59,25 +61,24 @@ class QueryRewriter:
 
         return rewritten
 
-    def _build_prompt(self, question: str, enrichment: str) -> str:
-        return f"{_REWRITE_SYSTEM}\n{enrichment}\n当前问题：{question}\n"
+    def _build_prompt(self, question: str, enrichment: str, memory_context: str = "") -> str:
+        memory = ""
+        if memory_context.strip():
+            memory = (
+                "\n[可用记忆]\n"
+                f"{memory_context.strip()}\n"
+                "[可用记忆结束]\n"
+            )
+        return f"{_REWRITE_SYSTEM}\n{enrichment}{memory}\n当前问题：{question}\n"
 
     def _call_llm(self, prompt: str) -> str:
-        import requests as _req
-
-        resp = _req.post(
-            f"{settings.ollama_base_url}/api/chat",
-            json={
-                "model": self._model,
-                "messages": [{"role": "user", "content": prompt}],
-                "stream": False,
-                "options": {"temperature": 0.0, "num_predict": 128},
-            },
+        return chat_text(
+            model=self._model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0,
+            max_tokens=128,
             timeout=15,
         )
-        resp.raise_for_status()
-        body = resp.json()
-        return body.get("message", {}).get("content", "")
 
 
 def _char_overlap_ratio(a: str, b: str) -> float:

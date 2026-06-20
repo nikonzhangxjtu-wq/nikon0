@@ -59,14 +59,21 @@ def run_batch(
 
         success = True
         try:
-            result = pipeline.run(
-                question=question, images=[], session_id=f"batch_{qid}"
-            )
-            if result.images:
-                images_str = json.dumps(result.images, ensure_ascii=False)
-                ret_value = f"{result.answer}, {images_str}"
+            try:
+                result = pipeline.run(
+                    question=question, images=[], session_id=f"batch_{qid}"
+                )
+            except TypeError as exc:
+                if "session_id" not in str(exc):
+                    raise
+                result = pipeline.run(question=question, images=[])
+            result_images = getattr(result, "images", []) or []
+            result_answer = getattr(result, "answer", "")
+            if result_images:
+                images_str = json.dumps(result_images, ensure_ascii=False)
+                ret_value = f"{result_answer}, {images_str}"
             else:
-                ret_value = result.answer
+                ret_value = result_answer
         except Exception as exc:
             success = False
             err_msg = str(exc)[:300]
@@ -82,8 +89,8 @@ def run_batch(
         if print_each and success:
             print(f"\n{'=' * 60}\n[{idx}/{total}] id={qid}", flush=True)
             print(f"question:\n{question}\n", flush=True)
-            print(f"answer:\n{result.answer}\n", flush=True)
-            if result.images:
+            print(f"answer:\n{getattr(result, 'answer', '')}\n", flush=True)
+            if getattr(result, "images", []):
                 print(f"images: {result.images}\n", flush=True)
 
         if progress_every > 0 and (idx % progress_every == 0 or idx == total):

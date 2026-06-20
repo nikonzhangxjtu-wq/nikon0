@@ -1,0 +1,1961 @@
+{
+  "description": "Chunk-level eval from official questions, GT verified by LLM V2",
+  "total_queries": 141,
+  "gt_changed_count": 123,
+  "multi_chunk_count": 70,
+  "high_confidence_count": 141,
+  "none_confidence_count": 0,
+  "queries": [
+    {
+      "query_id": "oq0065",
+      "query_text": "操作吹风机时，人员需要注意哪些安全要点？",
+      "source_manual": "吹风机手册",
+      "ground_truth_chunk_ids": [
+        "吹风机手册_0001",
+        "吹风机手册_0002"
+      ],
+      "query_type": "official_verified",
+      "language": "zh",
+      "llm_confidence": "high",
+      "llm_reason": "吹风机手册_0001中包含了个人防护装备和人身安全要点（如佩戴听力、眼部防护、束起长发、禁止未成年人操作等）；吹风机手册_0002中包含了吹风机操作安全要点（如禁止无关人员进入、严禁对准人、关闭发动机后安装配件、注意消音器高温等）以及其他安全措施。两者共同覆盖了操作吹风机时的主要安全要点。",
+      "old_gt_chunk_id": "吹风机手册_0001"
+    },
+    {
+      "query_id": "oq0093",
+      "query_text": "首次使用时，如何将洗碗机连接到排水口？",
+      "source_manual": "洗碗机手册",
+      "ground_truth_chunk_ids": [
+        "洗碗机手册_0004"
+      ],
+      "query_type": "official_verified",
+      "language": "zh",
+      "llm_confidence": "high",
+      "llm_reason": "洗碗机手册_0004中'排水连接'部分明确描述了如何将排水管连接到排水孔或水槽排水口，包括连接点高度要求、避免弯折、固定等具体操作，直接回答了首次使用时如何连接排水口的问题。",
+      "old_gt_chunk_id": "洗碗机手册_0005"
+    },
+    {
+      "query_id": "oq0124",
+      "query_text": "我的DCB101型号电钻指示灯闪烁时，这些闪烁标识代表什么含义？",
+      "source_manual": "电钻手册",
+      "ground_truth_chunk_ids": [
+        "电钻手册_0009"
+      ],
+      "query_type": "official_verified",
+      "language": "zh",
+      "llm_confidence": "high",
+      "llm_reason": "电钻手册_0009中'DCB101指示灯工作状态'部分以表格和文字说明了各种闪烁标识的含义：红色持续闪烁表示充电中，红色常亮表示充满，红色长闪后短闪表示过热/过冷延迟，红色快速闪烁表示电池组或充电器故障，红色快速闪烁两次后暂停表示电源故障。完整回答了问题。",
+      "old_gt_chunk_id": "电钻手册_0009"
+    },
+    {
+      "query_id": "oq0204",
+      "query_text": "如何将功能键盘搭配CAM软件使用？",
+      "source_manual": "功能键盘手册",
+      "ground_truth_chunk_ids": [
+        "功能键盘手册_0002"
+      ],
+      "query_type": "official_verified",
+      "language": "zh",
+      "llm_confidence": "high",
+      "llm_reason": "功能键盘手册_0002中'7. 使用功能键盘搭配CAM软件'章节详细说明了下载安装CAM软件、设置配置文件并存储至键盘、配置文件切换、自定义RGB灯光、自定义宏命令和按键重映射等完整操作步骤，直接回答了问题。",
+      "old_gt_chunk_id": "功能键盘手册_0000"
+    },
+    {
+      "query_id": "oq0209",
+      "query_text": "如何为蓝牙激光鼠标安装WIDCOMM蓝牙驱动程序？",
+      "source_manual": "蓝牙激光鼠标手册",
+      "ground_truth_chunk_ids": [
+        "蓝牙激光鼠标手册_0001"
+      ],
+      "query_type": "official_verified",
+      "language": "zh",
+      "llm_confidence": "high",
+      "llm_reason": "蓝牙激光鼠标手册_0001中'3.1 安装WIDCOMM蓝牙驱动程序'给出了从插入USB接收器、放入光盘、自动加载或手动运行Setup.exe、接受协议、选择路径、完成安装、重启电脑等完整步骤，直接回答了如何安装驱动程序的问题。",
+      "old_gt_chunk_id": "蓝牙激光鼠标手册_0001"
+    },
+    {
+      "query_id": "oq0210",
+      "query_text": "如何为蓝牙激光鼠标卸载WIDCOMM蓝牙驱动程序？",
+      "source_manual": "蓝牙激光鼠标手册",
+      "ground_truth_chunk_ids": [
+        "蓝牙激光鼠标手册_0002"
+      ],
+      "query_type": "official_verified",
+      "language": "zh",
+      "llm_confidence": "high",
+      "llm_reason": "在chunk '蓝牙激光鼠标手册_0002'中找到了卸载WIDCOMM蓝牙驱动程序的完整步骤（3.2节），包括拔下USB蓝牙接收器、通过控制面板添加或删除程序删除WIDCOMM蓝牙软件、重启电脑等。",
+      "old_gt_chunk_id": "蓝牙激光鼠标手册_0001"
+    },
+    {
+      "query_id": "oq0211",
+      "query_text": "如何在Windows系统中为蓝牙激光鼠标设置快速配对？",
+      "source_manual": "蓝牙激光鼠标手册",
+      "ground_truth_chunk_ids": [
+        "蓝牙激光鼠标手册_0002"
+      ],
+      "query_type": "official_verified",
+      "language": "zh",
+      "llm_confidence": "high",
+      "llm_reason": "在chunk '蓝牙激光鼠标手册_0002'中找到了Windows系统快速配对的步骤（4.1节），包括插入USB蓝牙接收器、按下鼠标底部配对按钮、按下接收器底部按钮直至LED闪烁、移动鼠标确认连接。",
+      "old_gt_chunk_id": "蓝牙激光鼠标手册_0000"
+    },
+    {
+      "query_id": "oq0212",
+      "query_text": "如何通过WIDCOMM蓝牙驱动程序为蓝牙激光鼠标设置配对？",
+      "source_manual": "蓝牙激光鼠标手册",
+      "ground_truth_chunk_ids": [
+        "蓝牙激光鼠标手册_0002"
+      ],
+      "query_type": "official_verified",
+      "language": "zh",
+      "llm_confidence": "high",
+      "llm_reason": "在chunk '蓝牙激光鼠标手册_0002'中找到了通过WIDCOMM蓝牙驱动程序配对的步骤（4.2节），说明需先安装驱动程序，然后按下USB蓝牙接收器按钮直至出现HID界面，再确认连接。",
+      "old_gt_chunk_id": "蓝牙激光鼠标手册_0000"
+    },
+    {
+      "query_id": "oq0218",
+      "query_text": "如何移动烤箱的顶部加热元件（仅限部分型号）？",
+      "source_manual": "烤箱手册",
+      "ground_truth_chunk_ids": [
+        "烤箱手册_0008"
+      ],
+      "query_type": "official_verified",
+      "language": "zh",
+      "llm_confidence": "high",
+      "llm_reason": "在chunk '烤箱手册_0008'中找到了移动顶部加热元件的步骤（移动顶部加热元件（仅限部分型号）），包括取下侧边配件支架格栅、轻轻拉出加热元件并向下放下、复位时抬起并支撑在侧支架上。",
+      "old_gt_chunk_id": "烤箱手册_0007"
+    },
+    {
+      "query_id": "oq0219",
+      "query_text": "如何更换烤箱的后部灯（如有）？",
+      "source_manual": "烤箱手册",
+      "ground_truth_chunk_ids": [
+        "烤箱手册_0008"
+      ],
+      "query_type": "official_verified",
+      "language": "zh",
+      "llm_confidence": "high",
+      "llm_reason": "在chunk '烤箱手册_0008'中找到了更换后部灯的步骤（更换后部灯（如有）），包括断开电源、拧下灯罩、更换灯泡（25-40W/230V E-14耐温300℃白炽灯）、拧回灯罩、重新接通电源。",
+      "old_gt_chunk_id": "烤箱手册_0007"
+    },
+    {
+      "query_id": "oq0241",
+      "query_text": "If this is the first time to use airfryer, What should I do before first use?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0014"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Airfryer_0014 的 'Before first use' 章节明确列出了首次使用前的步骤：移除所有包装材料、撕掉贴纸、按照清洁章节彻底清洁。这直接回答了问题。",
+      "old_gt_chunk_id": "Airfryer_0019"
+    },
+    {
+      "query_id": "oq0249",
+      "query_text": "How to install an anchor light while the boat is moving?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0135",
+        "Boat_0136",
+        "Boat_0137"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Boat_0135(锚灯概述-可拆卸式、210FSH DELUXE)、Boat_0136(锚灯安装步骤-展开灯杆、连接stopper)、Boat_0137(锚灯拆卸和收纳步骤)共同描述了锚灯的完整安装方法。手册中锚灯安装是在停船状态下操作的（安全要求），关于'moving'的答案隐含在安全章节Boat_0042中(天黑时必须亮锚灯)。",
+      "old_gt_chunk_id": "Boat_0041"
+    },
+    {
+      "query_id": "oq0250",
+      "query_text": "How do I use the jet wash function to clean the boat after using it?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0139",
+        "Boat_0140",
+        "Boat_0141",
+        "Boat_0142"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Boat_0139 提供了 jet wash 系统的安全警告和注意事项；Boat_0140 说明了使用前的阀门检查和注意事项；Boat_0141 给出了具体操作步骤（连接软管、启动发动机、按开关）；Boat_0142 介绍了水流调节和停止方法。这些 chunk 共同完整覆盖了如何使用 jet wash 功能清洁船只。",
+      "old_gt_chunk_id": "Boat_0039"
+    },
+    {
+      "query_id": "oq0253",
+      "query_text": "How do I install a bimini top on my boat if I want to use the canopy?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0144",
+        "Boat_0145",
+        "Boat_0148"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Boat_0144 提供了 210FSH SPORT 型号的 bimini top 安装步骤（反向操作拆卸步骤）；Boat_0145 提供了 210FSH DELUXE 型号的设置步骤（升起、固定支撑杆、展开等）；Boat_0148 给出了通用安装说明（反向操作拆卸步骤）。这些 chunk 覆盖了不同型号的安装方法。",
+      "old_gt_chunk_id": "Boat_0247"
+    },
+    {
+      "query_id": "oq0259",
+      "query_text": "How do I turn a boat while sailing?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0080",
+        "Boat_0081",
+        "Boat_0200"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Boat_0080 解释了转向原理（方向盘改变喷射喷嘴角度）；Boat_0081 进一步说明转向需要高于怠速油门、船尾转向特性等；Boat_0200 的 'Turning the boat' 标题下直接给出了转向操作步骤和注意事项。三者共同完整回答了如何在航行中转弯。",
+      "old_gt_chunk_id": "Boat_0073"
+    },
+    {
+      "query_id": "oq0260",
+      "query_text": "How to operate the boat cross wakes and swells?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0219"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Boat_0219中明确描述了如何穿越尾波和涌浪：改变速度、选择角度，并以较慢速度和‘斜切’（quartering）方式穿越以减少冲击。",
+      "old_gt_chunk_id": "Boat_0219"
+    },
+    {
+      "query_id": "oq0261",
+      "query_text": "How do I load the boat when the cruise is over?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0234",
+        "Boat_0235"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Boat_0234(Loading the boat-将船装载到拖车上的步骤：启动引擎、倒车入水)和Boat_0235(继续装载步骤和注意事项)描述了巡航结束后装载船舶的完整流程。",
+      "old_gt_chunk_id": "Boat_0009"
+    },
+    {
+      "query_id": "oq0265",
+      "query_text": "How to use the energy saving mode of a coffee machine?",
+      "source_manual": "Coffee_Machine",
+      "ground_truth_chunk_ids": [
+        "Coffee_Machine_0018",
+        "Coffee_Machine_0019"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Coffee_Machine_0018介绍了节能模式的基本功能（9分钟后自动断电，按按钮开启）；Coffee_Machine_0019说明了如何更改设置（按Espresso按钮3秒进入设置，切换9分钟/30分钟/停用，按Lungo按钮3秒退出）。两者共同覆盖了使用节能模式的完整信息。",
+      "old_gt_chunk_id": "Coffee_Machine_0001"
+    },
+    {
+      "query_id": "oq0267",
+      "query_text": "How to program the water valume of a coffee machine?",
+      "source_manual": "Coffee_Machine",
+      "ground_truth_chunk_ids": [
+        "Coffee_Machine_0022"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Coffee_Machine_0022 标题为'编程水量(Programming the water volume)'，提供了设置咖啡冲泡水量的详细步骤。",
+      "old_gt_chunk_id": "Coffee_Machine_0020"
+    },
+    {
+      "query_id": "oq0269",
+      "query_text": "How should I do if I want to reset to factory settings of the coffee machine?",
+      "source_manual": "Coffee_Machine",
+      "ground_truth_chunk_ids": [
+        "Coffee_Machine_0024",
+        "Coffee_Machine_0025"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Coffee_Machine_0024(emptying mode-关机前准备)和Coffee_Machine_0025(RESET TO FACTORY SETTINGS: 1.关机状态下按住Lungo键5秒 2.LED快闪3次确认已恢复出厂设置 3.列出出厂默认值:espresso 40ml, lungo 110ml, 9min关机)完整描述了恢复出厂设置的操作步骤。",
+      "old_gt_chunk_id": "Coffee_Machine_0001"
+    },
+    {
+      "query_id": "oq0270",
+      "query_text": "How should I clean my coffee maker after I use it so that it can last longer?",
+      "source_manual": "Coffee_Machine",
+      "ground_truth_chunk_ids": [
+        "Coffee_Machine_0027",
+        "Coffee_Machine_0028"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Coffee_Machine_0027 提供了详细的除垢步骤（descaling），除垢是延长咖啡机寿命的关键维护。Chunk Coffee_Machine_0028 包含清洁（CLEANING）章节，指导如何安全清洁机器，如拔掉电源、用软布清洁咖啡出口、可拆卸部件清洗等。两者共同覆盖了使用后清洁和保养以延长寿命的完整答案。",
+      "old_gt_chunk_id": "Coffee_Machine_0005"
+    },
+    {
+      "query_id": "oq0273",
+      "query_text": "What is the maintenance setting screen of the boat controller?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0089"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Boat_0089 中明确描述了维护设置屏幕（Maintenance setting screen）：'This screen displays the number of hours that the engines have been running since the last maintenance.' 直接回答了问题。",
+      "old_gt_chunk_id": "Boat_0089"
+    },
+    {
+      "query_id": "oq0276",
+      "query_text": "When I am ready to sail, if everything is ready, how do I make the boat move forward?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0078"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Boat_0078 说明了远程控制杆的前进位置（Forward position）以及如何通过移动控制杆使船前进，例如'Moving the remote control levers forward from...' 以及'Forward position'的描述，直接回答了如何让船向前移动。",
+      "old_gt_chunk_id": "Boat_0040"
+    },
+    {
+      "query_id": "oq0290",
+      "query_text": "How to set the camera model to \\P\\ model?",
+      "source_manual": "DSLR_Camera",
+      "ground_truth_chunk_ids": [
+        "DSLR_Camera_0161"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk DSLR_Camera_0161 中明确说明'Set the Mode Dial to <P>.' 并配有步骤和图片，直接回答了如何将相机模式设置为P模式。",
+      "old_gt_chunk_id": "DSLR_Camera_0247"
+    },
+    {
+      "query_id": "oq0291",
+      "query_text": "After or during shooting, how can I view the camera image on TV for better clarity?",
+      "source_manual": "DSLR_Camera",
+      "ground_truth_chunk_ids": [
+        "DSLR_Camera_0238",
+        "DSLR_Camera_0239"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "DSLR_Camera_0238(Connect camera to TV-使用视频线连接相机video terminal到TV的VIDEO IN)和DSLR_Camera_0239(按播放按钮图像显示在电视上)完整描述了拍摄后在电视上查看照片的步骤。",
+      "old_gt_chunk_id": "Television_0022"
+    },
+    {
+      "query_id": "oq0296",
+      "query_text": "After the earphones is in my hand, what are the components I should have?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0000"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Earphones_0000 展示了产品组件：Active Noise Canceling Truly Wireless Earphones，包含Right Earbud、Left Earbud、Multifunction Button、Status LED Indicators、Battery Level Display Button、Charging Case Battery，以及各按钮和指示灯的功能说明。",
+      "old_gt_chunk_id": "Earphones_0000"
+    },
+    {
+      "query_id": "oq0297",
+      "query_text": "If the case battery of earphones is low, how can I charge is?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0000"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Earphones_0000 中“Charging Case Battery Level”部分明确给出了为充电盒充电的步骤：插入USB-C线到充电盒背面端口，再插入标准USB线到USB端口等。",
+      "old_gt_chunk_id": "Earphones_0000"
+    },
+    {
+      "query_id": "oq0299",
+      "query_text": "What are the two main controling functions of earphones?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0003"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Earphones_0003 开头直接列出了“# Controlling Music”和“Controlling Calls”两个主要控制功能。",
+      "old_gt_chunk_id": "Earphones_0003"
+    },
+    {
+      "query_id": "oq0300",
+      "query_text": "Besides the two main controling functions, what other functions of the earphones can I operate?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0003"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Earphones_0003 在“Controlling Music”和“Controlling Calls”之后有“# Other Functions”部分，详细列出了激活语音助手、激活音乐app、切换环境音/ANC模式、低延迟模式等其他功能。",
+      "old_gt_chunk_id": "Earphones_0003"
+    },
+    {
+      "query_id": "oq0301",
+      "query_text": "If my earphones won't work, how can I reset them?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0004"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Earphones_0004 中“# Reset”部分明确描述了耳机重置方法：工厂重置（长按6秒）和硬件重置（长按10秒），适用于耳机不工作的情况。",
+      "old_gt_chunk_id": "Earphones_0004"
+    },
+    {
+      "query_id": "oq0302",
+      "query_text": "What are the maintenance and care policies of the earphones?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0007",
+        "Earphones_0008",
+        "Earphones_0009"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Earphones_0007 和 Earphones_0008 包含了维护和保养的安全注意事项及清洁、存储等具体政策；Earphones_0009 进一步补充了温度限制和回收处置要求。",
+      "old_gt_chunk_id": "Earphones_0008"
+    },
+    {
+      "query_id": "oq0303",
+      "query_text": "From three different observing views, what buttons and interfaces should this eReader have?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0005",
+        "eReader_0006"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "eReader_0005 详细描述了前视图的按钮（Home/ESC、翻页、导航、缩放、旋转、耳机插孔、USB接口等）；eReader_0006 补充了底部/侧面的接口（USB、Micro SD、播放/暂停、电源、音量等），共同覆盖了不同视图的按钮和接口。",
+      "old_gt_chunk_id": "eReader_0014"
+    },
+    {
+      "query_id": "oq0304",
+      "query_text": "What do the functions of Main Menu and Browser History of the eReader can do?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0012"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "eReader_0012 明确说明了 Main Menu 显示所有功能列表，Browser History 显示最近浏览文件并可通过导航键选择后跳转到上次阅读页。",
+      "old_gt_chunk_id": "eReader_0012"
+    },
+    {
+      "query_id": "oq0305",
+      "query_text": "When in eBook mode of this eReader, what will happen after pressing \\M\\ botton?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0013"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "eReader_0013 指出在 eBook 模式下按 M 键会进入 Page Jump、Save Mark、Load Mark、Del Mark、Browser Mode、Flip Time、Brightness、Set color 等功能选项。",
+      "old_gt_chunk_id": "eReader_0015"
+    },
+    {
+      "query_id": "oq0306",
+      "query_text": "If I want to listen to music using this eReader, what should I do?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0016",
+        "eReader_0017"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "eReader_0016 说明从主菜单进入音乐模式并选择音频文件后按 M 播放；eReader_0017 补充了音量调节、播放/暂停、前进/后退等控制操作，共同给出完整的听音乐步骤。",
+      "old_gt_chunk_id": "eReader_0016"
+    },
+    {
+      "query_id": "oq0307",
+      "query_text": "Can this eReader record voice? If so, how do I operate this feature?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0003",
+        "eReader_0006",
+        "eReader_0019",
+        "eReader_0020"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "eReader_0003 列出 Voice Recording: ACC 并确认支持录音；eReader_0006 提到 Play/Pause 按钮可控制录音；eReader_0019 说明进入 Voice Recording 菜单的方法；eReader_0020 详细描述开始、暂停、停止及保存录音的操作步骤。",
+      "old_gt_chunk_id": "eReader_0014"
+    },
+    {
+      "query_id": "oq0308",
+      "query_text": "I can't find the way to play video using this eReader, can you tell me how to do that?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0003",
+        "eReader_0018"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "eReader_0003 列出支持的视频格式 AVI, RMVB, MPEG2；eReader_0018 提供 Video 模式入口及操作说明（进入视频、字幕、播放时间、全屏等）。",
+      "old_gt_chunk_id": "eReader_0018"
+    },
+    {
+      "query_id": "oq0309",
+      "query_text": "Can this eReader become a photo viewer? If so, how do I operate this feature?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0003",
+        "eReader_0012",
+        "eReader_0019"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "eReader_0003 列出支持 JPEG 照片格式；eReader_0012 显示主菜单包含 Photo 功能；eReader_0019 详细说明 Photo 模式的操作（进入、翻页、旋转、缩放）。",
+      "old_gt_chunk_id": "eReader_0014"
+    },
+    {
+      "query_id": "oq0310",
+      "query_text": "When using this eReader, what kinds of trobles might I encounter and how to solve them?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0034",
+        "eReader_0035"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "eReader_0034 开始 Troubleshooting 部分，列出无法开机、无法充电、耳机无声等问题的解决方法；eReader_0035 继续提供无法下载文件、无法播放音乐等问题的解决步骤。",
+      "old_gt_chunk_id": "eReader_0006"
+    },
+    {
+      "query_id": "oq0311",
+      "query_text": "When connecting the fax, hwo can I properly finish the procedure?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0026",
+        "Fax_Machine_0038",
+        "Fax_Machine_0042"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Fax_Machine_0026(使用提供的电源线，安装按Quick Setup Guide)、Fax_Machine_0038(使用26 AWG或更大规格的电信线缆)、Fax_Machine_0042(提供合规电话线和模块化插头)共同描述了传真机连接完成所需的操作和注意事项。",
+      "old_gt_chunk_id": "Fax_Machine_0039"
+    },
+    {
+      "query_id": "oq0312",
+      "query_text": "What should I pay attention to in order to ensure my safety when using this fax?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0036",
+        "Fax_Machine_0000",
+        "Fax_Machine_0022",
+        "Fax_Machine_0025",
+        "Fax_Machine_0019"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "多个chunk包含安全注意事项：Chunk0036列出了基本安全预防措施（不近水、避雷雨、不报告燃气泄漏等）；Chunk0000要求阅读安全指南并遵守警告；Chunk0022警告液体、过热、塑料袋等危险；Chunk0025强调电源线安全；Chunk0019涉及电气危害。共同覆盖确保使用安全的关键点。",
+      "old_gt_chunk_id": "Fax_Machine_0036"
+    },
+    {
+      "query_id": "oq0313",
+      "query_text": "In order to keep your fingers safe, what should you pay attention to about the fax?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0027"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk0027明确提示：'To prevent injuries, be careful not to put your fingers in the areas shown in the illustrations.' 以及改变纸盘尺寸时小心夹到手指，直接回答了如何保护手指安全。",
+      "old_gt_chunk_id": "Fax_Machine_0018"
+    },
+    {
+      "query_id": "oq0314",
+      "query_text": "I'm about to move this fax. Is there anything I should pay attention to?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0013",
+        "Fax_Machine_0029",
+        "Fax_Machine_0035"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Fax_Machine_0013(不要在设备前放置物品-安全连接)、Fax_Machine_0029(搬运设备时移除扩展托盘)、Fax_Machine_0035(安全说明-保存说明、断电维修等)共同覆盖了移动传真机的注意事项。",
+      "old_gt_chunk_id": "Fax_Machine_0013"
+    },
+    {
+      "query_id": "oq0315",
+      "query_text": "Are caution or warning labels inside the fax important? If not, can I remove them?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0032"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk0032明确说明：'DO NOT remove or damage any of the caution or warning labels inside the product.' 表明这些标签很重要，不能移除。",
+      "old_gt_chunk_id": "Fax_Machine_0032"
+    },
+    {
+      "query_id": "oq0316",
+      "query_text": "If I'm in Canada, is there any statement of the fax vailable in my country?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0055",
+        "Fax_Machine_0054"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk0055声明'For Use in the USA or Canada Only'并说明产品专为美加制造；Chunk0054包含'Equipment Attachment Limitations (Canada Only)'及加拿大技术规范，直接提供了针对加拿大用户的声明。",
+      "old_gt_chunk_id": "Fax_Machine_0055"
+    },
+    {
+      "query_id": "oq0317",
+      "query_text": "When using the grill, how to connect regulator to the LP Tank?",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0019",
+        "Grill_0020",
+        "Grill_0021"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Grill_0019 提供了步骤 1-2（固定LP罐，关闭旋钮），Grill_0020 提供了步骤 3-5（关闭LP罐、移除保护帽、插入接头并手紧），Grill_0021 提供了步骤 6（拧紧耦合螺母）以及注意事项。三个chunk共同完整描述了连接调节器的步骤。",
+      "old_gt_chunk_id": "Grill_0004"
+    },
+    {
+      "query_id": "oq0318",
+      "query_text": "To engure my safety when using the grill, how to do leak testing on valves, hose and regulatol?",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0022",
+        "Grill_0023"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Grill_0022 标题为“Leak Testing Valves, Hose and Regulator”，给出了步骤 1-4（关闭旋钮、确保调节器连接、打开LP罐、刷肥皂水）。Grill_0023 给出了步骤 5-6（检查气泡、关闭LP罐）及注意事项。两者共同提供了完整的泄漏测试方法。",
+      "old_gt_chunk_id": "Grill_0022"
+    },
+    {
+      "query_id": "oq0319",
+      "query_text": "What should I pay attention to on ablout indirect cooking using the grill?",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0049",
+        "Grill_0050"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Grill_0049 解释了间接烹饪的概念和原理（通过间接热烹饪家禽和大块肉，减少火焰爆发）。Grill_0050 提供了间接烹饪的说明（始终关闭盖子烹饪，天气影响，建议用低火慢烤等）。两者完整回答了间接烹饪的注意事项。",
+      "old_gt_chunk_id": "Grill_0026"
+    },
+    {
+      "query_id": "oq0320",
+      "query_text": "What are the first three steps in assembly process of the grill according to the manual?",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0057"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Grill_0057 ASSEMBLY章节包含烤架组装前三个步骤：Step 1-安装两个锁定脚轮在底层架后部和两个固定脚轮在前部；Step 2-（通过图示说明）；Step 3-安装灯适配器到后面板并用螺丝固定，放置下后面板在侧板之间并用螺丝固定。",
+      "old_gt_chunk_id": "Grill_0021"
+    },
+    {
+      "query_id": "oq0321",
+      "query_text": "Can you share me some safety tips using the grill?",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0024",
+        "Grill_0026",
+        "Grill_0025",
+        "Grill_0034",
+        "Grill_0033"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Grill_0024 列出了安全使用要点（如不让儿童操作、保持区域清洁、检查火焰等）。Grill_0026 标题为“Safety Tips”，包含检查耦合螺母、关闭阀门、使用长柄工具等。Grill_0025 规定了与墙壁的距离和禁止使用木炭。Grill_0034 提醒不要无人看管并预防油脂火灾。Grill_0033 说明了油脂火灾的处理方法（关闭旋钮和LP罐，不要用水）。这些chunk共同提供了多个安全提示。",
+      "old_gt_chunk_id": "Grill_0026"
+    },
+    {
+      "query_id": "oq0322",
+      "query_text": "What are identification numbers of my jetski? I don't understand that.",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0002",
+        "WaveRunner_Jetski_0004",
+        "WaveRunner_Jetski_0001"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "三个chunk都包含识别号码信息：Chunk0（0002）提示记录PRI-ID、HIN和发动机序列号；Chunk1（0004）详细列出了每个号码的位置和示例；Chunk2（0001）提到了记录这些号码的章节。共同覆盖了用户对jetski identification numbers的疑问。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0001"
+    },
+    {
+      "query_id": "oq0323",
+      "query_text": "I've heard that my jetski has cruising limitations. Please introduce them.",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0010",
+        "WaveRunner_Jetski_0014"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk0（0010）明确包含'# Cruising limitations'标题，内容涉及最大载荷（160kg）和乘客限制（不超过2人）；Chunk6（0014）指出水车未配备夜航灯，禁止在日落后或日出前操作，这也是重要的巡航限制。两者共同回答了cruising limitations。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0000"
+    },
+    {
+      "query_id": "oq0324",
+      "query_text": "I've heard that my jetski has cruising limitations. Please introduce them.",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0010",
+        "WaveRunner_Jetski_0014"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "与问题oq0323相同，Chunk0（0010）包含巡航限制（载荷与乘客），Chunk6（0014）包含夜间操作限制，共同覆盖了cruising limitations。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0000"
+    },
+    {
+      "query_id": "oq0325",
+      "query_text": "What are the operation requirements if I want to use my jetski?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0014",
+        "WaveRunner_Jetski_0007",
+        "WaveRunner_Jetski_0020",
+        "WaveRunner_Jetski_0008"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk2（0014）有'# Operation requirements'标题，要求穿戴PFD和防护服；Chunk5（0007）要求操作前阅读手册和观看视频；Chunk9（0020）要求禁止酒后驾驶、进行预检等；Chunk4（0008）推荐最小操作年龄16岁。这些chunk共同完整列出了操作jetski所需的要求。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0000"
+    },
+    {
+      "query_id": "oq0326",
+      "query_text": "What kinds of watercraft characteristics does my jetski have?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0024",
+        "WaveRunner_Jetski_0025"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk0（0024）直接以'# Watercraft characteristics'开头，描述了喷射转向特性（松油门后转向能力下降等）；Chunk8（0025）描述了水喷推进特性（发动机运转即有推力、无空档、远离进水口等）。两者共同介绍了jetski的水车特性。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0027"
+    },
+    {
+      "query_id": "oq0327",
+      "query_text": "When encountering vessels driving my jetski, what rules should I obey?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0026",
+        "WaveRunner_Jetski_0030",
+        "WaveRunner_Jetski_0033",
+        "WaveRunner_Jetski_0031",
+        "WaveRunner_Jetski_0027",
+        "WaveRunner_Jetski_0035",
+        "WaveRunner_Jetski_0028"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "多个chunk共同覆盖了驾驶jetski遇到其他船只时应遵守的规则。Chunk 0026介绍了规则背景，0030列出了三种相遇情形（Meeting、Crossing、Overtaking），0031和0033分别详细说明了Meeting和Overtaking的具体规则，0027和0028定义了Stand-on和Give-way vessel的权利与义务，0035补充了渔船和帆船的优先权规则。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0026"
+    },
+    {
+      "query_id": "oq0328",
+      "query_text": "I'd like to remove and install the seat of my jetski, what steps should I follow?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0049"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0049明确给出了座椅拆卸和安装的步骤：拉座椅锁扣后拉出座椅安装时插入前部凸起并按下后部锁紧。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0026"
+    },
+    {
+      "query_id": "oq0329",
+      "query_text": "In daily usage, how to open and close the hood of the jetski?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0050"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0050直接描述了机罩的打开和关闭方法：向下推锁扣然后抬起机罩打开，向下按压机罩关闭。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0050"
+    },
+    {
+      "query_id": "oq0330",
+      "query_text": "I've noticed that there are two different kinds of filler caps on the jetski. How to remove them?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0050"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0050同时给出了燃油箱加油盖和机油箱加油盖的移除方法：两者都是逆时针旋转。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0026"
+    },
+    {
+      "query_id": "oq0331",
+      "query_text": "If I need to manipulate the two kinds of engine switches on the jetski, what should I do?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0047"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0047描述了两种发动机开关：发动机熄火开关（取下夹子停止发动机）和启动开关（按下启动发动机），直接回答了如何操作。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0000"
+    },
+    {
+      "query_id": "oq0332",
+      "query_text": "There are two kinds of levers on the jetski, how to manipulate them?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0054"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk[0] (WaveRunner_Jetski_0054) 明确描述了两种杠杆：Choke lever（阻风门杆）和 Throttle lever（油门杆）的操作方法，包括如何打开/关闭阻风门以及如何挤压/松开油门杆。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0026"
+    },
+    {
+      "query_id": "oq0333",
+      "query_text": "What information should I obtain about Quick Shift Trim System (QSTS) selector when using my jetski",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0057",
+        "WaveRunner_Jetski_0047",
+        "WaveRunner_Jetski_0058"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk[0] (WaveRunner_Jetski_0057) 详细介绍了 QSTS 选择器的位置、功能、5个位置及调整步骤；Chunk[1] (WaveRunner_Jetski_0047) 简要说明了其用途；Chunk[2] (WaveRunner_Jetski_0058) 提供了操作注意事项和推荐位置。三者共同覆盖了用户所需信息。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0047"
+    },
+    {
+      "query_id": "oq0334",
+      "query_text": "What do fuel meter and hour meter on my jetski do?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0064",
+        "WaveRunner_Jetski_0063"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk[0] (WaveRunner_Jetski_0064) 说明了小时计用于显示发动机运行时间以便按维护计划保养；Chunk[1] (WaveRunner_Jetski_0063) 说明了燃油表用于在行驶中方便检查燃油余量，有8个段位显示。两者共同回答了燃油表和小时计的功能。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0061"
+    },
+    {
+      "query_id": "oq0344",
+      "query_text": "Inspecting fuel filter and fuel tank of my jetski is important. How to do that?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0080",
+        "WaveRunner_Jetski_0079"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk[1] (WaveRunner_Jetski_0080) 指出检查燃油箱是否有泄漏或水；Chunk[3] (WaveRunner_Jetski_0079) 说明燃油滤清器应定期更换，并警告不要自行更换，需由经销商操作。这两个 chunk 提供了检查燃油滤清器和燃油箱的指导。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0001"
+    },
+    {
+      "query_id": "oq0345",
+      "query_text": "How to adjust the adjustable sponson of my jetski if needed?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0080",
+        "WaveRunner_Jetski_0069",
+        "WaveRunner_Jetski_0081"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk[0] (WaveRunner_Jetski_0080) 给出了调整可调式舷缘的步骤：拆下螺栓、拆下舷缘并安装到所需位置；Chunk[1] (WaveRunner_Jetski_0069) 说明了不同位置的效果（提升直线性能或转弯性能）；Chunk[3] (WaveRunner_Jetski_0081) 提供了安装时的注意事项和扭矩值。三者共同覆盖了调整方法。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0044"
+    },
+    {
+      "query_id": "oq0346",
+      "query_text": "The intake and impeller of my jetski are dirty. How to clean them?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0082",
+        "WaveRunner_Jetski_0083"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0082 提供了清洁前的警告和将水上摩托侧翻的步骤；Chunk 0083 提供了清除驱动轴、叶轮、泵壳和喷口处杂草或碎屑的具体操作步骤。两者共同覆盖了完整的清洁流程。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0074"
+    },
+    {
+      "query_id": "oq0347",
+      "query_text": "How to start my jetski in different situations?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0088",
+        "WaveRunner_Jetski_0087",
+        "WaveRunner_Jetski_0072",
+        "WaveRunner_Jetski_0091"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0088 描述了从码头启动的步骤（系绳、启动发动机）；Chunk 0087 描述了浅水启动步骤；Chunk 0072 描述了单独从水中登船并启动的步骤；Chunk 0091 描述了当平衡困难时带乘客启动的步骤。这些 chunk 覆盖了不同场景下的启动方法。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0022"
+    },
+    {
+      "query_id": "oq0348",
+      "query_text": "What are basic steps to board my jetski with a passenger in deep water?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0089",
+        "WaveRunner_Jetski_0090"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0089 提供了带乘客登船的前三步：操作员登船、系绳、让乘客移到船尾并登船；Chunk 0090 提供了后续步骤：操作员确认乘客坐稳、启动发动机并加速。两者共同给出了在深水中带乘客登船的完整基本步骤。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0026"
+    },
+    {
+      "query_id": "oq0349",
+      "query_text": "If it is difficult to balance the jetski at a stand still, what should I do?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0091"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0091 明确说明：如果水上摩托在静止时难以保持平衡，应按照以下步骤操作：乘客稳住船体，操作员登上平台坐好，系上绳索，启动发动机并保持怠速，然后乘客爬上座位。直接回答了问题。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0027"
+    },
+    {
+      "query_id": "oq0350",
+      "query_text": "What is the max load of the jetski?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0010"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0010 明确给出了最大负载：160 kg (353 lb)，并说明这是货物、操作员和乘客的总重量。",
+      "old_gt_chunk_id": "WaveRunner_Jetski_0000"
+    },
+    {
+      "query_id": "oq0358",
+      "query_text": "How can you lower the roll bar of a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0048"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Lawn_Mower_0048 中有 'Lowering the Roll Bar' 小节，包含具体步骤：移除开口销和销钉，然后降低防滚架。该内容直接回答了问题。",
+      "old_gt_chunk_id": "Lawn_Mower_0002"
+    },
+    {
+      "query_id": "oq0359",
+      "query_text": "How can you adjust the rear-shock assemblies for a lawn mower with suspension system only?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0057",
+        "Lawn_Mower_0058"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Lawn_Mower_0057 和 Lawn_Mower_0058 共同描述了调整后减震组件的方法：悬架系统可调节，通过改变后减震组件的位置来调整软硬，并指出左右减震应调整到相同位置。内容完整回答了问题。",
+      "old_gt_chunk_id": "Lawn_Mower_0057"
+    },
+    {
+      "query_id": "oq0360",
+      "query_text": "How can you adjust the height of cut for a lawn mower with an electric deck lift?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0084"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Lawn_Mower_0084 标题为 'Adjusting the Height of Cut For Machines with an Electric Deck Lift'，给出了使用电动升降开关升高/降低甲板，然后选择孔位插入销钉的步骤，直接回答了问题。",
+      "old_gt_chunk_id": "Lawn_Mower_0030"
+    },
+    {
+      "query_id": "oq0361",
+      "query_text": "How can you load a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0026"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Lawn_Mower_0026 中的第3条安全提示明确说明了装载草坪修剪机到拖车上的方法：使用单个足够宽的坡道，坡度小于15°，倒车上坡。该内容直接回答了装载问题。",
+      "old_gt_chunk_id": "Lawn_Mower_0002"
+    },
+    {
+      "query_id": "oq0362",
+      "query_text": "How can you unload a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0026"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Lawn_Mower_0026 中的第3条安全提示也包含了卸载说明：'drive forward off the ramp when unloading'（卸载时正向驶下坡道）。因此该chunk回答了卸载问题。",
+      "old_gt_chunk_id": "Lawn_Mower_0002"
+    },
+    {
+      "query_id": "oq0363",
+      "query_text": "How can you change the engine oil of a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0122"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 5 (Lawn_Mower_0122) contains the complete 'Changing the Engine Oil' procedure, including steps to warm up the engine, drain oil, and refill.",
+      "old_gt_chunk_id": "Lawn_Mower_0002"
+    },
+    {
+      "query_id": "oq0364",
+      "query_text": "How can you remove the filters of a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0115",
+        "Lawn_Mower_0132"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 2 (Lawn_Mower_0115) and chunk 3 (Lawn_Mower_0132) both provide 'Removing the Filters' steps for the air cleaner, covering the basic removal and the inner filter handling.",
+      "old_gt_chunk_id": "Lawn_Mower_0195"
+    },
+    {
+      "query_id": "oq0365",
+      "query_text": "How can you replace the mower belt of a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0160",
+        "Lawn_Mower_0161"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0 (Lawn_Mower_0160) starts the 'Replacing the Mower Belt' procedure with steps 1-4, and chunk 6 (Lawn_Mower_0161) continues with steps 5-9, together covering the full replacement process.",
+      "old_gt_chunk_id": "Lawn_Mower_0195"
+    },
+    {
+      "query_id": "oq0366",
+      "query_text": "How can you set up control of a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0038"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 2 (Microwave_OTR_0038) describes the 'Control Set-Up' pad function, which allows changing default settings such as sound, clock, display speed, and defrost weight, addressing how to set up control.",
+      "old_gt_chunk_id": "Microwave_OTR_0038"
+    },
+    {
+      "query_id": "oq0367",
+      "query_text": "How can you set the light timer of a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0045"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 1 (Microwave_OTR_0045) provides the 'LIGHT TIMER' section with an example of setting the light to turn on and off at specific times, explaining how to set the light timer.",
+      "old_gt_chunk_id": "Microwave_OTR_0037"
+    },
+    {
+      "query_id": "oq0368",
+      "query_text": "How can you set yout favorite recipe with a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0049"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Microwave_OTR_0049 明确描述了 Favorite Recipe 功能，包括如何编程和调用预设食谱，直接回答了设置最爱食谱的问题。",
+      "old_gt_chunk_id": "Microwave_OTR_0049"
+    },
+    {
+      "query_id": "oq0369",
+      "query_text": "How can you reheat food with a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0062"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Microwave_OTR_0062 中 'REHEAT(SENSOR)' 部分说明 Reheat 功能可让用户无需设置时间和功率即可加热食物，并给出了 Casserole、Dinner Plate、Soup/Sauce 三种类别的示例，直接回答了如何加热食物。",
+      "old_gt_chunk_id": "Microwave_OTR_0069"
+    },
+    {
+      "query_id": "oq0370",
+      "query_text": "How can you use auto defrost of a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0064"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Microwave_OTR_0064 提供了 Auto Defrost 的具体使用示例（如解冻1.2磅牛肉碎），包括重量转换表和操作提示，清晰说明了如何使用自动解冻功能。",
+      "old_gt_chunk_id": "Microwave_OTR_0069"
+    },
+    {
+      "query_id": "oq0371",
+      "query_text": "How can you clean the grease filter of a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0089"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Microwave_OTR_0089 详细列出了清洁油脂过滤器的步骤：取下、清洗（洗碗机或热水加温和洗涤剂）、重新安装，并附有警告说明，直接回答了清洁方法。",
+      "old_gt_chunk_id": "Microwave_OTR_0069"
+    },
+    {
+      "query_id": "oq0372",
+      "query_text": "How can you replace the charcoal filter of a over-the-range microwave? ",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0090"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Microwave_OTR_0090 提供了更换活性炭过滤器的完整步骤（断电、拆下通风口格栅、更换滤网、装回格栅并恢复供电），直接回答了更换方法。",
+      "old_gt_chunk_id": "Microwave_OTR_0069"
+    },
+    {
+      "query_id": "oq0373",
+      "query_text": "How can you replace the oven light of a over-the-range microwave? ",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0091",
+        "Microwave_OTR_0092"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Microwave_OTR_0091 包含 'OVEN LIGHT REPLACEMENT' 标题及步骤1-3（拔电源、拆螺丝、更换灯泡），Chunk Microwave_OTR_0092 包含步骤4-8（取出灯座、更换灯泡、装回等），两者共同完整覆盖了更换烤箱灯的操作。",
+      "old_gt_chunk_id": "Microwave_OTR_0069"
+    },
+    {
+      "query_id": "oq0374",
+      "query_text": "How can you set the PCI Express 3.0 x16 slots of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0038",
+        "Motherboard_0149"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0038 说明单显卡时应使用 PCIe 3.0 x16_1 插槽以获得更好性能；Motherboard_0149 提供 BIOS 中 'PCIEx16_1/ PCIEx16_2 Link Speed' 选项，可设置为 [Auto][Gen1][Gen2][Gen3] 来配置 PCI Express 3.0 x16 插槽的速度。两者结合可回答如何设置插槽。",
+      "old_gt_chunk_id": "Motherboard_0010"
+    },
+    {
+      "query_id": "oq0375",
+      "query_text": "How can you set the jumpers of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0039",
+        "Motherboard_0042"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0039 的 '1.6 Jumpers' 部分详细描述了 Clear RTC RAM 跳线的设置方法（短路两针）；Motherboard_0042 描述了 CPU Over Voltage 跳线的设置方法（插针2-3或1-2）。这两个 chunk 共同覆盖了主板上跳线的设置。",
+      "old_gt_chunk_id": "Motherboard_0039"
+    },
+    {
+      "query_id": "oq0376",
+      "query_text": "How can you set the rear panel connectors of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0042",
+        "Motherboard_0043"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0042包含1.7.1 Rear panel connectors章节标题，列出了PS/2 Mouse/Keyboard combo port等后面板接口；Motherboard_0043继续列出LAN(RJ-45) port及LED指示灯说明。这些chunk描述了后面板连接器的功能和连接方式。",
+      "old_gt_chunk_id": "Motherboard_0042"
+    },
+    {
+      "query_id": "oq0377",
+      "query_text": "How can you set the onboard LED of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0065",
+        "Motherboard_0158",
+        "Motherboard_0066",
+        "Motherboard_0160"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0065 和 Motherboard_0158 描述了 Model Name LED 的设置方法（通过 BIOS 或 Ai Suite 3 切换模式）；Motherboard_0066 和 Motherboard_0160 描述了 SupremeFX LED 的设置方法（同样通过 BIOS 或 App 修改）。这些 chunk 共同覆盖了主板上的多种板载 LED 设置。",
+      "old_gt_chunk_id": "Motherboard_0066"
+    },
+    {
+      "query_id": "oq0378",
+      "query_text": "How can you update the BIOS file of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0081",
+        "Motherboard_0072",
+        "Motherboard_0070"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0081 提供了使用 bupdater 在 FreeDOS 下更新 BIOS 的步骤；Motherboard_0072 提供了通过 EZ Flash 3 从 USB 或 Internet 更新 BIOS 的步骤；Motherboard_0070 介绍了使用 EZ Update 工具自动更新 BIOS 的方法。三者共同覆盖了多种 BIOS 更新方式。",
+      "old_gt_chunk_id": "Motherboard_0070"
+    },
+    {
+      "query_id": "oq0379",
+      "query_text": "How can you create RAID of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0098",
+        "Motherboard_0099",
+        "Motherboard_0058",
+        "Motherboard_0151"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0098 和 Motherboard_0099 给出了通过 EZ Tuning Wizard 创建 RAID 的详细操作步骤；Motherboard_0058 和 Motherboard_0151 说明了需要将 SATA Mode 设置为 [RAID] 才能创建 RAID，是必要的前置条件。",
+      "old_gt_chunk_id": "Motherboard_0058"
+    },
+    {
+      "query_id": "oq0380",
+      "query_text": "How can you use SATA ODD & USB devices to install an operating system for a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0202",
+        "Motherboard_0203"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0202 标题为“Method 1: Using SATA ODD & USB devices”，并给出了所需设备；Motherboard_0203 继续给出了具体的操作步骤（插入 USB ODD、连接 USB 设备、按 F8 选择启动设备等），完整回答了如何使用 SATA ODD 和 USB 设备安装操作系统。",
+      "old_gt_chunk_id": "Motherboard_0202"
+    },
+    {
+      "query_id": "oq0381",
+      "query_text": "How can you secure the motherboard to the chassis?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0021"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0021 明确写道“Place nine screws into the holes indicated by circles to secure the motherboard to the chassis. Do not over tighten the screws!”，直接回答了如何将主板固定到机箱。",
+      "old_gt_chunk_id": "Motherboard_0020"
+    },
+    {
+      "query_id": "oq0382",
+      "query_text": "How can you prepare the installation of Central Processing Unit (CPU) for a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0022",
+        "Motherboard_0023",
+        "Motherboard_0025",
+        "Motherboard_0019"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0022 要求安装 CPU 前拔掉电源线；Motherboard_0023 提醒确认 CPU 兼容性、检查 PnP 保护帽；Motherboard_0025 说明使用 CPU 安装工具并确保 CPU 牢固卡入；Motherboard_0019 给出了防静电等通用安全准备。这些共同覆盖了安装 CPU 前的准备工作。",
+      "old_gt_chunk_id": "Motherboard_0022"
+    },
+    {
+      "query_id": "oq0383",
+      "query_text": "How do you know about system memory of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0028",
+        "Motherboard_0031",
+        "Motherboard_0027",
+        "Motherboard_0029",
+        "Motherboard_0115"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "多个chunk直接描述了主板系统内存的信息：Motherboard_0027（系统内存概述和配置）、Motherboard_0028（双通道、电压、32位限制）、Motherboard_0029（SPD、频率调整建议）、Motherboard_0031（QVL和频率能力）、Motherboard_0115（DRAM频率BIOS设置）。这些共同覆盖了如何了解系统内存的各个方面。",
+      "old_gt_chunk_id": "Motherboard_0028"
+    },
+    {
+      "query_id": "oq0384",
+      "query_text": "How do you know about Serial port connector (10-1 pin COM) of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0048",
+        "Motherboard_0162"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0048 在内部连接器中明确描述了串口连接器（10-1 pin COM）的定义和用法；Motherboard_0162 在BIOS设置中提供了串口配置选项（启用/禁用、地址选择），两者共同回答了如何了解该连接器。",
+      "old_gt_chunk_id": "Motherboard_0048"
+    },
+    {
+      "query_id": "oq0385",
+      "query_text": "How do you know about TPM connector (14-1 pin TPM) for a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0048"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0048 在内部连接器部分明确描述了TPM连接器（14-1 pin TPM）的功能和用途，其余chunk未涉及TPM相关内容。",
+      "old_gt_chunk_id": "Motherboard_0054"
+    },
+    {
+      "query_id": "oq0386",
+      "query_text": "How do you know about Thermal sensor connector (2-pin T_SENSOR) of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0054",
+        "Motherboard_0167"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Motherboard_0054 直接定义了热敏传感器连接器（2-pin T_SENSOR）的用途（连接热敏电阻线监测温度）；Motherboard_0167 在BIOS监控菜单中列出了T_Sensor温度检测项，说明如何查看其温度。两者提供了硬件和软件层面的了解途径。",
+      "old_gt_chunk_id": "Motherboard_0054"
+    },
+    {
+      "query_id": "oq0387",
+      "query_text": "How can you set quick release for a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0038",
+        "PressureCooker_Airfryer_0037"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "PressureCooker_Airfryer_0038 和 PressureCooker_Airfryer_0037 都明确给出了快速释放的操作步骤：按下快速释放按钮直到其卡入并锁定在Vent位置，并说明了释放时蒸汽喷出、浮阀下降等预期现象。其他chunk未提供具体设置方法。",
+      "old_gt_chunk_id": "Airfryer_0019"
+    },
+    {
+      "query_id": "oq0388",
+      "query_text": "How can you set pressure cooking lid for a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0039"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "PressureCooker_Airfryer_0039 明确列出Closing the lid步骤：01对齐lid和cooker base的符号后放下盖子，02顺时针旋转盖子直到符号对齐。同时还包含Opening the lid的步骤。",
+      "old_gt_chunk_id": "Airfryer_0019"
+    },
+    {
+      "query_id": "oq0389",
+      "query_text": "How can you set float valve for a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0068"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0068 明确给出了安装浮阀的步骤：将浮阀窄端放入孔中，固定硅胶帽等，直接回答了如何设置。",
+      "old_gt_chunk_id": "Airfryer_0019"
+    },
+    {
+      "query_id": "oq0390",
+      "query_text": "What do you know about anti-block shield for a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0046",
+        "PressureCooker_Airfryer_0066",
+        "PressureCooker_Airfryer_0067"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0046 描述了防堵盾的功能（防止食物颗粒堵塞蒸汽释放管，对压力烹饪安全至关重要）；Chunk 0066 提供了安装和拆卸防堵盾的具体步骤；Chunk 0067 强调必须安装防堵盾才能操作压力锅。三者共同完整回答了关于防堵盾的已知信息。",
+      "old_gt_chunk_id": "Airfryer_0044"
+    },
+    {
+      "query_id": "oq0391",
+      "query_text": "How can you set steam release valve for a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0065",
+        "PressureCooker_Airfryer_0066"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0065 提到蒸汽释放阀必须安装后才能使用，并说明了拆卸方法；Chunk 0066 给出了安装蒸汽释放阀的具体步骤（将其放在蒸汽释放管上并用力按下）。两者共同覆盖了如何设置蒸汽释放阀。",
+      "old_gt_chunk_id": "Airfryer_0017"
+    },
+    {
+      "query_id": "oq0392",
+      "query_text": "How can you set anti-block shield for a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0066"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk 0066 中明确包含安装防堵盾的步骤：将防堵盾放在卡扣上并按下直至卡入到位。直接回答了如何设置。",
+      "old_gt_chunk_id": "Airfryer_0019"
+    },
+    {
+      "query_id": "oq0393",
+      "query_text": "How can you set silicone cap and float valve for a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0068"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk PressureCooker_Airfryer_0068 明确提供了安装浮阀和硅胶帽的步骤：将浮阀窄端放入浮阀孔，翻转盖子，将硅胶帽牢固地连接到浮阀底部。",
+      "old_gt_chunk_id": "Airfryer_0019"
+    },
+    {
+      "query_id": "oq0394",
+      "query_text": "How can you Install the condensation collector for a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0069"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk PressureCooker_Airfryer_0069 明确说明了冷凝收集器的安装方法：将冷凝收集器上的凹槽对准 cooker base 背部的卡舌，然后将其滑入到位。",
+      "old_gt_chunk_id": "Airfryer_0019"
+    },
+    {
+      "query_id": "oq0395",
+      "query_text": "How can you install the sealing ring for a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0064"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk PressureCooker_Airfryer_0064 中提供了安装密封圈的步骤：将密封圈放在密封圈架上，按压到位，用力按下以防止起皱。",
+      "old_gt_chunk_id": "Airfryer_0019"
+    },
+    {
+      "query_id": "oq0396",
+      "query_text": "How can you remove silicone sealing ring for a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0064"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk PressureCooker_Airfryer_0064 中提供了拆卸密封圈的步骤：抓住硅胶边缘，从圆形不锈钢密封圈架后面拉出密封圈。",
+      "old_gt_chunk_id": "Airfryer_0019"
+    },
+    {
+      "query_id": "oq0397",
+      "query_text": "What do you know about sealing ring of a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0042",
+        "PressureCooker_Airfryer_0041",
+        "PressureCooker_Airfryer_0044"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "多个chunk共同提供了密封圈的相关信息：Chunk 0042 说明硅胶多孔易吸收气味，只能使用授权密封圈且不得使用拉伸或损坏的；Chunk 0041 说明密封圈在压力烹饪盖关闭时形成气密密封，必须安装且一次只装一个；Chunk 0044 说明密封圈会随时间拉伸，应每12-18个月更换或发现变形时提前更换。",
+      "old_gt_chunk_id": "Airfryer_0044"
+    },
+    {
+      "query_id": "oq0398",
+      "query_text": "What do you know about steam release valve of a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0041",
+        "PressureCooker_Airfryer_0038",
+        "PressureCooker_Airfryer_0065",
+        "PressureCooker_Airfryer_0066"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk[3] (PressureCooker_Airfryer_0041) 描述了蒸汽释放阀的位置、功能和安全警告；Chunk[0] (PressureCooker_Airfryer_0038) 描述了按下快速释放按钮时蒸汽从阀顶部喷出的现象；Chunk[7] (PressureCooker_Airfryer_0065) 和 Chunk[8] (PressureCooker_Airfryer_0066) 分别提供了拆卸和安装蒸汽释放阀的步骤。这些chunk共同覆盖了蒸汽释放阀的完整信息。",
+      "old_gt_chunk_id": "Airfryer_0017"
+    },
+    {
+      "query_id": "oq0399",
+      "query_text": "What do you know about quick release button of a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0040",
+        "PressureCooker_Airfryer_0038",
+        "PressureCooker_Airfryer_0037"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk[1] (PressureCooker_Airfryer_0040) 专门介绍了快速释放按钮的功能（控制蒸汽释放阀）、使用技巧（轻弹操作，不超过45度）和安全优点；Chunk[0] (PressureCooker_Airfryer_0038) 描述了按下按钮的具体操作和产生的蒸汽现象；Chunk[3] (PressureCooker_Airfryer_0037) 在快速释放方法中再次说明按下按钮的操作。这些chunk共同回答了快速释放按钮的相关知识。",
+      "old_gt_chunk_id": "Airfryer_0011"
+    },
+    {
+      "query_id": "oq0400",
+      "query_text": "What can you know about natural release(NRorNPR) of a multi-use pressure cooker and air fryer?",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0037"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk[0] (PressureCooker_Airfryer_0037) 明确描述了自然释放（NR/NPR）的定义：烹饪逐渐停止，温度下降自然减压，并指出适用于高淀粉食物和易膨胀食物。该chunk直接回答了问题。",
+      "old_gt_chunk_id": "Airfryer_0011"
+    },
+    {
+      "query_id": "oq0401",
+      "query_text": "What is the robot anatomy of the vacuum?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0007"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Vacuum_Cleaner_0007 BUTTONS & INDICATORS 和 BOTTOM VIEW 展示了真空吸尘器的机器人结构：按钮(SPOT、CLEAN、DOCK)、指示灯(WiFi、电量、故障)、底部传感器和滚刷等。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0012"
+    },
+    {
+      "query_id": "oq0402",
+      "query_text": "What are the two primary modes available on a vacuum cleaner that can be used to tailor its performance to meet different home cleaning needs?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0014"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk[0] (Vacuum_Cleaner_0014) 明确描述了双模式虚拟墙屏障的两种模式：Halo模式（创建保护区域）和Virtual Wall模式（创建隐形屏障），用于适应不同家庭清洁需求。该chunk直接回答了问题。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0014"
+    },
+    {
+      "query_id": "oq0403",
+      "query_text": "What is the proper procedure for emptying the vacuum cleaner's bin?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0016"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Vacuum_Cleaner_0016 包含标题 # EMPTYING THE BIN，并提供具体步骤：1. Press bin release button to remove bin; 2. Open bin door to empty bin。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0013"
+    },
+    {
+      "query_id": "oq0404",
+      "query_text": "What is the correct procedure for cleaning the vacuum cleaner filter?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0016",
+        "Vacuum_Cleaner_0017"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Vacuum_Cleaner_0016 开始 # CLEANING THE FILTER，给出步骤 3. Remove filter by grasping the yellow tab; 4. Shake off debris by tapping。Vacuum_Cleaner_0017 继续该部分，重复步骤并补充重要提示：filter door won't close unless filter is reinserted, insert with yellow tab facing up。两者共同覆盖完整清洁滤网步骤。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0004"
+    },
+    {
+      "query_id": "oq0405",
+      "query_text": "What is the proper procedure for cleaning the full bin sensors on a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0017"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Vacuum_Cleaner_0017 包含 # CLEANING THE FULL BIN SENSORS，步骤为：1. Remove and empty the bin; 2. Wipe the sensors with a clean, dry cloth; 3. Wipe the inner and outer sensor ports on the bin with a clean, dry cloth。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0013"
+    },
+    {
+      "query_id": "oq0406",
+      "query_text": "What is the correct procedure for cleaning the extractors (brushes or rollers) on a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0019"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Vacuum_Cleaner_0019 包含 # CLEANING THE EXTRACTORS，步骤为：1. Pinch yellow extractor frame release tabs, lift up frame and remove obstructions; 2. Remove extractors and caps, clean hair/debris; 3. Remove debris from square and hexagonal pegs; 4. Clear vacuum path; 5. Reinstall extractors。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0004"
+    },
+    {
+      "query_id": "oq0407",
+      "query_text": "What is the proper procedure for cleaning the sensors and charging contacts on a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0018"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Vacuum_Cleaner_0018 包含 # CLEANING THE SENSOR AND CHARGING CONTACTS，步骤为：1. Wipe the sensor with a clean, dry cloth; Do not spray solution directly; 2. Wipe the charging contacts on Roomba and the Home Base with a clean, dry cloth。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0004"
+    },
+    {
+      "query_id": "oq0408",
+      "query_text": "What is the correct procedure for positioning the home base of a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0008",
+        "Vacuum_Cleaner_0019"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Vacuum_Cleaner_0008 POSITIONING THE vacuum 描述了放置要求(四周距离)；Vacuum_Cleaner_0019 涉及清洁Home Base充电触点、传感器开口，间接描述了Home Base的维护位置。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0011"
+    },
+    {
+      "query_id": "oq0409",
+      "query_text": "What is the proper procedure for cleaning the front caster wheel of a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0017",
+        "Vacuum_Cleaner_0018"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "chunk Vacuum_Cleaner_0017中标题为'CLEANING THE FRONT CASTER WHEEL'，包含步骤1-3（移除轮子、清理腔体、用手转动）；chunk Vacuum_Cleaner_0018继续步骤3的后半部分和步骤4（重新安装）。两个chunk共同覆盖完整清洗流程。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0017"
+    },
+    {
+      "query_id": "oq0410",
+      "query_text": "What is the correct procedure for cleaning the side brush of a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0018"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "chunk Vacuum_Cleaner_0018中包含'# CLEANING THE SIDE BRUSH'部分，明确给出了步骤：1.用硬币或螺丝刀卸下螺丝；2.取下刷子并清洁刷子和刷柱，然后重新安装。完整过程在一个chunk中。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0004"
+    },
+    {
+      "query_id": "oq0411",
+      "query_text": "What is the function of the dual-mode virtual wall barrier on a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0014",
+        "Vacuum_Cleaner_0015"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "chunk Vacuum_Cleaner_0014介绍了双模式虚拟墙屏障的总体功能（保持真空在清洁区域、阻止进入不想去的地方）以及Halo Mode；chunk Vacuum_Cleaner_0015介绍了Virtual Wall Mode。两个chunk共同完整描述了双模式的功能。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0014"
+    },
+    {
+      "query_id": "oq0412",
+      "query_text": "What are the troubleshooting steps if the vacuum indicates a problem?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0020"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "chunk Vacuum_Cleaner_0020中'# TROUBLESHOOTING'部分明确说明：真空会发出双音警报和语音消息，故障指示灯闪烁，更多支持可通过app和在线获取；并随后给出重启步骤（按住CLEAN 10秒）。这是直接的故障排除步骤。",
+      "old_gt_chunk_id": "Vacuum_Cleaner_0020"
+    },
+    {
+      "query_id": "oq0416",
+      "query_text": "What are the essential preparation checks to perform before using a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0016",
+        "Snowmobile_0019"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Snowmobile_0016 明确列出了使用前的必要检查项，如检查油门、刹车、转向、设置驻车制动等。Snowmobile_0019 强调每次启动前应执行预操作检查，并具体提到检查油门、转向和刹车操作。两者共同覆盖了 essential preparation checks。",
+      "old_gt_chunk_id": "Snowmobile_0082"
+    },
+    {
+      "query_id": "oq0417",
+      "query_text": "What are the detailed steps to start the engine of a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0071"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Snowmobile_0071 标题为“STARTING THE ENGINE”，详细描述了启动步骤：施加驻车制动、确保发动机停止开关在“ON”位置、完全打开启动杆（阻风门）、转动主开关等。其他 chunk 未提供如此完整的步骤。",
+      "old_gt_chunk_id": "Snowmobile_0084"
+    },
+    {
+      "query_id": "oq0419",
+      "query_text": "What are the steps to adjust the throttle cable on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0107"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Snowmobile_0107 包含THROTTLE CABLE ADJUSTMENT标题及步骤：1.Loosen the adjuster lock nut 2.Turn the adjuster in or out until proper free play is achieved。同时还包含前提条件（先调整idle speed）。",
+      "old_gt_chunk_id": "Snowmobile_0083"
+    },
+    {
+      "query_id": "oq0420",
+      "query_text": "What is the proper way to use the steering system on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0037",
+        "Snowmobile_0069",
+        "Snowmobile_0085"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Snowmobile_0037(THROTTLE LEVER - 描述油门和转向的关系)、Snowmobile_0069(STEERING SYSTEM检查-检查handlebar自由行程)、Snowmobile_0085(TURNING-转弯操作:减速、转手柄、调整重心)共同覆盖了转向系统的使用。",
+      "old_gt_chunk_id": "Snowmobile_0007"
+    },
+    {
+      "query_id": "oq0421",
+      "query_text": "What are the correct steps to turn using a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0085"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Snowmobile_0085 的“TURNING”部分明确给出了转弯步骤：接近弯道时减速，将把手转向所需方向，同时将身体重量放在转弯内侧的踏板上，并倾斜上身。这是完整的正确转弯步骤。",
+      "old_gt_chunk_id": "Snowmobile_0087"
+    },
+    {
+      "query_id": "oq0422",
+      "query_text": "What are the proper techniques for riding uphill on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0087",
+        "Snowmobile_0088"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Snowmobile_0087 和 Snowmobile_0088 共同覆盖了上坡技巧：Snowmobile_0087 提到先在缓坡练习、接近山坡时加速然后减小油门防止履带打滑、保持体重在上坡侧；Snowmobile_0088 进一步说明直上坡时前倾、陡坡时站在踏板上前倾、到达坡顶减速、无法继续时的操作。",
+      "old_gt_chunk_id": "Snowmobile_0090"
+    },
+    {
+      "query_id": "oq0423",
+      "query_text": "What are the proper techniques for riding downhill on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0089"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Snowmobile_0089 中有明确的 \"RIDING DOWNHILL\" 部分，指出下坡时保持最低速度、施加足够油门保持离合器接合以利用发动机制动、频繁轻踩刹车，并警告过度刹车会导致失控。",
+      "old_gt_chunk_id": "Snowmobile_0090"
+    },
+    {
+      "query_id": "oq0424",
+      "query_text": "What are the correct techniques for crossing a slope on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0090",
+        "Snowmobile_0091"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Snowmobile_0090 详细描述了横穿斜坡（侧坡）的技巧：体重向上坡侧倾斜、推荐下坡侧膝盖跪在座位上、上坡侧脚站在踏板上；Snowmobile_0091 补充了如果雪地摩托开始侧滑则向滑行方向转向、恢复平衡后再转向、以及如果开始倾斜则向下坡方向转向。",
+      "old_gt_chunk_id": "Snowmobile_0089"
+    },
+    {
+      "query_id": "oq0425",
+      "query_text": "What are the steps to inspect the spark plug on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0103",
+        "Snowmobile_0104",
+        "Snowmobile_0105",
+        "Snowmobile_0106"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "火花塞检查的步骤分散在多个 chunk 中：Snowmobile_0103 和 Snowmobile_0104 描述检查中心电极周围瓷绝缘体颜色以判断发动机状态；Snowmobile_0105 说明测量电极间隙并调整至规格；Snowmobile_0106 提供安装时的扭矩值（28 Nm）。这些步骤共同构成了完整的火花塞检查流程。",
+      "old_gt_chunk_id": "Snowmobile_0103"
+    },
+    {
+      "query_id": "oq0426",
+      "query_text": "What are the steps to clean a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0155"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Snowmobile_0155 STORAGE章节下1. Cleaning：Thoroughly clean the machine inside and out to remove corrosive salts and acids. Use Mud and Grease Release to loosen mud, grease and grime. Wash...",
+      "old_gt_chunk_id": "Snowmobile_0001"
+    },
+    {
+      "query_id": "oq0428",
+      "query_text": "What are the common causes and conditions that can lead to poor reception in television or radio signals?",
+      "source_manual": "Television",
+      "ground_truth_chunk_ids": [
+        "Television_0044",
+        "Television_0045"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Television_0044 详细列出了电视信号接收不良的常见原因，如点火干扰、重影、雪花，并解释了具体成因（汽车点火、高楼反射、信号弱等）。Television_0045 补充了其他原因如旧磁带、强信号干扰、天线信号弱。两个 chunk 共同覆盖了问题的答案。",
+      "old_gt_chunk_id": "Television_0043"
+    },
+    {
+      "query_id": "oq0429",
+      "query_text": "What are the steps to enable and customize captions and on-screen text settings on a television?",
+      "source_manual": "Television",
+      "ground_truth_chunk_ids": [
+        "Television_0046",
+        "Television_0047"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Television_0046 和 Television_0047 分别提供了使用 CAPTION 按钮和 MENU 按钮启用并选择字幕/文本模式的具体步骤，包括选择 OFF、Mode1、Mode2、Text1、Text2 等选项，直接回答了如何启用和自定义字幕和屏幕文本设置。",
+      "old_gt_chunk_id": "Television_0041"
+    },
+    {
+      "query_id": "oq0431",
+      "query_text": "What are the steps to properly connect a DVD player to a television or audio system for optimal performance?",
+      "source_manual": "Television",
+      "ground_truth_chunk_ids": [
+        "Television_0054"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Television_0054 明确给出了连接 DVD 播放器的步骤：将分量视频输出（Y, PB, PR）和音频输入连接到电视对应端口，然后按 TV/VIDEO 按钮选择 COMPONENT，并开启 DVD 播放器。这直接回答了如何正确连接 DVD 播放器。",
+      "old_gt_chunk_id": "Television_0041"
+    },
+    {
+      "query_id": "oq0434",
+      "query_text": "How do you adjust the intensity settings on an electric toothbrush to suit your oral care needs?",
+      "source_manual": "Electric_Toothbrush",
+      "ground_truth_chunk_ids": [
+        "Electric_Toothbrush_0023"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Electric_Toothbrush_0023 明确说明了强度设置有高、中、低三档，并提供了手动选择的方法：按下手柄上的强度指示灯循环切换，同时也可通过 app 自定义。这直接回答了如何调整强度设置。",
+      "old_gt_chunk_id": "Electric_Toothbrush_0014"
+    },
+    {
+      "query_id": "oq0435",
+      "query_text": "What are the steps to activate and deactivate the various features on an electric toothbrush for customized usage?",
+      "source_manual": "Electric_Toothbrush",
+      "ground_truth_chunk_ids": [
+        "Electric_Toothbrush_0031"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Electric_Toothbrush_0031 专门介绍了“激活或停用功能”的步骤，列出了可操作的功能（自适应强度、压力传感器反馈、擦洗反馈、刷头更换提醒），并提供了从 app 和从手柄两种激活/停用方法（手柄需放在充电座上，按住电源按钮）。这直接回答了如何激活和停用各种功能。",
+      "old_gt_chunk_id": "Electric_Toothbrush_0028"
+    },
+    {
+      "query_id": "oq0436",
+      "query_text": "What are the steps to charge an electric toothbrush when it is inside a travel case, and how do you ensure it charges properly?",
+      "source_manual": "Electric_Toothbrush",
+      "ground_truth_chunk_ids": [
+        "Electric_Toothbrush_0034"
+      ],
+      "query_type": "official_verified",
+      "language": "en",
+      "llm_confidence": "high",
+      "llm_reason": "Chunk Electric_Toothbrush_0034 的标题为 'Charging with the travel case'，其中明确列出了充电步骤：1) 将USB线插入旅行盒和USB壁式适配器；2) 将壁式适配器插入插座；3) 将牙刷放入旅行盒；4) 保持插入直至充满。同时说明了如何确认充电成功：牙刷会哔两声且灯向上亮起，充电时电池指示灯闪烁白色，充满后停止闪烁。还提示旅行盒应侧放以确保稳定。该chunk完整回答了用户问题。",
+      "old_gt_chunk_id": "Electric_Toothbrush_0015"
+    }
+  ]
+}

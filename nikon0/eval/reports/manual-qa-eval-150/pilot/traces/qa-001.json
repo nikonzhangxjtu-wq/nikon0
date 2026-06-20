@@ -1,0 +1,12 @@
+{
+  "case_id": "qa-001",
+  "category": "product_support",
+  "message": "空气炸锅怎么连接WiFi和手机App？",
+  "golden_answer": "将空气炸锅插入电源，确保智能设备在家庭WiFi范围内。下载NutriU App，在'My Appliances'中选择连接的空气炸锅，按照App指示完成WiFi连接和配对。WiFi LED常亮表示连接成功。需连接2.4 GHz 802.11 b/g/n家庭WiFi。",
+  "answer": "",
+  "status": "error",
+  "selected_skill": "",
+  "selection_source": "",
+  "elapsed_sec": 0.043,
+  "error": "AttributeError: 'AgentResponse' object has no attribute 'trace'"
+}

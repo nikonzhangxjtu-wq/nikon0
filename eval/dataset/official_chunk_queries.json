@@ -1,0 +1,1558 @@
+{
+  "description": "Chunk-level eval from official question dataset",
+  "total_queries": 141,
+  "total_manuals": 40,
+  "queries": [
+    {
+      "query_id": "oq0065",
+      "query_text": "操作吹风机时，人员需要注意哪些安全要点？",
+      "source_manual": "吹风机手册",
+      "ground_truth_chunk_ids": [
+        "吹风机手册_0001"
+      ],
+      "query_type": "official",
+      "language": "zh",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0093",
+      "query_text": "首次使用时，如何将洗碗机连接到排水口？",
+      "source_manual": "洗碗机手册",
+      "ground_truth_chunk_ids": [
+        "洗碗机手册_0005"
+      ],
+      "query_type": "official",
+      "language": "zh",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0124",
+      "query_text": "我的DCB101型号电钻指示灯闪烁时，这些闪烁标识代表什么含义？",
+      "source_manual": "电钻手册",
+      "ground_truth_chunk_ids": [
+        "电钻手册_0009"
+      ],
+      "query_type": "official",
+      "language": "zh",
+      "chunk_overlap_score": 0.25
+    },
+    {
+      "query_id": "oq0204",
+      "query_text": "如何将功能键盘搭配CAM软件使用？",
+      "source_manual": "功能键盘手册",
+      "ground_truth_chunk_ids": [
+        "功能键盘手册_0000"
+      ],
+      "query_type": "official",
+      "language": "zh",
+      "chunk_overlap_score": 0.333
+    },
+    {
+      "query_id": "oq0209",
+      "query_text": "如何为蓝牙激光鼠标安装WIDCOMM蓝牙驱动程序？",
+      "source_manual": "蓝牙激光鼠标手册",
+      "ground_truth_chunk_ids": [
+        "蓝牙激光鼠标手册_0001"
+      ],
+      "query_type": "official",
+      "language": "zh",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0210",
+      "query_text": "如何为蓝牙激光鼠标卸载WIDCOMM蓝牙驱动程序？",
+      "source_manual": "蓝牙激光鼠标手册",
+      "ground_truth_chunk_ids": [
+        "蓝牙激光鼠标手册_0001"
+      ],
+      "query_type": "official",
+      "language": "zh",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0211",
+      "query_text": "如何在Windows系统中为蓝牙激光鼠标设置快速配对？",
+      "source_manual": "蓝牙激光鼠标手册",
+      "ground_truth_chunk_ids": [
+        "蓝牙激光鼠标手册_0000"
+      ],
+      "query_type": "official",
+      "language": "zh",
+      "chunk_overlap_score": 0.333
+    },
+    {
+      "query_id": "oq0212",
+      "query_text": "如何通过WIDCOMM蓝牙驱动程序为蓝牙激光鼠标设置配对？",
+      "source_manual": "蓝牙激光鼠标手册",
+      "ground_truth_chunk_ids": [
+        "蓝牙激光鼠标手册_0000"
+      ],
+      "query_type": "official",
+      "language": "zh",
+      "chunk_overlap_score": 0.333
+    },
+    {
+      "query_id": "oq0218",
+      "query_text": "如何移动烤箱的顶部加热元件（仅限部分型号）？",
+      "source_manual": "烤箱手册",
+      "ground_truth_chunk_ids": [
+        "烤箱手册_0007"
+      ],
+      "query_type": "official",
+      "language": "zh",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0219",
+      "query_text": "如何更换烤箱的后部灯（如有）？",
+      "source_manual": "烤箱手册",
+      "ground_truth_chunk_ids": [
+        "烤箱手册_0007"
+      ],
+      "query_type": "official",
+      "language": "zh",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0241",
+      "query_text": "If this is the first time to use airfryer, What should I do before first use?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0019"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0249",
+      "query_text": "How to install an anchor light while the boat is moving?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0041"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.75
+    },
+    {
+      "query_id": "oq0250",
+      "query_text": "How do I use the jet wash function to clean the boat after using it?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0039"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.6
+    },
+    {
+      "query_id": "oq0253",
+      "query_text": "How do I install a bimini top on my boat if I want to use the canopy?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0247"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0259",
+      "query_text": "How do I turn a boat while sailing?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0073"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.6
+    },
+    {
+      "query_id": "oq0260",
+      "query_text": "How to operate the boat cross wakes and swells?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0219"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.75
+    },
+    {
+      "query_id": "oq0261",
+      "query_text": "How do I load the boat when the cruise is over?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0009"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.571
+    },
+    {
+      "query_id": "oq0265",
+      "query_text": "How to use the energy saving mode of a coffee machine?",
+      "source_manual": "Coffee_Machine",
+      "ground_truth_chunk_ids": [
+        "Coffee_Machine_0001"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.75
+    },
+    {
+      "query_id": "oq0267",
+      "query_text": "How to program the water valume of a coffee machine?",
+      "source_manual": "Coffee_Machine",
+      "ground_truth_chunk_ids": [
+        "Coffee_Machine_0020"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.571
+    },
+    {
+      "query_id": "oq0269",
+      "query_text": "How should I do if I want to reset to factory settings of the coffee machine?",
+      "source_manual": "Coffee_Machine",
+      "ground_truth_chunk_ids": [
+        "Coffee_Machine_0001"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.556
+    },
+    {
+      "query_id": "oq0270",
+      "query_text": "How should I clean my coffee maker after I use it so that it can last longer?",
+      "source_manual": "Coffee_Machine",
+      "ground_truth_chunk_ids": [
+        "Coffee_Machine_0005"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.364
+    },
+    {
+      "query_id": "oq0273",
+      "query_text": "What is the maintenance setting screen of the boat controller?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0089"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.571
+    },
+    {
+      "query_id": "oq0276",
+      "query_text": "When I am ready to sail, if everything is ready, how do I make the boat move forward?",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0040"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0290",
+      "query_text": "How to set the camera model to \\P\\ model?",
+      "source_manual": "DSLR_Camera",
+      "ground_truth_chunk_ids": [
+        "DSLR_Camera_0247"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.8
+    },
+    {
+      "query_id": "oq0291",
+      "query_text": "After or during shooting, how can I view the camera image on TV for better clarity?",
+      "source_manual": "Television",
+      "ground_truth_chunk_ids": [
+        "Television_0022"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.25
+    },
+    {
+      "query_id": "oq0296",
+      "query_text": "After the earphones is in my hand, what are the components I should have?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0000"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.333
+    },
+    {
+      "query_id": "oq0297",
+      "query_text": "If the case battery of earphones is low, how can I charge is?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0000"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.625
+    },
+    {
+      "query_id": "oq0299",
+      "query_text": "What are the two main controling functions of earphones?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0003"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.375
+    },
+    {
+      "query_id": "oq0300",
+      "query_text": "Besides the two main controling functions, what other functions of the earphones can I operate?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0003"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.364
+    },
+    {
+      "query_id": "oq0301",
+      "query_text": "If my earphones won't work, how can I reset them?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0004"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.429
+    },
+    {
+      "query_id": "oq0302",
+      "query_text": "What are the maintenance and care policies of the earphones?",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0008"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.625
+    },
+    {
+      "query_id": "oq0303",
+      "query_text": "From three different observing views, what buttons and interfaces should this eReader have?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0014"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.308
+    },
+    {
+      "query_id": "oq0304",
+      "query_text": "What do the functions of Main Menu and Browser History of the eReader can do?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0012"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0305",
+      "query_text": "When in eBook mode of this eReader, what will happen after pressing \\M\\ botton?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0015"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.545
+    },
+    {
+      "query_id": "oq0306",
+      "query_text": "If I want to listen to music using this eReader, what should I do?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0016"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.375
+    },
+    {
+      "query_id": "oq0307",
+      "query_text": "Can this eReader record voice? If so, how do I operate this feature?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0014"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.375
+    },
+    {
+      "query_id": "oq0308",
+      "query_text": "I can't find the way to play video using this eReader, can you tell me how to do that?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0018"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.462
+    },
+    {
+      "query_id": "oq0309",
+      "query_text": "Can this eReader become a photo viewer? If so, how do I operate this feature?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0014"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.333
+    },
+    {
+      "query_id": "oq0310",
+      "query_text": "When using this eReader, what kinds of trobles might I encounter and how to solve them?",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0006"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.385
+    },
+    {
+      "query_id": "oq0311",
+      "query_text": "When connecting the fax, hwo can I properly finish the procedure?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0039"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.444
+    },
+    {
+      "query_id": "oq0312",
+      "query_text": "What should I pay attention to in order to ensure my safety when using this fax?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0036"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.545
+    },
+    {
+      "query_id": "oq0313",
+      "query_text": "In order to keep your fingers safe, what should you pay attention to about the fax?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0018"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.462
+    },
+    {
+      "query_id": "oq0314",
+      "query_text": "I'm about to move this fax. Is there anything I should pay attention to?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0013"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.444
+    },
+    {
+      "query_id": "oq0315",
+      "query_text": "Are caution or warning labels inside the fax important? If not, can I remove them?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0032"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.75
+    },
+    {
+      "query_id": "oq0316",
+      "query_text": "If I'm in Canada, is there any statement of the fax vailable in my country?",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0055"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.625
+    },
+    {
+      "query_id": "oq0317",
+      "query_text": "When using the grill, how to connect regulator to the LP Tank?",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0004"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.625
+    },
+    {
+      "query_id": "oq0318",
+      "query_text": "To engure my safety when using the grill, how to do leak testing on valves, hose and regulatol?",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0022"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.615
+    },
+    {
+      "query_id": "oq0319",
+      "query_text": "What should I pay attention to on ablout indirect cooking using the grill?",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0026"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.4
+    },
+    {
+      "query_id": "oq0320",
+      "query_text": "What are the first three steps in assembly process of the grill according to the manual?",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0021"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.455
+    },
+    {
+      "query_id": "oq0321",
+      "query_text": "Can you share me some safety tips using the grill?",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0026"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.556
+    },
+    {
+      "query_id": "oq0322",
+      "query_text": "What are identification numbers of my jetski? I don't understand that.",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0001"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.375
+    },
+    {
+      "query_id": "oq0323",
+      "query_text": "I've heard that my jetski has cruising limitations. Please introduce them.",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0000"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.333
+    },
+    {
+      "query_id": "oq0324",
+      "query_text": "I've heard that my jetski has cruising limitations. Please introduce them.",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0000"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.333
+    },
+    {
+      "query_id": "oq0325",
+      "query_text": "What are the operation requirements if I want to use my jetski?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0000"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0326",
+      "query_text": "What kinds of watercraft characteristics does my jetski have?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0027"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.571
+    },
+    {
+      "query_id": "oq0327",
+      "query_text": "When encountering vessels driving my jetski, what rules should I obey?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0026"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.556
+    },
+    {
+      "query_id": "oq0328",
+      "query_text": "I'd like to remove and install the seat of my jetski, what steps should I follow?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0026"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.455
+    },
+    {
+      "query_id": "oq0329",
+      "query_text": "In daily usage, how to open and close the hood of the jetski?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0050"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.556
+    },
+    {
+      "query_id": "oq0330",
+      "query_text": "I've noticed that there are two different kinds of filler caps on the jetski. How to remove them?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0026"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.429
+    },
+    {
+      "query_id": "oq0331",
+      "query_text": "If I need to manipulate the two kinds of engine switches on the jetski, what should I do?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0000"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.4
+    },
+    {
+      "query_id": "oq0332",
+      "query_text": "There are two kinds of levers on the jetski, how to manipulate them?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0026"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0333",
+      "query_text": "What information should I obtain about Quick Shift Trim System (QSTS) selector when using my jetski",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0047"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0334",
+      "query_text": "What do fuel meter and hour meter on my jetski do?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0061"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0344",
+      "query_text": "Inspecting fuel filter and fuel tank of my jetski is important. How to do that?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0001"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.444
+    },
+    {
+      "query_id": "oq0345",
+      "query_text": "How to adjust the adjustable sponson of my jetski if needed?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0044"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.571
+    },
+    {
+      "query_id": "oq0346",
+      "query_text": "The intake and impeller of my jetski are dirty. How to clean them?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0074"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.6
+    },
+    {
+      "query_id": "oq0347",
+      "query_text": "How to start my jetski in different situations?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0022"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.4
+    },
+    {
+      "query_id": "oq0348",
+      "query_text": "What are basic steps to board my jetski with a passenger in deep water?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0026"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.4
+    },
+    {
+      "query_id": "oq0349",
+      "query_text": "If it is difficult to balance the jetski at a stand still, what should I do?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0027"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0350",
+      "query_text": "What is the max load of the jetski?",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0000"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.4
+    },
+    {
+      "query_id": "oq0358",
+      "query_text": "How can you lower the roll bar of a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0002"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.556
+    },
+    {
+      "query_id": "oq0359",
+      "query_text": "How can you adjust the rear-shock assemblies for a lawn mower with suspension system only?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0057"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.8
+    },
+    {
+      "query_id": "oq0360",
+      "query_text": "How can you adjust the height of cut for a lawn mower with an electric deck lift?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0030"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.643
+    },
+    {
+      "query_id": "oq0361",
+      "query_text": "How can you load a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0002"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0362",
+      "query_text": "How can you unload a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0002"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0363",
+      "query_text": "How can you change the engine oil of a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0002"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.556
+    },
+    {
+      "query_id": "oq0364",
+      "query_text": "How can you remove the filters of a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0195"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.75
+    },
+    {
+      "query_id": "oq0365",
+      "query_text": "How can you replace the mower belt of a lawn mower?",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0195"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.75
+    },
+    {
+      "query_id": "oq0366",
+      "query_text": "How can you set up control of a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0038"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0367",
+      "query_text": "How can you set the light timer of a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0037"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.6
+    },
+    {
+      "query_id": "oq0368",
+      "query_text": "How can you set yout favorite recipe with a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0049"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.583
+    },
+    {
+      "query_id": "oq0369",
+      "query_text": "How can you reheat food with a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0069"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.7
+    },
+    {
+      "query_id": "oq0370",
+      "query_text": "How can you use auto defrost of a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0069"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.7
+    },
+    {
+      "query_id": "oq0371",
+      "query_text": "How can you clean the grease filter of a over-the-range microwave?",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0069"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0372",
+      "query_text": "How can you replace the charcoal filter of a over-the-range microwave? ",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0069"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0373",
+      "query_text": "How can you replace the oven light of a over-the-range microwave? ",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0069"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.6
+    },
+    {
+      "query_id": "oq0374",
+      "query_text": "How can you set the PCI Express 3.0 x16 slots of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0010"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.556
+    },
+    {
+      "query_id": "oq0375",
+      "query_text": "How can you set the jumpers of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0039"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.714
+    },
+    {
+      "query_id": "oq0376",
+      "query_text": "How can you set the rear panel connectors of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0042"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0377",
+      "query_text": "How can you set the onboard LED of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0066"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.75
+    },
+    {
+      "query_id": "oq0378",
+      "query_text": "How can you update the BIOS file of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0070"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.875
+    },
+    {
+      "query_id": "oq0379",
+      "query_text": "How can you create RAID of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0058"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0380",
+      "query_text": "How can you use SATA ODD & USB devices to install an operating system for a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0202"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.769
+    },
+    {
+      "query_id": "oq0381",
+      "query_text": "How can you secure the motherboard to the chassis?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0020"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.714
+    },
+    {
+      "query_id": "oq0382",
+      "query_text": "How can you prepare the installation of Central Processing Unit (CPU) for a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0022"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.583
+    },
+    {
+      "query_id": "oq0383",
+      "query_text": "How do you know about system memory of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0028"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.714
+    },
+    {
+      "query_id": "oq0384",
+      "query_text": "How do you know about Serial port connector (10-1 pin COM) of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0048"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0385",
+      "query_text": "How do you know about TPM connector (14-1 pin TPM) for a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0054"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0386",
+      "query_text": "How do you know about Thermal sensor connector (2-pin T_SENSOR) of a motherboard?",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0054"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.778
+    },
+    {
+      "query_id": "oq0387",
+      "query_text": "How can you set quick release for a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0019"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0388",
+      "query_text": "How can you set pressure cooking lid for a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0019"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.571
+    },
+    {
+      "query_id": "oq0389",
+      "query_text": "How can you set float valve for a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0019"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0390",
+      "query_text": "What do you know about anti-block shield for a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0044"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.467
+    },
+    {
+      "query_id": "oq0391",
+      "query_text": "How can you set steam release valve for a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0017"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.467
+    },
+    {
+      "query_id": "oq0392",
+      "query_text": "How can you set anti-block shield for a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0019"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.467
+    },
+    {
+      "query_id": "oq0393",
+      "query_text": "How can you set silicone cap and float valve for a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0019"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.438
+    },
+    {
+      "query_id": "oq0394",
+      "query_text": "How can you Install the condensation collector for a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0019"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.533
+    },
+    {
+      "query_id": "oq0395",
+      "query_text": "How can you install the sealing ring for a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0019"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.533
+    },
+    {
+      "query_id": "oq0396",
+      "query_text": "How can you remove silicone sealing ring for a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0019"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.533
+    },
+    {
+      "query_id": "oq0397",
+      "query_text": "What do you know about sealing ring of a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0044"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.462
+    },
+    {
+      "query_id": "oq0398",
+      "query_text": "What do you know about steam release valve of a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0017"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.429
+    },
+    {
+      "query_id": "oq0399",
+      "query_text": "What do you know about quick release button of a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0011"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.429
+    },
+    {
+      "query_id": "oq0400",
+      "query_text": "What can you know about natural release(NRorNPR) of a multi-use pressure cooker and air fryer?",
+      "source_manual": "Airfryer",
+      "ground_truth_chunk_ids": [
+        "Airfryer_0011"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.4
+    },
+    {
+      "query_id": "oq0401",
+      "query_text": "What is the robot anatomy of the vacuum?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0012"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.6
+    },
+    {
+      "query_id": "oq0402",
+      "query_text": "What are the two primary modes available on a vacuum cleaner that can be used to tailor its performance to meet different home cleaning needs?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0014"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.4
+    },
+    {
+      "query_id": "oq0403",
+      "query_text": "What is the proper procedure for emptying the vacuum cleaner's bin?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0013"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.444
+    },
+    {
+      "query_id": "oq0404",
+      "query_text": "What is the correct procedure for cleaning the vacuum cleaner filter?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0004"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.556
+    },
+    {
+      "query_id": "oq0405",
+      "query_text": "What is the proper procedure for cleaning the full bin sensors on a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0013"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.545
+    },
+    {
+      "query_id": "oq0406",
+      "query_text": "What is the correct procedure for cleaning the extractors (brushes or rollers) on a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0004"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.455
+    },
+    {
+      "query_id": "oq0407",
+      "query_text": "What is the proper procedure for cleaning the sensors and charging contacts on a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0004"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0408",
+      "query_text": "What is the correct procedure for positioning the home base of a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0011"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0409",
+      "query_text": "What is the proper procedure for cleaning the front caster wheel of a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0017"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.455
+    },
+    {
+      "query_id": "oq0410",
+      "query_text": "What is the correct procedure for cleaning the side brush of a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0004"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0411",
+      "query_text": "What is the function of the dual-mode virtual wall barrier on a vacuum cleaner?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0014"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.7
+    },
+    {
+      "query_id": "oq0412",
+      "query_text": "What are the troubleshooting steps if the vacuum indicates a problem?",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0020"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.625
+    },
+    {
+      "query_id": "oq0416",
+      "query_text": "What are the essential preparation checks to perform before using a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0082"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.6
+    },
+    {
+      "query_id": "oq0417",
+      "query_text": "What are the detailed steps to start the engine of a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0084"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.625
+    },
+    {
+      "query_id": "oq0419",
+      "query_text": "What are the steps to adjust the throttle cable on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0083"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0420",
+      "query_text": "What is the proper way to use the steering system on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0007"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0421",
+      "query_text": "What are the correct steps to turn using a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0087"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0422",
+      "query_text": "What are the proper techniques for riding uphill on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0090"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.778
+    },
+    {
+      "query_id": "oq0423",
+      "query_text": "What are the proper techniques for riding downhill on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0090"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.778
+    },
+    {
+      "query_id": "oq0424",
+      "query_text": "What are the correct techniques for crossing a slope on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0089"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.667
+    },
+    {
+      "query_id": "oq0425",
+      "query_text": "What are the steps to inspect the spark plug on a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0103"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0426",
+      "query_text": "What are the steps to clean a snowmobile?",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0001"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0428",
+      "query_text": "What are the common causes and conditions that can lead to poor reception in television or radio signals?",
+      "source_manual": "Television",
+      "ground_truth_chunk_ids": [
+        "Television_0043"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.467
+    },
+    {
+      "query_id": "oq0429",
+      "query_text": "What are the steps to enable and customize captions and on-screen text settings on a television?",
+      "source_manual": "Television",
+      "ground_truth_chunk_ids": [
+        "Television_0041"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0431",
+      "query_text": "What are the steps to properly connect a DVD player to a television or audio system for optimal performance?",
+      "source_manual": "Television",
+      "ground_truth_chunk_ids": [
+        "Television_0041"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.357
+    },
+    {
+      "query_id": "oq0434",
+      "query_text": "How do you adjust the intensity settings on an electric toothbrush to suit your oral care needs?",
+      "source_manual": "Electric_Toothbrush",
+      "ground_truth_chunk_ids": [
+        "Electric_Toothbrush_0014"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.538
+    },
+    {
+      "query_id": "oq0435",
+      "query_text": "What are the steps to activate and deactivate the various features on an electric toothbrush for customized usage?",
+      "source_manual": "Electric_Toothbrush",
+      "ground_truth_chunk_ids": [
+        "Electric_Toothbrush_0028"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.5
+    },
+    {
+      "query_id": "oq0436",
+      "query_text": "What are the steps to charge an electric toothbrush when it is inside a travel case, and how do you ensure it charges properly?",
+      "source_manual": "Electric_Toothbrush",
+      "ground_truth_chunk_ids": [
+        "Electric_Toothbrush_0015"
+      ],
+      "query_type": "official",
+      "language": "en",
+      "chunk_overlap_score": 0.471
+    }
+  ]
+}

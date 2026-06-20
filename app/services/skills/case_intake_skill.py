@@ -95,7 +95,11 @@ class CaseIntakeSkill:
 
         state = self._store.load(sid) or CaseState()
         state.intent = self._detect_intent(slot_text, state.intent)
-        state.slots.update(self._extract_slots(slot_text))
+        # 历史可补全旧槽位，但当前用户发言优先级最高；否则助手追问里的示例
+        # “例如：DW-123”会被误抽为真实型号。
+        history_text = "\n\n".join(p.strip() for p in (conversation_history, enrichment) if (p or "").strip())
+        state.slots.update(self._extract_slots(history_text))
+        state.slots.update(self._extract_slots(q))
         self._store.save(sid, state)
 
         react_trace: tuple[str, ...] = ()
@@ -158,14 +162,15 @@ class CaseIntakeSkill:
     def _extract_slots(question: str) -> dict[str, str]:
         q = question.strip()
         out: dict[str, str] = {}
-        # 订单号
-        m_order = _ORDER_RE.search(q)
-        if m_order:
-            out["order_id"] = m_order.group(0)
         # 联系电话
         m_phone = _PHONE_RE.search(q)
         if m_phone:
             out["contact_phone"] = m_phone.group(0)
+        # 订单号。手机号也是 11 位数字，不能被订单号正则误收进去，否则工单 payload
+        # 会同时出现 order_id=手机号 和 contact_phone=手机号，后续工具系统容易误判。
+        m_order = _ORDER_RE.search(q)
+        if m_order and m_order.group(0) != out.get("contact_phone"):
+            out["order_id"] = m_order.group(0)
         # 型号（简单规则：型号xxx / model xxx）
         model = ""
         for marker in ("型号", "model", "Model"):
@@ -173,7 +178,7 @@ class CaseIntakeSkill:
             if idx >= 0:
                 tail = q[idx + len(marker):].strip(" ：:，,。")
                 if tail:
-                    model = tail.split()[0][:32]
+                    model = re.split(r"[\s，,。；;、]+", tail, maxsplit=1)[0][:32]
                     break
         if model:
             out["product_model"] = model
@@ -236,4 +241,3 @@ class CaseIntakeSkill:
         for key in ("product_model", "issue", "attempted_actions", "order_id", "contact_phone"):
             lines.append(f"- {key}: {payload.get(key, '')}")
         return "\n".join(lines)
-

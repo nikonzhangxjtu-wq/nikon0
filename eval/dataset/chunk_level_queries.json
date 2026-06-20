@@ -1,0 +1,727 @@
+{
+  "description": "Chunk 级检索评估数据集 — ground truth 为具体 chunk_id",
+  "total_queries": 72,
+  "total_manuals": 40,
+  "queries": [
+    {
+      "query_id": "cq0000",
+      "query_text": "Switches",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0105"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0001",
+      "query_text": "Draining the bilge water NOTICE",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0161"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0002",
+      "query_text": "You need throttle to steer. Turning left Turning right",
+      "source_manual": "Boat",
+      "ground_truth_chunk_ids": [
+        "Boat_0204"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0003",
+      "query_text": "EMPTYING THE SYSTEM BEFORE A PERIOD OF NON-USE AND FOR FROST PROTECTION, OR BEFORE A REPAIR",
+      "source_manual": "Coffee_Machine",
+      "ground_truth_chunk_ids": [
+        "Coffee_Machine_0023"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0004",
+      "query_text": "Always there to help you XL490 XL495",
+      "source_manual": "Cordless_Landline",
+      "ground_truth_chunk_ids": [
+        "Cordless_Landline_0000"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0005",
+      "query_text": "What is in the box Base station (XL490)",
+      "source_manual": "Cordless_Landline",
+      "ground_truth_chunk_ids": [
+        "Cordless_Landline_0010"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0006",
+      "query_text": "how to set the direct keys",
+      "source_manual": "Cordless_Landline",
+      "ground_truth_chunk_ids": [
+        "Cordless_Landline_0029"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0007",
+      "query_text": "Viewfinder Information",
+      "source_manual": "DSLR_Camera",
+      "ground_truth_chunk_ids": [
+        "DSLR_Camera_0024"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0008",
+      "query_text": "Menu Setting Procedure",
+      "source_manual": "DSLR_Camera",
+      "ground_truth_chunk_ids": [
+        "DSLR_Camera_0060"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0009",
+      "query_text": "Menu Settings Shooting menu (Red)",
+      "source_manual": "DSLR_Camera",
+      "ground_truth_chunk_ids": [
+        "DSLR_Camera_0063"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0010",
+      "query_text": "Controlling Music",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0003"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0011",
+      "query_text": "What Is Not Covered by Warranty",
+      "source_manual": "Earphones",
+      "ground_truth_chunk_ids": [
+        "Earphones_0014"
+      ],
+      "query_type": "definition",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0012",
+      "query_text": "English 6",
+      "source_manual": "Electric_Toothbrush",
+      "ground_truth_chunk_ids": [
+        "Electric_Toothbrush_0000"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0013",
+      "query_text": "how to connect to the app (see 'App - Getting Started",
+      "source_manual": "Electric_Toothbrush",
+      "ground_truth_chunk_ids": [
+        "Electric_Toothbrush_0031"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0014",
+      "query_text": "Compilation and Publication Notice The definitions of font style are as follows:",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0004"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0015",
+      "query_text": "DO NOT handle the plug with wet hands. Doing this might cause an electrical shock.",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0016"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0016",
+      "query_text": "how to use your product safely after reading this guide",
+      "source_manual": "Fax_Machine",
+      "ground_truth_chunk_ids": [
+        "Fax_Machine_0000"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0017",
+      "query_text": "LP Tank",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0011"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0018",
+      "query_text": "Note: Some parts omitted for",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0067"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0019",
+      "query_text": "Troubleshooting Section\"",
+      "source_manual": "Grill",
+      "ground_truth_chunk_ids": [
+        "Grill_0027"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0020",
+      "query_text": "Specifications Width",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0036"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0021",
+      "query_text": "Engine Maintenance Engine Safety • Do not change the engine governor speed or overspeed the engine.",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0112"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0022",
+      "query_text": "how to operate and maintain your product properly and to avoid injury and product damage",
+      "source_manual": "Lawn_Mower",
+      "ground_truth_chunk_ids": [
+        "Lawn_Mower_0002"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0023",
+      "query_text": "TIME DEFROST CHART",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0072"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0024",
+      "query_text": "POULTRY Cooking Poultry: General Directions",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0084"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0025",
+      "query_text": "Notes",
+      "source_manual": "Microwave_OTR",
+      "ground_truth_chunk_ids": [
+        "Microwave_OTR_0105"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0026",
+      "query_text": "Package contents Check your motherboard package for the following items.",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0015"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0027",
+      "query_text": "how to erase the RTC RAM",
+      "source_manual": "Motherboard",
+      "ground_truth_chunk_ids": [
+        "Motherboard_0086"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0028",
+      "query_text": "Pressure cooking 101 When pressure cooking, the goes through 3 stages. Pre-heating",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0035"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0029",
+      "query_text": "Troubleshooting online",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0019"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0030",
+      "query_text": "Troubleshooting Get in touch with a Customer Care Advisor b",
+      "source_manual": "PressureCooker_Airfryer",
+      "ground_truth_chunk_ids": [
+        "PressureCooker_Airfryer_0069"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0031",
+      "query_text": "AWARNING",
+      "source_manual": "Snowmobile",
+      "ground_truth_chunk_ids": [
+        "Snowmobile_0015"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0032",
+      "query_text": "Troubleshooting check list SYMPTOMS",
+      "source_manual": "Television",
+      "ground_truth_chunk_ids": [
+        "Television_0055"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0033",
+      "query_text": "Troubleshooting check list",
+      "source_manual": "Television",
+      "ground_truth_chunk_ids": [
+        "Television_0006"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0034",
+      "query_text": "How to connect",
+      "source_manual": "Television",
+      "ground_truth_chunk_ids": [
+        "Television_0054"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0035",
+      "query_text": "致英国用户",
+      "source_manual": "VR头显手册",
+      "ground_truth_chunk_ids": [
+        "VR头显手册_0003"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0036",
+      "query_text": "使用与操作",
+      "source_manual": "VR头显手册",
+      "ground_truth_chunk_ids": [
+        "VR头显手册_0004"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0037",
+      "query_text": "儿童使用",
+      "source_manual": "VR头显手册",
+      "ground_truth_chunk_ids": [
+        "VR头显手册_0006"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0038",
+      "query_text": "troubleshooting indicator will also blink",
+      "source_manual": "Vacuum_Cleaner",
+      "ground_truth_chunk_ids": [
+        "Vacuum_Cleaner_0020"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0039",
+      "query_text": "Owner's Instructions",
+      "source_manual": "Washing_Machine",
+      "ground_truth_chunk_ids": [
+        "Washing_Machine_0000"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0040",
+      "query_text": "Primary Identification (PRI-ID) number",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0004"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0041",
+      "query_text": "Approval label of Emission control certificate",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0005"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0042",
+      "query_text": "Other labels",
+      "source_manual": "WaveRunner_Jetski",
+      "ground_truth_chunk_ids": [
+        "WaveRunner_Jetski_0006"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0043",
+      "query_text": "Device Description FRONT VIEW",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0004"
+      ],
+      "query_type": "heading",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0044",
+      "query_text": "How to start the Recording: Press the \"Play/Pause\" button to star",
+      "source_manual": "eReader",
+      "ground_truth_chunk_ids": [
+        "eReader_0020"
+      ],
+      "query_type": "action",
+      "language": "en"
+    },
+    {
+      "query_id": "cq0045",
+      "query_text": "组装说明 请阅读本手册",
+      "source_manual": "人体工学椅手册",
+      "ground_truth_chunk_ids": [
+        "人体工学椅手册_0000"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0046",
+      "query_text": "健身追踪器",
+      "source_manual": "健身追踪器手册",
+      "ground_truth_chunk_ids": [
+        "健身追踪器手册_0000"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0047",
+      "query_text": "为手表充电 充满电的健身追踪器续航时间可达6天以上。电池续航和充电周期随使用情况及其他因素而异；实际结果可能有所不同。",
+      "source_manual": "健身追踪器手册",
+      "ground_truth_chunk_ids": [
+        "健身追踪器手册_0001"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0048",
+      "query_text": "佩戴健身追踪器 将健身追踪器佩戴在手腕上。如需更换不同尺寸的表带，或购买了其他表带，请参阅第14页“更换表带”说明。",
+      "source_manual": "健身追踪器手册",
+      "ground_truth_chunk_ids": [
+        "健身追踪器手册_0002"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0049",
+      "query_text": "请勿拉扯电源线断电。务必握住插头头部拔下。",
+      "source_manual": "冰箱手册",
+      "ground_truth_chunk_ids": [
+        "冰箱手册_0002"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0050",
+      "query_text": "若电源线或电源插头损坏、插座插孔松动，请勿使用。",
+      "source_manual": "冰箱手册",
+      "ground_truth_chunk_ids": [
+        "冰箱手册_0003"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0051",
+      "query_text": "支持与服务 如您对所购产品有任何疑问或问题，请随时通过我们的售后系统联系我们。请详细说明问题并附上购买凭证。如需提出意见与建议，可发送电子邮件至设计团队。最后，衷心感谢您购买并支持我们的产品。",
+      "source_manual": "功能键盘手册",
+      "ground_truth_chunk_ids": [
+        "功能键盘手册_0008"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0052",
+      "query_text": "识别码记录",
+      "source_manual": "发电机手册",
+      "ground_truth_chunk_ids": [
+        "发电机手册_0000"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0053",
+      "query_text": "废气有毒",
+      "source_manual": "发电机手册",
+      "ground_truth_chunk_ids": [
+        "发电机手册_0005"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0054",
+      "query_text": "接线注意事项",
+      "source_manual": "发电机手册",
+      "ground_truth_chunk_ids": [
+        "发电机手册_0006"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0055",
+      "query_text": "可编程温控器",
+      "source_manual": "可编程温控器手册",
+      "ground_truth_chunk_ids": [
+        "可编程温控器手册_0000"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0056",
+      "query_text": "摩托艇 驾驶练习指南",
+      "source_manual": "摩托艇手册",
+      "ground_truth_chunk_ids": [
+        "摩托艇手册_0000"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0057",
+      "query_text": "如何使用本练习指南 以下是各类速度的说明：",
+      "source_manual": "摩托艇手册",
+      "ground_truth_chunk_ids": [
+        "摩托艇手册_0005"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0058",
+      "query_text": "练习2：发动机启动与停止 训练2：停止发动机 1. 松开油门手柄，让发动机减速至怠速。 2. 按下发动机停止开关①（红色按钮）。点火电路断开，发动机立即停止。",
+      "source_manual": "摩托艇手册",
+      "ground_truth_chunk_ids": [
+        "摩托艇手册_0006"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0059",
+      "query_text": "注意 将接头安装到水泵时，务必确保垫片安装到位。",
+      "source_manual": "水泵手册",
+      "ground_truth_chunk_ids": [
+        "水泵手册_0002"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0060",
+      "query_text": "发动机机油",
+      "source_manual": "水泵手册",
+      "ground_truth_chunk_ids": [
+        "水泵手册_0003"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0061",
+      "query_text": "操作方法",
+      "source_manual": "水泵手册",
+      "ground_truth_chunk_ids": [
+        "水泵手册_0004"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0062",
+      "query_text": "安装 拆箱后，请确认设备在运输过程中无损坏，烤箱门关闭正常。如有问题，请联系经销商或最近的售后服务中心。为避免损坏，仅在安装时再将烤箱从泡沫底座上取出。 柜体准备",
+      "source_manual": "烤箱手册",
+      "ground_truth_chunk_ids": [
+        "烤箱手册_0004"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0063",
+      "query_text": "装入/充电电池 装入电池",
+      "source_manual": "相机手册",
+      "ground_truth_chunk_ids": [
+        "相机手册_0009"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0064",
+      "query_text": "装入/取出instax SQUARE相纸盒 注意事项 相纸用完前请勿打开后盖，否则剩余相纸会曝光变白，无法使用。",
+      "source_manual": "相机手册",
+      "ground_truth_chunk_ids": [
+        "相机手册_0013"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0065",
+      "query_text": "■ 自动打印模式 将侧面的打印模式选择器切换到“AUTO”。",
+      "source_manual": "相机手册",
+      "ground_truth_chunk_ids": [
+        "相机手册_0014"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0066",
+      "query_text": "如何拆除滤网塑料包装 新产品内置一体式滤网",
+      "source_manual": "空气净化器手册",
+      "ground_truth_chunk_ids": [
+        "空气净化器手册_0000"
+      ],
+      "query_type": "action",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0067",
+      "query_text": "如何清洁设备内外 清洁前请务必拔下电源插头",
+      "source_manual": "空气净化器手册",
+      "ground_truth_chunk_ids": [
+        "空气净化器手册_0003"
+      ],
+      "query_type": "action",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0068",
+      "query_text": "节能小贴士",
+      "source_manual": "空调手册",
+      "ground_truth_chunk_ids": [
+        "空调手册_0000"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0069",
+      "query_text": "安装须知",
+      "source_manual": "空调手册",
+      "ground_truth_chunk_ids": [
+        "空调手册_0001"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0070",
+      "query_text": "操作须知",
+      "source_manual": "空调手册",
+      "ground_truth_chunk_ids": [
+        "空调手册_0002"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    },
+    {
+      "query_id": "cq0071",
+      "query_text": "蓝牙激光鼠标 使用说明书",
+      "source_manual": "蓝牙激光鼠标手册",
+      "ground_truth_chunk_ids": [
+        "蓝牙激光鼠标手册_0000"
+      ],
+      "query_type": "heading",
+      "language": "zh"
+    }
+  ]
+}

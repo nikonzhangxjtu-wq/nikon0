@@ -24,3 +24,5 @@ class PromptContext:
     react_multi_evidence: bool = False
     # 多轮对话历史文本（已格式化，由 ConversationStore 生成）。
     conversation_history: str = ""
+    # 分层记忆系统产出的短期会话事实、长期用户画像与情景记忆。
+    memory_context: str = ""

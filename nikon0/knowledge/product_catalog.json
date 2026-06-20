@@ -1,0 +1,90 @@
+{
+  "generic_terms": ["相机", "镜头", "电池", "充电", "格式化", "自拍", "闪光灯", "对焦", "白平衡", "曝光"],
+  "clusters": [
+    {
+      "cluster_id": "camera",
+      "generic_terms": ["相机"],
+      "products": [
+        {
+          "product_id": "canon_dslr",
+          "display_name": "Canon EOS 单反相机",
+          "manual_names": ["DSLR_Camera"],
+          "exclusive_aliases": ["EF-S", "EF镜头", "EF 镜头", "CF卡", "CF 卡", "BP-511", "BP-514", "BP-512", "One-Shot AF", "AI Servo AF", "AI Focus AF", "单反", "单反相机", "DSLR", "EOS", "创作区", "接地插座", "ACK-E2", "DC Coupler"],
+          "identity_aliases": ["单反", "单反相机", "DSLR", "EOS", "Canon EOS 单反相机"]
+        },
+        {
+          "product_id": "instax_square",
+          "display_name": "instax 拍立得相机",
+          "manual_names": ["相机手册"],
+          "exclusive_aliases": ["instax", "拍立得", "相纸", "MENU/OK", "micro SD", "打印模式", "相纸盒"],
+          "identity_aliases": ["拍立得", "instax", "instax 拍立得相机"]
+        }
+      ]
+    },
+    {
+      "cluster_id": "airfryer",
+      "generic_terms": ["空气炸锅", "airfryer", "air fryer"],
+      "products": [{"product_id": "airfryer", "display_name": "Airfryer 空气炸锅", "manual_names": ["Airfryer"], "exclusive_aliases": ["空气炸锅", "airfryer", "air fryer", "HD9200", "HD9650", "NutriU"], "identity_aliases": ["空气炸锅", "airfryer", "air fryer"]}]
+    },
+    {
+      "cluster_id": "coffee_machine",
+      "generic_terms": ["咖啡机", "nespresso", "coffee machine"],
+      "products": [{"product_id": "nespresso", "display_name": "Nespresso 咖啡机", "manual_names": ["Coffee_Machine"], "exclusive_aliases": ["咖啡机", "nespresso", "coffee machine", "espresso", "lungo", "胶囊", "capsule"], "identity_aliases": ["咖啡机", "nespresso", "coffee machine"]}]
+    },
+    {
+      "cluster_id": "microwave",
+      "generic_terms": ["微波炉", "microwave"],
+      "products": [{"product_id": "microwave_otr", "display_name": "Microwave OTR 微波炉", "manual_names": ["Microwave_OTR"], "exclusive_aliases": ["微波炉", "microwave", "sensor cook", "child lock", "STOP/CLEAR", "charcoal filter", "grease filter"], "identity_aliases": ["微波炉", "microwave", "Microwave OTR"]}]
+    },
+    {
+      "cluster_id": "washing_machine",
+      "generic_terms": ["洗衣机", "washing machine", "washer"],
+      "products": [{"product_id": "washing_machine", "display_name": "洗衣机", "manual_names": ["Washing_Machine"], "exclusive_aliases": ["洗衣机", "washing machine", "washer", "脱水桶", "洗涤定时器", "WASH", "DRAIN"], "identity_aliases": ["洗衣机", "washing machine", "washer"]}]
+    },
+    {
+      "cluster_id": "refrigerator",
+      "generic_terms": ["冰箱", "refrigerator", "fridge"],
+      "products": [{"product_id": "refrigerator", "display_name": "冰箱", "manual_names": ["冰箱手册"], "exclusive_aliases": ["冰箱", "refrigerator", "fridge", "冷藏室", "冷冻室", "门封条"], "identity_aliases": ["冰箱", "refrigerator", "fridge"]}]
+    },
+    {
+      "cluster_id": "air_conditioner",
+      "generic_terms": ["空调", "air conditioner"],
+      "products": [{"product_id": "air_conditioner", "display_name": "空调", "manual_names": ["空调手册", "AC900手册"], "exclusive_aliases": ["空调", "air conditioner", "AC900", "遥控器", "制冷", "自诊断"], "identity_aliases": ["空调", "air conditioner", "AC900"]}]
+    },
+    {
+      "cluster_id": "dishwasher",
+      "generic_terms": ["洗碗机", "dishwasher"],
+      "products": [{"product_id": "dishwasher", "display_name": "洗碗机", "manual_names": ["洗碗机手册"], "exclusive_aliases": ["洗碗机", "dishwasher", "亮碟剂", "洗碗粉", "盐仓", "喷淋臂", "门封条"], "identity_aliases": ["洗碗机", "dishwasher"]}]
+    },
+    {
+      "cluster_id": "oven",
+      "generic_terms": ["烤箱", "oven"],
+      "products": [{"product_id": "oven", "display_name": "烤箱", "manual_names": ["烤箱手册"], "exclusive_aliases": ["烤箱", "oven", "旋转烤叉", "热风循环", "自清洁", "烤箱灯"], "identity_aliases": ["烤箱", "oven"]}]
+    },
+    {
+      "cluster_id": "vr_headset",
+      "generic_terms": ["VR头显", "vr headset", "VR"],
+      "products": [{"product_id": "vr_headset", "display_name": "VR 头显", "manual_names": ["VR头显手册"], "exclusive_aliases": ["VR头显", "vr headset", "处理器单元", "头晕", "眩晕", "游玩区域"], "identity_aliases": ["VR头显", "vr headset"]}]
+    },
+    {
+      "cluster_id": "bluetooth_mouse",
+      "generic_terms": ["蓝牙鼠标", "bluetooth mouse", "mouse"],
+      "products": [{"product_id": "bluetooth_mouse", "display_name": "蓝牙激光鼠标", "manual_names": ["蓝牙激光鼠标手册"], "exclusive_aliases": ["蓝牙鼠标", "蓝牙激光鼠标", "bluetooth mouse", "USB接收器", "WIDCOMM", "BIOS"], "identity_aliases": ["蓝牙鼠标", "蓝牙激光鼠标", "bluetooth mouse"]}]
+    },
+    {
+      "cluster_id": "leaf_blower",
+      "generic_terms": ["吹风机", "leaf blower", "225B"],
+      "products": [{"product_id": "leaf_blower_225b", "display_name": "225B 户外吹风机", "manual_names": ["吹风机手册"], "exclusive_aliases": ["吹风机", "leaf blower", "225B", "化油器", "油针", "二冲程", "怠速"], "identity_aliases": ["225B", "225B吹风机", "leaf blower"]}]
+    },
+    {
+      "cluster_id": "air_purifier",
+      "generic_terms": ["空气净化器", "air purifier"],
+      "products": [{"product_id": "air_purifier", "display_name": "空气净化器", "manual_names": ["空气净化器手册"], "exclusive_aliases": ["空气净化器", "air purifier", "HEPA", "前置滤网", "静音模式"], "identity_aliases": ["空气净化器", "air purifier"]}]
+    },
+    {
+      "cluster_id": "electric_toothbrush",
+      "generic_terms": ["电动牙刷", "electric toothbrush"],
+      "products": [{"product_id": "electric_toothbrush", "display_name": "电动牙刷", "manual_names": ["Electric_Toothbrush"], "exclusive_aliases": ["电动牙刷", "electric toothbrush", "SenseIQ", "刷头"], "identity_aliases": ["电动牙刷", "electric toothbrush"]}]
+    }
+  ]
+}

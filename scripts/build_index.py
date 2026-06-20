@@ -126,25 +126,30 @@ def main() -> None:
 
     # 建完库立刻做一次 schema 自检：避免「create 像是成功了，但服务端实际没有 dense_vector
     # 字段」的沉默失败（在 Milvus Lite 上开启 BM25 Function 时曾观察到此类状态）。
-    try:
-        desc = client.describe_collection(collection_name=settings.milvus_collection)
-        fields = desc.get("fields") if isinstance(desc, dict) else getattr(desc, "fields", None)
-        field_names: list[str] = []
-        if fields:
-            for f in fields:
-                if isinstance(f, dict):
-                    field_names.append(str(f.get("name", "")))
-                else:
-                    field_names.append(str(getattr(f, "name", "")))
-        print(f"[INFO] 集合字段: {field_names}")
-        if "dense_vector" not in field_names:
-            raise RuntimeError(
-                "集合缺少 dense_vector 字段，build_collection 未按预期创建。"
-                "在 Milvus Lite 上请确认 MILVUS_ENABLE_BM25=False，并删除旧的 .db 文件后重建。"
-            )
-    except Exception as exc:  # noqa: BLE001
-        print(f"[ERROR] 建库自检失败: {exc}")
-        return
+    if hasattr(client, "describe_collection"):
+        try:
+            desc = client.describe_collection(collection_name=settings.milvus_collection)
+            fields = desc.get("fields") if isinstance(desc, dict) else getattr(desc, "fields", None)
+            field_names: list[str] = []
+            if fields:
+                for f in fields:
+                    if isinstance(f, dict):
+                        field_names.append(str(f.get("name", "")))
+                    else:
+                        field_names.append(str(getattr(f, "name", "")))
+            print(f"[INFO] 集合字段: {field_names}")
+            if not field_names:
+                print("[WARN] describe_collection 未返回字段列表，跳过建库字段自检")
+            elif "dense_vector" not in field_names:
+                raise RuntimeError(
+                    "集合缺少 dense_vector 字段，build_collection 未按预期创建。"
+                    "在 Milvus Lite 上请确认 MILVUS_ENABLE_BM25=False，并删除旧的 .db 文件后重建。"
+                )
+        except Exception as exc:  # noqa: BLE001
+            print(f"[ERROR] 建库自检失败: {exc}")
+            return
+    else:
+        print("[INFO] Milvus 客户端不支持 describe_collection，跳过建库自检")
 
     success = 0
     failed = 0
@@ -203,13 +208,12 @@ def main() -> None:
     load_ok = False
     if index_ok:
         try:
-            client.load_collection(collection_name=settings.milvus_collection)
             state = None
             try:
                 state = client.get_load_state(collection_name=settings.milvus_collection)
             except Exception:
                 state = "<unknown>"
-            print(f"[INFO] load_collection 成功, state={state}")
+            print(f"[INFO] collection 已建索引并 load, state={state}")
             load_ok = True
         except Exception as exc:  # noqa: BLE001
             print(

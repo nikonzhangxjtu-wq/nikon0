@@ -1,0 +1,559 @@
+{
+  "software_name": "多模态智能客服Agent系统",
+  "project_root": "/Users/nikonzhang/compeletion",
+  "instruction": "本文件只收集证据，不决定行业、功能或手册结构。请由模型阅读这些证据以及必要的项目源码后，另行编写业务理解模型稿。",
+  "documents": [
+    {
+      "path": "README.md",
+      "size": 8704,
+      "headings": [
+        "Multimodal Customer Service Agent (V1 Scaffold)",
+        "1. V1 Goal",
+        "2. Suggested Project Structure",
+        "3. Tech Stack (Your Selected Direction)",
+        "4. Python + Package Versions",
+        "5. Conda Setup (No Auto Installation, Manual Commands)",
+        "6. Ollama Model Check",
+        "7. Environment Variables (Recommended)",
+        "8. Run API",
+        "9. Build Index (after you implement TODOs)",
+        "10. Batch Submission (after you implement TODOs)",
+        "11. How To Use This Scaffold",
+        "12. 路由与 RAG 门控升级指南（自行实现参考）",
+        "设计原则（把三件事拆开）",
+        "分层推进（由浅入深）",
+        "建议实现顺序（自检清单）",
+        "最小可用升级（时间紧时只做这三项）",
+        "相关文件速查"
+      ],
+      "opening": "Multimodal Customer Service Agent (V1 Scaffold) This repository is a learning-first scaffold for your competition project. It is intentionally designed so that: - The framework is ready to run. - Core modules are clearly separated. - Critical implementation points are marked with TODO . - You can fill in the actual logic step by step. 1. V1 Goal Build a baseline system that: 1. Exposes a competition-compatible POST /chat API. 2. Supports the required request fields ( question , images , session id , stream ). 3. Implements a minimal pipeline: - RAG gate (whether retrieval is needed) - optional domain hint (manual vs customer service) - retrieval call - answer generation call 4. Can batch-generate a submission file from question public.csv . 2. Suggested Project Structure 离线对比优化效果：见 eval/README.md，一键命令示例： 3. Tech Stack (Your Selected Direction) - API: fastapi , uvicorn - Validation: pydan"
+    },
+    {
+      "path": "TODO_SCORE_IMPROVEMENT.md",
+      "size": 8495,
+      "headings": [
+        "得分提升 TODO",
+        "P0 — 高收益低投入，建议立刻做",
+        "1. 换更强的生成模型",
+        "若显存/内存不够，降级为：",
+        "2. 修复 query_construction 导致的手册命中率仅 40% 的问题",
+        "3. 强制 max_tokens 控制输出长度",
+        "P1 — 中等投入，明确收益",
+        "4. 补全视觉能力（多模态理解）",
+        "或",
+        "5. 扩展路由关键词覆盖",
+        "中文",
+        "英文",
+        "6. 改进检索后置过滤（用真实 reranker 分数）",
+        "方案：保留并 softmax 归一化 cross-encoder 原始分数",
+        "P2 — 值得做但投入较大",
+        "7. 多轮对话支持",
+        "8. ReAct / 反思式生成（仅用于复杂问题）",
+        "9. 规则化的后处理校验",
+        "1. 检查答案是否包含禁止的模板话术，若有则截断",
+        "2. 检查答案中引用的 IMG 标记是否在合法列表中（不在则移除）",
+        "3. 如果答案为空或仅剩模板，触发重试",
+        "不建议做的事（及原因）",
+        "执行建议"
+      ],
+      "opening": "得分提升 TODO 当前状态：排名 50/93，自评分数 ~4.13/5（qwen2 自评，可能偏高） 关键短板：manual hit rate 仅 40%（RAG 检索错了手册）、视觉模型空缺、模型指令遵循弱 --- P0 — 高收益低投入，建议立刻做 1. 换更强的生成模型 现状 ： qwen2:latest （7B Q4 0），基座模型较旧，指令遵循和推理均弱于 qwen2.5。 动作 ： 然后修改 .env 或环境变量： 预期收益 ：答案质量 +0.3~0.5 分（结构、指令遵循、虚构减少），估计可提升 10-15 名。 2. 修复 query construction 导致的手册命中率仅 40% 的问题 现状 ： app/services/rag skill/query construction.py 用 LLM 判断用户问题属于哪本手册，正确率仅 40%。手册选错 → 检索结果完全无关 → 答案质量崩塌。 根因 ：query construction 依赖 LLM 单次决策，没有 fallback；LLM 不知道所有手册名列表。 动作 （按优先级）： - 方案 A（推荐，低投入） ：检索时先不过滤手册名（全库搜索），让 BM25 + dense + rerank 自然召回最相关 chunk。在 pipeline.py:120-122 去掉 manual name 过滤参数。全库搜索可能引入噪音，但 reranker 会过滤掉。 - 方案 B（中投入） ：在 query construction prompt 中显式列出所有可用手册名及其内容简介，让 LLM 做选择题而非开放生成。 - 方案 C（高投入） ：用 embedding 相似度匹配手册名（用户 query embedding vs 每个手册的摘要描述 embedding），替代 LLM 调用。 预期收益 ：RAG 答案准确率从 40% → 80%+，估计可提升 15-20 名。 3. 强制 max tokens 控制输出长度 现状 ：prompt 里写了 ≤250 字，但 generator.py"
+    },
+    {
+      "path": "todo.md",
+      "size": 4568,
+      "headings": [
+        "V1 实现待办清单",
+        "已完成（框架层）",
+        "阶段 1：`app/services/ingestion.py`（手册入库）",
+        "阶段 2：`scripts/build_index.py` + `app/services/retriever.py`（Milvus + 向量）",
+        "阶段 3：`app/services/pipeline.py` + `app/utils/prompt_builder.py`（质量与幻觉）",
+        "阶段 4：`scripts/run_batch_submission.py`（批量与提交）",
+        "可选后续（V1+）",
+        "参考：手把手补 `ingestion.py` 的推进顺序（若需要）"
+      ],
+      "opening": "V1 实现待办清单 本文件对应「骨架已搭好、核心由你实现」的路线，按顺序推进即可。 --- 已完成（框架层） - [x] README.md ：安装说明、环境变量、运行方式 - [x] app/main.py ： POST /chat 、Bearer 校验、 GET /healthz - [x] app/schemas/chat.py ：请求/响应结构与字段校验 - [x] app/core/config.py ：从 .env 读取配置 - [x] app/services/router.py ：RAG gate + domain hint（启发式，可替换） - [x] app/services/retriever.py ：Milvus 检索占位 - [x] app/services/generator.py ：LangChain + Ollama qwen2 - [x] app/services/pipeline.py ：gate → retrieve → generate 主链路 - [x] app/services/ingestion.py ：手册解析/切块占位 - [x] app/services/session store.py ： session id 生成 - [x] app/utils/prompt builder.py ：检索结果拼 prompt - [x] scripts/build index.py ：建索引入口 - [x] scripts/run batch submission.py ：批量 id,ret 导出 --- 阶段 1： app/services/ingestion.py （手册入库） 目标 ：把 手册/ .txt 变成可索引的 chunk，并绑定图片 ID。 - [ ] 解析单份手册文件格式（长字符串、 标题、 <PIC 、尾部 image id 列表） - [ ] 从正文中提取 <PIC 位置，与尾部列表做顺序/局部对齐（先实现一种简单规则即可） - [ ] 按「标题 / 步骤 / 故障排查」等边界切块，控制单块长度 - [ ]"
+    },
+    {
+      "path": "docs/memory_system_v2_implementation.md",
+      "size": 23654,
+      "headings": [
+        "记忆系统 v2 — Agent 可执行实施规格书",
+        "Agent 执行须知",
+        "任务清单（Agent 逐项勾选）",
+        "0. 设计总览",
+        "0.1 现状（已实现，保留）",
+        "0.2 目标架构",
+        "0.3 核心技术选型（全局锁定，不可擅自更改）",
+        "0.4 端到端全链路（POST /chat）",
+        "0.5 三 Store 边界",
+        "0.6 memory_context 双消费通道",
+        "0.7 四层记忆 L0-L3",
+        "1. 需新建/修改的文件清单",
+        "1.1 新建文件",
+        "1.2 修改文件",
+        "2. 数据模型",
+        "2.1 observation.py",
+        "2.2 types.py 扩展",
+        "2.3 Redis JSON v2 示例",
+        "3. Write Path",
+        "3.1 extract_turn_observation（硬匹配，无 LLM）",
+        "3.2 apply_write_gate",
+        "3.3 merge_turn_observation（session_memory.py）",
+        "3.4 manager.write_turn",
+        "4. Read Path（按需返回）"
+      ],
+      "opening": "记忆系统 v2 — Agent 可执行实施规格书 用途： 供 Coding Agent 按序实现记忆系统 v2，无需额外上下文。 原则： 在现有 MemoryManager + Redis/Milvus 骨架上扩展； MEMORY ENABLED=false 时行为必须与现网一致。 抽取策略： extract turn observation 使用 硬匹配（regex + 槽位 + 规则 merge） ，主链路 不调用 LLM ；LLM 仅用于异步 consolidate 。 --- Agent 执行须知 1. 严格按 Phase 1 → Phase 2 顺序 ；Phase 1 完成且测试通过后再做 Phase 2。 2. 不可漏改 §11 嵌入点详表 中标记为「必须改」的项。 3. 向后兼容： 旧 Redis JSON 缺新字段时， from dict 用空 list/空 dict 默认。 4. 最小 diff： 不重构无关模块；不删除 render() / merge turn facts 直到测试迁移完成。 5. 验证命令： 任务清单（Agent 逐项勾选） Phase 1 - [ ] T1 新增 app/services/memory/observation.py ；扩展 app/services/memory/types.py - [ ] T2 新增 extractor.py + merge.py （五源硬匹配 + merge） - [ ] T3 新增 intent.py + write gate.py - [ ] T4 session memory.merge turn observation + memory index - [ ] T5 改 manager.read / manager.write turn - [ ] T6 conversation store.format history excluding last - [ ] T7 改 pipeline.py Read(R2) + Write(W1-W5) 全分支 - [ ] T8 新增 rend"
+    },
+    {
+      "path": "docs/multimodal_design.md",
+      "size": 17546,
+      "headings": [
+        "多模态客服系统 - 技术方案设计",
+        "一、现状诊断",
+        "1.1 当前架构中\"多模态\"的实际实现",
+        "1.2 具体问题",
+        "二、多模态升级路线图（四个阶段）",
+        "阶段 1：修复 & 增强当前视觉管线（1-2 天）",
+        "1.1 配置视觉模型",
+        ".env",
+        "1.2 增强视觉摘要的结构化输出",
+        "升级后的视觉摘要输出",
+        "1.3 代码改动点",
+        "阶段 2：多模态向量嵌入 — 统一图文向量空间（3-5 天）",
+        "2.1 模型选型",
+        "2.2 新增 Milvus Collection：`manual_images`",
+        "新 collection schema",
+        "2.3 增强 `manual_chunks` Collection",
+        "给每个 chunk 增加多模态向量（该 chunk 关联图片的平均 CLIP 嵌入）",
+        "2.4 建索引脚本改造",
+        "scripts/build_index.py 新增逻辑",
+        "1. 为每张手册图片生成 CLIP 嵌入",
+        "2. 为每个 chunk 计算多模态向量",
+        "阶段 3：多路混合检索 + 图文融合（5-7 天）",
+        "3.1 检索架构升级",
+        "3.2 融合权重策略"
+      ],
+      "opening": "多模态客服系统 - 技术方案设计 一、现状诊断 1.1 当前架构中\"多模态\"的实际实现 本质：图片 → 文本 → 文本检索 → 文本生成。图片从未真正参与向量检索和视觉理解。 1.2 具体问题 问题 代码位置 影响 ------ --------- ------ VISION MODEL 未配置（空字符串） .env → vision.py:69 用户上传图片的视觉摘要静默失败，回退到 deepseek-v4-flash （无视觉能力） 手册图片只存 image ids JSON 字段 ingestion.py:281 → Milvus image ids 字段 图片无向量表示，无法做相似度检索 图片 <IMG:xxx 只是文本标签 prompt builder.py:139 生成模型看到的是字符串 <IMG:Manual1 0 ，不是图片像素 检索只有 dense vector (文本) + sparse vector (BM25) retriever.py:233-294 无法实现以图搜图、以文搜图 生成模型是纯文本 deepseek-v4-flash generator.py 即使检索返回了图片，模型也无法\"看\"图片 bge-m3 只做文本嵌入 config.py:48-49 缺少多模态嵌入模型（CLIP 类） --- 二、多模态升级路线图（四个阶段） 阶段 1：修复 & 增强当前视觉管线（1-2 天） 目标 ：让用户上传图片的视觉信息真正参与检索和生成。 1.1 配置视觉模型 minicpm-v 在 Ollama 上可用，支持中文，轻量（8B），适合客服场景。 1.2 增强视觉摘要的结构化输出 当前 vision.py 只输出一句中文摘要。改为结构化 JSON： - ocr text 用于关键词精确匹配（走 BM25 / sparse 检索） - key entities 作为额外的检索过滤条件 - product type 辅助路由判断（缩小手册范围） 1.3 代码改动点 - app/services/vision.py — summarize images("
+    },
+    {
+      "path": "docs/multimodal_v2_reading_guide.md",
+      "size": 26135,
+      "headings": [
+        "多模态 V2 精读说明（含代码位置索引）",
+        "目录",
+        "0. 代码地图（速查表）",
+        "1. 架构总览",
+        "1.1 双 Collection 不混用",
+        "1.2 三类「图」对象（必读）",
+        "2. 离线索引：文本 chunk 建库",
+        "2.1 流程图",
+        "2.2 步骤与代码位置",
+        "步骤 1：解析手册字面量",
+        "步骤 2：`<PIC>` 与 `image_ids` 顺序绑定",
+        "步骤 3：替换为 `<IMG:actual_id>`",
+        "步骤 4：切块与 IMG 标签修复",
+        "步骤 5：遍历目录",
+        "步骤 6：写入 Milvus（文本）",
+        "3. 离线索引：手册图片建库",
+        "3.1 流程图",
+        "3.2 阶段 [1/4]：资产扫描",
+        "3.3 阶段 [2/4]：客户端初始化",
+        "3.4 阶段 [3/4]：Milvus 图片 collection",
+        "3.5 阶段 [4/4]：逐张索引循环",
+        "scripts/build_image_index.py:263-276（摘录）",
+        "3.6 VLM 调用链（精读）",
+        "4. 在线检索：Pipeline 主流程"
+      ],
+      "opening": "多模态 V2 精读说明（含代码位置索引） 本文档按 离线建库 → 在线检索 组织，每个步骤标注 文件路径:行号 与入口函数。 行号随代码演进可能偏移，请以函数名为锚点用 IDE 跳转核对。 --- 目录 - 0. 代码地图（速查表） - 1. 架构总览 - 2. 离线索引：文本 chunk 建库 - 3. 离线索引：手册图片建库 - 4. 在线检索：Pipeline 主流程 - 5. 在线检索：VectorRetriever 文本 RAG - 6. 在线检索：图片三路召回与回填 - 7. Prompt 与赛题输出格式 - 8. 配置项与代码绑定 - 9. 推荐阅读顺序 - 10. 创新点 / 难点 / 不足 --- 0. 代码地图（速查表） 阶段 职责 主文件 入口 ------ ------ -------- ------ 手册解析切块 <PIC → <IMG:id ，产出 ManualChunk app/services/ingestion.py ManualIngestionService.parse and chunk L293-314 文本建库脚本 Ollama embed → manual chunks v1 scripts/build index.py main L91+ 文本 Milvus schema dense/sparse/BM25 app/services/milvus create.py build collection L44-100 图片资产扫描 catalog + 质量报告 app/services/multimodal/catalog.py build manual image catalog L77-108 类型定义 Asset / Understanding app/services/multimodal/types.py 全文 VLM 结构理解 JSON 抽取 + 缓存 app/services/multimodal/understanding.py ManualImageInterpreter.understand image"
+    },
+    {
+      "path": "eval/README.md",
+      "size": 3204,
+      "headings": [
+        "离线评测（小集 + 一键跑分）",
+        "目录说明",
+        "评测集 JSONL 字段",
+        "运行方式",
+        "输出文件",
+        "指标怎么读",
+        "评分模型（LLM-as-judge）"
+      ],
+      "opening": "离线评测（小集 + 一键跑分） 目录说明 路径 说明 ------ ------ eval/dataset/dev eval.jsonl 小评测集（每行一个 JSON 对象） eval/dataset/public eval 30.jsonl 从 question public.csv 挑选的 30 条覆盖性样本 eval/run eval.py 一键跑分：跑 pipeline、记延迟、可选 LLM 打分、写 CSV eval/results/ 输出目录（默认已加入 .gitignore ） 评测集 JSONL 字段 字段 必填 说明 ------ ------ ------ id 是 样本唯一 id question 是 用户问题 category 否 如 manual / customer service ，仅便于分析 rubric keywords 否 关键词列表；若回答中出现任一关键词则 rubric pass=1 （弱指标，可自改规则） should use rag 否 金标路由；用于比较是否应走检索 gold manual name 否 期望命中的手册名，用于粗粒度检索命中率 gold chunk keywords 否 期望命中 chunk 的关键词提示，当前主要用于人工分析 answer must include 否 回答应覆盖的要点列表，全部出现才记通过 可自行复制该文件为 my eval.jsonl 扩充题量。 运行方式 在项目根目录执行（保证能 import app ）： 运行 30 条公开问题样本集： 常用参数： 输出文件 1. detail <run id .csv 逐条样本：除 version 、 latency ms 、 score 、 rubric pass 、 route reason 、 question 、 answer 外，还会记录 route needs rag 、 route confidence 、 retrieved chunk ids 、 filtered chunk ids 、 top1 score 、 context"
+    },
+    {
+      "path": "mcp-gateway/DEPLOYMENT.zh-CN.md",
+      "size": 12845,
+      "headings": [
+        "Java MCP Gateway 部署说明",
+        "1. 部署文件说明",
+        "2. 服务器环境要求",
+        "3. 部署方式选择",
+        "方式一：服务器上构建镜像",
+        "方式二：提前构建镜像并推送镜像仓库",
+        "4. 服务器部署步骤",
+        "4.1 拉取代码",
+        "4.2 构建 Java jar",
+        "4.3 启动 Gateway + Nginx",
+        "5. 端口配置",
+        "6. Nginx 转发说明",
+        "7. Cursor / Agent 挂载配置",
+        "8. 部署验收命令",
+        "8.1 健康检查",
+        "8.2 MCP initialize",
+        "8.3 查看 Gateway 暴露给 Agent 的工具",
+        "8.4 查看当前可用 MCP 服务",
+        "8.5 测试 fetch MCP",
+        "8.6 测试 sandbox MCP",
+        "9. 高德 MCP 凭证说明",
+        "10. 日志查看",
+        "11. 停止和重启",
+        "12. 清理测试 sandbox 容器"
+      ],
+      "opening": "Java MCP Gateway 部署说明 本文档面向 mentor、部署同学和后续接入公司 Agent Runtime 的同学，说明如何把 java-mcp-gateway 部署到服务器，并通过 Nginx 暴露给 Cursor 或类 Cursor Agent 使用。 当前部署目标： 当前版本只保留三个下游 MCP 服务： Service ID 类型 说明 --- --- --- amap Streamable HTTP 高德官方 MCP，地图、天气、POI、路线等能力 fetch stdio 公网网页抓取 sandbox Streamable HTTP Agent run 沙盒生命周期管理，底层通过 Docker 创建 Ubuntu 容器 1. 部署文件说明 文件 作用 --- --- java-mcp-gateway/Dockerfile 构建 Gateway 镜像，包含 Java 17、Docker CLI、Python、uv java-mcp-gateway/docker-compose.java-mcp-gateway.yml 本地或服务器编排 Gateway + Nginx deploy/docker/java-mcp-gateway/nginx.conf Nginx 反向代理配置 java-mcp-gateway/src/main/resources/application-real-mcp.yml MCP 服务注册配置 2. 服务器环境要求 依赖 建议版本 用途 检查命令 --- --- --- --- Docker 20+ 运行 Gateway、Nginx 和 sandbox 容器 docker version Docker Compose v2+ 编排服务 docker compose version Git 任意新版本 拉取代码 git --version 网络访问 可访问 Docker Hub、高德 MCP、目标网页 拉取镜像和调用外部 MCP curl https://mcp.amap.com 说明： - 服务器不需要单独安装 Java 或"
+    },
+    {
+      "path": "mcp-gateway/README.md",
+      "size": 13643,
+      "headings": [
+        "Java MCP Gateway",
+        "1. 最快部署方式",
+        "2. 部署状态检查",
+        "3. Cursor 配置方式",
+        "4. Cursor 验收流程",
+        "4.1 查看当前可用 MCP 服务",
+        "4.2 提交高德 Key 并刷新服务",
+        "4.3 调用高德天气",
+        "4.4 调用 fetch",
+        "4.5 调用 sandbox",
+        "5. 当前架构",
+        "6. 当前服务",
+        "7. Gateway MCP 接口",
+        "7.1 查询服务",
+        "7.2 查看某个服务的工具",
+        "7.3 调用某个下游工具",
+        "8. Sandbox MCP 使用说明",
+        "9. 本地测试",
+        "10. 配置文件",
+        "11. 新增 MCP 服务",
+        "11.1 新增 Streamable HTTP MCP",
+        "11.2 新增需要 API Key 的 HTTP MCP",
+        "11.3 新增 stdio MCP",
+        "11.4 重新部署"
+      ],
+      "opening": "Java MCP Gateway 当前交付版本以 amap 、 fetch 、 sandbox 三个服务为主。推荐先按下面的 Docker Compose 流程启动，再在 Cursor 中挂载 http://127.0.0.1:18080/mcp 验收。 1. 最快部署方式 docker-compose.java-mcp-gateway.yml 已放在 java-mcp-gateway 包内，部署时不需要回到仓库根目录。 这条命令会完成两件事： 1. --build ：根据当前目录下的 Dockerfile 构建/更新 java-mcp-gateway:0.1.0 镜像。 2. up -d ：用镜像创建并启动 java-mcp-gateway 容器，同时启动 Nginx 转发容器。 简单说： 启动成功后，对外访问地址为： Nginx 会把 18080 转发到 Gateway 容器内部的 8091 。 2. 部署状态检查 查看容器状态： 检查健康状态： 查看 Gateway 内部服务状态： 查看日志： 停止服务： 如果启动时报容器名冲突，例如 container name \"/java-mcp-gateway\" is already in use ，说明旧容器还存在。先清理旧容器再启动： 3. Cursor 配置方式 在项目级 .cursor/mcp.json 或全局 ~/.cursor/mcp.json 中添加： 配置后，在 Cursor Settings - MCP 中 reload / reconnect java-mcp-gateway 。 Cursor 连接成功后，顶层只会看到 Gateway catalog tools，例如： - search mcp services - describe mcp service - list mcp tools - get auth status - get credential requirements - submit mcp credential - refresh mcp service - delete mcp"
+    },
+    {
+      "path": "手册/Airfryer.txt",
+      "size": 24285,
+      "headings": [],
+      "opening": "[\"User manual \\n TABLE OF CONTENTS \\nImportant 3 Introduction 7 General description 7 Before first use 9 The NutriU App 9 Preparing for use 10 Using the appliance Food table 10 Airfrying 12 Choosing the keep warm mode 15 Cooking with a preset 16 Changing to another preset 17 Starting a recipe from the NutriU App 18 Making home-made fries 19 \\nCleaning 20 Cleaning table 21 \\nStorage 21 Recycling 22 Declaration of Conformity 22 Guarantee and support 22 Software updates 22 Device compatibility 22 Factory reset 23 Troubleshooting 23 Important Read this important information carefully beforeyou use the appliance and save it for future reference. Danger Always put the ingredients tobe fried in the basket, to prevent them from coming into contact with the heating elements. Do notcover the airinlet and the airoutlet openings while the appliance is operating Do not fill the pan with oil as this m"
+    },
+    {
+      "path": "手册/Boat.txt",
+      "size": 167189,
+      "headings": [],
+      "opening": "[\" 2021 Boat 210FSH SPORT 210FSH DELUXE OWNER’S/OPERATOR’S MANUAL \\n<PIC \\n To the owner Thank you for choosing a boat. This owner’s/operator’s manual contains information you will need for proper operation, main- tenance, and care. A thorough understanding of these simple instructions will help you to obtain maximum enjoyment from your new. If you have any questions about the operation or maintenance of your boat, please consult a Boat Dealer. In this manual, information of particular importance is distinguished in the following ways: This is the safety alert symbol. It is used to alert you to potential personal injury hazards. Obey all safety messages that follow this symbol to avoid possible injury or death. WARNING A WARNING indicates a hazardous situation which, if not avoided, could result in death or serious injury. NOTICE A NOTICE indicates special precautions that must be taken"
+    },
+    {
+      "path": "手册/Coffee_Machine.txt",
+      "size": 17719,
+      "headings": [],
+      "opening": "[\"an exclusive system creating the perfect Espresso, time after time. All machines are equipped with a unique extraction system that guarantees up to 19 Bar pressure. Each parameter has been calculated with great precision to ensure that all the aromas from each Grand Cru can be extracted, to give the cofee body and create an exceptionally thick and smooth crema. CONTENT/ CONTENU These instructions are part of the appliance. Read all instructions and all safety instructions before operating the appliance. IMPORTANT SAFEGUARDS.......................................... OVERVIEW .............................................................................. SPECIFICATIONS.................................................................... ENERGY SAVING MODE......................................... FIRST USE OR AFTER LONG PERIOD OF NON-USE........................................... COFFEE PRE"
+    },
+    {
+      "path": "手册/Cordless_Landline.txt",
+      "size": 70515,
+      "headings": [],
+      "opening": "[\" Always there to help you <PIC XL490 XL495 \\nSwitch between uppercase and lowercase\\t 17 1\\t Important safety instructions\\t 3 2\\t Your phone\\t 5 What is in the box\\t 5 Overview of the phone\\t 6 Overview of the base station\\t 7 3\\t Get started\\t 8 Connect the base station\\t 8 Install the handset\\t 8 Configure your phone (country dependent)\\t 9 Change the remote access PIN code (for XL495)\\t 9 Charge the handset\\t 10 Check the battery level\\t 10 What is standby mode?\\t 10 Display icons\\t 10 Check the signal strength\\t 11 Switch the handset on or off\\t 11 4\\t Calls\\t 12 Make a call\\t 12 Answer a call\\t 12 End a call\\t 13 Adjust the earpiece/speaker volume\\t 13 Mute the microphone\\t 13 Turn the speaker on or off\\t 13 Make a second call\\t 13 Answer a second call\\t 13 Switch between two calls\\t 13 Make a conference call with the external callers\\t 14 5\\t Intercom and conference calls\\t 15 M"
+    },
+    {
+      "path": "手册/DSLR_Camera.txt",
+      "size": 176052,
+      "headings": [],
+      "opening": "[\" Introduction Item Check List. 3 \\nHandlingPrecautions .8 \\nNomenclature ... .10 \\nConventions Used in this Manual. .16 Getting Started 17 Recharging the Battery... .18 \\nInstalling and Removing the Battery.. .20 \\nUsing a Household Power Outlet... .22 \\nMounting and Detaching a Lens..... ..23 \\nInstalling and Removing the CF Card.. .24 \\nBasic Operation..... .26 \\nMenu Operations. .29 \\nSetting the Language.... .33 \\nSet the power-off time/Auto power off. .33 \\nSetting theDate and Time... .34 \\nReplacing the Date/TimeBattery... .35 \\nCleaning the CMOS sensor.... ..36 \\nDioptric Adjustment .38 \\nHolding the Camera... .38 Fully Automatic Shooting 39 Using Full Auto. 40 \\nBasic Zone Modes. 42 \\nSelf-timer Operation .44 3Image Settings 45 Setting the Image-recording Quality .46 \\nSetting the ISO Speed. .49 \\nSetting the White Balance ... .50 \\nCustom White Balance. .51 \\nSetting the Color"
+    },
+    {
+      "path": "手册/Earphones.txt",
+      "size": 9809,
+      "headings": [],
+      "opening": "[\"Active Noise Canceling Truly Wireless Earphones \\n<PIC Multifunction Button \\n<PIC Right Earbud Left Earbud\\n<PIC Status LED Indicators Battery Level LED Indicators \\n<PIC Battery Level Display Button \\n<PIC Charging Case Battery Level 1. To power the charging case, insert the USB-C cable into the charging port located at the back of the charging case. \\n<PIC 2. Insert the standard USB cable into any suitable USB port.\\n<PIC 3. The Battery Level LED Indicators will light up according to the battery capacity. \\n<PIC 4. You can see the case battery level at any time by pressing the button on the right hand side of the case. \\n<PIC Powering ON/Pairing: When the case is opened the earbuds will ﬁrst connect to each other then enter pairing mode. When in the case the earbud LEDs show their charge status: \\n<PIC When removed from the case the earbud LEDs show their pairing status: \\n<PIC Blue"
+    },
+    {
+      "path": "手册/Electric_Toothbrush.txt",
+      "size": 22985,
+      "headings": [],
+      "opening": "[\" \\n<PIC \\n English 6 \\n Introduction Congratulations on your new toothbrush! Superior plaque removal, whiter teeth, and healthier gums are at your fingertips. Using combination of gentle sonic technology and clinically developed and proven features, you can be confident that you’re getting the very best clean, every time. IMPORTANT SAFEGUARDS READ ALL INSTRUCTIONS BEFORE USE Read this user manual carefully before you use the appliance and save it for future reference. Brushing instructionsWhen using electrical products, especially when children are present, basic safety precautions should always be followed, including the following: DANGERS To reduce the risk of electrocution: - Keep the USB wall adapter and chargers away from water. \\n- Do not place or store product where it can fall or be pulled into a tub or sink. - Do not place in or drop into water or other liquid. - Do not immers"
+    },
+    {
+      "path": "手册/Fax_Machine.txt",
+      "size": 32786,
+      "headings": [],
+      "opening": "[\" Product Safety Guide Read this guide before attempting to operate the product, or before attempting any maintenance, and ensure that you follow all warnings and instructions marked on the product. If you have concerns about how to use your product safely after reading this guide, contact brand of the fax customer service or your local brand of the fax dealer. Failure to follow these instructions may result in an increased risk of personal injury or damage to property, including through fire, electrical shock, burns or suffocation. brand of the fax shall not be liable for the damage caused where the product owner has failed to follow the instructions set out in this guide or on the product. For more advanced instructions, information, and product specifications, see the Online User's Guide. Symbols and Conventions Used in the Documentation Prohibition icons indicate actions that must n"
+    },
+    {
+      "path": "手册/Grill.txt",
+      "size": 37504,
+      "headings": [],
+      "opening": "[\"Use and Care Guide \\nThis Grill is for Outdoor Use Only \\n<PIC WARNING Read and follow all Safety, Assembly and Use and Care Instructions in this Guide before assembling and cooking with this grill. Failure to follow all instructions in this Use and Care Guide may lead to fire or explosion,which could result in property damage, personal injury or death. Safety Parts Use and Care Assembly Assembly Questions? Call1-800-241-7548 Tools needed for assembly: Adjustable wrench (not provided) Screwdriver (not provided) 7/16\\\" Combination wrench (not provided) SAVE THESE INSTRUCTIONS! <PIC \\n If you smell gas: 1.Shut off gas to the appliance. 2. Extinguish any open flame. 3.Open lid. 4. If odor continues, keep away from the appliance and immediately call your gas supplier or your fire department. \\n<PIC \\n1. Do not store or use gasoline or other flammable liquids or vapors in the vicinity of th"
+    },
+    {
+      "path": "手册/Lawn_Mower.txt",
+      "size": 118092,
+      "headings": [],
+      "opening": "[\" It is a violation of California Public Resource Code Section 4442 or 4443 to use or operate the engine on any forest-covered, brush-covered, or grass-covered land unless the engine is equipped with a spark arrester, as defined in Section 4442, maintained in effective working order or the engine is constructed, equipped, and maintained for the prevention of fire. The enclosed engine owner's manual is supplied for information regarding the US Environmental Protection Agency (EPA) and the California Emission Control Regulation of emission systems, maintenance, and warranty. Replacements may be ordered through the engine manufacturer. Please refer to the engine manufacturer’s information included with the machine. Gross or Net Torque: The gross or net torque of this engine was laboratory rated by the engine manufacturer in accordance with the Society of Automotive Engineers (SAE) J1940 or"
+    },
+    {
+      "path": "手册/Microwave_OTR.txt",
+      "size": 55041,
+      "headings": [],
+      "opening": "[\"<PIC Over-the-Range Microwave Use and Care Manual ForModels:HMV9302,HMV9305,HMV9306,HMV9307 PLEASE READ ENTIRE INSTRUCTIONS BEFORE PROCEEDING IMPORTANT: Save these instructions for the local electrical inspector's use. INSTALLER:Please leave these Installation Instructions with this unit for the owner. OWNER:Please retain these instructions for future reference. \\nSAFETY 3-5 Precautions To Avoid Possible Exposure To Excessive Microwave Energy .. 3 Important Safety Instructions 4-5 Grounding Instructions . 5 UNDERSTANDING YOUR MICROWAVE OVEN 6-9 Cook ware Guide 6 Tips For Microwave Cooking.. Parts And Accessories 8 Control Panel. . 8-9 USING YOUR MICROWAVE OVEN 10-29 Learn About Your Microwave Oven 10 Help ... ...10 Clock .10 Kitchen Timer .. .10 Control Set-Up 10 Vent HI/LO/Off 11 T/Table On/Off 11 Child Lock. 11 Light HI/LO/Off 11 Light Timer... 11 Easy Cook .... 12 Hold Warm.. 12 Fav"
+    },
+    {
+      "path": "手册/Motherboard.txt",
+      "size": 119901,
+      "headings": [],
+      "opening": "[\"\\n<PIC No part of this manual, including the products and software described in it, may be reproduced, transmitted, transcribed, stored in a retrieval system, or translated into any language in any form or by any means, except documentation kept by the purchaser for backup purposes, without the express written permission. Product warranty or service will not be extended if: (1) the product is repaired, modified or altered, unless such repair, modification of alteration is authorized in writing; or (2) the serial number of the product is defaced or missing. THIS MANUAL WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL ITS DIRECTORS, OFFICERS, EMPLOYEES OR AGENTS BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES (INCLUD"
+    },
+    {
+      "path": "手册/PressureCooker_Airfryer.txt",
+      "size": 42862,
+      "headings": [],
+      "opening": "[\"MULTI-USE PRESSURE COOKER AND AIR FRYER-5.7AND8LITRE <PIC Getting Started Guide 2 Important safeguards 9 Welcome 9 Products, parts and accessories 11 Get started 13 Pressure cooking 101 14 Releasing pressure 15Control panel 16 Pressure control features 20 Cooking 28 Care, cleaning and storage 32 Troubleshooting 34Warranty Full Manual, How-to Videos, FAQs and more available. Download the Multi-use pressure cooker and air fryer App with 1000+ recipes. \\n IMPORTANT SAFEGUARDS CEUK (Yes, we have to) Your safety always comes first. It Was designed with your safety in mind, and we mean business.Checkout this Multi-use pressure cooker and air fryer's long list of safety mechanisms to see what we mean. When using electrical appliances, basic safety precautions should always befollowed: 01READ THIS ENTIRE DOCUMENT BEFORE OPERATING THEAPPLIANCE.FAILURE TO FOLLOW THESE SAFEGUARDS AND INSTRUCTIONS"
+    },
+    {
+      "path": "手册/Security_Camera.txt",
+      "size": 6027,
+      "headings": [],
+      "opening": "[\" Camera Installation Guide Camera Overview This is a networked camera that is exceptionally simple to deploy and configure due to its integration into the dashboard and the use of cloud augmented edge storage. The MV family eliminates the complex and costly servers and video recorders required by traditional solutions which removes the limitations typically placed on video surveillance deployments. Package Contents In addition to the MV camera, the following are provided: <PIC <PIC \\n Pre-lnstall Preparation You should complete the following steps before going on-site to perform an installation. Configure Your Network in Dashboard The following is a brief overview only of the steps required to add an camera to your network. For detailed instructions about creating,configuring and managing Camera networks,refer to the online documentation 1. Login to website, If this is your first time,"
+    },
+    {
+      "path": "手册/Snowmobile.txt",
+      "size": 89393,
+      "headings": [],
+      "opening": "[\" MACHINE IDENTIFICATION Identification numbers recordA.FRAME NUMBER: <PIC B. ENGINE NUMBER (PRIMARY I.D.): <PIC <PIC <PIC <PIC C.KEYNUMBER: Record your frame number,engine number(Primaryl.D.) and key number in the spaces provided,to assist you in ordering spare parts from your dealer. $\\\\textcircled{1}$ The frame number is the nine-digit number stamped on the frame of the machine. (See Fig.A) $\\\\circledcirc$ The model code number is the first three digits of the frame number.(See Fig.A) $\\\\textcircled{3}$ The engine number is stamped in the location as shown.(SeeFig.B) $\\\\textcircled{4}$ Key number (See Fig.) Also, record and keep these I.D. numbers in a separate place in case your machine is stolen. <PIC INTRODUCTION Congratulations!Your choice of a snowmobile assures you of the highest quality and dependability.Your snowmobile is manufactured bya company wellknown for excellence in t"
+    },
+    {
+      "path": "手册/Television.txt",
+      "size": 33614,
+      "headings": [],
+      "opening": "[\"\\n Color Television OWNER'SMANUAL WARNING:TO REDUCE THE RISK OF FIRE OR ELECTRIC SHOCK,DO NOT EXPOSE THIS PRODUCT TO RAIN OR MOISTURE. CAUTION:TO REDUCE THE RISK OF ELECTRIC SHOCK,DO NOT REMOVE COVER(OR BACK).NOUSER-SERVICEABLE PARTS INSIDE.REFER SERVICING TOQUALIFIED SERVICE PERSONNEL Cleaning Unplug this television receiver from thewall outlet before cleaning.Do not useliquid cleaners or aerosol cleaners. Use a damp cloth for cleaning. Do not use attachments not recommended by the television receiver manufacturer as they may cause hazards. Power Supply This television receiver should be operated only from the type of power source indicated on the marking label.lf you are not sure of the type of power supplied to your home,consult your television dealer or local power company. Installation Do not use this television receiver near water, for example,near a bathtub,washbowl,kitchen sink"
+    },
+    {
+      "path": "手册/VR头显手册.txt",
+      "size": 13994,
+      "headings": [],
+      "opening": "[\"使用说明书\\n 警告 使用本产品前，请仔细阅读本说明书及配套硬件的相关手册，并遵守所有警告及安装说明。请妥善保管，以备日后参考。\\n● VR头显不适用于12岁以下儿童。\\n● 若您感到疲劳、头晕、头昏、恶心、身体不适、处于醉酒或服药状态，或运动感、平衡感受损，请勿使用PS VR。若您患有严重疾病，使用PS VR前请咨询医生。\\n● 佩戴VR头显会限制您对周围真实环境的视野。VR头显无法检测障碍物。使用前，请检查并清理大于游玩区域的活动空间，清除所有障碍物。有关如何设置游玩区域的详细信息，请参阅“使用PS VR”章节（第8页）。确保您远离墙壁、楼梯、家具或其他可能导致碰撞或绊倒的障碍物。\\n● 使用期间，请采取措施防止宠物、他人或其他障碍物进入大于游玩区域的活动空间。\\n● 佩戴VR头显时，请待在游玩区域中央，切勿随意走动。尽可能保持坐姿，佩戴VR头显时避免头部、四肢或身体做出剧烈或过度动作。若应用程序要求您佩戴头显时站立，请务必严格遵循应用程序的指示。\\n● 开始游玩前，检查VR头显线缆是否缠绕在身体或四肢上，并在游玩过程中经常检查。\\n● 若您或您的孩子出现以下任何健康问题或症状，请 立即停止使用 ，并咨询医生，经医生许可后方可继续使用：头晕、视觉异常、眼睛或肌肉抽搐、意识丧失、方向障碍、癫痫发作，或任何不自主运动及抽搐。 仅在医生许可后方可继续游玩。 \\n● 部分人可能会出现晕动症、恶心、方向障碍、视力模糊或其他不适症状。若出现此类情况，请立即停止使用并摘下VR头显。若使用后感到不适，请休息，且不要从事需要良好视力、平衡感或协调能力的活动，直至症状完全消失。\\n● 当您感到疲劳或需要睡眠时，请勿使用PS VR。\\n● 请勿在可能发生震动或其他不稳定的环境中使用PS VR。\\n● 适应虚拟现实体验可能需要一定时间。初次使用时，建议您短时间使用PS VR。\\n● 通常建议每游玩1小时，休息15分钟。但观看虚拟现实内容时，所需休息的时长和频率因人而异——请休息至不适感完全消退为止。\\n 致英国用户\\n为安全与方便起见，本设备已配备成型插头。若需更换插头内的保险丝……在"
+    },
+    {
+      "path": "手册/Vacuum_Cleaner.txt",
+      "size": 13790,
+      "headings": [],
+      "opening": "[\" VACUUM <PIC SAFETY CAUTloN!Do not expose the electronics, its battery or the integrated dockcharger.Thereareno user-serviceable parts inside. Refer servicing fo qualified service personnel.Please ensure voltage rating for enclosed matches standard outlet voltage. Before using vacuum,pickup objects like clothing loose papers, pull cords for blinds or curfains, power cords and any fragile objects.If the vacuum passes over a power cord and drags if,there is a chance an obj ecf could be pulled off a fable or shelf. ·If the room to be cleaned contains a balcony,a physical barrier should be used fo prevent access fo the balcony and ensure safe operation. Read all safety and operating instructions before operating this vacuum This vacuum is not intended for use by persons (including children)with reduced physical,sensory or mental capabilities,or lack of experience and knowledge,unless they"
+    },
+    {
+      "path": "手册/Washing_Machine.txt",
+      "size": 8833,
+      "headings": [],
+      "opening": "[\" Owner's Instructions <PIC \\nBefore operating theunit,pleaseread thismanual thoroughly,and retain for future reference. FEATURES 1 CAUTIONS 1 PRECAUTIONS WHEN OPERATING 1 DESCRIPTION OF PARTS 2 CONTROL PANEL 2 WASHING PROCEDURE 3 TO WASH 3 SPIN DRY 3 RINSING 4 OVERFLOW RINSE 4 ADDITIONAL RINSE 4 INSTALLATION 5 ENVIRONMENT 5 CONNECTING THE DRAIN HOSE 5 MOUNTING THE LEGS 5 CLEANING THE MACHINE 5 LAUNDRY GUIDE 6 MAINTENANCE 6 TROUBLESHOOTING 6 SPECIFICATIONS \\n FEATURES POWERFUL WASHING BY LARGE PULSATOR This washing machine has a big pulsator so that it can wash evenly. THREE WAY LINT FILTER Three way lint fiter strains off the lint efficiently during washing. so you can wash laundry cleanly. NORMAL OR SOFT SELECTOR You can wash laundry efficiently by twotypes,Normal or Soft CAUTIONS Be sure that the washer is grounded To avoid electrical shock,use a metal pipe for the ground connection."
+    },
+    {
+      "path": "手册/WaveRunner_Jetski.txt",
+      "size": 51421,
+      "headings": [],
+      "opening": "[\" 2005 WaveRunner To the owner/operator This Owner’s/Operator’s Manual contains information you will need for proper operation, maintenance, and care. A thorough understanding of these simple instructions will help you to obtain maximum enjoyment from your new jetski. If you have any questions about the operation or maintenance of your watercraft, please consult a jetski dealer. Because jetski has a policy of continuing product improvement, this product may not be exactly as described in this Owner’s/ Operator’s Manual. Specifications are subject to change without notice. This manual should be considered a permanent part of this watercraft and should remain with it even if the watercraft is subsequently sold. EJU00990 Important manual information: In this manual, information of particular importance is distinguished in the following ways: The Safety Alert Symbol means ATTENTION! BECOME"
+    },
+    {
+      "path": "手册/eReader.txt",
+      "size": 21718,
+      "headings": [],
+      "opening": "[\" Table of Contents \\\\ Introduction…………………………………………………………………page 1 \\\\ Device description…………………………………………………………page 2 \\\\ Front view…………………………………………………………………...page 2 \\\\ Navigation button view……………………………………………………page 3 \\\\ Bottom view…………………………………………………………………page 3 \\\\ Power management………………………………………………………..page 4 \\\\ General Operation………………………………………………………….page 4 \\\\ Main Menu……… …………………………………………………………..page 5 \\\\ Browser History…………………………………………………………….page 6 \\\\ eBook………………………………………………………………………page 6 \\\\ Music……………………………………………………………………….page 8 \\\\ Video………………………………………………………………………..page 11 \\\\ Photo………………………………………………………………………..page 12 \\\\ Voice Recording…………………………………………………………..page 13 \\\\ Setting………………………………………………………………………page 15 \\\\ Document Management………………………………………………....page 17 \\\\ Connect eBook to the computer……………………………………….page 17 \\\\ Manage files……………………………………………………………….page 17 \\\\ Inserting Mi"
+    },
+    {
+      "path": "手册/人体工学椅手册.txt",
+      "size": 1628,
+      "headings": [],
+      "opening": "[\" 组装说明 请阅读本手册 \\n 在阅读并理解本手册中的说明前，请勿使用本产品。请妥善保管本手册以备日后查阅。检查各类配件 \\n 配件详情 \\n<PIC 使用椅子前须知 安装说明 请保留原包装箱，以备可能需要退换产品时使用。用螺丝将 C1 与 C2 组装在一起 \\n<PIC 安装脚轮。用底座盖盖住底座中心，并安装气杆。\\n<PIC 安装底盘。<PIC 安装脚踏，然后套上橡胶圈。<PIC 将座椅放置在气杆上。<PIC 在椅背上安装连接件。<PIC 将连接件安装到底盘后端。<PIC \\n 对准螺丝孔并安装扶手。<PIC 安装头枕与腰枕。<PIC 组装完成。<PIC 常见问题：Q：使用一段时间后扶手变松怎么办？A：大多数情况下，扶手和椅背的螺丝会在使用一段时间后松动，重新拧紧螺丝即可解决问题。 高度调节<PIC 向上拉起 “升降” 拉杆即可调节椅子高度，到达所需高度后松开 “升降” 拉杆。调节高度时请将身体微微抬离座椅。<PIC 椅背后仰功能<PIC 向上拉起 “后仰” 拉杆，椅背角度可随人体动作独立倾斜。向下按下 “后仰” 拉杆，椅背角度即可锁定。将椅背复位至正常位置时请靠在椅背上，否则椅背可能会快速回弹。<PIC 按摩功能 \\n 插入 USB 即可启用腰枕的按摩功能。\\n<PIC \", [\"Manual02 0\", \"Manual02 1\", \"Manual02 2\", \"Manual02 3\", \"Manual02 4\", \"Manual02 5\", \"Manual02 6\", \"Manual02 7\", \"Manual02 8\", \"Manual02 9\", \"Manual02 10\", \"Manual02 11\", \"Manual02 12\", \"Manual02 13\", \"Manual02 14\", \"Manual02 15\"]]"
+    },
+    {
+      "path": "手册/健身单车手册.txt",
+      "size": 30470,
+      "headings": [],
+      "opening": "[\"\\n 请遵守以下警告：阅读并理解本机上的所有警告。！仔细阅读并理解装配说明。装配产品时，请始终让旁观者和儿童远离。在得到指示前，请勿将电源连接到机器上。请勿在室外、潮湿或湿润环境中装配本机。请在合适的工作区域完成装配，远离行人通道和旁观者。本机部分部件可能较重或难以握持。进行涉及这些部件的装配步骤时，请由另一人协助。请勿独自完成需要重物搬运或姿势别扭的操作步骤。将本机放置在坚固、水平的平面上。请勿试图更改本机的设计或功能，否则可能降低本机安全性并使保修失效。如需更换零件，请仅使用Nautilus原厂替换零件及配件。未使用原厂零件可能对使用者造成危险、影响机器正常运行并使保修失效。在本机完全装配完毕并按照手册检查性能正常前，请勿使用。首次使用前，请阅读并理解随本机提供的完整手册，并妥善保管以备日后参考。请按给定顺序完成所有装配步骤。装配不当可能导致受伤或功能异常。本产品含有磁铁。近距离情况下，磁场可能干扰部分医疗设备的正常使用。在装配、维护和/或使用产品时，使用者可能靠近磁铁区域。鉴于起搏器等设备的重要性，使用本设备前请务必咨询医疗服务人员。请查阅“安全警告标签与序列号”部分，确定本产品磁铁位置。\\n<PIC 技术规格\\n<PIC 最大使用者重量：136 千克（300 磅）设备总占地面积：5670 平方厘米 机器重量：26.5 千克（58.4 磅） 电源要求：工作电压：220V–240V 交流电，50Hz 工作电流：0.4A 认证标准：交流电源适配器：符合 CE 认证。\\n<PIC 本产品符合固定式健身器材 EN ISO 20957 国际标准，S 级 装配前 选择放置和使用机器的区域。为安全运行，场地必须坚固、水平。运动区域最小预留空间：2.3 米 × 1.8 米（90 英寸 × 70 英寸）。\\n<PIC 基本装配提示 装配本机时请遵循以下要点：1. 装配前阅读并理解“重要安全说明”。2. 收集每个装配步骤所需的所有零件。3. 使用推荐扳手，顺时针拧紧螺栓和螺母，逆时针松开，除非另有说明。4. 连接两个部件时，轻轻抬起并对准螺栓孔，帮助螺栓穿过。5. 装配可能需要两"
+    },
+    {
+      "path": "手册/健身追踪器手册.txt",
+      "size": 36539,
+      "headings": [],
+      "opening": "[\" 健身追踪器\\n<PIC 开始使用 包装盒内含物品\\n为手表充电 8 设置健身追踪器 9 在健身追踪器应用中查看你的数据\\n 开始使用 认识健身追踪器 健身追踪器——一款旨在帮你减轻压力、改善睡眠、更健康生活的智能手表。请花点时间阅读我们完整的安全信息。\\n健身追踪器不用于提供医疗或科学数据。 包装盒内含物品 你的健身追踪器包装盒包含： 配有小号表带的手表（颜色和材质仅供参考）\\n<PIC 充电线\\n<PIC 额外大号表带\\n<PIC 健身追踪器的可拆卸表带提供多种颜色和材质，需单独购买。\\n 为手表充电 充满电的健身追踪器续航时间可达6天以上。电池续航和充电周期随使用情况及其他因素而异；实际结果可能有所不同。\\n为健身追踪器充电： 1. 将充电线插入电脑的USB端口、UL认证的USB墙充充电器或其他低功耗充电设备。\\n2. 将充电线的另一端靠近手表背面的充电接口，直至磁吸吸附。确保充电线上的金属触点与手表背面的接口对齐。\\n<PIC 为健身追踪器充电12分钟即可续航24小时。手表充电时，轻点屏幕两次或按下按钮即可点亮屏幕。完全充满电大约需要1-2小时。\\n<PIC 设置健身追踪器 通过适用于iPhone、iPad或安卓手机的健身追踪器应用设置健身追踪器。健身追踪器应用兼容大多数主流手机。请访问官网查看你的手机是否兼容。\\n<PIC 开始操作： 1. 下载应用\\n2. 安装应用并打开。\\n3. 点击登录，然后按照屏幕上的说明完成设备设置。 设置完成后，通读指南以了解更多关于你的新手表的信息，然后探索健身追踪器应用。\\n如需更多信息，请参阅相关帮助文章。 在健身追踪器应用中查看你的数据 打开手机上的健身追踪器应用，查看你的健康指标、活动和睡眠数据，选择锻炼或正念课程等。\\n 解锁健身追踪器高级版 健身追踪器高级版是健身追踪器应用中的个性化资源，助你保持活力、良好睡眠和管理压力。高级订阅包含根据你的健康和健身目标定制的计划、个性化洞察、数百种健身品牌课程、引导式冥想等。\\n用户可在健身追踪器应用中兑换健身追踪器高级版试用订阅。\\n如需更多信息，请参阅相关帮助文章。\\n"
+    },
+    {
+      "path": "手册/儿童电动摩托车手册.txt",
+      "size": 14039,
+      "headings": [],
+      "opening": "[\" 儿童电动摩托车 <PIC 使用说明书 使用前请仔细阅读并理解本手册全部内容。 请妥善保管本手册以备日后查阅，本手册包含重要信息。首次使用前，请为电池充电8至12小时，连续充电时间不得超过20小时。 电池出厂时可能带有部分电量，但使用前仍需对电池进行充电。 \\n产品介绍 零件清单 零件图解 产品组装 操作说明 电池充电 故障排除 保养维护 电池处理 产品介绍 阅读本指南时请注意以下事项： 适用年龄：3岁及以上 载重：30千克 充电器：输出：直流7.8V 0.5A 电池：直流6V 4.5AH 保险丝：5A自恢复保险丝 充电时间：8至12小时（最长不超过20小时） 警告！ 为了您孩子的安全，请务必阅读所有警告及组装/使用说明。请妥善保管本指南以备日后查阅 \\n· 需由成人完成组装。本产品包含包装材料及小零件，可能对儿童造成危险。组装时请让儿童远离，并妥善处理包装材料。 \\n<PIC \\n<PIC \\n<PIC <PIC 本产品需由成人组装。产品未组装状态下的小零件、尖锐边缘及尖端可能会对儿童造成伤害。拆箱及组装产品时请务必小心。儿童不得接触零件或协助组装产品。 \\n组装前请确认所有零件齐全，组装完成前请保留所有包装，确保无零件遗失。 \\n· 组装时可能需要部分工具（不随产品提供），例如十字螺丝刀和钳子。 1. 安装挡泥板。 \\n· 按照步骤1所示，将挡泥板侧转，然后向上滑入左侧把手管。注意！请勿让“凸点”卡入1号孔。 \\n<PIC · 按照步骤2所示，安装挡泥板，使“凸点”卡入2号孔。 \\n<PIC 2. 安装右侧把手管。 <PIC 如图所示，拆下把手固定夹上的两颗螺栓和螺母。 将右侧把手管穿过固定夹与挡泥板。轻轻转动把手，避免“凸点”卡入1号孔。将把手调整至正确位置后，转动把手使“凸点”卡入2号孔。使用两颗螺栓和螺母将把手管固定在固定夹上。 3. 安装前轮。 <PIC \\n· 按照步骤1所示，将前轴穿过两侧把手管及前轮，两侧把手管内外均需安装垫片。 \\n· 使用两个螺母将前轴及车轮固定在把手管上，使用随产品提供的扳手拧紧螺母直至螺纹尽头。 <PIC \\n间隙 \\n注意"
+    },
+    {
+      "path": "手册/冰箱手册.txt",
+      "size": 20684,
+      "headings": [],
+      "opening": "[\" 重要安全说明 基本安全注意事项 本手册包含多项重要安全提示。请始终阅读并遵守所有安全说明。 这是安全警示符号。它用于提醒您注意安全提示，告知您可能导致您或他人伤亡、或造成产品损坏的危险。所有安全提示前均会标注安全警示符号及危险警示词：危险、警告或注意。这些词语含义如下： 危险 不遵守说明将导致死亡或重伤。 警告 不遵守说明可能导致死亡或重伤。 注意 表示存在潜在危险，如不避免，可能导致轻微或中度伤害，或仅造成产品损坏。 所有安全提示均会说明危险、告知如何降低受伤风险以及不遵守说明可能产生的后果。 重要安全说明 警告 为降低使用产品时发生火灾、触电或人身伤害的风险，应遵守基本安全预防措施，包括以下内容。使用本电器前请阅读所有说明。 1. 连接电源时 应使用专用插座。 \\n• 一个插座同时使用多个设备可能引发火灾。\\n • 若本机连接漏电保护器，保护器可能跳闸，导致食物变质。 \\n<PIC 请勿让电源插头朝上或被挤压在冰箱冰柜背面。 \\n若电源线被挤压在冰箱后方，可能损坏线缆引发火灾。插头朝上可能因线缆自重松脱，导致电气故障、引发火灾或冰箱停机导致食物变质。 \\n<PIC 安装过程中拔下插头后推入冰箱时，防止电源线被挤压或弯折。 \\n线缆被挤压或弯折可能引发火灾或触电。将电器从墙面移开时，注意不要碾压或损坏电源线。 请勿让重物挤压或弯折电源线。 \\n可能损坏电源线，引发火灾或触电。 \\n<PIC 重要安全说明 请勿延长或改装电源插头长度。 \\n可能引发火灾或触电。 \\n<PIC 清洁、操作或更换冰箱冰柜内部灯泡时，请拔下电源插头。 \\n• 可能引发触电或伤害。\\n • 更换冰箱冰柜内部灯泡时，确保灯座内的绝缘橡胶圈未被取下。 \\n<PIC 请勿拉扯电源线或用湿手触碰电源插头。 \\n可能引发触电或伤害。 \\n<PIC 清除电源插头上的水渍或灰尘，确保插脚完全牢固插入。 \\n灰尘、水渍或接触不良可能引发火灾或触电。 \\n<PIC \\n 请勿拉扯电源线断电。务必握住插头头部拔下。 \\n拉扯线缆可能损坏线缆，导致触电或火灾。 \\n<PIC 重要安全说明 确保接地可靠。 若不完"
+    },
+    {
+      "path": "手册/功能键盘手册.txt",
+      "size": 11277,
+      "headings": [],
+      "opening": "[\"<PIC \\n 目录 1. 简介 02 2. 关于功能键盘 03 包装内容及 3. 说明 04 4. 功能键盘 06 更换键帽及 6. 轴体 10 使用功能 7. 键盘搭配CAM软件 14 在硬件模式下 8. 使用键盘 15 9. 附录 A-1 5. 键盘设置 09\\n 1. 简介 恭喜您拥有专属的功能键盘！无论您是专业主播还是休闲玩家，我们都衷心欢迎您的到来。<PIC \\n 2. 关于功能键盘 本功能键盘专为打造PC电竞桌面核心而设计。全键位热插拔机械轴体与100%标准底行设计，支持全面自定义与个性化设置。<PIC \\n 3. 包装内容及说明 A. 键盘<PIC B. USB线<PIC C. 腕托（仅全尺寸及无小键盘版本）<PIC \\n 3. 包装内容及说明 D. 拔键器<PIC E. 拔轴器<PIC \\n 4. 功能键盘 1. 音量滚轮 2. 扬声器静音/闭音键 3. Win锁定键 4. 亮度键<PIC \\n5. 配置文件1（FN+F1键） 6. 配置文件2（FN+F2键） 7. 配置文件3（FN+F3键） 8. 配置文件4（FN+F4键）<PIC <PIC 9. 数字锁定指示灯 10. 大小写锁定指示灯 11. 滚动锁定指示灯<PIC <PIC \\n12. 腕托 13. USB-C接口<PIC \\n 5. 键盘设置 a. 将USB-C线连接键盘背面接口，另一端连接电脑上可用的USB 2.0（或更高速度）接口。 b. 将腕托（仅全尺寸及无小键盘版本）安装到键盘正面。腕托采用磁吸设计，可自动吸附并居中。 c. 若需要更高的打字倾斜角度，可展开键盘底部的可调节支撑脚。共有两层支撑脚，可选择中高两档角度。\\n 6. 更换键帽及轴体 6.1 键帽拆卸/重新安装 11 6.2 轴体拆卸/重新安装 12\\n 6.1 键帽拆卸/重新安装 使用附赠的拔键器，将工具套在键帽顶部，轻轻向上拔出即可。若轴体随键帽一同拔出，请参考下文安装指南重新安装。<PIC <PIC \\n 6.2 轴体拆卸/重新安装 使用附赠的拔轴器，从顶部夹住轴体，将工具两端沿轴体前后方向放置。轴体由两个卡扣固定"
+    },
+    {
+      "path": "手册/发电机手册.txt",
+      "size": 25275,
+      "headings": [],
+      "opening": "[\" 简介\\n恭喜您选购全新发电机。本手册将帮助您充分了解本机的操作与维护方法。如对机器的操作或维护有任何疑问，请咨询发电机经销商。 产品识别码 AE00012\\n 识别码记录\\n请在指定位置记录您的产品识别码和序列号，以便向发电机经销商订购零配件。\\n同时请将这些识别码另行妥善保管，以防机器被盗。\\n<PIC AE00011\\n 机器标识\\n机器序列号标注在图示位置。\\n<PIC \\n 注意：这些编号的前三位为机型标识，其余数字为产品生产编号。请妥善记录，以便向发电机经销商订购配件时参考。\\n 使用机器前请务必完整阅读并理解本手册。 注意：发电机厂商持续致力于产品设计与品质的改进。因此，尽管本手册包含印刷时最新的产品信息，但您的发动机与手册内容可能存在细微差异。如对本手册有任何疑问，请咨询发电机经销商。本手册应视为发动机的永久组成部分，转售时应随机器一并移交。本手册中特别重要的信息通过以下标识区分：\\n- 安全警示符号意为：注意！提高警惕！事关您的人身安全！\\n不遵守警告说明可能导致发动机操作人员、旁观者或检修人员重伤甚至死亡。\\n注意标识提示必须采取特别预防措施，以免损坏发动机。\\n注：注释提供关键信息，使操作步骤更简便清晰。 发电机EF系列及EDL系列有限保修条款\\n发电机公司保证，在美国本土授权经销商处购买的全新民用发电机，在规定期限内材料与工艺无缺陷，具体以本条款所列限制为准。 保修期限\\n凡从美国本土授权经销商处购买、用于私人非商业用途的全新EF系列或EDL系列发电机，自购买之日起享受 2年 材料与工艺缺陷保修服务，具体以本条款除外责任为准。用于商业或租赁用途的非商用发电机，自购买之日起享受 180天 保修服务，具体以本条款除外责任为准。 保修期内服务\\n任何授权发电机经销商将根据厂商判断，免费维修或更换因原厂材料或工艺缺陷而判定为故障的零部件，具体由发电机厂商决定。保修维修所用零部件在原产品剩余保修期内继续享受保修。所有保修更换的零部件归美国发电机汽车公司所有。 一般除外责任\\n以下原因导致的故障不在保修范围内：\\na. 安装与原厂发电机配件质量不相当的零"
+    },
+    {
+      "path": "手册/可编程温控器手册.txt",
+      "size": 13842,
+      "headings": [],
+      "opening": "[\" 可编程温控器\\nhoneywell\\n快速安装指南 <PIC \\n包装盒内物品 <PIC \\n所需工具\\n 可能需要的工具 <PIC <PIC \\n电钻及钻头(7/32英寸) 尖嘴钳\\n 拆卸旧温控器 关闭电源。为保护您自身及设备安全，请在断路器箱或控制供暖/制冷系统的开关处关闭电源。<PIC 2 确认系统已关闭 调节旧温控器温度。若5分钟内未听到系统启动，则电源已关闭。 <PIC 拆卸旧温控器面板。 大多数温控器可握住面板轻轻拉下即可拆卸。部分温控器可能配有螺丝、按钮或卡扣。 <PIC 此时请勿拆卸温控器上的任何电线！ <PIC 确认无120/240伏电线。 是否有带线帽的粗黑色电线？ 您的温控器电压是否为120伏或更高？ 若任一问题答案为是，则您的系统为线电压系统，本温控器不适用。 <PIC 5 拍摄当前接线照片。 务必拍下电线插入端子旁的字母标识。这将为您后续接线提供参考。 提示：若电线颜色褪色或两个端子电线颜色相同，请使用包装内提供的电线标签标记每根电线。<PIC \\n6 拆除所有跨接线 跨接线用于连接两个端子，外观类似小订书钉或彩色电线，继续操作前必须拆除。使用螺丝刀将电线从端子上松开。 <PIC RTH 7500型温控器无需跨接线。 7 记录以下端子是否有电线 计数时请勿包含跨接线。本温控器无需跨接线。 <PIC 8 记录电线颜色。 勾选连接至端子的电线，并在勾选旁写下电线颜色。计数时请勿包含跨接线。 勾选适用选项（并非全部适用） <PIC RTH 7500型温控器不支持L/A、S或U端子 若有电线连接至未列出的端子，您需要额外的接线支持，本温控器方可正常使用\\n快速安装指南 ) 断开电线并拆卸旧墙座。 使用螺丝刀将电线从端子松开。然后，使用电线标签在断开时标记每根电线。电线标签上的字母应与端子字母一致。 提示：为防止电线缩回墙内，可将电线缠绕在铅笔上。 <PIC 安装温控器 <PIC 10 整理并将电线穿过UWP底座 打开UWP底座，将成束电线从底座背面穿过。确保每根电线至少露出1/4英寸，便于插入电线端子。 <PIC \\n11 安装墙塞。 建议使用"
+    },
+    {
+      "path": "手册/吹风机手册.txt",
+      "size": 20232,
+      "headings": [],
+      "opening": "[\"<PIC 225B 使用说明书 使用吹风机前，请仔细阅读使用说明书并确保理解相关内容。\\n 安全说明。产品描述 燃油处理 .12 启动与停机 . .14 吹风机使用 .16 维护保养 20 技术参数. .25 排放控制装置和系统的维护、更换或维修可由任何非道路发动机维修机构或个人进行。 胡斯华纳公司秉持产品持续开发政策，因此保留在不事先通知的情况下修改产品设计与外观的权利。 本使用说明书详细介绍了吹风机的使用、保养及日常维护方法。同时说明操作吹风机时如何实现最高安全性、安全装置的工作方式及维护方法。 注意！所有接触本吹风机的人员均必须阅读并理解说明书中涉及安全的章节。 <PIC 本使用说明书专为需要对吹风机进行故障排查、全面检修及纠正性维护的人员编写。 吹风机上设有警示标识，相关图示见第 3 页。若吹风机上的任何警示标识出现破损或磨损，应尽快订购新标识并安装。注意部分警示标识为吹风机部件一体成型。 本吹风机用于吹扫地面落叶及其他杂物。操作吹风机时，操作人员必须双脚稳固站立在地面上。 <PIC 个人防护装备 使用吹风机的人员需佩戴以下防护装备： 1. 合格的听力防护装备 2. 合格的眼部防护装备。 3. 在多尘环境中操作时佩戴面罩。 4. 防滑鞋底的工作靴或工作鞋 5. 急救箱。 <PIC 人身安全 以下说明适用于吹风机操作人员： 1. 操作人员必须阅读并理解本说明书内容。 2. 请勿穿着宽松衣物、佩戴围巾或项链，长发需束起，以免被吹风机旋转部件卷入造成伤害。 3. 饮酒、服药后或疲劳状态下请勿操作吹风机。 4. 禁止未成年人操作吹风机 燃油安全 <PIC 本吹风机所用燃油有专门安全说明，相关规定详见 消音器 消音器设计旨在尽可能降低噪音，并将发动机废气引导远离操作人员。配备催化转化器的消音器还可减少有害废气排放。 警告！发动机废气温度较高且可能含有火花，易引发火灾。严禁在室内或易燃材料附近启动设备！ 警告！配备催化转化器的消音器在使用中及停机后会变得异常滚烫，怠速状态下同样如此。接触可能导致皮肤烫伤。请注意火灾风险！ <PIC 安全装置 吹风机配备多项安全装置与防护"
+    },
+    {
+      "path": "手册/摩托艇手册.txt",
+      "size": 17654,
+      "headings": [],
+      "opening": "[\" 摩托艇 驾驶练习指南\\n 目录 中文 内容 前言 ............................................................................ 1 \\n重要信息 ............................................................................ 2 \\n如何使用本练习指南 ............................................................ 4 \\n练习1：操控装置 ................................................................ 6 \\n练习2：发动机启动与停止 ................................................ 7 \\n练习3：登艇与平衡 .......................................................... 10 \\n练习4：拖曳速度操控 ...................................................... 13 \\n练习5：半滑航速度操控 .................................................. 14 \\n练习6：全加速与停车 ...................................................... 17 \\n练习7：滑航速度操作 ...................................................... 18 \\n练习8：穿越尾流与浪涌 .................................................. 20 \\n练习9：搭载乘客操作 ...................................................."
+    }
+  ],
+  "code_evidence": {
+    "project_name": "compeletion",
+    "software_name_candidate": "compeletion",
+    "frameworks": [],
+    "language": "Python、Java",
+    "routes": [
+      "/"
+    ],
+    "feature_name_candidates": [
+      "query rewriter",
+      "react agent",
+      "online review skill",
+      "ingestion",
+      "answer postprocess",
+      "context assembler",
+      "vision",
+      "llm clients",
+      "retriever",
+      "conversation store",
+      "init",
+      "generator",
+      "pipeline",
+      "milvus create",
+      "session store",
+      "conversation store redis",
+      "order status skill",
+      "evidence extractor",
+      "budget",
+      "fact extractor",
+      "types",
+      "assembler",
+      "verifier",
+      "consolidator",
+      "session memory",
+      "user profile store",
+      "episodic store"
+    ],
+    "entry_files": [],
+    "page_files": [],
+    "component_files": [],
+    "api_files": [
+      "app/services/query_rewriter.py",
+      "app/services/react_agent.py",
+      "app/services/online_review_skill.py",
+      "app/services/ingestion.py",
+      "app/services/answer_postprocess.py",
+      "app/services/context_assembler.py",
+      "app/services/vision.py",
+      "app/services/llm_clients.py",
+      "app/services/retriever.py",
+      "app/services/conversation_store.py",
+      "app/services/__init__.py",
+      "app/services/generator.py",
+      "app/services/pipeline.py",
+      "app/services/milvus_create.py",
+      "app/services/session_store.py",
+      "app/services/conversation_store_redis.py",
+      "app/services/order_status_skill.py",
+      "app/services/context/evidence_extractor.py",
+      "app/services/context/budget.py",
+      "app/services/context/fact_extractor.py",
+      "app/services/context/__init__.py",
+      "app/services/context/types.py",
+      "app/services/context/assembler.py",
+      "app/services/context/verifier.py",
+      "app/services/memory/consolidator.py",
+      "app/services/memory/session_memory.py",
+      "app/services/memory/__init__.py",
+      "app/services/memory/types.py",
+      "app/services/memory/user_profile_store.py",
+      "app/services/memory/episodic_store.py",
+      "app/services/memory/manager.py",
+      "app/services/memory/v4/store.py",
+      "app/services/memory/v4/renderer.py",
+      "app/services/memory/v4/__init__.py",
+      "app/services/memory/v4/types.py",
+      "app/services/memory/v4/state_change.py",
+      "app/services/memory/v4/updater.py",
+      "app/services/memory/v4/reader.py",
+      "app/services/memory/v4/resolver.py",
+      "app/services/memory/v4/manager.py",
+      "app/services/memory/v3/profile_store.py",
+      "app/services/memory/v3/renderer.py",
+      "app/services/memory/v3/__init__.py",
+      "app/services/memory/v3/types.py",
+      "app/services/memory/v3/read_planner.py",
+      "app/services/memory/v3/reader.py",
+      "app/services/memory/v3/episodic_store.py",
+      "app/services/memory/v3/evidence_packet.py",
+      "app/services/memory/v3/llm_judge.py",
+      "app/services/memory/v3/ranker.py",
+      "app/services/memory/v3/session_store.py",
+      "app/services/memory/v3/write_gate.py",
+      "app/services/memory/v3/manager.py",
+      "app/services/memory/v3/adapters.py",
+      "app/services/rag_skill/rerank.py",
+      "app/services/rag_skill/query_construction.py",
+      "app/services/rag_skill/__init__.py",
+      "app/services/multimodal/catalog.py",
+      "app/services/multimodal/understanding.py",
+      "app/services/multimodal/__init__.py",
+      "app/services/multimodal/types.py",
+      "app/services/multimodal/embeddings.py",
+      "app/services/multimodal/facts_store.py",
+      "app/services/mcp_gateway/client.py",
+      "app/services/mcp_gateway/__init__.py",
+      "app/services/skills/case_intake_skill.py",
+      "app/services/skills/case_intake_react.py",
+      "app/services/skills/case_intake_types.py",
+      "app/services/skills/local_review_table.py",
+      "app/services/skills/__init__.py",
+      "app/services/skills/gateway_case_intake.py",
+      "app/services/skills/case_intake_redis_store.py",
+      "mcp-gateway/src/main/java/com/example/mcpgateway/ToolCallRequest.java",
+      "mcp-gateway/src/main/java/com/example/mcpgateway/SandboxRequest.java",
+      "mcp-gateway/src/main/java/com/example/mcpgateway/mcp/McpJsonRpcRequest.java"
+    ],
+    "run_command_candidates": [],
+    "package": {
+      "name": "",
+      "path": "",
+      "version": "V1.0",
+      "scripts": {},
+      "dependency_names": []
+    }
+  },
+  "external_research_notes": ""
+}

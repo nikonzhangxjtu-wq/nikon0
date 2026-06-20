@@ -1,0 +1,18 @@
+{
+  "missing_images": [],
+  "orphan_images": [
+    "Camera_20",
+    "Camera_66",
+    "Camera_67",
+    "Dish_washer_04",
+    "Dish_washer_05",
+    "Dish_washer_06",
+    "Manual06_24",
+    "Manual36_50",
+    "drill0_07",
+    "drill0_13",
+    "generator_02"
+  ],
+  "duplicate_ids": [],
+  "case_conflicts": []
+}

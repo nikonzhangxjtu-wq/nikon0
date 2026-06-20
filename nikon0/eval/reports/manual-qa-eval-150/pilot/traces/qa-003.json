@@ -1,0 +1,12 @@
+{
+  "case_id": "qa-003",
+  "category": "product_support",
+  "message": "空气炸锅的保温模式怎么用？能保温多久？",
+  "golden_answer": "按菜单按钮直到保温图标闪烁，按电源按钮启动保温模式。保温定时器默认设置为30分钟，可通过时间下调按钮更改保温时间（1-30分钟）。保温模式下温度不可更改。",
+  "answer": "",
+  "status": "error",
+  "selected_skill": "",
+  "selection_source": "",
+  "elapsed_sec": 0.034,
+  "error": "AttributeError: 'AgentResponse' object has no attribute 'trace'"
+}

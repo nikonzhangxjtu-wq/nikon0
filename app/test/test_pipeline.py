@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock, patch
 
-from app.services.online_review_skill import OnlineReviewSkill, ReviewHit
-from app.services.order_status_skill import OrderStatusHit, OrderStatusSkill
 from app.services.pipeline import ChatPipeline
 from app.services.retriever import RetrievalTrace, RetrievedChunk
 from app.services.router import RouteDecision
@@ -65,7 +63,7 @@ def test_run_rag_branch_uses_retrieval_and_generation():
     router.decide.assert_called_once_with("怎么安装")
     vision.summarize_images.assert_called_once_with("怎么安装", [])
     retriever.retrieve.assert_called_once_with(
-        "怎么安装", top_k=6, manual_name=None
+        "怎么安装", top_k=6, manual_name=None, image_inputs=[]
     )
     mock_filter.assert_called_once_with(raw_chunks)
     mock_context.assert_called_once_with(filtered_chunks)
@@ -74,7 +72,8 @@ def test_run_rag_branch_uses_retrieval_and_generation():
     prompt_ctx = mock_compose.call_args.args[0]
     assert prompt_ctx.need_rag is True
     assert prompt_ctx.domain_hint == "manual"
-    assert prompt_ctx.context_block == "上下文块"
+    assert "上下文块" in prompt_ctx.context_block
+    assert "[关键事实]" in prompt_ctx.context_block
     assert prompt_ctx.question == "怎么安装"
     assert prompt_ctx.evidence_status == "ok"
     assert prompt_ctx.route_low_confidence is False
@@ -129,7 +128,7 @@ def test_run_no_rag_branch_skips_retrieval():
     prompt_ctx = mock_compose.call_args.args[0]
     assert prompt_ctx.need_rag is False
     assert prompt_ctx.domain_hint == "customer_service"
-    assert prompt_ctx.context_block == ""
+    assert "退款" in prompt_ctx.context_block
     assert prompt_ctx.question == "我要退款"
     assert prompt_ctx.evidence_status == "ok"
     assert result.debug.post_retrieval_gate == ""
@@ -144,24 +143,58 @@ def test_run_no_rag_branch_skips_retrieval():
     assert result.debug.retrieval is None
 
 
-def test_run_web_review_skill_branch():
-    class FakeReviewProvider:
-        def search_reviews(self, query: str, *, top_k: int = 8) -> list[ReviewHit]:
-            _ = (query, top_k)
-            return [
-                ReviewHit(
-                    title="电钻用户反馈汇总",
-                    url="https://example.com/review1",
-                    snippet="动力足，续航不错，但噪音偏大。",
-                    source="example",
-                )
-            ]
+def test_pipeline_reads_and_writes_memory_context():
+    router = MagicMock()
+    router.decide.return_value = RouteDecision(
+        needs_rag=False,
+        domain_hint="customer_service",
+        reason="客服问题",
+        confidence=0.9,
+        strategy="test",
+    )
+    retriever = MagicMock()
+    generator = MagicMock()
+    generator.generate.return_value = "请继续提供订单号"
+    vision = MagicMock()
+    vision.summarize_images.return_value = ""
+    memory_manager = MagicMock()
+    memory_bundle = MagicMock()
+    memory_bundle.render.return_value = "[记忆]\n产品/型号: AC900"
+    memory_manager.read.return_value = memory_bundle
 
+    pipeline = ChatPipeline(
+        router=router,
+        retriever=retriever,
+        generator=generator,
+        vision=vision,
+        memory_manager=memory_manager,
+    )
+
+    with (
+        patch("app.services.pipeline.settings.memory_enabled", True),
+        patch("app.services.pipeline.settings.router_llm_enabled", False),
+        patch("app.services.pipeline.compose_generation_prompt", return_value="NO_RAG_PROMPT") as mock_compose,
+    ):
+        pipeline.run("我要退款", images=[], session_id="sid_mem", user_id="user-1")
+
+    memory_manager.read.assert_called_once_with(
+        session_id="sid_mem",
+        user_id="user-1",
+        query="我要退款",
+    )
+    prompt_ctx = mock_compose.call_args.args[0]
+    assert prompt_ctx.memory_context == "[记忆]\n产品/型号: AC900"
+    memory_manager.write_turn.assert_called_once()
+    assert memory_manager.write_turn.call_args.kwargs["session_id"] == "sid_mem"
+    assert memory_manager.write_turn.call_args.kwargs["user_id"] == "user-1"
+
+
+def test_legacy_web_review_domain_falls_back_to_no_rag_branch():
     router = MagicMock()
     router.decide.return_value = RouteDecision(
         needs_rag=False,
         domain_hint="web_review",
-        reason="命中口碑查询",
+        reason="旧口碑分支标记",
         confidence=0.91,
         strategy="heuristic_web_review",
     )
@@ -171,63 +204,39 @@ def test_run_web_review_skill_branch():
     vision = MagicMock()
     vision.summarize_images.return_value = ""
 
-    skill = OnlineReviewSkill(provider=FakeReviewProvider())
-    with patch.object(
-        skill,
-        "_call_llm",
-        return_value='{"summary":"整体评价偏正向","pros":["动力足"],"cons":["噪音大"],"controversies":[],"advice":"家庭偶尔使用可考虑","confidence":"medium"}',
-    ):
-        pipeline = ChatPipeline(
-            router=router,
-            retriever=retriever,
-            generator=generator,
-            vision=vision,
-            online_review_skill=skill,
-        )
+    pipeline = ChatPipeline(
+        router=router,
+        retriever=retriever,
+        generator=generator,
+        vision=vision,
+    )
 
-        with (
-            patch("app.services.pipeline.settings.router_llm_enabled", False),
-            patch("app.services.pipeline.settings.online_review_skill_enabled", True),
-            patch("app.services.pipeline.compose_generation_prompt", return_value="WEB_REVIEW_PROMPT") as mock_compose,
-        ):
-            result = pipeline.run("这款电钻网上评价怎么样", images=[])
+    with (
+        patch("app.services.pipeline.settings.router_llm_enabled", False),
+        patch("app.services.pipeline.compose_generation_prompt", return_value="NO_RAG_PROMPT") as mock_compose,
+    ):
+        result = pipeline.run("这款电钻网上评价怎么样", images=[])
 
     retriever.retrieve.assert_not_called()
     mock_compose.assert_called_once()
     prompt_ctx = mock_compose.call_args.args[0]
     assert prompt_ctx.domain_hint == "web_review"
     assert prompt_ctx.need_rag is False
-    assert "[口碑评价摘要]" in prompt_ctx.context_block
-    assert "总体倾向" in prompt_ctx.context_block
+    assert "[口碑评价摘要]" not in prompt_ctx.context_block
 
-    generator.generate.assert_called_once_with("WEB_REVIEW_PROMPT")
+    generator.generate.assert_called_once_with("NO_RAG_PROMPT")
     assert result.answer == "这是口碑总结答案"
     assert result.debug.route_domain_hint == "web_review"
-    assert result.debug.post_retrieval_gate == "ok"
-    assert result.debug.context_chunk_count == 1
+    assert result.debug.post_retrieval_gate == ""
+    assert result.debug.context_chunk_count == 0
 
 
-def test_run_order_status_skill_branch():
-    class FakeOrderProvider:
-        def search_order_status(self, query: str, *, top_k: int = 3) -> list[OrderStatusHit]:
-            _ = (query, top_k)
-            return [
-                OrderStatusHit(
-                    order_id="OD20260507001",
-                    status="已发货",
-                    logistics_status="运输中（杭州分拨中心）",
-                    eta="2026-05-09",
-                    updated_at="2026-05-07 19:20",
-                    can_refund="可联系客服拦截退款",
-                    note="建议先等待下一节点更新",
-                )
-            ]
-
+def test_legacy_order_status_domain_falls_back_to_no_rag_branch():
     router = MagicMock()
     router.decide.return_value = RouteDecision(
         needs_rag=False,
         domain_hint="order_status",
-        reason="命中订单进度查询",
+        reason="旧订单分支标记",
         confidence=0.93,
         strategy="heuristic_order_status",
     )
@@ -236,19 +245,16 @@ def test_run_order_status_skill_branch():
     generator.generate.return_value = "订单状态答复"
     vision = MagicMock()
     vision.summarize_images.return_value = ""
-    skill = OrderStatusSkill(provider=FakeOrderProvider())
 
     pipeline = ChatPipeline(
         router=router,
         retriever=retriever,
         generator=generator,
         vision=vision,
-        order_status_skill=skill,
     )
     with (
         patch("app.services.pipeline.settings.router_llm_enabled", False),
-        patch("app.services.pipeline.settings.order_status_skill_enabled", True),
-        patch("app.services.pipeline.compose_generation_prompt", return_value="ORDER_STATUS_PROMPT") as mock_compose,
+        patch("app.services.pipeline.compose_generation_prompt", return_value="NO_RAG_PROMPT") as mock_compose,
     ):
         result = pipeline.run("请帮我查订单 OD20260507001 到哪了", images=[])
 
@@ -257,14 +263,65 @@ def test_run_order_status_skill_branch():
     prompt_ctx = mock_compose.call_args.args[0]
     assert prompt_ctx.domain_hint == "order_status"
     assert prompt_ctx.need_rag is False
-    assert "[订单进度信息]" in prompt_ctx.context_block
-    assert "OD20260507001" in prompt_ctx.context_block
+    assert "[订单进度信息]" not in prompt_ctx.context_block
 
-    generator.generate.assert_called_once_with("ORDER_STATUS_PROMPT")
+    generator.generate.assert_called_once_with("NO_RAG_PROMPT")
     assert result.answer == "订单状态答复"
     assert result.debug.route_domain_hint == "order_status"
+    assert result.debug.post_retrieval_gate == ""
+    assert result.debug.context_chunk_count == 0
+
+
+def test_legacy_order_status_domain_with_needs_rag_uses_manual_rag_branch():
+    router = MagicMock()
+    router.decide.return_value = RouteDecision(
+        needs_rag=True,
+        domain_hint="order_status",
+        reason="旧订单分支标记但需要检索",
+        confidence=0.5,
+        strategy="legacy_tool_domain",
+    )
+
+    retriever = MagicMock()
+    raw_chunks = [
+        RetrievedChunk(chunk_id="c1", text="订单相关手册说明", score=0.9, manual_name="m"),
+    ]
+    retriever.retrieve.return_value = raw_chunks
+    retriever.build_trace.return_value = RetrievalTrace(
+        query="订单状态是否需要查手册",
+        top_k=4,
+        raw_count=1,
+        filtered_count=1,
+    )
+    generator = MagicMock()
+    generator.generate.return_value = "检索后答案"
+    vision = MagicMock()
+    vision.summarize_images.return_value = ""
+
+    pipeline = ChatPipeline(
+        router=router,
+        retriever=retriever,
+        generator=generator,
+        vision=vision,
+    )
+    with (
+        patch("app.services.pipeline.settings.react_enabled", False),
+        patch("app.services.pipeline.settings.router_llm_enabled", False),
+        patch("app.services.pipeline.query_construction", return_value=None),
+        patch("app.services.pipeline.retriever_context_filter", return_value=raw_chunks),
+        patch(
+            "app.services.pipeline.build_multimodal_context_block",
+            return_value=MultimodalContextBlock(context_block="上下文块", image_ref_map={}),
+        ),
+        patch("app.services.pipeline.compose_generation_prompt", return_value="RAG_PROMPT") as mock_compose,
+    ):
+        result = pipeline.run("订单状态是否需要查手册", images=[])
+
+    retriever.retrieve.assert_called_once()
+    prompt_ctx = mock_compose.call_args.args[0]
+    assert prompt_ctx.domain_hint == "order_status"
+    assert prompt_ctx.need_rag is True
     assert result.debug.post_retrieval_gate == "ok"
-    assert result.debug.context_chunk_count == 1
 
 
 def test_run_case_intake_skill_branch():
@@ -303,7 +360,8 @@ def test_run_case_intake_skill_branch():
 if __name__ == "__main__":
     test_run_rag_branch_uses_retrieval_and_generation()
     test_run_no_rag_branch_skips_retrieval()
-    test_run_web_review_skill_branch()
-    test_run_order_status_skill_branch()
+    test_legacy_web_review_domain_falls_back_to_no_rag_branch()
+    test_legacy_order_status_domain_falls_back_to_no_rag_branch()
+    test_legacy_order_status_domain_with_needs_rag_uses_manual_rag_branch()
     test_run_case_intake_skill_branch()
     print("[OK] test_pipeline passed")

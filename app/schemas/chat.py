@@ -14,6 +14,7 @@ class ChatRequest(BaseModel):
     question: str = Field(..., description="用户问题，非空字符串。")
     images: list[str] = Field(default_factory=list, description="可选 Base64 图片列表，0～3 张。")
     session_id: Optional[str] = Field(default=None, description="会话 ID，多轮对话用。")
+    user_id: Optional[str] = Field(default=None, description="可选用户 ID，用于跨会话长期记忆。")
     stream: bool = Field(default=False, description="是否流式返回。")
 
     @field_validator("question")

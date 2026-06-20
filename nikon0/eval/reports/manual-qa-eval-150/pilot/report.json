@@ -1,0 +1,17 @@
+{
+  "dataset": "nikon0/eval/datasets/agent_qa_eval_150_manual.jsonl",
+  "runtime_profile": "deterministic",
+  "total_items": 15,
+  "total_elapsed_sec": 0.5,
+  "avg_sec_per_item": 0.03,
+  "ok_count": 15,
+  "error_count": 0,
+  "by_category": {
+    "product_support": {
+      "total": 15,
+      "ok": 15,
+      "error": 0,
+      "empty": 0
+    }
+  }
+}

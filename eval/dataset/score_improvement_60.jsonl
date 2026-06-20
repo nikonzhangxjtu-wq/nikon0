@@ -1,0 +1,66 @@
+{"id":"cs_001","question":"请问你们家的商品支持7天无理由退换货吗？\n需要自己承担运费吗？","category":"customer_service","should_use_rag":false,"answer_must_include":["7天无理由","运费"]}
+{"id":"cs_002","question":"我想咨询一下，你们的售后维修服务范围是什么？\n如果是人为损坏的，能维修吗？维修费用怎么算？","category":"customer_service","should_use_rag":false,"answer_must_include":["维修","人为损坏","费用"]}
+{"id":"cs_003","question":"请问你们的商品能开发票吗？发票类型是什么？\n多久能收到呢？","category":"customer_service","should_use_rag":false,"answer_must_include":["发票","类型","收到"]}
+{"id":"cs_004","question":"我收到商品后，发现包装破损了，怎么办？\n影响商品退换货吗？","category":"customer_service","should_use_rag":false,"answer_must_include":["包装破损","照片","退换货"]}
+{"id":"cs_005","question":"我想了解一下你们的退款政策，退款多久能到账？\n信用卡会原路返回吗？","category":"customer_service","should_use_rag":false,"answer_must_include":["退款","到账","原路"]}
+{"id":"cs_006","question":"我收到的商品和图片不一样，颜色偏差很大，我要投诉！","category":"customer_service","should_use_rag":false,"answer_must_include":["投诉","照片","客服"]}
+{"id":"cs_007","question":"你们的商品存在虚假宣传，宣传的功能和实际不一样，我要投诉！","category":"customer_service","should_use_rag":false,"answer_must_include":["虚假宣传","证据","投诉"]}
+{"id":"cs_008","question":"我收到的商品少了一件，联系客服说会补发，但是过了一周还没补发！","category":"customer_service","should_use_rag":false,"answer_must_include":["少发","补发","订单"]}
+{"id":"cs_009","question":"你们的售后维修服务太差了，我送修的商品，过了半个月还没修好！","category":"customer_service","should_use_rag":false,"answer_must_include":["维修","进度","售后"]}
+{"id":"cs_010","question":"我收到商品后，发现商品有轻微划痕，不影响使用，能申请换货吗？","category":"customer_service","should_use_rag":false,"answer_must_include":["划痕","换货","凭证"]}
+{"id":"cs_011","question":"我想换货，但是原来的商品包装盒丢了，还能换吗？\n需要我额外支付包装费吗？","category":"customer_service","should_use_rag":false,"answer_must_include":["包装盒","换货","费用"]}
+{"id":"cs_012","question":"快递丢失了，怎么办？\n这种情况你们会怎么赔偿？多久能解决？","category":"customer_service","should_use_rag":false,"answer_must_include":["快递丢失","赔偿","时效"]}
+{"id":"complex_001","question":"我上个月购买的家电，使用不到一个月就出现故障，联系售后寄回维修，现在已经维修15天了，还没收到，而且我发现商品是翻新机，并非全新，要求退货退款并赔偿，请问该怎么处理？","category":"customer_service_complex","should_use_rag":false,"answer_must_include":["故障","维修","翻新机","退货退款","赔偿"]}
+{"id":"complex_002","question":"我在你们平台批量购买了100件商品用于企业采购，收到货后发现有20件存在质量问题，15件少发，而且发票开错了抬头，需要重新开具，同时想申请质量问题商品的换货和少发商品的补寄，请问流程是什么？","category":"customer_service_complex","should_use_rag":false,"answer_must_include":["质量问题","少发","发票","换货","补寄"]}
+{"id":"complex_003","question":"我购买的食品类商品，收到后发现生产日期临近过期，而且包装破损，部分商品受潮无法食用，我要求退货退款并赔偿，同时担心食用了受潮商品影响健康，请问能提供相关保障吗？","category":"customer_service_complex","should_use_rag":false,"answer_must_include":["临期","包装破损","受潮","退货退款","健康"]}
+{"id":"complex_004","question":"我购买的商品包装破损，商品出现损坏，而且快递员拒绝承认是运输问题，同时我已经签收商品，请问还能申请售后吗？","category":"customer_service_complex","should_use_rag":false,"answer_must_include":["包装破损","商品损坏","签收","售后"]}
+{"id":"complex_005","question":"我购买的大家电需要上门安装，但是安装人员上门后说需要额外收取配件费，而且安装服务原本应该是免费的，同时安装人员操作不规范，导致家电出现轻微损坏，请问该怎么处理？","category":"customer_service_complex","should_use_rag":false,"answer_must_include":["上门安装","配件费","损坏","投诉"]}
+{"id":"complex_006","question":"我购买的商品在质保期内出现质量问题，寄回维修后，维修人员说需要更换配件，而且要收取配件费，但是质保期内应该免费维修，同时维修时间已经超过承诺的7天，请问该怎么处理？","category":"customer_service_complex","should_use_rag":false,"answer_must_include":["质保期","配件费","维修时间","免费维修"]}
+{"id":"complex_007","question":"我购买的大型设备需要上门检修，但是检修人员上门后说设备故障无法现场修复，需要拉回仓库维修，而且维修时间不确定，同时我担心设备拉回过程中出现损坏，请问该怎么处理？","category":"customer_service_complex","should_use_rag":false,"answer_must_include":["上门检修","拉回维修","时间","运输损坏"]}
+{"id":"complex_008","question":"我想试用商品，但是试用期间商品出现故障，而且不是人为操作导致的，同时我想延长试用期限，请问可以吗？另外故障商品能更换吗？","category":"customer_service_complex","should_use_rag":false,"answer_must_include":["试用","故障","延长","更换"]}
+{"id":"complex_009","question":"我购买的商品，收到后发现是临期商品（还有15天过期），但下单时页面未标注临期，而且商品包装上也没有临期提示，我要求退货退款并赔偿，请问可以吗？","category":"customer_service_complex","should_use_rag":false,"answer_must_include":["临期","未标注","退货退款","赔偿"]}
+{"id":"complex_010","question":"我购买的商品，使用时发现商品的功能和详情页描述的不一致，详情页说支持无线充电，实际不支持，而且商品的续航时间也比描述的短很多，要求退货退款并赔偿，请问可以吗？","category":"customer_service_complex","should_use_rag":false,"answer_must_include":["功能不一致","无线充电","续航","退货退款"]}
+{"id":"manual_cn_001","question":"使用吹风机时，人员需要佩戴哪些防护装备？","category":"manual","should_use_rag":true,"gold_manual_name":"吹风机手册","answer_must_include":["防护"]}
+{"id":"manual_cn_002","question":"操作吹风机时，人员需要注意哪些安全要点？","category":"manual","should_use_rag":true,"gold_manual_name":"吹风机手册","answer_must_include":["安全"]}
+{"id":"manual_cn_003","question":"使用吹风机时，如何调节化油器？","category":"manual","should_use_rag":true,"gold_manual_name":"吹风机手册","answer_must_include":["化油器"]}
+{"id":"manual_cn_004","question":"吹风机冷机时，该如何启动？","category":"manual","should_use_rag":true,"gold_manual_name":"吹风机手册","answer_must_include":["启动"]}
+{"id":"manual_cn_005","question":"该如何关闭吹风机？","category":"manual","should_use_rag":true,"gold_manual_name":"吹风机手册","answer_must_include":["关闭"]}
+{"id":"manual_cn_006","question":"空调的重要组成部件有哪些？","category":"manual","should_use_rag":true,"gold_manual_name":"空调手册","answer_must_include":["部件"]}
+{"id":"manual_cn_007","question":"如何给空调遥控器安装电池？","category":"manual","should_use_rag":true,"gold_manual_name":"空调手册","answer_must_include":["电池"]}
+{"id":"manual_cn_008","question":"如何使用空调的自清洁运行功能？","category":"manual","should_use_rag":true,"gold_manual_name":"空调手册","answer_must_include":["自清洁"]}
+{"id":"manual_cn_009","question":"如何清洁空调的空气滤网？","category":"manual","should_use_rag":true,"gold_manual_name":"空调手册","answer_must_include":["滤网"]}
+{"id":"manual_cn_010","question":"如何快速组装蒸汽清洁机？","category":"manual","should_use_rag":true,"gold_manual_name":"蒸汽清洁机手册","answer_must_include":["组装"]}
+{"id":"manual_cn_011","question":"如何使用蒸汽清洁机清洁硬质地面？","category":"manual","should_use_rag":true,"gold_manual_name":"蒸汽清洁机手册","answer_must_include":["硬质地面"]}
+{"id":"manual_cn_012","question":"组装人体工学椅涉及哪些部件？","category":"manual","should_use_rag":true,"gold_manual_name":"人体工学椅手册","answer_must_include":["部件"]}
+{"id":"manual_cn_013","question":"椅子的扶手使用一段时间后为什么会松动？","category":"manual","should_use_rag":true,"gold_manual_name":"人体工学椅手册","answer_must_include":["扶手"]}
+{"id":"manual_cn_014","question":"洗碗机的部件有哪些？","category":"manual","should_use_rag":true,"gold_manual_name":"洗碗机手册","answer_must_include":["部件"]}
+{"id":"manual_cn_015","question":"如何为洗碗机添加专用盐？","category":"manual","should_use_rag":true,"gold_manual_name":"洗碗机手册","answer_must_include":["专用盐"]}
+{"id":"manual_cn_016","question":"如何清洁洗碗机的进水管滤网？","category":"manual","should_use_rag":true,"gold_manual_name":"洗碗机手册","answer_must_include":["进水管滤网"]}
+{"id":"manual_cn_017","question":"如何拆除空气净化器滤网的塑料包装？","category":"manual","should_use_rag":true,"gold_manual_name":"空气净化器手册","answer_must_include":["塑料包装"]}
+{"id":"manual_cn_018","question":"空气净化器通常有哪些模式？如何设置？这些模式有什么特点？","category":"manual","should_use_rag":true,"gold_manual_name":"空气净化器手册","answer_must_include":["模式","设置","特点"]}
+{"id":"manual_cn_019","question":"如何更换空气净化器的滤网？","category":"manual","should_use_rag":true,"gold_manual_name":"空气净化器手册","answer_must_include":["更换","滤网"]}
+{"id":"manual_cn_020","question":"启动健身单车前，我需要做什么？","category":"manual","should_use_rag":true,"gold_manual_name":"健身单车手册","answer_must_include":["启动"]}
+{"id":"manual_cn_021","question":"如果要给电钻充电，需要遵循哪些步骤？","category":"manual","should_use_rag":true,"gold_manual_name":"电钻手册","answer_must_include":["充电"]}
+{"id":"manual_cn_022","question":"我的DCB101型号电钻指示灯闪烁时，这些闪烁标识代表什么含义？","category":"manual","should_use_rag":true,"gold_manual_name":"电钻手册","answer_must_include":["DCB101","指示灯"]}
+{"id":"manual_cn_023","question":"使用冰箱冰柜时需要注意什么？只需告诉我手册中的前五条。","category":"manual","should_use_rag":true,"gold_manual_name":"冰箱手册","answer_must_include":["前五条"]}
+{"id":"manual_cn_024","question":"使用发电机时，燃油的使用前检查十分重要，该如何操作？","category":"manual","should_use_rag":true,"gold_manual_name":"发电机手册","answer_must_include":["燃油","检查"]}
+{"id":"manual_cn_025","question":"发电机的电池电量不足了，该如何正确充电？","category":"manual","should_use_rag":true,"gold_manual_name":"发电机手册","answer_must_include":["电池","充电"]}
+{"id":"manual_cn_026","question":"水泵无法抽水的潜在原因有哪些，该如何有效诊断并解决这些问题？","category":"manual","should_use_rag":true,"gold_manual_name":"水泵手册","answer_must_include":["无法抽水","原因","解决"]}
+{"id":"manual_cn_027","question":"如何调整温控器的程序日程，以实现高效的能源利用和温度控制？","category":"manual","should_use_rag":true,"gold_manual_name":"可编程温控器手册","answer_must_include":["程序日程"]}
+{"id":"manual_cn_028","question":"如何安全更换温控器的电池，确保更换后设备功能正常？","category":"manual","should_use_rag":true,"gold_manual_name":"可编程温控器手册","answer_must_include":["电池"]}
+{"id":"manual_cn_029","question":"使用和操作VR头显时应采取哪些安全预防措施，以确保用户安全和设备使用寿命？","category":"manual","should_use_rag":true,"gold_manual_name":"VR头显手册","answer_must_include":["安全"]}
+{"id":"manual_cn_030","question":"如何设置功能键盘？","category":"manual","should_use_rag":true,"gold_manual_name":"功能键盘手册","answer_must_include":["设置"]}
+{"id":"manual_cn_031","question":"如何安装儿童电动摩托车的前轮？","category":"manual","should_use_rag":true,"gold_manual_name":"儿童电动摩托车手册","answer_must_include":["前轮"]}
+{"id":"manual_cn_032","question":"如何为蓝牙激光鼠标安装电池？","category":"manual","should_use_rag":true,"gold_manual_name":"蓝牙激光鼠标手册","answer_must_include":["电池"]}
+{"id":"manual_cn_033","question":"如何拆卸烤箱门？","category":"manual","should_use_rag":true,"gold_manual_name":"烤箱手册","answer_must_include":["烤箱门"]}
+{"id":"manual_cn_034","question":"如何清洁烤箱外部？","category":"manual","should_use_rag":true,"gold_manual_name":"烤箱手册","answer_must_include":["清洁"]}
+{"id":"manual_en_001","question":"How do I set up the DSLR camera for first use?","category":"manual_en","should_use_rag":true,"gold_manual_name":"DSLR_Camera","answer_must_include":["camera"]}
+{"id":"manual_en_002","question":"How can I troubleshoot a television that will not power on?","category":"manual_en","should_use_rag":true,"gold_manual_name":"Television","answer_must_include":["power"]}
+{"id":"manual_en_003","question":"How should I clean and maintain the lawn mower safely?","category":"manual_en","should_use_rag":true,"gold_manual_name":"Lawn_Mower","answer_must_include":["clean"]}
+{"id":"manual_en_004","question":"What safety precautions should I follow before using the grill?","category":"manual_en","should_use_rag":true,"gold_manual_name":"Grill","answer_must_include":["safety"]}
+{"id":"manual_en_005","question":"How do I pair or connect the security camera to the app?","category":"manual_en","should_use_rag":true,"gold_manual_name":"Security_Camera","answer_must_include":["camera"]}
+{"id":"manual_en_006","question":"How do I descale or clean the coffee machine?","category":"manual_en","should_use_rag":true,"gold_manual_name":"Coffee_Machine","answer_must_include":["clean"]}
+{"id":"manual_en_007","question":"How do I replace parts or accessories on the vacuum cleaner?","category":"manual_en","should_use_rag":true,"gold_manual_name":"Vacuum_Cleaner","answer_must_include":["replace"]}
+{"id":"manual_en_008","question":"How do I charge and maintain the electric toothbrush?","category":"manual_en","should_use_rag":true,"gold_manual_name":"Electric_Toothbrush","answer_must_include":["charge"]}
+{"id":"manual_en_009","question":"What should I do if the microwave OTR is not heating properly?","category":"manual_en","should_use_rag":true,"gold_manual_name":"Microwave_OTR","answer_must_include":["heating"]}
+{"id":"manual_en_010","question":"How do I safely use and maintain the snowmobile?","category":"manual_en","should_use_rag":true,"gold_manual_name":"Snowmobile","answer_must_include":["safely"]}

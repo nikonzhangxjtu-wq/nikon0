@@ -49,7 +49,8 @@ class NoRagCustomerServicePromptBuilder:
             rules = (
                 "5. 每个子问题至少给出 1-2 句实质性回应。知道就说知道，不确定就坦承不确定并建议联系哪里确认，不要跳过任何子问题。\n"
                 "6. 给通用、合规的建议方向，不承诺个案结果。例如\"建议联系购买平台客服，提供订单号和商品照片，他们会按平台规则处理\"。\n"
-                "7. 中文答案通常 80～300 字，覆盖所有子问题即可，不凑字数。\n"
+                "7. 遇到复杂投诉或多个诉求时，按\"问题识别 → 可处理方案 → 所需材料 → 时效/责任\"组织，逐项覆盖退货、退款、换货、补寄、发票、赔偿等诉求。\n"
+                "8. 中文答案通常 80～350 字，覆盖所有子问题即可，不凑字数。\n"
             )
             q_label = "用户问题："
             footer = "（提醒：逐一覆盖所有子问题，不要漏答，不要写模板开头结尾）"
@@ -58,7 +59,8 @@ class NoRagCustomerServicePromptBuilder:
             rules = (
                 "5. Give at least 1-2 substantive sentences per sub-question. Say what you know, openly admit uncertainty where needed, and suggest where to confirm.\n"
                 "6. Provide general, compliant guidance. Do not promise case-specific outcomes. Example: \"Contact the platform's customer service with your order number and product photos; they will handle it per platform policy.\"\n"
-                "7. English answers are typically 50–200 words. Cover all sub-questions without padding.\n"
+                "7. For complex complaints or multiple requests, organize the answer as: issue identification → handling options → required materials → timing/responsibility. Cover refund, return, exchange, reshipment, invoice, and compensation requests as applicable.\n"
+                "8. English answers are typically 50–220 words. Cover all sub-questions without padding.\n"
             )
             q_label = "Question:"
             footer = "(Reminder: cover every sub-question fully, no template intros or closings)"
@@ -66,6 +68,13 @@ class NoRagCustomerServicePromptBuilder:
         conv_history = ""
         if ctx.conversation_history:
             conv_history = f"{ctx.conversation_history}\n"
+
+        memory = ""
+        if ctx.memory_context:
+            memory = (
+                "可用记忆 / Available Memory：\n"
+                f"{ctx.memory_context}\n"
+            )
 
         return f"""{lang}
 
@@ -75,7 +84,7 @@ class NoRagCustomerServicePromptBuilder:
 
 【客服场景补充规则 / CS Supplemental Rules】
 {rules}
-{retrieval_note}{low_conf}{visual}{conv_history}
+{retrieval_note}{low_conf}{visual}{memory}{conv_history}
 {q_label}
 {ctx.question}
 

@@ -1,7 +1,6 @@
 """本地评价表：内置若干商品评论，按 query 关键词检索，不访问外网。
 
 与 ``OnlineReviewSkill`` 配合：实现 ``ReviewSearchProvider``，返回 ``ReviewHit``。
-可选 ``LOCAL_REVIEW_TABLE_PATH`` 指向 JSON 数组，与内置数据合并。
 """
 
 from __future__ import annotations
@@ -12,7 +11,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Sequence
 
-from app.core.config import settings
 from app.services.online_review_skill import ReviewHit, ReviewSearchProvider
 
 
@@ -233,8 +231,9 @@ class LocalReviewTableProvider(ReviewSearchProvider):
         if table is not None:
             self._table = table
             return
-        path = (settings.local_review_table_path or "").strip()
-        self._table = LocalReviewTable.from_json_file(path) if path else LocalReviewTable.default()
+        # 旧口碑分支已从主 Pipeline 断开；保留 provider 仅供独立测试/实验使用，
+        # 因此不再读取已废弃的 LOCAL_REVIEW_TABLE_PATH 配置。
+        self._table = LocalReviewTable.default()
 
     def search_reviews(self, query: str, *, top_k: int = 8) -> list[ReviewHit]:
         return self._table.search(query, top_k=top_k)

@@ -1,0 +1,1849 @@
+{
+  "project_root": "/Users/nikonzhang/compeletion",
+  "selection_required": true,
+  "model_selection_required": true,
+  "confirmation_required": true,
+  "user_confirmed": true,
+  "target_pages": 60,
+  "lines_per_page": 50,
+  "target_lines": 3000,
+  "estimated_selected_lines": 4359,
+  "estimated_selected_pages": 88,
+  "estimated_all_candidate_lines": 80242,
+  "estimated_all_candidate_pages": 1605,
+  "supplement_rule": "模型优先选择能体现软件核心功能和真实运行逻辑的源码；不足60页时再从其他相关源码中补充；候选源码仍不足时才生成全部代码材料。",
+  "confirmation_stage": "code-selection",
+  "next_action": "请由模型填写 草稿/代码文件选择.json 的抽取选择和选择理由，再让用户确认；确认后运行 confirm_stage.py --stage code-selection。",
+  "instructions": "The script only inventories source files. The model must choose selected/model_reason before user confirmation. Selected files are copied in full.",
+  "files": [
+    {
+      "path": "app/services/llm_router.py",
+      "selected": false,
+      "line_count": 172,
+      "priority": 10,
+      "selection_tier": "supplement",
+      "evidence": "路由文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/router.py",
+      "selected": true,
+      "line_count": 488,
+      "priority": 10,
+      "selection_tier": "supplement",
+      "evidence": "路由文件证据",
+      "model_reason": "意图路由模块，通过关键词打分和LLM仲裁判断问题类型，体现智能路由能力"
+    },
+    {
+      "path": "app/services/__init__.py",
+      "selected": false,
+      "line_count": 1,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/answer_postprocess.py",
+      "selected": false,
+      "line_count": 79,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/context/__init__.py",
+      "selected": false,
+      "line_count": 13,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/context/assembler.py",
+      "selected": false,
+      "line_count": 172,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/context/budget.py",
+      "selected": false,
+      "line_count": 55,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/context/evidence_extractor.py",
+      "selected": false,
+      "line_count": 397,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/context/fact_extractor.py",
+      "selected": false,
+      "line_count": 114,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/context/types.py",
+      "selected": false,
+      "line_count": 88,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/context/verifier.py",
+      "selected": false,
+      "line_count": 50,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/context_assembler.py",
+      "selected": false,
+      "line_count": 23,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/conversation_store.py",
+      "selected": false,
+      "line_count": 201,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/conversation_store_redis.py",
+      "selected": false,
+      "line_count": 157,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/generator.py",
+      "selected": true,
+      "line_count": 92,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": "答案生成模块，封装LLM调用生成最终回答，体现生成能力"
+    },
+    {
+      "path": "app/services/ingestion.py",
+      "selected": true,
+      "line_count": 314,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": "手册解析入库模块，解析产品说明书文本并切块，体现知识库构建能力"
+    },
+    {
+      "path": "app/services/llm_clients.py",
+      "selected": true,
+      "line_count": 179,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": "LLM客户端抽象层，统一百炼API和Ollama调用，体现多模型接入能力"
+    },
+    {
+      "path": "app/services/mcp_gateway/__init__.py",
+      "selected": false,
+      "line_count": 6,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/mcp_gateway/client.py",
+      "selected": false,
+      "line_count": 128,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/__init__.py",
+      "selected": false,
+      "line_count": 15,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/consolidator.py",
+      "selected": false,
+      "line_count": 174,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/episodic_store.py",
+      "selected": false,
+      "line_count": 152,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/manager.py",
+      "selected": false,
+      "line_count": 183,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/session_memory.py",
+      "selected": false,
+      "line_count": 148,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/types.py",
+      "selected": false,
+      "line_count": 267,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/user_profile_store.py",
+      "selected": false,
+      "line_count": 94,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/__init__.py",
+      "selected": false,
+      "line_count": 36,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/adapters.py",
+      "selected": false,
+      "line_count": 342,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/episodic_store.py",
+      "selected": false,
+      "line_count": 171,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/evidence_packet.py",
+      "selected": false,
+      "line_count": 46,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/llm_judge.py",
+      "selected": false,
+      "line_count": 159,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/manager.py",
+      "selected": false,
+      "line_count": 166,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/profile_store.py",
+      "selected": false,
+      "line_count": 51,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/ranker.py",
+      "selected": false,
+      "line_count": 49,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/read_planner.py",
+      "selected": false,
+      "line_count": 86,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/reader.py",
+      "selected": false,
+      "line_count": 118,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/renderer.py",
+      "selected": false,
+      "line_count": 80,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/session_store.py",
+      "selected": false,
+      "line_count": 154,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/types.py",
+      "selected": false,
+      "line_count": 261,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v3/write_gate.py",
+      "selected": false,
+      "line_count": 124,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v4/__init__.py",
+      "selected": false,
+      "line_count": 5,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v4/manager.py",
+      "selected": false,
+      "line_count": 104,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v4/reader.py",
+      "selected": false,
+      "line_count": 68,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v4/renderer.py",
+      "selected": false,
+      "line_count": 69,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v4/resolver.py",
+      "selected": false,
+      "line_count": 50,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v4/state_change.py",
+      "selected": false,
+      "line_count": 166,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v4/store.py",
+      "selected": false,
+      "line_count": 110,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v4/types.py",
+      "selected": false,
+      "line_count": 105,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/memory/v4/updater.py",
+      "selected": false,
+      "line_count": 231,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/milvus_create.py",
+      "selected": false,
+      "line_count": 284,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/multimodal/__init__.py",
+      "selected": false,
+      "line_count": 2,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/multimodal/catalog.py",
+      "selected": false,
+      "line_count": 108,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/multimodal/embeddings.py",
+      "selected": false,
+      "line_count": 225,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/multimodal/facts_store.py",
+      "selected": false,
+      "line_count": 127,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/multimodal/types.py",
+      "selected": false,
+      "line_count": 122,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/multimodal/understanding.py",
+      "selected": false,
+      "line_count": 211,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/online_review_skill.py",
+      "selected": false,
+      "line_count": 309,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/order_status_skill.py",
+      "selected": false,
+      "line_count": 100,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/pipeline.py",
+      "selected": true,
+      "line_count": 892,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": "核心流水线编排，实现路由→检索→生成主流程，是软件最核心的业务逻辑"
+    },
+    {
+      "path": "app/services/query_rewriter.py",
+      "selected": false,
+      "line_count": 91,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/rag_skill/__init__.py",
+      "selected": false,
+      "line_count": 26,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/rag_skill/query_construction.py",
+      "selected": true,
+      "line_count": 173,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": "检索查询构建，识别目标产品手册名称，体现检索精准度优化"
+    },
+    {
+      "path": "app/services/rag_skill/rerank.py",
+      "selected": true,
+      "line_count": 213,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": "精排模块，Cross-Encoder对召回结果重排序，体现检索质量优化"
+    },
+    {
+      "path": "app/services/react_agent.py",
+      "selected": false,
+      "line_count": 292,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/retriever.py",
+      "selected": true,
+      "line_count": 896,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": "向量检索模块，实现BM25+Dense混合检索与结果过滤，体现RAG核心检索能力"
+    },
+    {
+      "path": "app/services/session_store.py",
+      "selected": false,
+      "line_count": 15,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/skills/__init__.py",
+      "selected": false,
+      "line_count": 15,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/skills/case_intake_react.py",
+      "selected": false,
+      "line_count": 255,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/skills/case_intake_redis_store.py",
+      "selected": false,
+      "line_count": 126,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/skills/case_intake_skill.py",
+      "selected": true,
+      "line_count": 243,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": "工单收集Skill，多轮对话收集报修/退货信息，体现售后受理能力"
+    },
+    {
+      "path": "app/services/skills/case_intake_types.py",
+      "selected": false,
+      "line_count": 23,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/skills/gateway_case_intake.py",
+      "selected": false,
+      "line_count": 119,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/skills/local_review_table.py",
+      "selected": false,
+      "line_count": 239,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/services/vision.py",
+      "selected": true,
+      "line_count": 136,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": "多模态视觉理解模块，提取用户上传图片的OCR和实体信息，体现多模态能力"
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/mcp/McpJsonRpcRequest.java",
+      "selected": false,
+      "line_count": 14,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/SandboxRequest.java",
+      "selected": false,
+      "line_count": 14,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/ToolCallRequest.java",
+      "selected": false,
+      "line_count": 6,
+      "priority": 30,
+      "selection_tier": "supplement",
+      "evidence": "数据交互文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/utils/__init__.py",
+      "selected": false,
+      "line_count": 1,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/utils/manual_lang.py",
+      "selected": false,
+      "line_count": 46,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/utils/prompt_builder.py",
+      "selected": true,
+      "line_count": 209,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": "Prompt构建模块，组装检索上下文生成模型输入，体现Prompt工程能力"
+    },
+    {
+      "path": "app/utils/prompts/__init__.py",
+      "selected": false,
+      "line_count": 13,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/utils/prompts/answer_structure.py",
+      "selected": false,
+      "line_count": 22,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/utils/prompts/builders/__init__.py",
+      "selected": false,
+      "line_count": 1,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/utils/prompts/builders/base.py",
+      "selected": false,
+      "line_count": 11,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/utils/prompts/builders/no_rag_customer_service.py",
+      "selected": false,
+      "line_count": 94,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/utils/prompts/builders/no_rag_generic.py",
+      "selected": false,
+      "line_count": 94,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/utils/prompts/builders/rag_manual.py",
+      "selected": false,
+      "line_count": 100,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/utils/prompts/context.py",
+      "selected": true,
+      "line_count": 28,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": "Prompt上下文模型，定义路由状态和证据状态传给生成侧，体现上下文管理"
+    },
+    {
+      "path": "app/utils/prompts/registry.py",
+      "selected": true,
+      "line_count": 39,
+      "priority": 60,
+      "selection_tier": "supplement",
+      "evidence": "通用能力文件证据",
+      "model_reason": "Prompt模板注册与选择，按领域和证据状态匹配不同模板，体现多场景适配"
+    },
+    {
+      "path": "app/schemas/__init__.py",
+      "selected": false,
+      "line_count": 1,
+      "priority": 70,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/schemas/chat.py",
+      "selected": true,
+      "line_count": 60,
+      "priority": 70,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": "数据模型定义，含ChatRequest/ChatResponse字段结构、校验规则，体现接口规范"
+    },
+    {
+      "path": "app/__init__.py",
+      "selected": false,
+      "line_count": 1,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/core/__init__.py",
+      "selected": false,
+      "line_count": 1,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/core/config.py",
+      "selected": true,
+      "line_count": 325,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": "系统配置中心，涵盖所有功能开关和环境变量，体现软件可配置能力"
+    },
+    {
+      "path": "app/data/local_reviews.sample.json",
+      "selected": false,
+      "line_count": 12,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/data/manual_image_asset_report.json",
+      "selected": false,
+      "line_count": 18,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/main.py",
+      "selected": true,
+      "line_count": 72,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": "API入口，定义POST /chat接口、Bearer鉴权、请求分发，体现软件对外服务方式"
+    },
+    {
+      "path": "app/test/build_chunk_level_dataset.py",
+      "selected": false,
+      "line_count": 592,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/final_fix_gt.py",
+      "selected": false,
+      "line_count": 215,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/fix_remaining_gt.py",
+      "selected": false,
+      "line_count": 243,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/sweep_rerank_params.py",
+      "selected": false,
+      "line_count": 221,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_build_index.py",
+      "selected": false,
+      "line_count": 95,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_case_intake_react.py",
+      "selected": false,
+      "line_count": 84,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_case_intake_react_flow_demo.py",
+      "selected": false,
+      "line_count": 205,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_case_intake_redis_store.py",
+      "selected": false,
+      "line_count": 34,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_case_intake_sticky.py",
+      "selected": false,
+      "line_count": 55,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_context_assembler.py",
+      "selected": false,
+      "line_count": 154,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_conversation_store_redis.py",
+      "selected": false,
+      "line_count": 52,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_gateway_case_intake_skill.py",
+      "selected": false,
+      "line_count": 56,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_index_health.py",
+      "selected": false,
+      "line_count": 247,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_ingestion.py",
+      "selected": false,
+      "line_count": 25,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_local_review_skill_flow.py",
+      "selected": false,
+      "line_count": 154,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_mcp_gateway_client.py",
+      "selected": false,
+      "line_count": 83,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_memory_system.py",
+      "selected": false,
+      "line_count": 327,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_memory_v3.py",
+      "selected": false,
+      "line_count": 382,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_memory_v4.py",
+      "selected": false,
+      "line_count": 217,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_multimodal_image_alignment.py",
+      "selected": false,
+      "line_count": 185,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_multimodal_v2.py",
+      "selected": false,
+      "line_count": 227,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_pipeline.py",
+      "selected": false,
+      "line_count": 367,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_retrieval_quality.py",
+      "selected": false,
+      "line_count": 1170,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_retriever_build_index_integration.py",
+      "selected": false,
+      "line_count": 158,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_run_batch_submission.py",
+      "selected": false,
+      "line_count": 124,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/test_splite.py",
+      "selected": false,
+      "line_count": 33,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/verify_gt.py",
+      "selected": false,
+      "line_count": 244,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "app/test/verify_gt_v2.py",
+      "selected": false,
+      "line_count": 367,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/__init__.py",
+      "selected": false,
+      "line_count": 1,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/dataset/chunk_level_queries.json",
+      "selected": false,
+      "line_count": 727,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/dataset/official_chunk_queries.json",
+      "selected": false,
+      "line_count": 1558,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/dataset/official_chunk_queries_verified.json",
+      "selected": false,
+      "line_count": 1961,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/chunk_level_20260605T190623Z.json",
+      "selected": false,
+      "line_count": 62,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/chunk_level_detail.json",
+      "selected": false,
+      "line_count": 2511,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/memory_v3_scenario_report.json",
+      "selected": false,
+      "line_count": 697,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/memory_v4_eval_report.json",
+      "selected": false,
+      "line_count": 43,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/official_chunk_level.json",
+      "selected": false,
+      "line_count": 4857,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/official_verified.json",
+      "selected": false,
+      "line_count": 4857,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/official_verified_no_rerank.json",
+      "selected": false,
+      "line_count": 4857,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/official_verified_v3.json",
+      "selected": false,
+      "line_count": 4857,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/official_verified_v4.json",
+      "selected": false,
+      "line_count": 4857,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/official_verified_v5.json",
+      "selected": false,
+      "line_count": 4857,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/official_verified_v6_recall30.json",
+      "selected": false,
+      "line_count": 4857,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/retrieval_quality_20260605T091957Z.json",
+      "selected": false,
+      "line_count": 219,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/retrieval_quality_20260605T094844Z.json",
+      "selected": false,
+      "line_count": 459,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/results/retrieval_quality_20260605T101200Z.json",
+      "selected": false,
+      "line_count": 11407,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/run_eval.py",
+      "selected": false,
+      "line_count": 492,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "eval/run_memory_v4_eval.py",
+      "selected": false,
+      "line_count": 124,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "examples/mcp_case_intake/server.py",
+      "selected": false,
+      "line_count": 142,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "examples/mcp_hello/server.py",
+      "selected": false,
+      "line_count": 66,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "examples/mcp_order_status/server.py",
+      "selected": false,
+      "line_count": 160,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/CapabilityIndex.java",
+      "selected": false,
+      "line_count": 55,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/Credential.java",
+      "selected": false,
+      "line_count": 4,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/CredentialRequirement.java",
+      "selected": false,
+      "line_count": 4,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/CredentialStore.java",
+      "selected": false,
+      "line_count": 34,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/DockerCliSandboxContainerBackend.java",
+      "selected": false,
+      "line_count": 80,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/DownstreamClientRegistry.java",
+      "selected": false,
+      "line_count": 17,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/EncryptedFileCredentialStore.java",
+      "selected": false,
+      "line_count": 172,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/GatewayConfiguration.java",
+      "selected": false,
+      "line_count": 162,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/GatewayMetrics.java",
+      "selected": false,
+      "line_count": 49,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/GatewayRuntime.java",
+      "selected": false,
+      "line_count": 576,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/GatewayStatusController.java",
+      "selected": false,
+      "line_count": 20,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/JsonSupport.java",
+      "selected": false,
+      "line_count": 152,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/Main.java",
+      "selected": false,
+      "line_count": 7,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/mcp/McpJsonRpcResponse.java",
+      "selected": false,
+      "line_count": 21,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/mcp/McpProtocolException.java",
+      "selected": false,
+      "line_count": 11,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/mcp/McpToolContentExtractor.java",
+      "selected": false,
+      "line_count": 22,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/mcp/StdioMcpClient.java",
+      "selected": false,
+      "line_count": 156,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/mcp/StdioProcessTransport.java",
+      "selected": false,
+      "line_count": 157,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/McpClient.java",
+      "selected": false,
+      "line_count": 14,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/McpGatewayApplication.java",
+      "selected": false,
+      "line_count": 11,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/McpGatewayController.java",
+      "selected": false,
+      "line_count": 36,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/McpGatewayHealthIndicator.java",
+      "selected": false,
+      "line_count": 41,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/McpJsonRpcHandler.java",
+      "selected": false,
+      "line_count": 169,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/McpServiceCatalogProperties.java",
+      "selected": false,
+      "line_count": 328,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/McpServiceWarmupRunner.java",
+      "selected": false,
+      "line_count": 83,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/PermissionService.java",
+      "selected": false,
+      "line_count": 15,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/SandboxContainerBackend.java",
+      "selected": false,
+      "line_count": 7,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/SandboxMcpController.java",
+      "selected": false,
+      "line_count": 132,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/SandboxRuntime.java",
+      "selected": false,
+      "line_count": 74,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/SandboxSession.java",
+      "selected": false,
+      "line_count": 52,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/ServiceDefinition.java",
+      "selected": false,
+      "line_count": 89,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/ServiceRegistry.java",
+      "selected": false,
+      "line_count": 23,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/ServiceSummary.java",
+      "selected": false,
+      "line_count": 15,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/StreamableHttpMcpClient.java",
+      "selected": false,
+      "line_count": 201,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/ToolCallResult.java",
+      "selected": false,
+      "line_count": 15,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/ToolSchema.java",
+      "selected": false,
+      "line_count": 6,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/main/java/com/example/mcpgateway/UserContext.java",
+      "selected": false,
+      "line_count": 9,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/EncryptedFileCredentialStoreTest.java",
+      "selected": false,
+      "line_count": 41,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/GatewayRuntimeUnitTest.java",
+      "selected": false,
+      "line_count": 443,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/mcp/McpToolContentExtractorTest.java",
+      "selected": false,
+      "line_count": 42,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/mcp/StdioMcpClientTest.java",
+      "selected": false,
+      "line_count": 37,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/mcp/StdioProcessTransportTest.java",
+      "selected": false,
+      "line_count": 35,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/McpGatewayIntegrationTest.java",
+      "selected": false,
+      "line_count": 140,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/McpJsonRpcHandlerTest.java",
+      "selected": false,
+      "line_count": 258,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/McpServiceWarmupRunnerTest.java",
+      "selected": false,
+      "line_count": 32,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/SandboxMcpControllerTest.java",
+      "selected": false,
+      "line_count": 123,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/SandboxRuntimeTest.java",
+      "selected": false,
+      "line_count": 128,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/java/com/example/mcpgateway/StreamableHttpMcpClientTest.java",
+      "selected": false,
+      "line_count": 98,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "mcp-gateway/src/test/resources/fake-stdio-mcp-server.py",
+      "selected": false,
+      "line_count": 43,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "scripts/__init__.py",
+      "selected": false,
+      "line_count": 1,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "scripts/build_image_index.py",
+      "selected": false,
+      "line_count": 492,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "scripts/build_index.py",
+      "selected": false,
+      "line_count": 234,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "scripts/evaluate_memory_v3_scenarios.py",
+      "selected": false,
+      "line_count": 543,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "scripts/fix_submission_format.py",
+      "selected": false,
+      "line_count": 41,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    },
+    {
+      "path": "scripts/run_batch_submission.py",
+      "selected": false,
+      "line_count": 205,
+      "priority": 100,
+      "selection_tier": "supplement",
+      "evidence": "补充源码证据",
+      "model_reason": ""
+    }
+  ],
+  "confirmation_note": "用户确认16个核心文件选择，4359行约88页，覆盖API入口、流水线、路由、检索、生成、视觉、工单、精排、Prompt构建等核心功能",
+  "confirmed_at": "2026-06-09T04:13:10+00:00"
+}

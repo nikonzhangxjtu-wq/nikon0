@@ -1,0 +1,281 @@
+{
+  "software_name": "多模态智能客服Agent系统",
+  "product_positioning": "面向电商及消费电子领域的多模态智能客服Agent系统，通过融合产品手册检索增强生成（RAG）、多模态图像理解、多轮对话记忆与工单收集能力，为消费者提供产品使用咨询、故障排查、售后受理等一站式智能客服体验。",
+  "industry": "电商/消费电子/智能客服",
+  "target_users": ["电商平台消费者（查询产品说明书、故障排查）", "品牌客服人员（辅助回答产品问题）", "系统运维人员（部署配置、索引管理、评测优化）"],
+  "core_value": "以检索增强生成技术为核心，将海量产品说明手册索引化为可检索知识库，结合多模态视觉理解处理用户上传的图片，通过意图路由自动判断问题类型并选择最佳回答策略，同时支持多轮对话记忆和工单收集流程，提升客服效率和回答准确率。",
+  "business_features": [
+    "智能意图路由",
+    "产品手册检索问答",
+    "多模态图像理解",
+    "工单收集与售后受理",
+    "在线评价查询",
+    "多轮对话记忆",
+    "问题改写优化检索",
+    "批量问题处理",
+    "离线评测优化"
+  ],
+  "business_feature_details": {
+    "智能意图路由": "系统通过关键词加权打分和LLM仲裁，自动判断用户问题属于产品说明书查询、客服政策咨询、售后工单受理还是未知领域，据此决定是否需要检索产品手册知识库以及采用何种回答策略。",
+    "产品手册检索问答": "系统将20余类产品说明书（家电、数码、运动器械等）解析为文本块，通过BM25稀疏向量和Dense稠密向量混合检索，结合精排模型对召回结果重排序，从最相关的产品手册段落中提取信息生成准确回答。",
+    "多模态图像理解": "系统支持用户上传最多3张Base64编码的图片，通过视觉语言模型提取图片中的文字OCR、关键实体和产品类型，将视觉信息融入检索查询和答案生成，帮助定位产品型号和故障现象。",
+    "工单收集与售后受理": "当用户表达报修、退货、退款等售后意图时，系统自动进入工单收集流程，通过多轮对话逐步收集产品型号、购买渠道、故障现象、联系方式等必要信息，完成工单草稿。",
+    "在线评价查询": "系统支持查询产品的在线评价和用户口碑信息，帮助消费者了解产品优缺点和真实使用反馈，辅助购买决策。",
+    "多轮对话记忆": "系统记录用户会话历史，提取关键事实和用户偏好形成长期记忆，在后续对话中自动加载相关记忆上下文，支持跨会话的个性化服务。",
+    "问题改写优化检索": "当存在对话历史或记忆上下文时，系统自动将用户当前问题改写为更完整、更适合检索的查询语句，提升检索召回准确率。",
+    "批量问题处理": "系统支持从CSV文件读取大量用户问题，批量执行对话流水线生成答案，输出符合竞赛提交格式的结果文件。",
+    "离线评测优化": "系统内置离线评测框架，支持在评测集上运行流水线并记录路由决策、检索命中率、答案质量分数等指标，便于迭代优化系统性能。"
+  },
+  "operation_flow": [
+    "用户通过HTTP POST /chat接口提交问题（可附带图片和会话ID）",
+    "系统验证Bearer Token并确保会话ID存在",
+    "如有历史对话和长期记忆，加载相关上下文并改写问题",
+    "视觉模块处理用户上传的图片，提取OCR文字和关键实体",
+    "路由模块分析问题意图（说明书查询/客服咨询/工单受理/未知）",
+    "不需要检索时，直接使用客服话术模板生成回答",
+    "需要检索时，先确定目标产品手册，再执行混合检索和多路召回",
+    "对召回结果执行精排和过滤，保留最相关的文本块",
+    "组装Prompt（用户问题+检索上下文+视觉摘要+对话历史+记忆）",
+    "LLM根据Prompt生成最终答案并返回"
+  ],
+  "application_purpose": "构建面向电商消费电子领域的智能客服系统，通过产品手册知识检索和多模态理解技术，为消费者提供准确、及时的产品使用咨询和售后服务。",
+  "main_functions": "本系统是一款面向电商及消费电子领域的多模态智能客服Agent软件。系统核心功能包括：（1）智能意图路由：通过关键词打分和LLM仲裁自动判断用户问题类型，决定是否检索产品手册知识库。（2）产品手册检索问答：将20余类消费电子产品说明书索引至向量数据库，支持BM25稀疏检索、Dense稠密检索和精排模型重排序，从最相关的产品手册段落中提取信息生成准确回答。（3）多模态图像理解：支持用户上传产品图片、故障照片等，通过视觉语言模型提取OCR文字和关键实体，融入检索和生成流程。（4）工单收集：当用户表达报修、退货等售后意图时，自动进入多轮信息收集流程，逐步获取工单所需字段。（5）在线评价查询：支持查询产品评价和口碑信息。（6）多轮对话记忆：记录用户会话历史和长期偏好，在后续对话中自动加载相关上下文。（7）问题改写：利用对话历史自动改写用户问题以提升检索效果。（8）批量处理与离线评测：支持CSV批量问题处理和离线指标评测，便于系统迭代优化。",
+  "technical_characteristics": "采用检索增强生成架构，结合关键词路由加LLM仲裁的混合意图识别，支持BM25加Dense多路混合检索与Cross-Encoder精排，集成视觉语言模型实现多模态理解，具备分级记忆系统，通过MCP协议网关集成外部工具能力。",
+  "software_technical_option": "应用软件",
+  "software_category": "应用软件",
+  "manual_sections": [
+    {
+      "title": "一、相关文档",
+      "intent": "列出与操作手册配套的其他技术文档，供审核员参考。",
+      "paragraphs": ["本操作手册配套以下技术文档，供使用者参考：\n| 文档名称 | 文档说明 |\n|----------|----------|\n| 总体设计说明书 | 系统架构、模块划分与技术选型说明 |\n| 详细设计说明书 | 各模块内部实现细节与接口定义 |\n| 测试案例文档 | 系统测试用例与评测结果 |\n| 部署运维手册 | 系统部署、配置与运维操作指南 |"],
+      "include_feature_overview": false,
+      "include_operation_modules": false,
+      "include_operation_flow": false
+    },
+    {
+      "title": "二、说明",
+      "intent": "向使用者说明软件的基本情况、用途和业务场景。",
+      "paragraphs": ["本系统是一款面向电商及消费电子领域的多模态智能客服Agent软件。系统以产品说明书知识库为核心，通过意图路由、混合检索、视觉理解和对话记忆等技术，为消费者提供产品使用咨询、故障排查指导和售后工单受理等客服服务。", "软件适用的业务场景包括：消费者查询家电、数码、运动器械等产品的使用说明和操作步骤；消费者上传产品故障照片寻求排查指导；消费者发起报修、退货、退款等售后请求时系统自动收集工单信息；客服人员借助系统快速检索产品手册回答消费者问题。", "本操作手册面向系统使用人员，说明各功能模块的操作方式、输入要求、操作步骤和预期结果，帮助使用者快速掌握系统的使用方法。"],
+      "include_feature_overview": false,
+      "include_operation_modules": false,
+      "include_operation_flow": false
+    },
+    {
+      "title": "三、功能特点",
+      "intent": "概览软件的核心功能特性，让使用者了解软件能做什么。",
+      "paragraphs": [],
+      "include_feature_overview": true,
+      "include_operation_modules": false,
+      "include_operation_flow": false
+    },
+    {
+      "title": "四、系统要求",
+      "intent": "说明软件运行所需的软硬件环境。",
+      "paragraphs": [],
+      "include_feature_overview": false,
+      "include_operation_modules": false,
+      "include_operation_flow": false
+    }
+  ],
+  "manual_modules": [
+    {
+      "title": "系统部署与启动",
+      "evidence": ["README.md 第8节 Run API", "docker-compose.yml"],
+      "purpose": "将系统部署到服务器并启动API服务，使系统进入可对外提供服务的运行状态。",
+      "usage": "运维人员在新服务器或开发环境中首次部署系统，或系统升级后重新启动服务时使用此流程。",
+      "usage_scenario": "运维人员在新服务器上部署智能客服系统，需要配置环境变量、安装依赖并启动API服务。",
+      "entry": "在项目根目录下，通过终端命令行执行启动指令。",
+      "visible_elements": ["终端命令行界面", "环境变量配置文件（.env）", "uvicorn启动日志输出"],
+      "operation_steps": [
+        "确认已安装Python 3.10和所需依赖包",
+        "编辑.env文件，配置API端口、Bearer Token、Ollama服务地址、生成模型名称、嵌入模型名称、Milvus数据库连接等参数",
+        "在终端中执行 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 启动API服务",
+        "观察终端日志输出，确认服务已成功启动并监听指定端口",
+        "在浏览器或命令行中访问 http://localhost:8000/healthz 验证服务健康状态，应返回 {\"status\":\"ok\"}"
+      ],
+      "validation_rules": ["API_BEARER_TOKEN为必填项，用于接口鉴权", "OLLAMA_BASE_URL必须指向运行中的Ollama服务", "MILVUS_URI必须指向可访问的Milvus数据库"],
+      "feedback": ["终端输出uvicorn启动日志，显示服务监听地址和端口", "healthz接口返回 {\"status\":\"ok\"} 表示服务正常运行"],
+      "screenshot": "【截图预留：终端中系统启动日志和healthz接口验证结果的截图。】"
+    },
+    {
+      "title": "API对话接口调用",
+      "evidence": ["app/main.py POST /chat", "app/schemas/chat.py ChatRequest/ChatResponse"],
+      "purpose": "通过HTTP POST接口向系统提交用户问题并获取智能回答，是系统的核心对外服务入口。",
+      "usage": "消费者在电商平台或客服对话界面提交产品使用问题时，由前端或中间层调用此接口获取智能回答。",
+      "usage_scenario": "消费者在购物APP中咨询空气炸锅如何清洁滤网，前端将问题通过API发送至系统，系统检索空气炸锅说明书后返回清洁步骤。",
+      "entry": "通过HTTP客户端（如curl、Postman或前端应用）发送POST请求至 /chat 接口。",
+      "visible_elements": ["请求头 Authorization 字段（Bearer Token）", "请求体 question 字段（用户问题文本）", "请求体 images 字段（可选，Base64编码图片列表）", "请求体 session_id 字段（可选，会话标识）", "请求体 stream 字段（流式标志）", "响应体 answer 字段（系统生成的回答文本）", "响应体 session_id 字段（会话标识）", "响应体 images 字段（回答中引用的图片列表）"],
+      "operation_steps": [
+        "在HTTP请求头中设置 Authorization: Bearer <token>，token需与.env中配置的API_BEARER_TOKEN一致",
+        "构建请求体JSON，填写question字段为用户实际问题，可选附带images图片列表和session_id会话标识",
+        "发送POST请求至 /chat 接口",
+        "系统处理后返回JSON响应，从data.answer字段获取回答文本，data.session_id用于后续同一会话的继续对话"
+      ],
+      "validation_rules": ["question字段必填且不能为空字符串", "images字段最多包含3张图片", "stream=true时当前版本返回400错误", "Authorization头缺失或Token错误时返回401错误"],
+      "feedback": ["成功时返回code=0，data中包含answer回答文本、session_id会话标识、images引用的图片列表", "Token无效时返回401 Unauthorized", "question为空时返回422 Validation Error"],
+      "screenshot": "【截图预留：使用curl或Postman调用 /chat 接口的请求和响应截图，展示完整的请求参数和返回结果。】"
+    },
+    {
+      "title": "产品手册索引构建",
+      "evidence": ["scripts/build_index.py", "app/services/ingestion.py", "app/services/milvus_create.py"],
+      "purpose": "将产品说明书文件解析、切块并写入Milvus向量数据库，建立可供检索的知识索引。",
+      "usage": "运维人员在首次部署系统或新增产品手册时，运行索引构建脚本将手册内容导入向量数据库。",
+      "usage_scenario": "新接入一个产品品牌的说明书后，运维人员将手册文件放入手册目录并运行索引构建脚本，使该产品手册内容可被检索。",
+      "entry": "在项目根目录下通过终端执行索引构建命令。",
+      "visible_elements": ["终端命令行界面", "手册目录中的.txt产品说明书文件", "Milvus数据库Collection创建信息", "索引进度日志输出"],
+      "operation_steps": [
+        "将要索引的产品说明书.txt文件放入手册目录（默认 ./手册/）",
+        "确认Milvus数据库服务正在运行且可连接",
+        "在终端中执行 python scripts/build_index.py 启动索引构建",
+        "观察终端日志，确认手册文件解析、文本切块、向量嵌入和Milvus写入各步骤均成功完成",
+        "索引构建完成后，可通过API对话接口测试是否能检索到新手册内容"
+      ],
+      "validation_rules": ["手册文件必须为.txt格式", "Milvus服务必须已启动且.env中连接参数正确", "Ollama嵌入模型服务必须正在运行"],
+      "feedback": ["终端输出各手册文件的解析进度、切块数量和写入状态", "索引构建完成后输出成功摘要信息"],
+      "screenshot": "【截图预留：终端中执行索引构建命令的输出截图，展示索引进度、切块数量和成功完成信息。】"
+    },
+    {
+      "title": "批量问题处理",
+      "evidence": ["scripts/run_batch_submission.py"],
+      "purpose": "从CSV文件中读取大量用户问题，批量调用对话流水线生成答案，输出标准提交格式的结果文件。",
+      "usage": "运维或评测人员在收集到一批用户问题后，使用批量处理功能统一生成答案，用于竞赛提交或效果评估。",
+      "usage_scenario": "竞赛评测场景中，从question_public.csv读取数百条用户问题，批量生成答案并导出为submission.csv提交文件。",
+      "entry": "在项目根目录下通过终端执行批量处理命令。",
+      "visible_elements": ["终端命令行界面", "输入的CSV问题文件（含id和question列）", "输出的CSV结果文件（含id和ret列）", "处理进度日志"],
+      "operation_steps": [
+        "准备符合格式的CSV输入文件，至少包含id列和question列",
+        "确认API服务依赖（Ollama、Milvus）均已正常运行",
+        "在终端中执行 python scripts/run_batch_submission.py 启动批量处理",
+        "观察处理进度日志，关注每个问题的处理状态和耗时",
+        "处理完成后，在指定输出路径查看生成的CSV结果文件"
+      ],
+      "validation_rules": ["输入CSV文件路径必须存在且格式正确", "Ollama和Milvus服务必须正常运行"],
+      "feedback": ["终端输出每个问题的处理状态、生成答案和耗时", "最终输出结果文件路径和总处理条数"],
+      "screenshot": "【截图预留：终端中执行批量处理命令的输出截图，展示处理进度和结果文件路径。】"
+    },
+    {
+      "title": "离线评测",
+      "evidence": ["eval/run_eval.py", "eval/README.md"],
+      "purpose": "在标注评测集上运行系统流水线，统计路由准确率、检索命中率、答案质量分数等指标，评估系统性能。",
+      "usage": "系统开发或优化后，运维或评测人员运行离线评测对比不同版本的效果，指导后续优化方向。",
+      "usage_scenario": "系统升级检索精排模型后，运行离线评测对比新旧版本的检索命中率和答案质量，确认优化是否有效。",
+      "entry": "在项目根目录下通过终端执行评测命令。",
+      "visible_elements": ["终端命令行界面", "评测集JSONL文件（含问题、金标路由、金标手册名等字段）", "评测结果CSV文件（含每条的分数、延迟、路由决策等详细字段）", "汇总统计指标"],
+      "operation_steps": [
+        "准备评测集JSONL文件，确保包含id、question等必要字段",
+        "在终端中执行 python -m eval.run_eval --version <版本标识> 启动评测",
+        "可添加 --no-judge 参数跳过LLM打分仅统计路由和检索指标",
+        "评测完成后查看 results/ 目录下的detail和summary文件",
+        "对比不同版本的评测指标，判断优化效果"
+      ],
+      "validation_rules": ["评测集JSONL文件格式必须正确", "可选择是否启用LLM评分"],
+      "feedback": ["终端输出评测进度和每条的简要结果", "results/目录下生成detail_<version>.csv逐条结果文件和summary汇总文件"],
+      "screenshot": "【截图预留：终端中执行离线评测命令的输出截图，展示评测进度和汇总统计指标。】"
+    },
+    {
+      "title": "MCP网关管理",
+      "evidence": ["mcp-gateway/README.md", "mcp-gateway/DEPLOYMENT.zh-CN.md", "mcp-gateway/src/main/java/com/example/mcpgateway/McpGatewayController.java"],
+      "purpose": "管理MCP协议网关服务，实现对下游工具服务（高德地图、网页抓取、沙盒执行）的统一接入和调度。",
+      "usage": "运维人员在需要集成外部工具能力（如地图查询、网页内容抓取、代码沙盒执行）时，部署和管理MCP网关。",
+      "usage_scenario": "运维人员需要为智能客服系统增加地图查询能力时，部署MCP网关并配置高德地图MCP服务，使客服系统能查询门店位置和导航信息。",
+      "entry": "在mcp-gateway目录下通过Docker Compose启动网关服务，或通过HTTP接口管理下游MCP服务。",
+      "visible_elements": ["终端命令行界面", "Docker容器状态", "Nginx反向代理配置", "MCP服务注册配置", "Gateway健康检查接口返回"],
+      "operation_steps": [
+        "在mcp-gateway目录下执行 docker compose -f docker-compose.java-mcp-gateway.yml up -d --build 构建并启动网关",
+        "执行 docker compose ps 检查Gateway和Nginx容器是否均正常运行",
+        "访问 http://localhost:18080/health 验证网关健康状态",
+        "通过Gateway的MCP接口查询可用服务列表、查看服务工具、测试工具调用",
+        "在Cursor或Agent配置中挂载 http://<服务器IP>:18080/mcp 即可使用网关提供的工具能力"
+      ],
+      "validation_rules": ["Docker和Docker Compose必须已安装", "服务器端口18080和18081未被占用", "如需高德地图功能则需配置高德API Key"],
+      "feedback": ["Docker容器状态显示Gateway和Nginx均为Running", "健康检查接口返回正常状态", "查询可用服务列表返回注册的下游MCP服务信息"],
+      "screenshot": "【截图预留：终端中Docker Compose启动输出和健康检查结果截图。】"
+    }
+  ],
+  "system_requirements": [
+    {
+      "item": "操作系统",
+      "minimum": "macOS 14 / Ubuntu 22.04 / Windows 11",
+      "recommended": "macOS 15 / Ubuntu 24.04"
+    },
+    {
+      "item": "Python版本",
+      "minimum": "Python 3.10",
+      "recommended": "Python 3.10"
+    },
+    {
+      "item": "Ollama服务",
+      "minimum": "Ollama 0.1.0以上，qwen2和nomic-embed-text模型",
+      "recommended": "Ollama最新稳定版，qwen2.5模型"
+    },
+    {
+      "item": "Milvus向量数据库",
+      "minimum": "Milvus 2.4以上",
+      "recommended": "Milvus 2.4.6以上"
+    },
+    {
+      "item": "Docker（MCP网关）",
+      "minimum": "Docker 20以上，Docker Compose v2以上",
+      "recommended": "Docker最新稳定版"
+    },
+    {
+      "item": "内存",
+      "minimum": "8GB",
+      "recommended": "16GB以上"
+    }
+  ],
+  "faq": [
+    {
+      "question": "API接口返回401 Unauthorized错误怎么办？",
+      "answer": "检查请求头中的Authorization字段是否正确，格式必须为 Bearer <token>，且token值需与.env文件中API_BEARER_TOKEN配置一致。"
+    },
+    {
+      "question": "检索结果不准确或回答与产品无关怎么办？",
+      "answer": "首先检查产品手册文件是否已通过索引构建脚本成功导入Milvus数据库。如已导入，可在.env中调整检索参数（如top_k值），或运行离线评测分析检索命中率。"
+    },
+    {
+      "question": "Ollama服务连接失败怎么办？",
+      "answer": "确认Ollama服务已启动（命令行执行 ollama serve），检查.env中OLLAMA_BASE_URL地址是否正确，并确认所需的生成模型和嵌入模型已通过 ollama pull 下载。"
+    },
+    {
+      "question": "系统启动后healthz接口无响应？",
+      "answer": "检查终端日志中的错误信息。常见原因包括：Python依赖包未完整安装、.env文件配置有误、端口被占用等。可尝试重新安装依赖后重试。"
+    },
+    {
+      "question": "如何新增产品手册？",
+      "answer": "将产品说明书.txt文件放入手册目录（默认 ./手册/），然后运行 python scripts/build_index.py 重新构建索引。新手册内容将被解析、切块、向量化后写入Milvus数据库，即可通过对话接口检索。"
+    }
+  ],
+  "glossary": [
+    {
+      "term": "RAG（检索增强生成）",
+      "definition": "一种结合信息检索和文本生成的技术，先从知识库中检索与问题相关的文档片段，再将其作为上下文提供给语言模型生成答案，提高回答的准确性和可追溯性。"
+    },
+    {
+      "term": "向量数据库（Milvus）",
+      "definition": "用于存储和检索向量数据的专用数据库系统。本系统中用于存储产品手册文本块的嵌入向量，支持高效的语义相似度搜索。"
+    },
+    {
+      "term": "意图路由",
+      "definition": "系统自动判断用户问题类型（产品说明书查询、客服政策咨询、售后工单等）并据此选择不同处理策略的模块。"
+    },
+    {
+      "term": "MCP（Model Context Protocol）",
+      "definition": "一种标准化协议，用于AI模型与外部工具和服务之间的通信。本系统的MCP网关通过此协议统一管理下游工具服务的接入和调用。"
+    },
+    {
+      "term": "工单收集（Case Intake）",
+      "definition": "当用户表达售后诉求时，系统通过多轮对话逐步收集必要信息（产品型号、故障现象、联系方式等）形成完整工单的流程。"
+    },
+    {
+      "term": "会话ID（Session ID）",
+      "definition": "标识同一用户连续对话的唯一标识符，系统通过会话ID维护对话历史，实现多轮对话上下文连贯。"
+    }
+  ],
+  "model_review_notes": [
+    "操作手册应按软著审核通用骨架组织：相关文档（表格形式列出配套文档）、说明、功能特点、系统要求、按功能模块逐章操作、常见问题解答、术语表。",
+    "本系统为后端API服务，无Web前端UI，操作手册的功能模块章节应围绕运维操作流程组织：部署启动、API调用、索引构建、批量处理、离线评测、网关管理。",
+    "功能模块章节需写清每项操作的目的、进入方式、操作步骤、输入要求限制、异常处理和操作结果反馈。",
+    "语言面向运维人员和开发者，不写代码实现细节和框架名称，只写操作层面的步骤和结果。"
+  ]
+}

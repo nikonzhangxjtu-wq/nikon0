@@ -45,6 +45,7 @@ htmlcov/
 # Logs
 *.log
 logs/
+nikon0/infra/runtime/
 
 # Generated submissions (regenerate with scripts)
 submission_v*.csv

@@ -1,0 +1,71 @@
+{
+  "dataset": "nikon0/eval/datasets/agent_qa_eval_150_manual.jsonl",
+  "runtime_profile": "deterministic",
+  "total_items": 150,
+  "total_elapsed_sec": 2.4,
+  "avg_sec_per_item": 0.02,
+  "ok_count": 149,
+  "error_count": 1,
+  "by_category": {
+    "product_support": {
+      "total": 30,
+      "ok": 30,
+      "error": 0,
+      "empty": 0
+    },
+    "troubleshooting": {
+      "total": 25,
+      "ok": 25,
+      "error": 0,
+      "empty": 0
+    },
+    "case_intake": {
+      "total": 20,
+      "ok": 20,
+      "error": 0,
+      "empty": 0
+    },
+    "refund": {
+      "total": 10,
+      "ok": 10,
+      "error": 0,
+      "empty": 0
+    },
+    "handoff": {
+      "total": 10,
+      "ok": 10,
+      "error": 0,
+      "empty": 0
+    },
+    "composite": {
+      "total": 15,
+      "ok": 15,
+      "error": 0,
+      "empty": 0
+    },
+    "boundary": {
+      "total": 15,
+      "ok": 14,
+      "error": 1,
+      "empty": 0
+    },
+    "multi-turn": {
+      "total": 10,
+      "ok": 10,
+      "error": 0,
+      "empty": 0
+    },
+    "general": {
+      "total": 10,
+      "ok": 10,
+      "error": 0,
+      "empty": 0
+    },
+    "no_evidence": {
+      "total": 5,
+      "ok": 5,
+      "error": 0,
+      "empty": 0
+    }
+  }
+}

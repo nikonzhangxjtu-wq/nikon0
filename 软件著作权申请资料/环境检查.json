@@ -1,0 +1,23 @@
+{
+  "output_directory": "当前目录/软件著作权申请资料",
+  "capabilities": {
+    "markdown_drafts": true,
+    "application_txt": true,
+    "basic_docx": true,
+    "python_docx": true,
+    "pandoc_preview": true,
+    "docx_openxml_full": true,
+    "dotnet_sdk": true
+  },
+  "versions": {
+    "pandoc": "pandoc 3.9.0.2",
+    "dotnet": "10.0.300"
+  },
+  "final_docx_mode": "docx-openxml",
+  "recommendation": "完整 DOCX OpenXML 环境已就绪，建议使用完整 Word 生成和校验流程。",
+  "install_prompt": "无需安装，完整环境可用。",
+  "requires_user_input": false,
+  "confirmation_stage": null,
+  "next_action": "完整 DOCX 环境可用，可以进入项目分析。",
+  "docx_env_output": "=== DOCX Environment Check ===\n\n[OK]      dotnet         10.0.300 (>= 8.0)\n[OK]      project        built\n[OK]      pandoc         3.9.0 (content preview)\n[OK]      soffice        26.2.3 (.doc conversion)\n[OK]      zip/unzip      available\n[OK]      locale         zh_CN.UTF-8\n[OK]      permissions    all scripts executable\n\nStatus: READY"
+}

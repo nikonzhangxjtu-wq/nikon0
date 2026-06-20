@@ -1,0 +1,42 @@
+{
+  "total": 150,
+  "passed": 54,
+  "pass_rate": 0.36,
+  "skill_accuracy": 0.8,
+  "tool_accuracy": 0.86,
+  "safety_accuracy": 0.8067,
+  "evidence_accuracy": 0.94,
+  "answer_constraint_accuracy": 0.4,
+  "fallback_rate": 0.1933,
+  "guard_rejection_rate": 0.32,
+  "sticky_overstay_rate": 0.0,
+  "approval_rate": 0.1133,
+  "handoff_rate": 0.08,
+  "avg_loop_turns": 1.4533333333333334,
+  "by_category": {
+    "boundary": {
+      "total": 25.0,
+      "pass_rate": 0.16
+    },
+    "case_intake": {
+      "total": 25.0,
+      "pass_rate": 0.88
+    },
+    "composite": {
+      "total": 25.0,
+      "pass_rate": 0.4
+    },
+    "handoff": {
+      "total": 15.0,
+      "pass_rate": 0.1333
+    },
+    "product_support": {
+      "total": 40.0,
+      "pass_rate": 0.1
+    },
+    "refund": {
+      "total": 20.0,
+      "pass_rate": 0.6
+    }
+  }
+}

@@ -1,8 +1,4 @@
-"""LLM 驱动的路由分类器。
-
-用本地 qwen2 模型判断用户问题是否需要 RAG 检索，替代关键词启发式。
-失败时自动回退到关键词路由器。
-"""
+"""LLM 驱动的路由分类器。"""
 
 from __future__ import annotations
 
@@ -10,6 +6,7 @@ import json
 from dataclasses import dataclass
 
 from app.core.config import settings
+from app.services.llm_clients import chat_text
 from app.services.router import QuestionRouter, RouteDecision
 
 
@@ -30,18 +27,15 @@ _ROUTER_SYSTEM = (
     "   技术规格参数、功能说明、清洁维护保养、配件更换\n"
     "2. 涉及以下 → needs_rag=false, domain=\"customer_service\"：\n"
     "   订单、退款、退货换货、物流快递、发票、保修政策、售后投诉、\n"
-    "   价格优惠券、配送运费、购买渠道\n"
-    "3. 涉及以下 → needs_rag=false, domain=\"web_review\"：\n"
-    "   真实口碑、用户评价、网上测评、值得买吗、优缺点对比\n"
-    "4. 涉及以下 → needs_rag=false, domain=\"order_status\"：\n"
-    "   查订单状态、物流到哪、配送进度、预计送达、催发货\n"
-    "5. 涉及以下 → needs_rag=false, domain=\"case_intake\"：\n"
+    "   价格优惠券、配送运费、购买渠道、真实口碑、用户评价、网上测评、\n"
+    "   值得买吗、优缺点对比、查订单状态、物流到哪、配送进度、预计送达、催发货\n"
+    "3. 涉及以下 → needs_rag=false, domain=\"case_intake\"：\n"
     "   报修、故障受理、退换货申请、需要人工售后跟进的信息收集\n"
-    "6. 其他 → needs_rag=false, domain=\"unknown\"：\n"
+    "4. 其他 → needs_rag=false, domain=\"unknown\"：\n"
     "   纯寒暄、无关闲聊、无法判断的问题\n"
     "\n"
     "严格只输出一行 JSON，不要 markdown 代码块，不要额外文字：\n"
-    '{"needs_rag": true/false, "domain": "manual"|"customer_service"|"web_review"|"order_status"|"case_intake"|"unknown", "reason": "中文 ≤30 字", "confidence": 0.0~1.0}\n'
+    '{"needs_rag": true/false, "domain": "manual"|"customer_service"|"case_intake"|"unknown", "reason": "中文 ≤30 字", "confidence": 0.0~1.0}\n'
     "\n"
     "示例：\n"
     "Q: 净水器怎么更换滤芯？\n"
@@ -57,16 +51,16 @@ _ROUTER_SYSTEM = (
     "Q: 物流到哪了帮我查一下\n"
     'A: {"needs_rag": false, "domain": "customer_service", "reason": "物流查询属于客服范畴", "confidence": 0.9}\n'
     "Q: 这款电钻网上评价怎么样\n"
-    'A: {"needs_rag": false, "domain": "web_review", "reason": "用户在询问真实口碑评价", "confidence": 0.9}\n'
+    'A: {"needs_rag": false, "domain": "customer_service", "reason": "口碑评价暂归普通客服", "confidence": 0.9}\n'
     "Q: 订单 OD20260507001 到哪了\n"
-    'A: {"needs_rag": false, "domain": "order_status", "reason": "用户在查询订单物流状态", "confidence": 0.93}\n'
+    'A: {"needs_rag": false, "domain": "customer_service", "reason": "订单查询暂归普通客服", "confidence": 0.93}\n'
     "Q: 电钻坏了，帮我报修\n"
     'A: {"needs_rag": false, "domain": "case_intake", "reason": "需要收集售后受理信息", "confidence": 0.92}\n'
 )
 
 
 class LLMRouter:
-    """用本地 LLM 做 RAG 需求分类，失败时回退关键词路由器。"""
+    """用 LLM 做 RAG 需求分类，失败时回退关键词路由器。"""
 
     def __init__(self, model: str | None = None) -> None:
         self._model = (model or settings.router_llm_model).strip()
@@ -104,21 +98,13 @@ class LLMRouter:
         return f"{_ROUTER_SYSTEM}\n用户问题：\n{question}\n"
 
     def _call_llm(self, prompt: str) -> str:
-        import requests as _req
-
-        resp = _req.post(
-            f"{settings.ollama_base_url}/api/chat",
-            json={
-                "model": self._model,
-                "messages": [{"role": "user", "content": prompt}],
-                "stream": False,
-                "options": {"temperature": 0.0, "num_predict": 256},
-            },
+        return chat_text(
+            model=self._model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0,
+            max_tokens=256,
             timeout=30,
         )
-        resp.raise_for_status()
-        body = resp.json()
-        return body.get("message", {}).get("content", "")
 
     def _parse_output(self, raw: str) -> _LLMRouteOutput | None:
         text = (raw or "").strip()
@@ -151,7 +137,9 @@ class LLMRouter:
             return None
 
         domain = str(obj.get("domain", "unknown")).strip().lower()
-        if domain not in ("manual", "customer_service", "web_review", "order_status", "case_intake", "unknown"):
+        if domain in ("web_review", "order_status"):
+            domain = "customer_service"
+        if domain not in ("manual", "customer_service", "case_intake", "unknown"):
             domain = "unknown"
 
         reason = str(obj.get("reason", "LLM 分类")).strip()

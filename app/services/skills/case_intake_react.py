@@ -12,6 +12,7 @@ from enum import Enum
 from typing import Any
 
 from app.core.config import settings
+from app.services.llm_clients import chat_text
 from app.services.skills.case_intake_types import CaseIntakeResult, CaseState
 
 
@@ -116,22 +117,19 @@ def _extract_json_object(text: str) -> Any:
         return {}
 
 
-def _call_ollama(prompt: str) -> str:
-    import requests as _req
-
-    resp = _req.post(
-        f"{settings.ollama_base_url}/api/chat",
-        json={
-            "model": _model_name(),
-            "messages": [{"role": "user", "content": prompt}],
-            "stream": False,
-            "options": {"temperature": 0.0, "num_predict": 320},
-        },
+def _call_llm(prompt: str) -> str:
+    return chat_text(
+        model=_model_name(),
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.0,
+        max_tokens=320,
         timeout=30,
     )
-    resp.raise_for_status()
-    body = resp.json()
-    return str(body.get("message", {}).get("content", ""))
+
+
+def _call_ollama(prompt: str) -> str:
+    """兼容旧测试/调试脚本的函数名；实际已改为百炼优先、Ollama 兜底。"""
+    return _call_llm(prompt)
 
 
 def _observation_for_state(skill: Any, state: CaseState) -> str:
@@ -240,6 +238,8 @@ def run_case_intake_react(
             req = skill._required_slots_for_intent(state.intent)  # noqa: SLF001
             missing = [k for k in req if not state.slots.get(k)]
             ask = user_facing.strip() if user_facing else skill._build_followup_question(missing)  # noqa: SLF001
+            if ask and "请补充以下信息" not in ask:
+                ask = f"为尽快处理，请补充以下信息：\n- {ask}"
             return state, CaseIntakeResult(
                 completed=False,
                 exited=False,

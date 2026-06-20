@@ -14,20 +14,15 @@ from dataclasses import dataclass, field
 
 from app.core.config import settings
 from app.services.generator import Qwen2Generator
-from app.services.online_review_skill import (
-    NullReviewProvider,
-    OnlineReviewSkill,
-    ReviewSearchProvider,
-)
-from app.services.order_status_skill import (
-    NullOrderStatusProvider,
-    OrderStatusProvider,
-    OrderStatusSkill,
-)
+from app.services.answer_postprocess import postprocess_answer
+from app.services.context_assembler import ContextAssembler, ContextAssemblyTrace
+from app.services.memory import MemoryManager, get_memory_manager
+from app.services.memory.v3 import get_memory_manager_v3
+from app.services.memory.v3.evidence_packet import TurnEvidencePacketBuilder
+from app.services.memory.v3.read_planner import MemoryReadPlanner
+from app.services.memory.v4 import get_memory_manager_v4
+from app.services.memory.v4.reader import IssueReadPlanner
 from app.services.skills.case_intake_skill import CaseIntakeSkill
-from app.services.skills.local_review_table import LocalReviewTableProvider
-from app.services.skills.mcp_order_provider import MCPOrderProvider
-from app.services.skills.mcp_review_provider import MCPReviewProvider
 from app.services.rag_skill.query_construction import query_construction
 from app.services.retriever import RetrievalTrace, VectorRetriever, retriever_context_filter
 from app.services.router import QuestionRouter, RouteDecision
@@ -38,8 +33,6 @@ from app.utils.prompts import PromptContext, compose_generation_prompt
 _llm_router = None
 _react_agent = None
 _rewriter = None
-_online_review_skill = None
-_order_status_skill = None
 _case_intake_skill = None
 
 
@@ -67,68 +60,21 @@ def _get_react_agent():
     return _react_agent
 
 
-def _review_search_mode() -> str:
-    mode = (settings.review_search_mode or "local").strip().lower()
-    if mode not in {"local", "mcp", "none"}:
-        return "local"
-    return mode
-
-
-def _get_online_review_skill() -> OnlineReviewSkill:
-    global _online_review_skill
-    if _online_review_skill is None:
-        provider: ReviewSearchProvider = NullReviewProvider()
-        mode = _review_search_mode()
-        if mode == "none":
-            provider = NullReviewProvider()
-        elif mode == "mcp":
-            endpoint = (settings.mcp_review_endpoint or "").strip()
-            if endpoint:
-                try:
-                    provider = MCPReviewProvider(
-                        endpoint=endpoint,
-                        api_key=settings.mcp_review_api_key,
-                        timeout_sec=settings.mcp_review_timeout_sec,
-                    )
-                except Exception as exc:  # noqa: BLE001
-                    print(f"[WARN] MCPReviewProvider 初始化失败，回退 NullReviewProvider: {exc}")
-                    provider = NullReviewProvider()
-        else:
-            provider = LocalReviewTableProvider()
-        _online_review_skill = OnlineReviewSkill(provider=provider)
-    return _online_review_skill
-
-
-def reset_online_review_skill_singleton() -> None:
-    """单测或切换配置后重置口碑 skill 单例。"""
-    global _online_review_skill
-    _online_review_skill = None
-
-
-def _get_order_status_skill() -> OrderStatusSkill:
-    global _order_status_skill
-    if _order_status_skill is None:
-        provider: OrderStatusProvider = NullOrderStatusProvider()
-        endpoint = (settings.mcp_order_endpoint or "").strip()
-        if endpoint:
-            try:
-                provider = MCPOrderProvider(
-                    endpoint=endpoint,
-                    api_key=settings.mcp_order_api_key,
-                    timeout_sec=settings.mcp_order_timeout_sec,
-                )
-            except Exception as exc:  # noqa: BLE001
-                print(f"[WARN] MCPOrderProvider 初始化失败，回退 NullOrderStatusProvider: {exc}")
-                provider = NullOrderStatusProvider()
-        _order_status_skill = OrderStatusSkill(provider=provider)
-    return _order_status_skill
-
-
 def _get_case_intake_skill() -> CaseIntakeSkill:
     global _case_intake_skill
     if _case_intake_skill is None:
-        # 每次进程启动创建一次；状态读写由 skill 内 store（Redis 或内存）负责。
-        _case_intake_skill = CaseIntakeSkill()
+        provider = (settings.case_intake_provider or "local").strip().lower()
+        if provider == "gateway":
+            try:
+                from app.services.skills.gateway_case_intake import GatewayCaseIntakeSkill
+
+                _case_intake_skill = GatewayCaseIntakeSkill()
+            except Exception as exc:  # noqa: BLE001
+                print(f"[WARN] GatewayCaseIntakeSkill 初始化失败，回退本地 CaseIntakeSkill: {exc}")
+                _case_intake_skill = CaseIntakeSkill()
+        else:
+            # 每次进程启动创建一次；状态读写由 skill 内 store（Redis 或内存）负责。
+            _case_intake_skill = CaseIntakeSkill()
     return _case_intake_skill
 
 
@@ -157,6 +103,17 @@ class PipelineDebug:
     react_queries: list[str] = field(default_factory=list)
     # Query 改写结果（空字符串表示未改写或没有历史）
     rewritten_query: str = ""
+    retrieval_source_queries: list[str] = field(default_factory=list)
+    manual_name_decisions: list[str] = field(default_factory=list)
+    context_original_tokens: int = 0
+    context_final_tokens: int = 0
+    context_compression_notes: list[str] = field(default_factory=list)
+    evidence_block_count: int = 0
+    critical_fact_count: int = 0
+    compression_fallback_count: int = 0
+    verifier_failed_reasons: list[str] = field(default_factory=list)
+    preserved_block_types: list[str] = field(default_factory=list)
+    memory_trace: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -178,20 +135,28 @@ class ChatPipeline:
         retriever: VectorRetriever | None = None,
         generator: Qwen2Generator | None = None,
         vision: VisionInterpreter | None = None,
-        online_review_skill: OnlineReviewSkill | None = None,
-        order_status_skill: OrderStatusSkill | None = None,
         case_intake_skill: CaseIntakeSkill | None = None,
+        context_assembler: ContextAssembler | None = None,
+        memory_manager: MemoryManager | None = None,
     ) -> None:
         self.router = router or QuestionRouter()
         self.retriever = retriever or VectorRetriever()
         self.generator = generator or Qwen2Generator()
         self.vision = vision or VisionInterpreter()
-        self.online_review_skill = online_review_skill or _get_online_review_skill()
-        self.order_status_skill = order_status_skill or _get_order_status_skill()
         self.case_intake_skill = case_intake_skill or _get_case_intake_skill()
+        self.context_assembler = context_assembler or ContextAssembler()
+        self.memory_manager = memory_manager or get_memory_manager()
+        self.memory_read_planner_v3 = MemoryReadPlanner()
+        self.memory_read_planner_v4 = IssueReadPlanner()
+        self._last_context_trace = ContextAssemblyTrace(0, 0)
 
     def run(
-        self, question: str, images: list[str], *, session_id: str | None = None
+        self,
+        question: str,
+        images: list[str],
+        *,
+        session_id: str | None = None,
+        user_id: str | None = None,
     ) -> PipelineResult:
         """执行流水线。
 
@@ -204,8 +169,14 @@ class ChatPipeline:
 
         store = get_conversation_store() if session_id else None
         conversation_history, enrichment = self._load_conversation_context(store, session_id)
+        memory_context = self._read_memory_context(
+            question=question,
+            session_id=session_id,
+            user_id=user_id,
+            conversation_history=conversation_history,
+        )
         visual_context = self.vision.summarize_images(question, images)
-        rewritten_query = self._maybe_rewrite_query(question, enrichment)
+        rewritten_query = self._maybe_rewrite_query(question, enrichment, memory_context)
         search_question = rewritten_query or question
         routing_query = self._compose_multimodal_query(search_question, visual_context)
 
@@ -216,9 +187,11 @@ class ChatPipeline:
         if cancelled_case_intake:
             return self._build_case_intake_cancelled_result(
                 session_id=session_id,
+                user_id=user_id,
                 question=question,
                 images=images,
                 store=store,
+                memory_context=memory_context,
                 visual_context=visual_context,
                 rewritten_query=rewritten_query,
             )
@@ -234,7 +207,9 @@ class ChatPipeline:
             question=question,
             images=images,
             session_id=session_id,
+            user_id=user_id,
             conversation_history=conversation_history,
+            memory_context=memory_context,
             enrichment=enrichment,
             store=store,
             top_k=top_k,
@@ -246,47 +221,15 @@ class ChatPipeline:
         if skill_case_intake_result is not None:
             return skill_case_intake_result
 
-        order_status_result = self._maybe_run_order_status_branch(
-            decision=decision,
-            question=question,
-            images=images,
-            session_id=session_id,
-            enrichment=enrichment,
-            conversation_history=conversation_history,
-            store=store,
-            top_k=top_k,
-            route_low_confidence=route_low_confidence,
-            used_visual_context=used_visual_context,
-            visual_context=visual_context,
-            rewritten_query=rewritten_query,
-        )
-        if order_status_result is not None:
-            return order_status_result
-
-        web_review_result = self._maybe_run_web_review_branch(
-            decision=decision,
-            question=question,
-            images=images,
-            session_id=session_id,
-            enrichment=enrichment,
-            conversation_history=conversation_history,
-            store=store,
-            top_k=top_k,
-            route_low_confidence=route_low_confidence,
-            used_visual_context=used_visual_context,
-            visual_context=visual_context,
-            rewritten_query=rewritten_query,
-        )
-        if web_review_result is not None:
-            return web_review_result
-
         if not decision.needs_rag:
             return self._run_no_rag_branch(
                 decision=decision,
                 question=question,
                 images=images,
                 session_id=session_id,
+                user_id=user_id,
                 conversation_history=conversation_history,
+                memory_context=memory_context,
                 store=store,
                 top_k=top_k,
                 route_low_confidence=route_low_confidence,
@@ -295,8 +238,9 @@ class ChatPipeline:
                 rewritten_query=rewritten_query,
             )
 
-        chunks, filter_context, react_iterations, react_queries = self._retrieve_context(
-            routing_query
+        chunks, filter_context, react_iterations, react_queries, manual_name_decisions = self._retrieve_context(
+            routing_query,
+            image_inputs=images,
         )
 
         if not chunks:
@@ -313,6 +257,8 @@ class ChatPipeline:
             top_k=top_k,
             raw_chunks=chunks,
             filtered_chunks=filter_context,
+            source_queries=react_queries or [routing_query],
+            manual_name_decisions=manual_name_decisions,
         )
 
         prompt, context_block, context_chunk_count, image_ref_map = self._build_rag_prompt(
@@ -322,17 +268,32 @@ class ChatPipeline:
             route_low_confidence=route_low_confidence,
             visual_context=visual_context,
             conversation_history=conversation_history,
+            memory_context=memory_context,
             filter_context=filter_context,
             react_iterations=react_iterations,
         )
 
         answer = self.generator.generate(prompt)
         answer, images = finalize_answer_images(answer, image_ref_map)
+        answer = postprocess_answer(answer)
         if store:
             store.add_turn(
                 session_id, question=question, answer=answer,
                 user_images=images, answer_images=images,
             )
+        self._record_memory_turn(
+            session_id=session_id,
+            user_id=user_id,
+            question=question,
+            answer=answer,
+            visual_context=visual_context,
+            context_block=context_block,
+            conversation_history=conversation_history,
+            memory_context_used=memory_context,
+            branch_name="rag_manual",
+            route_domain_hint=decision.domain_hint,
+            route_needs_rag=decision.needs_rag,
+        )
         return PipelineResult(
             answer=answer,
             images=images,
@@ -350,6 +311,8 @@ class ChatPipeline:
                 react_iterations=react_iterations,
                 react_queries=react_queries,
                 rewritten_query=rewritten_query,
+                manual_name_decisions=manual_name_decisions,
+                context_trace=self._last_context_trace,
             ),
         )
 
@@ -359,11 +322,42 @@ class ChatPipeline:
             return "", ""
         return store.format_history(session_id), store.format_enrichment(session_id)
 
-    @staticmethod
-    def _maybe_rewrite_query(question: str, enrichment: str) -> str:
-        if not (enrichment and settings.query_rewrite_enabled):
+    def _read_memory_context(
+        self,
+        *,
+        question: str,
+        session_id: str | None,
+        user_id: str | None,
+        conversation_history: str,
+    ) -> str:
+        if not settings.memory_enabled:
             return ""
-        rewritten = _get_rewriter().rewrite(question, enrichment)
+        if (settings.memory_version or "v1").strip().lower() == "v3":
+            request = self.memory_read_planner_v3.plan(
+                session_id=session_id,
+                user_id=user_id,
+                question=question,
+                recent_history=conversation_history,
+                route_domain_hint=None,
+            )
+            return get_memory_manager_v3().read(request).render()
+        if (settings.memory_version or "v1").strip().lower() == "v4":
+            request = self.memory_read_planner_v4.plan(
+                session_id=session_id,
+                query=question,
+            )
+            return get_memory_manager_v4().read(request).render()
+        return self.memory_manager.read(
+            session_id=session_id,
+            user_id=user_id,
+            query=question,
+        ).render()
+
+    @staticmethod
+    def _maybe_rewrite_query(question: str, enrichment: str, memory_context: str = "") -> str:
+        if not ((enrichment or memory_context) and settings.query_rewrite_enabled):
+            return ""
+        rewritten = _get_rewriter().rewrite(question, enrichment, memory_context=memory_context)
         return rewritten or ""
 
     def _resolve_case_intake_sticky_state(
@@ -399,9 +393,11 @@ class ChatPipeline:
         self,
         *,
         session_id: str | None,
+        user_id: str | None,
         question: str,
         images: list[str],
         store,
+        memory_context: str,
         visual_context: str,
         rewritten_query: str,
     ) -> PipelineResult:
@@ -414,6 +410,19 @@ class ChatPipeline:
                 user_images=images,
                 answer_images=[],
             )
+        self._record_memory_turn(
+            session_id=session_id,
+            user_id=user_id,
+            question=question,
+            answer=reply,
+            visual_context=visual_context,
+            context_block=memory_context,
+            memory_context_used=memory_context,
+            branch_name="case_intake",
+            route_domain_hint="case_intake",
+            route_needs_rag=False,
+            branch_result={"case_status": "cancelled"},
+        )
         cancel_decision = RouteDecision(
             needs_rag=False,
             domain_hint="case_intake",
@@ -448,7 +457,9 @@ class ChatPipeline:
         question: str,
         images: list[str],
         session_id: str | None,
+        user_id: str | None,
         conversation_history: str,
+        memory_context: str,
         enrichment: str,
         store,
         top_k: int,
@@ -473,6 +484,25 @@ class ChatPipeline:
                 session_id, question=question, answer=skill_result.reply_text,
                 user_images=images, answer_images=[],
             )
+        self._record_memory_turn(
+            session_id=session_id,
+            user_id=user_id,
+            question=question,
+            answer=skill_result.reply_text,
+            visual_context=visual_context,
+            context_block=skill_result.context_block,
+            conversation_history=conversation_history,
+            memory_context_used=memory_context,
+            branch_name="case_intake",
+            route_domain_hint=decision.domain_hint,
+            route_needs_rag=decision.needs_rag,
+            branch_result={
+                **(skill_result.ticket_payload or {}),
+                "completed": skill_result.completed,
+                "missing_slots": skill_result.missing_slots,
+                "context_block": skill_result.context_block,
+            },
+        )
         return PipelineResult(
             answer=skill_result.reply_text,
             images=[],
@@ -493,142 +523,6 @@ class ChatPipeline:
             ),
         )
 
-    def _maybe_run_order_status_branch(
-        self,
-        *,
-        decision: RouteDecision,
-        question: str,
-        images: list[str],
-        session_id: str | None,
-        enrichment: str,
-        conversation_history: str,
-        store,
-        top_k: int,
-        route_low_confidence: bool,
-        used_visual_context: bool,
-        visual_context: str,
-        rewritten_query: str,
-    ) -> PipelineResult | None:
-        if not (
-            decision.domain_hint == "order_status"
-            and settings.order_status_skill_enabled
-        ):
-            return None
-        skill_result = self.order_status_skill.run(
-            question=question,
-            enrichment=enrichment,
-            top_k=settings.order_status_top_k,
-        )
-        context_block = skill_result.context_block if skill_result.ok else ""
-        evidence_status = "ok" if skill_result.ok else "no_passing_chunks"
-        prompt = compose_generation_prompt(
-            PromptContext(
-                question=question,
-                need_rag=False,
-                domain_hint="order_status",
-                context_block=context_block,
-                route_reason=decision.reason,
-                evidence_status=evidence_status,
-                route_low_confidence=route_low_confidence,
-                visual_context=visual_context,
-                conversation_history=conversation_history,
-            )
-        )
-        answer = self.generator.generate(prompt)
-        answer, result_images = finalize_answer_images(answer, {})
-        if store:
-            store.add_turn(
-                session_id, question=question, answer=answer,
-                user_images=images, answer_images=result_images,
-            )
-        return PipelineResult(
-            answer=answer,
-            images=result_images,
-            route_reason=decision.reason,
-            debug=self._build_debug(
-                decision=decision,
-                top_k=top_k,
-                context_block=context_block,
-                context_chunk_count=1 if context_block else 0,
-                retrieval_trace=None,
-                route_low_confidence=route_low_confidence,
-                post_retrieval_gate=evidence_status,
-                used_visual_context=used_visual_context,
-                visual_context=visual_context,
-                react_iterations=0,
-                react_queries=[],
-                rewritten_query=rewritten_query,
-            ),
-        )
-
-    def _maybe_run_web_review_branch(
-        self,
-        *,
-        decision: RouteDecision,
-        question: str,
-        images: list[str],
-        session_id: str | None,
-        enrichment: str,
-        conversation_history: str,
-        store,
-        top_k: int,
-        route_low_confidence: bool,
-        used_visual_context: bool,
-        visual_context: str,
-        rewritten_query: str,
-    ) -> PipelineResult | None:
-        if not (
-            decision.domain_hint == "web_review"
-            and settings.online_review_skill_enabled
-        ):
-            return None
-        skill_result = self.online_review_skill.run(
-            question=question,
-            enrichment=enrichment,
-            top_k=settings.online_review_top_k,
-        )
-        context_block = skill_result.context_block if skill_result.ok else ""
-        evidence_status = "ok" if skill_result.ok else "no_passing_chunks"
-        prompt = compose_generation_prompt(
-            PromptContext(
-                question=question,
-                need_rag=False,
-                domain_hint="web_review",
-                context_block=context_block,
-                route_reason=decision.reason,
-                evidence_status=evidence_status,
-                route_low_confidence=route_low_confidence,
-                visual_context=visual_context,
-                conversation_history=conversation_history,
-            )
-        )
-        answer = self.generator.generate(prompt)
-        answer, result_images = finalize_answer_images(answer, {})
-        if store:
-            store.add_turn(
-                session_id, question=question, answer=answer,
-                user_images=images, answer_images=result_images,
-            )
-        return PipelineResult(
-            answer=answer,
-            images=result_images,
-            route_reason=decision.reason,
-            debug=self._build_debug(
-                decision=decision,
-                top_k=top_k,
-                context_block=context_block,
-                context_chunk_count=1 if context_block else 0,
-                retrieval_trace=None,
-                route_low_confidence=route_low_confidence,
-                post_retrieval_gate=evidence_status,
-                used_visual_context=used_visual_context,
-                visual_context=visual_context,
-                react_iterations=0,
-                react_queries=[],
-                rewritten_query=rewritten_query,
-            ),
-        )
-
     def _run_no_rag_branch(
         self,
         *,
@@ -636,7 +530,9 @@ class ChatPipeline:
         question: str,
         images: list[str],
         session_id: str | None,
+        user_id: str | None,
         conversation_history: str,
+        memory_context: str,
         store,
         top_k: int,
         route_low_confidence: bool,
@@ -644,7 +540,7 @@ class ChatPipeline:
         visual_context: str,
         rewritten_query: str,
     ) -> PipelineResult:
-        prompt = compose_generation_prompt(
+        prompt = self._compose_generation_prompt(
             PromptContext(
                 question=question,
                 need_rag=False,
@@ -655,15 +551,30 @@ class ChatPipeline:
                 route_low_confidence=route_low_confidence,
                 visual_context=visual_context,
                 conversation_history=conversation_history,
+                memory_context=memory_context,
             )
         )
         answer = self.generator.generate(prompt)
         answer, result_images = finalize_answer_images(answer, {})
+        answer = postprocess_answer(answer)
         if store:
             store.add_turn(
                 session_id, question=question, answer=answer,
                 user_images=images, answer_images=result_images,
             )
+        self._record_memory_turn(
+            session_id=session_id,
+            user_id=user_id,
+            question=question,
+            answer=answer,
+            visual_context=visual_context,
+            context_block=memory_context,
+            conversation_history=conversation_history,
+            memory_context_used=memory_context,
+            branch_name="no_rag",
+            route_domain_hint=decision.domain_hint,
+            route_needs_rag=decision.needs_rag,
+        )
         return PipelineResult(
             answer=answer,
             images=result_images,
@@ -681,12 +592,13 @@ class ChatPipeline:
                 react_iterations=0,
                 react_queries=[],
                 rewritten_query=rewritten_query,
+                context_trace=self._last_context_trace,
             ),
         )
 
     def _retrieve_context(
-        self, routing_query: str
-    ) -> tuple[list, list, int, list[str]]:
+        self, routing_query: str, *, image_inputs: list[str] | None = None
+    ) -> tuple[list, list, int, list[str], list[str]]:
         if settings.react_enabled:
             ms_result = _get_react_agent().collect_evidence(routing_query)
             filter_context = ms_result.all_filtered_chunks
@@ -695,12 +607,75 @@ class ChatPipeline:
                 filter_context,
                 ms_result.iterations,
                 ms_result.search_queries,
+                [],
             )
-        manual_name = query_construction(routing_query)
-        chunks = self.retriever.retrieve(
-            routing_query, top_k=6, manual_name=manual_name or None
-        )
-        return chunks, retriever_context_filter(chunks), 1, []
+        source_queries = self._build_retrieval_queries(routing_query)
+        raw_chunks: list = []
+        manual_decisions: list[str] = []
+        for query in source_queries:
+            manual_name = query_construction(routing_query) or None
+            manual_decisions.append(
+                f"{query[:60]} => {manual_name or '<all>'}"
+            )
+            raw_chunks.extend(
+                self.retriever.retrieve(
+                    query,
+                    top_k=6,
+                    manual_name=manual_name,
+                    image_inputs=image_inputs or [],
+                )
+            )
+        chunks = self._deduplicate_chunks(raw_chunks)
+        return chunks, retriever_context_filter(chunks), len(source_queries), source_queries, manual_decisions
+
+    @staticmethod
+    def _build_retrieval_queries(routing_query: str) -> list[str]:
+        """对复杂/多子问生成少量检索 query，简单题保持单 query。"""
+        import re
+
+        q = (routing_query or "").strip()
+        if not q:
+            return []
+
+        signals = 0
+        signals += q.count("\n")
+        signals += len(re.findall(r"[？?]", q))
+        signals += len(re.findall(r"同时|另外|还有|并且|而且|以及|分别|哪些|流程|步骤|前[一二三四五六七八九十\d]+", q))
+        if signals < settings.retrieval_multi_query_min_signals:
+            return [q]
+
+        parts: list[str] = []
+        for raw in re.split(r"[\n。；;？?]+", q):
+            item = raw.strip(" ，,、：:\"'“”")
+            if not item:
+                continue
+            if len(item) < 6 and not re.search(r"[A-Za-z]{3,}", item):
+                continue
+            parts.append(item)
+
+        # 对长句中的并列诉求再粗拆一次，便于召回不同证据。
+        expanded: list[str] = []
+        for part in parts or [q]:
+            subparts = re.split(r"(?:同时|另外|还有|并且|而且|以及)", part)
+            if len(subparts) <= 1:
+                expanded.append(part)
+                continue
+            for sub in subparts:
+                sub = sub.strip(" ，,、：")
+                if len(sub) >= 6:
+                    expanded.append(sub)
+
+        queries: list[str] = []
+        seen: set[str] = set()
+        for item in [q, *expanded]:
+            item = item.strip()
+            if not item or item in seen:
+                continue
+            seen.add(item)
+            queries.append(item)
+            if len(queries) >= max(1, settings.retrieval_multi_query_max_queries):
+                break
+        return queries or [q]
 
     def _build_rag_prompt(
         self,
@@ -711,11 +686,12 @@ class ChatPipeline:
         route_low_confidence: bool,
         visual_context: str,
         conversation_history: str,
+        memory_context: str,
         filter_context: list,
         react_iterations: int,
     ) -> tuple[str, str, int, dict[str, str]]:
         if post_retrieval_gate != "ok":
-            prompt = compose_generation_prompt(
+            prompt = self._compose_generation_prompt(
                 PromptContext(
                     question=question,
                     need_rag=False,
@@ -726,13 +702,14 @@ class ChatPipeline:
                     route_low_confidence=route_low_confidence,
                     visual_context=visual_context,
                     conversation_history=conversation_history,
+                    memory_context=memory_context,
                 )
             )
             return prompt, "", len(filter_context), {}
 
         multimodal_context = build_multimodal_context_block(filter_context)
         context_block = multimodal_context.context_block
-        prompt = compose_generation_prompt(
+        prompt = self._compose_generation_prompt(
             PromptContext(
                 question=question,
                 need_rag=True,
@@ -744,6 +721,7 @@ class ChatPipeline:
                 visual_context=visual_context,
                 react_multi_evidence=react_iterations > 1,
                 conversation_history=conversation_history,
+                memory_context=memory_context,
             )
         )
         return (
@@ -751,6 +729,80 @@ class ChatPipeline:
             context_block,
             len(filter_context),
             multimodal_context.image_ref_map,
+        )
+
+    def _compose_generation_prompt(self, ctx: PromptContext) -> str:
+        """统一入口：生成前先做上下文预算与压缩。
+
+        这样 prompt builder 仍然只关心业务表达，ContextAssembler 专注决定
+        哪些上下文应该进入模型窗口。
+        """
+        assembled = self.context_assembler.assemble(ctx)
+        self._last_context_trace = assembled.trace
+        return compose_generation_prompt(assembled.context)
+
+    def _record_memory_turn(
+        self,
+        *,
+        session_id: str | None,
+        user_id: str | None,
+        question: str,
+        answer: str,
+        visual_context: str,
+        context_block: str,
+        conversation_history: str = "",
+        memory_context_used: str = "",
+        branch_name: str = "",
+        route_domain_hint: str = "",
+        route_needs_rag: bool = False,
+        branch_result: dict | None = None,
+        tool_results: list[dict] | None = None,
+    ) -> None:
+        if not (settings.memory_enabled and session_id):
+            return
+        if (settings.memory_version or "v1").strip().lower() == "v3":
+            packet = TurnEvidencePacketBuilder.build(
+                session_id=session_id,
+                user_id=user_id,
+                question=question,
+                answer=answer,
+                route_domain_hint=route_domain_hint,
+                route_needs_rag=route_needs_rag,
+                branch_name=branch_name,
+                recent_history=conversation_history,
+                memory_context_used=memory_context_used,
+                visual_context=visual_context,
+                rag_context=context_block if branch_name == "rag_manual" else "",
+                branch_result=branch_result,
+                tool_results=tool_results or [],
+            )
+            get_memory_manager_v3().observe_and_write(packet)
+            return
+        if (settings.memory_version or "v1").strip().lower() == "v4":
+            packet = TurnEvidencePacketBuilder.build(
+                session_id=session_id,
+                user_id=user_id,
+                question=question,
+                answer=answer,
+                route_domain_hint=route_domain_hint,
+                route_needs_rag=route_needs_rag,
+                branch_name=branch_name,
+                recent_history=conversation_history,
+                memory_context_used=memory_context_used,
+                visual_context=visual_context,
+                rag_context=context_block if branch_name == "rag_manual" else "",
+                branch_result=branch_result,
+                tool_results=tool_results or [],
+            )
+            get_memory_manager_v4().observe_and_write(packet)
+            return
+        self.memory_manager.write_turn(
+            session_id=session_id,
+            user_id=user_id,
+            question=question,
+            answer=answer,
+            visual_context=visual_context,
+            context_block=context_block,
         )
 
     @staticmethod
@@ -768,7 +820,10 @@ class ChatPipeline:
         react_iterations: int = 0,
         react_queries: list[str] | None = None,
         rewritten_query: str = "",
+        manual_name_decisions: list[str] | None = None,
+        context_trace: ContextAssemblyTrace | None = None,
     ) -> PipelineDebug:
+        trace = context_trace or ContextAssemblyTrace(0, 0)
         return PipelineDebug(
             route_needs_rag=decision.needs_rag,
             route_domain_hint=decision.domain_hint,
@@ -786,7 +841,31 @@ class ChatPipeline:
             react_iterations=react_iterations,
             react_queries=react_queries or [],
             rewritten_query=rewritten_query,
+            retrieval_source_queries=react_queries or [],
+            manual_name_decisions=manual_name_decisions or [],
+            context_original_tokens=trace.original_tokens,
+            context_final_tokens=trace.final_tokens,
+            context_compression_notes=trace.notes,
+            evidence_block_count=trace.evidence_block_count,
+            critical_fact_count=trace.critical_fact_count,
+            compression_fallback_count=trace.compression_fallback_count,
+            verifier_failed_reasons=trace.verifier_failed_reasons,
+            preserved_block_types=trace.preserved_block_types,
         )
+
+    @staticmethod
+    def _deduplicate_chunks(chunks: list) -> list:
+        seen: dict[str, object] = {}
+        for chunk in chunks:
+            chunk_id = getattr(chunk, "chunk_id", "")
+            if not chunk_id:
+                continue
+            prev = seen.get(chunk_id)
+            if prev is None or getattr(chunk, "score", 0.0) > getattr(prev, "score", 0.0):
+                seen[chunk_id] = chunk
+        out = list(seen.values())
+        out.sort(key=lambda c: getattr(c, "score", 0.0), reverse=True)
+        return out
 
     @staticmethod
     def _collect_image_ids(chunks: list) -> list[str]:

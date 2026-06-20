@@ -1,0 +1,168 @@
+{
+  "software_name": "多模态智能客服Agent系统",
+  "version": "V1.0",
+  "project_root": "/Users/nikonzhang/compeletion",
+  "file_count": 16,
+  "material_line_count": 4391,
+  "source_line_count": 4359,
+  "selected_source_line_count": 4359,
+  "lines_per_page": 50,
+  "total_pages": 88,
+  "target_pages": 60,
+  "available_candidate_line_count": 80242,
+  "available_candidate_pages": 1605,
+  "supplement_status": "候选源码可达到前30页/后30页要求",
+  "mode": "front30_back30",
+  "selection_file": "/Users/nikonzhang/compeletion/软件著作权申请资料/草稿/代码文件选择.json",
+  "outputs": [
+    "代码-前30页.md",
+    "代码-后30页.md"
+  ],
+  "files": [
+    {
+      "path": "app/services/router.py",
+      "source_line_count": 488,
+      "selected_line_start": 1,
+      "selected_line_end": 488,
+      "selected_line_count": 488,
+      "material_line_start": 1,
+      "material_line_end": 490
+    },
+    {
+      "path": "app/services/generator.py",
+      "source_line_count": 92,
+      "selected_line_start": 1,
+      "selected_line_end": 92,
+      "selected_line_count": 92,
+      "material_line_start": 491,
+      "material_line_end": 584
+    },
+    {
+      "path": "app/services/ingestion.py",
+      "source_line_count": 314,
+      "selected_line_start": 1,
+      "selected_line_end": 314,
+      "selected_line_count": 314,
+      "material_line_start": 585,
+      "material_line_end": 900
+    },
+    {
+      "path": "app/services/llm_clients.py",
+      "source_line_count": 179,
+      "selected_line_start": 1,
+      "selected_line_end": 179,
+      "selected_line_count": 179,
+      "material_line_start": 901,
+      "material_line_end": 1081
+    },
+    {
+      "path": "app/services/pipeline.py",
+      "source_line_count": 892,
+      "selected_line_start": 1,
+      "selected_line_end": 892,
+      "selected_line_count": 892,
+      "material_line_start": 1082,
+      "material_line_end": 1975
+    },
+    {
+      "path": "app/services/rag_skill/query_construction.py",
+      "source_line_count": 173,
+      "selected_line_start": 1,
+      "selected_line_end": 173,
+      "selected_line_count": 173,
+      "material_line_start": 1976,
+      "material_line_end": 2150
+    },
+    {
+      "path": "app/services/rag_skill/rerank.py",
+      "source_line_count": 213,
+      "selected_line_start": 1,
+      "selected_line_end": 213,
+      "selected_line_count": 213,
+      "material_line_start": 2151,
+      "material_line_end": 2365
+    },
+    {
+      "path": "app/services/retriever.py",
+      "source_line_count": 896,
+      "selected_line_start": 1,
+      "selected_line_end": 896,
+      "selected_line_count": 896,
+      "material_line_start": 2366,
+      "material_line_end": 3263
+    },
+    {
+      "path": "app/services/skills/case_intake_skill.py",
+      "source_line_count": 243,
+      "selected_line_start": 1,
+      "selected_line_end": 243,
+      "selected_line_count": 243,
+      "material_line_start": 3264,
+      "material_line_end": 3508
+    },
+    {
+      "path": "app/services/vision.py",
+      "source_line_count": 136,
+      "selected_line_start": 1,
+      "selected_line_end": 136,
+      "selected_line_count": 136,
+      "material_line_start": 3509,
+      "material_line_end": 3646
+    },
+    {
+      "path": "app/utils/prompt_builder.py",
+      "source_line_count": 209,
+      "selected_line_start": 1,
+      "selected_line_end": 209,
+      "selected_line_count": 209,
+      "material_line_start": 3647,
+      "material_line_end": 3857
+    },
+    {
+      "path": "app/utils/prompts/context.py",
+      "source_line_count": 28,
+      "selected_line_start": 1,
+      "selected_line_end": 28,
+      "selected_line_count": 28,
+      "material_line_start": 3858,
+      "material_line_end": 3887
+    },
+    {
+      "path": "app/utils/prompts/registry.py",
+      "source_line_count": 39,
+      "selected_line_start": 1,
+      "selected_line_end": 39,
+      "selected_line_count": 39,
+      "material_line_start": 3888,
+      "material_line_end": 3928
+    },
+    {
+      "path": "app/schemas/chat.py",
+      "source_line_count": 60,
+      "selected_line_start": 1,
+      "selected_line_end": 60,
+      "selected_line_count": 60,
+      "material_line_start": 3929,
+      "material_line_end": 3990
+    },
+    {
+      "path": "app/core/config.py",
+      "source_line_count": 325,
+      "selected_line_start": 1,
+      "selected_line_end": 325,
+      "selected_line_count": 325,
+      "material_line_start": 3991,
+      "material_line_end": 4317
+    },
+    {
+      "path": "app/main.py",
+      "source_line_count": 72,
+      "selected_line_start": 1,
+      "selected_line_end": 72,
+      "selected_line_count": 72,
+      "material_line_start": 4318,
+      "material_line_end": 4391
+    }
+  ],
+  "safe_software_filename": "多模态智能客服Agent系统"
+}

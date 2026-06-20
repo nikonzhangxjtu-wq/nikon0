@@ -152,6 +152,16 @@ class RowResult:
     filtered_chunk_ids: str
     retrieved_manual_names: str
     filtered_manual_names: str
+    retrieval_source_queries: str
+    manual_name_decisions: str
+    context_original_tokens: int
+    context_final_tokens: int
+    context_compression_notes: str
+    evidence_block_count: int
+    critical_fact_count: int
+    compression_fallback_count: int
+    verifier_failed_reasons: str
+    preserved_block_types: str
     top1_score: str
     context_chars: int
     context_chunk_count: int
@@ -280,6 +290,24 @@ def main() -> None:
                 filtered_manual_names=_json_compact(
                     pr.debug.retrieval.filtered_manual_names if pr.debug.retrieval else []
                 ),
+                retrieval_source_queries=_json_compact(
+                    pr.debug.retrieval.source_queries
+                    if pr.debug.retrieval and pr.debug.retrieval.source_queries
+                    else pr.debug.react_queries
+                ),
+                manual_name_decisions=_json_compact(
+                    pr.debug.retrieval.manual_name_decisions
+                    if pr.debug.retrieval
+                    else pr.debug.manual_name_decisions
+                ),
+                context_original_tokens=pr.debug.context_original_tokens,
+                context_final_tokens=pr.debug.context_final_tokens,
+                context_compression_notes=_json_compact(pr.debug.context_compression_notes),
+                evidence_block_count=pr.debug.evidence_block_count,
+                critical_fact_count=pr.debug.critical_fact_count,
+                compression_fallback_count=pr.debug.compression_fallback_count,
+                verifier_failed_reasons=_json_compact(pr.debug.verifier_failed_reasons),
+                preserved_block_types=_json_compact(pr.debug.preserved_block_types),
                 top1_score="" if not pr.debug.retrieval or pr.debug.retrieval.top1_score is None else f"{pr.debug.retrieval.top1_score:.6f}",
                 context_chars=pr.debug.context_chars,
                 context_chunk_count=pr.debug.context_chunk_count,
@@ -313,6 +341,16 @@ def main() -> None:
         "filtered_chunk_ids",
         "retrieved_manual_names",
         "filtered_manual_names",
+        "retrieval_source_queries",
+        "manual_name_decisions",
+        "context_original_tokens",
+        "context_final_tokens",
+        "context_compression_notes",
+        "evidence_block_count",
+        "critical_fact_count",
+        "compression_fallback_count",
+        "verifier_failed_reasons",
+        "preserved_block_types",
         "top1_score",
         "context_chars",
         "context_chunk_count",
@@ -351,6 +389,16 @@ def main() -> None:
                     "filtered_chunk_ids": r.filtered_chunk_ids,
                     "retrieved_manual_names": r.retrieved_manual_names,
                     "filtered_manual_names": r.filtered_manual_names,
+                    "retrieval_source_queries": r.retrieval_source_queries,
+                    "manual_name_decisions": r.manual_name_decisions,
+                    "context_original_tokens": r.context_original_tokens,
+                    "context_final_tokens": r.context_final_tokens,
+                    "context_compression_notes": r.context_compression_notes,
+                    "evidence_block_count": r.evidence_block_count,
+                    "critical_fact_count": r.critical_fact_count,
+                    "compression_fallback_count": r.compression_fallback_count,
+                    "verifier_failed_reasons": r.verifier_failed_reasons,
+                    "preserved_block_types": r.preserved_block_types,
                     "top1_score": r.top1_score,
                     "context_chars": r.context_chars,
                     "context_chunk_count": r.context_chunk_count,

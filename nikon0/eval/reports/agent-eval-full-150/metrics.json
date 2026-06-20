@@ -1,0 +1,47 @@
+{
+  "total": 150,
+  "passed": 74,
+  "pass_rate": 0.4933,
+  "skill_accuracy": 0.9,
+  "tool_accuracy": 0.9133,
+  "safety_accuracy": 0.8133,
+  "evidence_accuracy": 1.0,
+  "answer_constraint_accuracy": 0.6,
+  "fact_coverage_accuracy": 0.9333,
+  "evidence_alignment_accuracy": 0.9333,
+  "rag_backend_accuracy": 1.0,
+  "enterprise_rag_ok_rate": 1.0,
+  "rag_fallback_rate": 0.0,
+  "fallback_rate": 0.0667,
+  "guard_rejection_rate": 0.2067,
+  "sticky_overstay_rate": 0.0,
+  "approval_rate": 0.1133,
+  "handoff_rate": 0.0733,
+  "avg_loop_turns": 1.5,
+  "by_category": {
+    "boundary": {
+      "total": 25.0,
+      "pass_rate": 0.08
+    },
+    "case_intake": {
+      "total": 25.0,
+      "pass_rate": 0.72
+    },
+    "composite": {
+      "total": 25.0,
+      "pass_rate": 0.52
+    },
+    "handoff": {
+      "total": 15.0,
+      "pass_rate": 0.2
+    },
+    "product_support": {
+      "total": 40.0,
+      "pass_rate": 0.675
+    },
+    "refund": {
+      "total": 20.0,
+      "pass_rate": 0.55
+    }
+  }
+}

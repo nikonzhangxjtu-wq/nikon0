@@ -19,6 +19,8 @@ from app.core.config import settings
 
 TEXT_MAX_LEN = 16384
 IMAGE_IDS_MAX_LEN = 8192
+IMAGE_META_MAX_LEN = 8192
+MEMORY_TEXT_MAX_LEN = 4096
 
 
 def _collection_field_names(client: MilvusClient, collection_name: str) -> set[str]:
@@ -145,3 +147,138 @@ def _create_vector_index(client: MilvusClient) -> None:
 
     client.create_index(collection_name=settings.milvus_collection, index_params=index_params)
     client.load_collection(collection_name=settings.milvus_collection)
+
+
+def build_image_collection(client: MilvusClient, vector_dim: int | None = None) -> None:
+    """(Re)create 手册图片 collection。
+
+    图片与文本 chunk 是不同粒度的知识单元：图片 collection 只保存图片级证据和
+    parent_chunk_ids，不修改原有 manual_chunks_v1，保证纯文本 RAG 主链路稳定。
+    """
+    name = settings.multimodal_image_collection
+    dim = vector_dim or settings.multimodal_image_vector_dim
+    if client.has_collection(collection_name=name):
+        client.drop_collection(collection_name=name)
+
+    schema = MilvusClient.create_schema(auto_id=False, enable_dynamic_field=False)
+    schema.add_field(
+        field_name="image_id",
+        datatype=DataType.VARCHAR,
+        max_length=256,
+        is_primary=True,
+    )
+    schema.add_field(field_name="image_vector", datatype=DataType.FLOAT_VECTOR, dim=dim)
+    schema.add_field(field_name="semantic_vector", datatype=DataType.FLOAT_VECTOR, dim=dim)
+    schema.add_field(field_name="image_path", datatype=DataType.VARCHAR, max_length=1024)
+    schema.add_field(field_name="manual_name", datatype=DataType.VARCHAR, max_length=256)
+    schema.add_field(field_name="parent_chunk_ids", datatype=DataType.VARCHAR, max_length=IMAGE_META_MAX_LEN)
+    schema.add_field(field_name="parent_context_text", datatype=DataType.VARCHAR, max_length=IMAGE_META_MAX_LEN)
+    schema.add_field(field_name="context_intent", datatype=DataType.VARCHAR, max_length=1024)
+    schema.add_field(field_name="image_type", datatype=DataType.VARCHAR, max_length=128)
+    schema.add_field(field_name="semantic_text", datatype=DataType.VARCHAR, max_length=IMAGE_META_MAX_LEN)
+    schema.add_field(field_name="ocr_text", datatype=DataType.VARCHAR, max_length=IMAGE_META_MAX_LEN)
+    schema.add_field(field_name="visual_entities", datatype=DataType.VARCHAR, max_length=IMAGE_META_MAX_LEN)
+    schema.add_field(field_name="operation_steps", datatype=DataType.VARCHAR, max_length=IMAGE_META_MAX_LEN)
+    schema.add_field(field_name="warnings", datatype=DataType.VARCHAR, max_length=IMAGE_META_MAX_LEN)
+    client.create_collection(collection_name=name, schema=schema)
+
+
+def create_image_vector_index(client: MilvusClient) -> None:
+    """为手册图片 collection 建立向量与手册名索引并 load。"""
+    name = settings.multimodal_image_collection
+    index_params = MilvusClient.prepare_index_params()
+    for field_name in ("image_vector", "semantic_vector"):
+        index_params.add_index(
+            field_name=field_name,
+            index_type="HNSW",
+            metric_type="COSINE",
+            params={"M": 16, "efConstruction": 256},
+        )
+    index_params.add_index(field_name="manual_name", index_type="TRIE")
+    client.create_index(collection_name=name, index_params=index_params)
+    client.load_collection(collection_name=name)
+
+
+def build_user_memory_collection(client: MilvusClient, vector_dim: int | None = None) -> None:
+    """(Re)create 长期用户情景记忆 collection。
+
+    该 collection 只保存用户个人化/情景化记忆，不重复手册静态知识。
+    """
+    name = settings.memory_episodic_collection
+    dim = vector_dim or settings.vector_dim
+    if client.has_collection(collection_name=name):
+        client.drop_collection(collection_name=name)
+
+    schema = MilvusClient.create_schema(auto_id=False, enable_dynamic_field=False)
+    schema.add_field(
+        field_name="memory_id",
+        datatype=DataType.VARCHAR,
+        max_length=256,
+        is_primary=True,
+    )
+    schema.add_field(field_name="user_key", datatype=DataType.VARCHAR, max_length=128)
+    schema.add_field(field_name="memory_text", datatype=DataType.VARCHAR, max_length=MEMORY_TEXT_MAX_LEN)
+    schema.add_field(field_name="dense_vector", datatype=DataType.FLOAT_VECTOR, dim=dim)
+    schema.add_field(field_name="memory_type", datatype=DataType.VARCHAR, max_length=64)
+    schema.add_field(field_name="source_session", datatype=DataType.VARCHAR, max_length=256)
+    schema.add_field(field_name="created_at", datatype=DataType.DOUBLE)
+    schema.add_field(field_name="expire_ts", datatype=DataType.DOUBLE)
+    client.create_collection(collection_name=name, schema=schema)
+
+    index_params = MilvusClient.prepare_index_params()
+    index_params.add_index(
+        field_name="dense_vector",
+        index_type="HNSW",
+        metric_type="COSINE",
+        params={"M": 16, "efConstruction": 256},
+    )
+    index_params.add_index(field_name="user_key", index_type="TRIE")
+    index_params.add_index(field_name="expire_ts", index_type="STL_SORT")
+    client.create_index(collection_name=name, index_params=index_params)
+    client.load_collection(collection_name=name)
+
+
+def build_user_memory_v2_collection(client: MilvusClient, vector_dim: int | None = None) -> None:
+    """(Re)create v3 episodic memory collection。
+
+    v2/v3 长期记忆保存的是“事件”，不是对话全文摘要；metadata 字段用于按用户、
+    事件类型、产品、工单号过滤，dense_vector 只负责语义召回。
+    """
+    name = settings.memory_v3_episodic_collection
+    dim = vector_dim or settings.vector_dim
+    if client.has_collection(collection_name=name):
+        client.drop_collection(collection_name=name)
+
+    schema = MilvusClient.create_schema(auto_id=False, enable_dynamic_field=False)
+    schema.add_field(
+        field_name="event_id",
+        datatype=DataType.VARCHAR,
+        max_length=256,
+        is_primary=True,
+    )
+    schema.add_field(field_name="user_key", datatype=DataType.VARCHAR, max_length=128)
+    schema.add_field(field_name="event_type", datatype=DataType.VARCHAR, max_length=64)
+    schema.add_field(field_name="title", datatype=DataType.VARCHAR, max_length=512)
+    schema.add_field(field_name="summary", datatype=DataType.VARCHAR, max_length=MEMORY_TEXT_MAX_LEN)
+    schema.add_field(field_name="product_model", datatype=DataType.VARCHAR, max_length=256)
+    schema.add_field(field_name="case_id", datatype=DataType.VARCHAR, max_length=256)
+    schema.add_field(field_name="issue_thread_id", datatype=DataType.VARCHAR, max_length=256)
+    schema.add_field(field_name="dense_vector", datatype=DataType.FLOAT_VECTOR, dim=dim)
+    schema.add_field(field_name="created_at", datatype=DataType.DOUBLE)
+    schema.add_field(field_name="expire_ts", datatype=DataType.DOUBLE)
+    client.create_collection(collection_name=name, schema=schema)
+
+    index_params = MilvusClient.prepare_index_params()
+    index_params.add_index(
+        field_name="dense_vector",
+        index_type="HNSW",
+        metric_type="COSINE",
+        params={"M": 16, "efConstruction": 256},
+    )
+    index_params.add_index(field_name="user_key", index_type="TRIE")
+    index_params.add_index(field_name="event_type", index_type="TRIE")
+    index_params.add_index(field_name="product_model", index_type="TRIE")
+    index_params.add_index(field_name="case_id", index_type="TRIE")
+    index_params.add_index(field_name="expire_ts", index_type="STL_SORT")
+    client.create_index(collection_name=name, index_params=index_params)
+    client.load_collection(collection_name=name)

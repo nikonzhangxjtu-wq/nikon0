@@ -1,0 +1,29 @@
+services:
+  nikon0-redis:
+    image: redis:7-alpine
+    container_name: nikon0-redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - nikon0_redis_data:/data
+
+  nikon0-mysql:
+    image: mysql:8.4
+    container_name: nikon0-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nikon0
+      MYSQL_USER: nikon0
+      MYSQL_PASSWORD: nikon0
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - nikon0_mysql_data:/var/lib/mysql
+
+volumes:
+  nikon0_redis_data:
+  nikon0_mysql_data:

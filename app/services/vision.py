@@ -8,8 +8,30 @@ from __future__ import annotations
 
 import json
 import re
+from dataclasses import dataclass, field
 
 from app.core.config import settings
+from app.services.llm_clients import chat_with_image_inputs
+
+
+@dataclass(frozen=True)
+class VisualSummary:
+    summary: str = ""
+    ocr_text: str = ""
+    key_entities: list[str] = field(default_factory=list)
+    product_type: str = ""
+
+    def to_context_text(self) -> str:
+        parts: list[str] = []
+        if self.ocr_text:
+            parts.append(f"OCR文字：{self.ocr_text}")
+        if self.key_entities:
+            parts.append(f"关键实体：{', '.join(self.key_entities)}")
+        if self.product_type:
+            parts.append(f"产品类型：{self.product_type}")
+        if self.summary:
+            parts.append(f"图片摘要：{self.summary}")
+        return "\n".join(parts)
 
 
 def _ensure_data_uri(image_b64_or_uri: str) -> str:
@@ -22,10 +44,18 @@ def _ensure_data_uri(image_b64_or_uri: str) -> str:
     return f"data:image/jpeg;base64,{s}"
 
 
-def _extract_summary(raw: str) -> str:
+def _coerce_str_list(value: object) -> list[str]:
+    if isinstance(value, list):
+        return [str(v).strip() for v in value if str(v).strip()]
+    if isinstance(value, str):
+        return [v.strip() for v in re.split(r"[,，、;；\s]+", value) if v.strip()]
+    return []
+
+
+def _extract_visual_summary(raw: str) -> VisualSummary:
     text = (raw or "").strip()
     if not text:
-        return ""
+        return VisualSummary()
     if "```" in text:
         parts = text.split("```")
         for p in parts:
@@ -39,15 +69,19 @@ def _extract_summary(raw: str) -> str:
     if start >= 0 and end > start:
         try:
             obj = json.loads(text[start : end + 1])
-            summary = obj.get("summary")
-            if isinstance(summary, str):
-                return summary.strip()
+            if isinstance(obj, dict):
+                return VisualSummary(
+                    summary=str(obj.get("summary") or "").strip(),
+                    ocr_text=str(obj.get("ocr_text") or "").strip(),
+                    key_entities=_coerce_str_list(obj.get("key_entities")),
+                    product_type=str(obj.get("product_type") or "").strip(),
+                )
         except json.JSONDecodeError:
             pass
 
     # 兜底：移除多余空白，截取首段文本
     text = re.sub(r"\s+", " ", text).strip()
-    return text
+    return VisualSummary(summary=text)
 
 
 class VisionInterpreter:
@@ -59,51 +93,44 @@ class VisionInterpreter:
         if not images:
             return ""
 
-        try:
-            from langchain_core.messages import HumanMessage
-            from langchain_ollama import ChatOllama
-        except ModuleNotFoundError as exc:
-            print(f"[WARN] 视觉摘要跳过：缺少依赖 ({exc})")
-            return ""
-
         model = (settings.vision_model or "").strip() or settings.gen_model
-        client = ChatOllama(
-            model=model,
-            base_url=settings.ollama_base_url,
-            temperature=0.0,
-        )
-
         system = (
             "你是客服系统中的视觉理解模块。请只根据用户上传图片和问题，提取对客服问答有帮助的"
             "可观察信息（部件、指示灯状态、故障提示、型号/标签、界面文字等）。"
             "不要编造图片中看不到的细节。"
             "只输出一行 JSON："
-            '{"summary":"1~3句中文摘要，尽量包含可用于检索的关键词"}'
+            '{"summary":"1~3句中文摘要","ocr_text":"图片中可见文字，没有则空字符串",'
+            '"key_entities":["型号/故障码/部件/品牌等关键词"],"product_type":"产品类型，没有则空字符串"}'
         )
         user_text = f"用户问题：{question.strip()}\n请输出图片摘要。"
 
-        content: list[dict] = [{"type": "text", "text": user_text}]
         max_images = max(1, settings.vision_max_images)
+        image_payloads: list[str] = []
         for img in images[:max_images]:
             uri = _ensure_data_uri(img)
             if not uri:
                 continue
-            # ChatOllama 兼容 OpenAI 风格的 image_url 内容块。
-            content.append({"type": "image_url", "image_url": {"url": uri}})
+            image_payloads.append(uri)
 
-        if len(content) <= 1:
+        if not image_payloads:
             return ""
 
         try:
-            msg = client.invoke([("system", system), HumanMessage(content=content)])
+            raw = chat_with_image_inputs(
+                model=model,
+                prompt=f"{system}\n\n{user_text}",
+                images=image_payloads,
+                temperature=0.0,
+                max_tokens=512,
+                timeout=120,
+            )
         except Exception as exc:  # noqa: BLE001
             print(f"[WARN] 视觉摘要失败，已降级为无图摘要: {exc}")
             return ""
 
-        raw = getattr(msg, "content", "") or ""
-        summary = _extract_summary(raw)
-        if not summary:
+        summary = _extract_visual_summary(raw)
+        text = summary.to_context_text()
+        if not text:
             return ""
         max_chars = max(80, settings.vision_summary_max_chars)
-        return summary[:max_chars]
-
+        return text[:max_chars]

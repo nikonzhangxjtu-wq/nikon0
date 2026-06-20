@@ -114,6 +114,26 @@ def build_multimodal_context_block(chunks: list[RetrievedChunk]) -> MultimodalCo
                 )
                 chunk_refs.append(f"<{token}:{img_id}>")
             lines.append(f"可引用图片: {', '.join(chunk_refs)}")
+        if getattr(chunk, "image_evidence", None):
+            lines.append("[图片结构证据]")
+            for evidence in chunk.image_evidence:
+                token = f"IMG_{next_image_idx}"
+                next_image_idx += 1
+                image_ref_map[token] = evidence.image_id
+                image_refs.append(
+                    PromptImageRef(
+                        token=token,
+                        image_id=evidence.image_id,
+                        chunk_id=chunk.chunk_id,
+                        local_index=len(image_refs) + 1,
+                    )
+                )
+                lines.append(
+                    f"<{token}:{evidence.image_id}> "
+                    f"score={evidence.score:.4f} reason={evidence.match_reason}"
+                )
+                if evidence.prompt_text:
+                    lines.append(evidence.prompt_text)
         lines.append("")
 
     return MultimodalContextBlock(

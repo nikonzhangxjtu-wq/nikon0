@@ -2,7 +2,7 @@
 
 设计目标：
 1) 与 pipeline 解耦：本模块只负责「查询 -> 收集 -> 摘要 -> 返回证据块」。
-2) Provider 可插拔：默认不联网；接入 MCP 时仅需实现 `ReviewSearchProvider`。
+2) Provider 可插拔：默认不联网；重新接入外部服务时仅需实现 `ReviewSearchProvider`。
 3) 安全降级：无结果或 LLM 失败时返回可解释的 fallback_reason。
 """
 
@@ -14,6 +14,7 @@ from dataclasses import dataclass, field
 from typing import Protocol
 
 from app.core.config import settings
+from app.services.llm_clients import chat_text
 
 
 @dataclass(frozen=True)
@@ -44,7 +45,7 @@ class OnlineReviewResult:
 
 
 class ReviewSearchProvider(Protocol):
-    """外部评价检索 Provider 协议（MCP 适配层实现此接口）。"""
+    """外部评价检索 Provider 协议。"""
 
     def search_reviews(self, query: str, *, top_k: int = 8) -> list[ReviewHit]:
         ...
@@ -289,21 +290,13 @@ class OnlineReviewSkill:
         return "\n".join(lines).strip()
 
     def _call_llm(self, prompt: str) -> str:
-        import requests as _req
-
-        resp = _req.post(
-            f"{settings.ollama_base_url}/api/chat",
-            json={
-                "model": self._model,
-                "messages": [{"role": "user", "content": prompt}],
-                "stream": False,
-                "options": {"temperature": 0.0, "num_predict": 256},
-            },
+        return chat_text(
+            model=self._model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0,
+            max_tokens=256,
             timeout=20,
         )
-        resp.raise_for_status()
-        body = resp.json()
-        return body.get("message", {}).get("content", "")
 
     @staticmethod
     def _build_context_block(*, summary: str, hits: list[ReviewHit]) -> str:
@@ -314,4 +307,3 @@ class OnlineReviewSkill:
             url = h.url or "-"
             lines.append(f"{idx}. {title} | {src} | {url}")
         return "\n".join(lines).strip()
-

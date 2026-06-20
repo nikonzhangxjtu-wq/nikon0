@@ -1,0 +1,12 @@
+{
+  "case_id": "qa-002",
+  "category": "product_support",
+  "message": "How do I make homemade fries in the Airfryer?",
+  "golden_answer": "Peel potatoes and cut into 10x10mm sticks. Soak in water for at least 30 minutes. Dry with towel. Mix with one tablespoon of cooking oil. Put sticks in basket and fry, shaking 2-3 times during cooking. Best to air fry in portions up to 800g.",
+  "answer": "",
+  "status": "error",
+  "selected_skill": "",
+  "selection_source": "",
+  "elapsed_sec": 0.0,
+  "error": "AttributeError: 'AgentResponse' object has no attribute 'trace'"
+}

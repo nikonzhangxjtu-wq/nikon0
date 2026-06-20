@@ -1,6 +1,6 @@
 """从用户问题推断 ``manual_name``（与 ``手册/*.txt`` 的 stem 一致）。
 
-使用本地 Ollama（``SIMPLE_LLM_MODEL``）在**当前目录下已有手册名**中做
+使用轻量 LLM（百炼 API 优先，Ollama 兜底）在**当前目录下已有手册名**中做
 单选分类；解析失败或模型输出不在列表中时返回 ``""``，由检索端走全库。
 """
 
@@ -18,8 +18,27 @@ if __name__ == "__main__":
 
 import json
 import re
+from dataclasses import dataclass
 
 from app.core.config import settings
+from app.services.llm_clients import chat_text
+
+
+@dataclass(frozen=True)
+class ManualNameDecision:
+    """手册名识别结果。
+
+    ``manual_name`` 只有在置信度达到阈值时才应用为检索过滤，避免错选手册。
+    """
+
+    manual_name: str
+    confidence: float
+    source: str
+    reason: str = ""
+
+    @property
+    def should_filter(self) -> bool:
+        return bool(self.manual_name) and self.confidence >= settings.manual_name_filter_min_confidence
 
 _SYSTEM = """你是手册路由助手。根据用户问题中提到的**主体设备/产品**，判断最可能对应哪一本「操作手册」。
 
@@ -65,7 +84,7 @@ def _parse_llm_manual_name(raw: str, stems: set[str]) -> str:
     return name if name in stems else ""
 
 
-def _keyword_fallback(question: str, stems: set[str]) -> str:
+def _keyword_fallback(question: str, stems: set[str]) -> ManualNameDecision:
     """Fallback: 用问题中的关键词匹配手册名（LLM 输出不在列表中时使用）。"""
     q_lower = question.lower()
     best = ""
@@ -80,25 +99,30 @@ def _keyword_fallback(question: str, stems: set[str]) -> str:
             if kw.lower() in q_lower and len(kw) > best_len:
                 best_len = len(kw)
                 best = stem
-    return best
+    if not best:
+        return ManualNameDecision("", 0.0, "keyword", "未命中手册名关键词")
+    confidence = 0.95 if best_len >= 2 else 0.72
+    return ManualNameDecision(best, confidence, "keyword", "问题文本直接命中手册名")
 
 
-def query_construction(question: str) -> str:
-    """返回模型选中的 ``manual_name``（手册 txt stem），无法判断则 ``""``。"""
+def query_construction_decision(question: str) -> ManualNameDecision:
+    """返回带置信度的 ``manual_name`` 决策。"""
     q = question.strip()
     if not q:
-        return ""
+        return ManualNameDecision("", 0.0, "empty", "空问题")
 
     manual_dir = Path(settings.manual_dir).expanduser().resolve()
     stems_list = _list_manual_stems(manual_dir)
     if not stems_list:
-        return ""
+        return ManualNameDecision("", 0.0, "manual_dir", "手册目录为空")
 
     stems_set = set(stems_list)
     if len(stems_list) == 1:
-        return stems_list[0]
+        return ManualNameDecision(stems_list[0], 1.0, "single_manual", "仅有一本手册")
 
-    import requests as _req
+    keyword_decision = _keyword_fallback(q, stems_set)
+    if keyword_decision.should_filter:
+        return keyword_decision
 
     human = (
         "允许的手册名（JSON 数组，必须原样匹配其一）：\n"
@@ -106,30 +130,43 @@ def query_construction(question: str) -> str:
         f"用户问题：\n{q}\n"
     )
 
-    payload = {
-        "model": settings.simple_llm_model,
-        "messages": [
+    try:
+        raw = chat_text(
+            model=settings.simple_llm_model,
+            messages=[
             {"role": "system", "content": _SYSTEM},
             {"role": "user", "content": human},
-        ],
-        "stream": False,
-        "options": {"temperature": 0.0, "num_predict": 128},
-    }
-    try:
-        resp = _req.post(
-            f"{settings.ollama_base_url}/api/chat",
-            json=payload,
+            ],
+            temperature=0.0,
+            max_tokens=128,
             timeout=15,
         )
-        resp.raise_for_status()
-        raw = resp.json().get("message", {}).get("content", "")
     except Exception:
-        return ""
+        return keyword_decision
 
     result = _parse_llm_manual_name(raw, stems_set)
     if not result:
-        result = _keyword_fallback(q, stems_set)
-    return result
+        return keyword_decision
+
+    # LLM 的单选有帮助，但错选代价很高；只有当题面也弱命中该手册名时才给高置信。
+    stem_core = result
+    for sfx in ("手册", "Manual", "manual"):
+        if stem_core.endswith(sfx) and len(stem_core) > len(sfx):
+            stem_core = stem_core[: -len(sfx)]
+            break
+    if stem_core and stem_core.lower() in q.lower():
+        confidence = 0.86
+        reason = "LLM 选择且问题文本命中手册主体"
+    else:
+        confidence = 0.58
+        reason = "LLM 选择但题面未直接命中手册主体，低置信全库检索"
+    return ManualNameDecision(result, confidence, "llm", reason)
+
+
+def query_construction(question: str) -> str:
+    """返回高置信 ``manual_name``；低置信或无法判断则 ``""``。"""
+    decision = query_construction_decision(question)
+    return decision.manual_name if decision.should_filter else ""
 
 
 if __name__ == "__main__":

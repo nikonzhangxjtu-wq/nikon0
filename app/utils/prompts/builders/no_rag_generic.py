@@ -68,6 +68,13 @@ class NoRagGenericPromptBuilder:
         if ctx.conversation_history:
             conv_history = f"{ctx.conversation_history}\n"
 
+        memory = ""
+        if ctx.memory_context:
+            memory = (
+                "可用记忆 / Available Memory：\n"
+                f"{ctx.memory_context}\n"
+            )
+
         return f"""{lang}
 
 你是电商/设备客服助手。{evidence_note}
@@ -77,7 +84,7 @@ You are an e-commerce/device customer support assistant. {evidence_note}
 
 【通用场景补充规则 / General Supplemental Rules】
 {rules}
-{low_conf}{visual}{conv_history}
+{low_conf}{visual}{memory}{conv_history}
 用户问题 / Question：
 {ctx.question}
 
