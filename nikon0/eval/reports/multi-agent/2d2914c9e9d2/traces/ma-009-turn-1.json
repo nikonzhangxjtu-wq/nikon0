@@ -1,0 +1,1099 @@
+{
+  "trace": {
+    "trace_id": "711a77703e814775b3a8a091a4460fbe",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-009",
+    "user_message": "空气净化器的滤网怎么清洁？",
+    "selected_agents": [
+      "support"
+    ],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 13,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-009",
+        "section_count": 3,
+        "section_names": [
+          "system_policy",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 176,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "current_user": 13,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      },
+      {
+        "message_chars": 13,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-009",
+        "section_count": 4,
+        "section_names": [
+          "system_policy",
+          "evidence",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 2589,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "evidence": 2400,
+            "current_user": 13,
+            "runtime": 117
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "evidence": 35,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "evidence",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [
+            "evidence"
+          ],
+          "dropped_sections": [],
+          "truncated_sections": [
+            "evidence"
+          ]
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [
+      {
+        "query": "空气净化器的滤网怎么清洁？",
+        "intent": "product_support",
+        "evidence_count": 3,
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "空气净化器手册",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": true
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "空气净化器手册"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 3,
+            "retrieval_trace": {
+              "query": "空气净化器的滤网怎么清洁？",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 3,
+              "score_threshold": 0.1,
+              "top1_score": 0.228824,
+              "retrieved_chunk_ids": [
+                "空气净化器手册_0003",
+                "空气净化器手册_0001",
+                "空气净化器手册_0004"
+              ],
+              "filtered_chunk_ids": [
+                "空气净化器手册_0003",
+                "空气净化器手册_0001",
+                "空气净化器手册_0004"
+              ],
+              "retrieved_manual_names": [
+                "空气净化器手册",
+                "空气净化器手册",
+                "空气净化器手册"
+              ],
+              "filtered_manual_names": [
+                "空气净化器手册",
+                "空气净化器手册",
+                "空气净化器手册"
+              ],
+              "source_queries": [
+                "空气净化器的滤网怎么清洁？"
+              ],
+              "manual_name_decisions": [
+                "空气净化器手册"
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Manual03_17",
+                "Manual03_18",
+                "Manual03_19",
+                "Manual03_20",
+                "Manual03_0",
+                "Manual03_1",
+                "Manual03_2",
+                "Manual03_3",
+                "Manual03_4",
+                "Manual03_5",
+                "Manual03_6",
+                "Manual03_7",
+                "Manual03_8",
+                "Manual03_9",
+                "Manual03_10",
+                "Manual03_11",
+                "Manual03_12",
+                "Manual03_13",
+                "Manual03_21",
+                "Manual03_22",
+                "Manual03_23",
+                "Manual03_24",
+                "Manual03_25",
+                "Manual03_26"
+              ]
+            }
+          }
+        ],
+        "product_resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "air_purifier",
+          "display_name": "空气净化器",
+          "manual_names": [
+            "空气净化器手册"
+          ],
+          "matched_terms": [
+            "空气净化器"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "service_id": "product-support",
+        "tool_name": "resolve_product",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "search_product_manual",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "validate_answer_grounding",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      }
+    ],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781970370.303936
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "llm",
+          "confidence": 0.95,
+          "reason": "User query is a new, standalone question about air purifier filter cleaning; no existing threads are relevant.",
+          "fallback_reason": ""
+        },
+        "created_at": 1781970377.475862
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 0.95,
+          "source": "llm",
+          "reason": "User query is a new, standalone question about air purifier filter cleaning; no existing threads are relevant."
+        },
+        "created_at": 1781970377.475866
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "current_user",
+            "runtime",
+            "system_policy",
+            "evidence"
+          ],
+          "reasons": {
+            "current_user": "需要用户的当前消息以理解问题",
+            "runtime": "提供会话运行时的基本信息",
+            "system_policy": "界定回答边界和禁止事项",
+            "evidence": "需要商品知识或手册中的滤网清洁方法"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970382.9896462
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 13,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-009",
+          "section_count": 3,
+          "section_names": [
+            "system_policy",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 176,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "current_user": 13,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970382.9897401
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "The user asks about cleaning an air purifier filter, which is a product maintenance question that falls under support.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"The user asks about cleaning an air purifier filter, which is a product maintenance question that falls under support.\"\n}"
+        },
+        "created_at": 1781970388.0373278
+      },
+      {
+        "stage": "agent.execution_start",
+        "message": "support agent started",
+        "payload": {
+          "agent": "support"
+        },
+        "created_at": 1781970388.037405
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.resolve_product",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970388.0374641
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970388.037498
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.resolve_product returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970388.037639
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970388.0376582
+      },
+      {
+        "stage": "product.resolve",
+        "message": "product resolution status=resolved",
+        "payload": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "air_purifier",
+          "display_name": "空气净化器",
+          "manual_names": [
+            "空气净化器手册"
+          ],
+          "matched_terms": [
+            "空气净化器"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        },
+        "created_at": 1781970388.037715
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.search_product_manual",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970388.0377312
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970388.037741
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.search_product_manual returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970401.7251499
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970401.725159
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "current_user",
+            "runtime",
+            "evidence"
+          ],
+          "reasons": {
+            "system_policy": "需要确认回答边界，避免不当建议",
+            "current_user": "包含用户当前问题",
+            "runtime": "提供渠道等运行时信息可能影响回答形式",
+            "evidence": "清洁方法需要检索商品手册或知识库"
+          },
+          "source": "llm",
+          "confidence": 0.9
+        },
+        "created_at": 1781970407.0290759
+      },
+      {
+        "stage": "context.tool_observations",
+        "message": "built prompt tool observations",
+        "payload": {
+          "item_count": 2,
+          "raw_result_refs": [
+            "trace://711a77703e814775b3a8a091a4460fbe/tool_results/0",
+            "trace://711a77703e814775b3a8a091a4460fbe/tool_results/1"
+          ]
+        },
+        "created_at": 1781970407.0292501
+      },
+      {
+        "stage": "context.evidence_pack",
+        "message": "built prompt evidence pack",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:空气净化器手册_0003",
+            "enterprise_rag:空气净化器手册_0001",
+            "enterprise_rag:空气净化器手册_0004"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:空气净化器手册_0003",
+            "enterprise_rag:空气净化器手册_0001",
+            "enterprise_rag:空气净化器手册_0004"
+          ],
+          "deduplicated_evidence_ids": [],
+          "item_count": 3,
+          "source": "llm_span_selector"
+        },
+        "created_at": 1781970407.0296571
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 13,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-009",
+          "section_count": 4,
+          "section_names": [
+            "system_policy",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 2589,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "evidence": 2400,
+              "current_user": 13,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "evidence",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [
+              "evidence"
+            ],
+            "dropped_sections": [],
+            "truncated_sections": [
+              "evidence"
+            ]
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970407.029904
+      },
+      {
+        "stage": "llm.answer",
+        "message": "generated product support answer",
+        "payload": {
+          "node": "product_support",
+          "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+          "evidence_count": 3
+        },
+        "created_at": 1781970416.182195
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.validate_answer_grounding",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970416.1823401
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970416.182368
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.validate_answer_grounding returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970416.183851
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970416.183862
+      },
+      {
+        "stage": "evidence.usage",
+        "message": "recorded product-support evidence usage",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:空气净化器手册_0003",
+            "enterprise_rag:空气净化器手册_0001",
+            "enterprise_rag:空气净化器手册_0004"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:空气净化器手册_0003",
+            "enterprise_rag:空气净化器手册_0001",
+            "enterprise_rag:空气净化器手册_0004"
+          ],
+          "used_evidence_ids": [
+            "enterprise_rag:空气净化器手册_0003",
+            "enterprise_rag:空气净化器手册_0001",
+            "enterprise_rag:空气净化器手册_0004"
+          ],
+          "grounding_checked": true,
+          "grounding": {
+            "grounded": true,
+            "missing_terms": [],
+            "evidence_count": 3,
+            "token_overlap": 1,
+            "reason": "answer is covered by evidence"
+          },
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "air_purifier",
+            "display_name": "空气净化器",
+            "manual_names": [
+              "空气净化器手册"
+            ],
+            "matched_terms": [
+              "空气净化器"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          }
+        },
+        "created_at": 1781970416.183887
+      },
+      {
+        "stage": "agent.execution_stop",
+        "message": "support agent completed",
+        "payload": {
+          "agent": "support",
+          "status": "success"
+        },
+        "created_at": 1781970416.1839402
+      },
+      {
+        "stage": "agent.handoff_created",
+        "message": "support handoff created",
+        "payload": {
+          "agent": "support",
+          "handoff": {
+            "stage": "diagnosis",
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "air_purifier",
+              "display_name": "空气净化器",
+              "manual_names": [
+                "空气净化器手册"
+              ],
+              "matched_terms": [
+                "空气净化器"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "diagnosis_status": "grounded",
+            "symptoms": [
+              "空气净化器的滤网怎么清洁？"
+            ],
+            "attempted_steps": [],
+            "recommended_next_steps": [
+              "根据空气净化器手册，**您可以清洁的是预过滤网**，其他滤网（高效过滤网、活性炭滤网）**不可水洗**，如果过脏需要直接更换。清洁预过滤网时请注意以下步骤和安全提醒。\n\n**清洁步骤：**\n1. **断电**：清洁前务必拔下电源插头，避免触电或故障。\n2. **取出滤网**：按手册拆机步骤（双手握上盖向上拉起→拉开背部滤网盖→取出滤网）。\n3. **清洁预过滤网**：用**吸尘器**或**软刷**轻轻清除预过滤网表面的灰尘。  \n   **⚠️ 严禁用水清洗**——水洗会损坏滤网。\n4. **清洁滤网仓内部**：用吸尘器和湿毛巾清洁机身内部，然后用软布擦干。\n5. **装回滤网**：将滤网装回后，长按控制面板上的“睡眠+自动”键5秒以上重置滤网指示灯。\n\n**重要提醒：**\n- 每月建议清洁预过滤网1-2次，污染严重时可增加频率。\n- 若滤网已经非常脏或使用超过6-12个月，**请直接更换新滤网**（滤网更换指示灯亮起红色时也需更换），不要继续清洁。\n- 更换滤网后请务必重置指示灯，否则设备可能无法正常工作。\n\n如果您对滤网型号或更换操作有疑问，可以进一步提供产品型号，我会帮您查找详细信息。"
+            ],
+            "safety_risks": [],
+            "evidence_ids": [
+              "enterprise_rag:空气净化器手册_0003",
+              "enterprise_rag:空气净化器手册_0001",
+              "enterprise_rag:空气净化器手册_0004"
+            ],
+            "summary": "根据空气净化器手册，**您可以清洁的是预过滤网**，其他滤网（高效过滤网、活性炭滤网）**不可水洗**，如果过脏需要直接更换。清洁预过滤网时请注意以下步骤和安全提醒。\n\n**清洁步骤：**\n1. **断电**：清洁前务必拔下电源插头，避免触电或故障。\n2. **取出滤网**：按手册拆机步骤（双手握上盖向上拉起→拉开背部滤网盖→取出滤网）。\n3. **清洁预过滤网**：用**吸尘器**或**软刷**轻轻清除预过滤网表面的灰尘。  \n   **⚠️ 严禁用水清洗**——水洗会损坏滤网。\n4. **清洁滤网仓内部**：用吸尘器和湿毛巾清洁机身内部，然后用软布擦干。\n5. **装回滤网**：将滤网装回后，长按控制面板上的“睡眠+自动”键5秒以上重置滤网指示灯。\n\n**重要提醒：**\n- 每月建议清洁预过滤网1-2次，污染严重时可增加频率。\n- 若滤网已经非常脏或使用超过6-12个月，**请直接更换"
+          }
+        },
+        "created_at": 1781970416.183957
+      },
+      {
+        "stage": "agent.replan",
+        "message": "replanned after support result",
+        "payload": {
+          "action": "clarify",
+          "confidence": 0.9,
+          "reason": "Support has provided a detailed answer based on the manual. Since no further user input has been received, it is appropriate to clarify with the user whether the solution was helpful or if they have additional questions.",
+          "source": "llm",
+          "raw_response": "{\"action\": \"clarify\", \"confidence\": 0.9, \"reason\": \"Support has provided a detailed answer based on the manual. Since no further user input has been received, it is appropriate to clarify with the user whether the solution was helpful or if they have additional questions.\"}"
+        },
+        "created_at": 1781970423.5580428
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781970423.558208
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 0,
+          "accepted_count": 0,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781970423.575785
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "needs_more_info"
+        },
+        "created_at": 1781970423.575789
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 2663,
+    "section_count": 4,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "evidence",
+        "source": "knowledge_runtime",
+        "priority": 35,
+        "chars": 2400,
+        "token_estimate": 600,
+        "char_budget": 2400,
+        "truncated": true,
+        "metadata": {},
+        "content": "\n[truncated: kept most recent/relevant tail]\n预过滤网 1-2 次。 # 滤网清洁 1 若滤网过脏请直接更换。滤网污染程度因使用环境和运行时长而异，清洁时间相应调整。2 更换滤网期间，可用吸尘器或软刷清洁预过滤网。 禁止 切勿用水清洗滤网。 #\", \"source\": {\"chunk_id\": \"空气净化器手册_0003\", \"manual_name\": \"空气净化器手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"空气净化器手册\"}, \"confidence\": 0.227661, \"evidence_id\": \"enterprise_rag:空气净化器手册_0001\", \"raw_excerpt\": \"注意 使用柔软干布及温和清洁剂清洁设备。请勿通电清洁，以免导致触电或故障。使用前请拆除滤网上的塑料包装。 注意 请将塑料包装远离儿童，以防窒息。 # 如何拆除滤网塑料包装 新产品内置一体式滤网。拆除滤网包装前请务必拔下设备插头。 注意 滤网塑料包装拆除后无法退货。1 双手握住设备上盖并向上拉起。<IMG:Manual03_0> 2 握住背部滤网盖把手并向前拉出。<IMG:Manual03_1> 3 拆除滤网上的塑料包装。未拆除包装会产生异响，滤网无法正常工作，且可能引发火灾或损坏设备。<IMG:Manual03_2> 4 将滤网上下推入设备，确保滤网贴合紧密。<IMG:Manual03_3> 5 装回滤网盖。先将盖子插入设备底部固定卡槽。向前滑动盖子，使其卡入顶部卡槽。<IMG:Manual03_4> 6 双手握住设备上盖并滑回原位，确保标识朝前。<IMG:Manual03_5> 7 滤网安装完成后，长按控制面板上的睡眠 + 自动键 5 秒以上进行初始化。重置后红色滤网指示灯将熄灭。 # 脚轮安装（可选）1 空气净化器包装盒内有一小盒，内含 4 个脚轮和 8 颗螺丝。2 用螺丝刀拆下空气净化器底部四个底座。3 每个脚轮用两颗螺丝替换原底座。4 保留拆下的底座和螺丝以备后续使用。 注意 若滤盒内无脚轮盒，请联系客服。 # 室内空气净化器 <IMG:Manual03_6> 注意 产品功能和规格可能因型号而异。<IMG:Manual03_7> <IMG:Manual03_8> <IMG:Manual03_9> <IMG:Manual03_10> 注意 建议每 6-12 个月更换一次滤网。更换周期可能因产品使用情况而异。 # 显示屏 <IMG:Manual03_11> # 控制面板 <IMG:Manual03_12> # 控制面板说明 <IMG:Manual03_13> 注意\", \"source\": {\"chunk_id\": \"空气净化器手册_0001\", \"manual_name\": \"空气净化器手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"空气净化器手册\"}, \"confidence\": 0.199846, \"evidence_id\": \"enterprise_rag:空气净化器手册_0004\", \"raw_excerpt\": \"每月清洁设备及预过滤网 1-2 次。 # 滤网清洁 1 若滤网过脏请直接更换。滤网污染程度因使用环境和运行时长而异，清洁时间相应调整。2 更换滤网期间，可用吸尘器或软刷清洁预过滤网。 禁止 切勿用水清洗滤网。 # 更换滤网 1 需更换滤网时，滤网更换指示灯将亮起红色。每 6-12 个月更换一次滤网（滤网安装详见第 4 页）。2 更换滤网后重置指示灯。长按控制面板上的睡眠 + 自动键 5 秒以上重置指示灯。<IMG:Manual03_21> 注意 滤网寿命取决于使用环境。 # 灰尘传感器清洁 1 双手握住设备上盖并向上拉起。<IMG:Manual03_22> 2 握住背部滤网盖把手并向前拉出。<IMG:Manual03_23> 3 拆下设备右侧灰尘传感器盖。<IMG:Manual03_24> 4 用蘸少量水的棉签擦拭灰尘传感器镜头和进风口，再用干净干棉签彻底擦干。<IMG:Manual03_25> 5 装回灰尘传感器盖。装回滤网盖。将设备上盖标识朝前装回。 # 注意 请勿使用丙酮、酒精等强腐蚀性化学试剂擦拭传感器部件，以免损坏镜头。遮盖设备并存放在干燥、无阳光直射的地方。 # 长期存放 1 晴天运行设备 1 小时，拔下电源插头，晾干设备内部。2 遮盖设备并存放在干燥、无阳光直射的地方。 # 故障排除 <IMG:Manual03_26>\", \"source\": {\"chunk_id\": \"空气净化器手册_0004\", \"manual_name\": \"空气净化器手册\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"空气净化器的滤网怎么清洁？\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:空气净化器手册_0003\", \"enterprise_rag:空气净化器手册_0001\", \"enterprise_rag:空气净化器手册_0004\"], \"retrieved_evidence_ids\": [\"enterprise_rag:空气净化器手册_0003\", \"enterprise_rag:空气净化器手册_0001\", \"enterprise_rag:空气净化器手册_0004\"]}}",
+        "preview": "\n[truncated: kept most recent/relevant tail]\n预过滤网 1-2 次。 # 滤网清洁 1 若滤网过脏请直接更换。滤网污染程度因使用环境和运行时长而异，清洁时间相应调整。2 更换滤网期间，可用吸尘器或软刷清洁预过滤网。 禁止 切勿用水清洗滤网。 #\", \"source\": {\"chunk_id\": \"空气净化器手册_0003\", \"manual_name\": \"空气净化器手册\"}, \"source_type\": \"enterprise_"
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 13,
+        "token_estimate": 3,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "空气净化器的滤网怎么清洁？",
+        "preview": "空气净化器的滤网怎么清洁？"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 117,
+        "token_estimate": 29,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "evidence",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 2589,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "evidence": 2400,
+        "current_user": 13,
+        "runtime": 117
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "evidence": 35,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "evidence",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [
+        "evidence"
+      ],
+      "dropped_sections": [],
+      "truncated_sections": [
+        "evidence"
+      ]
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[evidence]\n\n[truncated: kept most recent/relevant tail]\n预过滤网 1-2 次。 # 滤网清洁 1 若滤网过脏请直接更换。滤网污染程度因使用环境和运行时长而异，清洁时间相应调整。2 更换滤网期间，可用吸尘器或软刷清洁预过滤网。 禁止 切勿用水清洗滤网。 #\", \"source\": {\"chunk_id\": \"空气净化器手册_0003\", \"manual_name\": \"空气净化器手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"空气净化器手册\"}, \"confidence\": 0.227661, \"evidence_id\": \"enterprise_rag:空气净化器手册_0001\", \"raw_excerpt\": \"注意 使用柔软干布及温和清洁剂清洁设备。请勿通电清洁，以免导致触电或故障。使用前请拆除滤网上的塑料包装。 注意 请将塑料包装远离儿童，以防窒息。 # 如何拆除滤网塑料包装 新产品内置一体式滤网。拆除滤网包装前请务必拔下设备插头。 注意 滤网塑料包装拆除后无法退货。1 双手握住设备上盖并向上拉起。<IMG:Manual03_0> 2 握住背部滤网盖把手并向前拉出。<IMG:Manual03_1> 3 拆除滤网上的塑料包装。未拆除包装会产生异响，滤网无法正常工作，且可能引发火灾或损坏设备。<IMG:Manual03_2> 4 将滤网上下推入设备，确保滤网贴合紧密。<IMG:Manual03_3> 5 装回滤网盖。先将盖子插入设备底部固定卡槽。向前滑动盖子，使其卡入顶部卡槽。<IMG:Manual03_4> 6 双手握住设备上盖并滑回原位，确保标识朝前。<IMG:Manual03_5> 7 滤网安装完成后，长按控制面板上的睡眠 + 自动键 5 秒以上进行初始化。重置后红色滤网指示灯将熄灭。 # 脚轮安装（可选）1 空气净化器包装盒内有一小盒，内含 4 个脚轮和 8 颗螺丝。2 用螺丝刀拆下空气净化器底部四个底座。3 每个脚轮"
+  },
+  "trace_persisted": "711a77703e814775b3a8a091a4460fbe",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [
+      "support"
+    ],
+    "support_handoff": {
+      "stage": "diagnosis",
+      "product_resolution": {
+        "status": "resolved",
+        "source": "strong_signal",
+        "product_id": "air_purifier",
+        "display_name": "空气净化器",
+        "manual_names": [
+          "空气净化器手册"
+        ],
+        "matched_terms": [
+          "空气净化器"
+        ],
+        "disclose_default_product": false,
+        "candidate_product_ids": [],
+        "reason": "user named product identity"
+      },
+      "diagnosis_status": "grounded",
+      "symptoms": [
+        "空气净化器的滤网怎么清洁？"
+      ],
+      "attempted_steps": [],
+      "recommended_next_steps": [
+        "根据空气净化器手册，**您可以清洁的是预过滤网**，其他滤网（高效过滤网、活性炭滤网）**不可水洗**，如果过脏需要直接更换。清洁预过滤网时请注意以下步骤和安全提醒。\n\n**清洁步骤：**\n1. **断电**：清洁前务必拔下电源插头，避免触电或故障。\n2. **取出滤网**：按手册拆机步骤（双手握上盖向上拉起→拉开背部滤网盖→取出滤网）。\n3. **清洁预过滤网**：用**吸尘器**或**软刷**轻轻清除预过滤网表面的灰尘。  \n   **⚠️ 严禁用水清洗**——水洗会损坏滤网。\n4. **清洁滤网仓内部**：用吸尘器和湿毛巾清洁机身内部，然后用软布擦干。\n5. **装回滤网**：将滤网装回后，长按控制面板上的“睡眠+自动”键5秒以上重置滤网指示灯。\n\n**重要提醒：**\n- 每月建议清洁预过滤网1-2次，污染严重时可增加频率。\n- 若滤网已经非常脏或使用超过6-12个月，**请直接更换新滤网**（滤网更换指示灯亮起红色时也需更换），不要继续清洁。\n- 更换滤网后请务必重置指示灯，否则设备可能无法正常工作。\n\n如果您对滤网型号或更换操作有疑问，可以进一步提供产品型号，我会帮您查找详细信息。"
+      ],
+      "safety_risks": [],
+      "evidence_ids": [
+        "enterprise_rag:空气净化器手册_0003",
+        "enterprise_rag:空气净化器手册_0001",
+        "enterprise_rag:空气净化器手册_0004"
+      ],
+      "summary": "根据空气净化器手册，**您可以清洁的是预过滤网**，其他滤网（高效过滤网、活性炭滤网）**不可水洗**，如果过脏需要直接更换。清洁预过滤网时请注意以下步骤和安全提醒。\n\n**清洁步骤：**\n1. **断电**：清洁前务必拔下电源插头，避免触电或故障。\n2. **取出滤网**：按手册拆机步骤（双手握上盖向上拉起→拉开背部滤网盖→取出滤网）。\n3. **清洁预过滤网**：用**吸尘器**或**软刷**轻轻清除预过滤网表面的灰尘。  \n   **⚠️ 严禁用水清洗**——水洗会损坏滤网。\n4. **清洁滤网仓内部**：用吸尘器和湿毛巾清洁机身内部，然后用软布擦干。\n5. **装回滤网**：将滤网装回后，长按控制面板上的“睡眠+自动”键5秒以上重置滤网指示灯。\n\n**重要提醒：**\n- 每月建议清洁预过滤网1-2次，污染严重时可增加频率。\n- 若滤网已经非常脏或使用超过6-12个月，**请直接更换"
+    },
+    "plans": [
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "The user asks about cleaning an air purifier filter, which is a product maintenance question that falls under support.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"The user asks about cleaning an air purifier filter, which is a product maintenance question that falls under support.\"\n}"
+      },
+      {
+        "action": "clarify",
+        "confidence": 0.9,
+        "reason": "Support has provided a detailed answer based on the manual. Since no further user input has been received, it is appropriate to clarify with the user whether the solution was helpful or if they have additional questions.",
+        "source": "llm",
+        "raw_response": "{\"action\": \"clarify\", \"confidence\": 0.9, \"reason\": \"Support has provided a detailed answer based on the manual. Since no further user input has been received, it is appropriate to clarify with the user whether the solution was helpful or if they have additional questions.\"}"
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "llm",
+      "confidence": 0.95,
+      "reason": "User query is a new, standalone question about air purifier filter cleaning; no existing threads are relevant.",
+      "fallback_reason": ""
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 0.95,
+      "source": "llm",
+      "reason": "User query is a new, standalone question about air purifier filter cleaning; no existing threads are relevant."
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": false,
+    "valid": null,
+    "failure_reason": "",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

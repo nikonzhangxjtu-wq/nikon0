@@ -1,0 +1,504 @@
+{
+  "trace": {
+    "trace_id": "62d0e2e047da492d9666aadf05fb0945",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-005",
+    "user_message": "你支持中文吗？",
+    "selected_agents": [],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 7,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-005",
+        "section_count": 3,
+        "section_names": [
+          "system_policy",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 170,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "current_user": 7,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [],
+    "tool_calls": [],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781970290.063923
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "llm",
+          "confidence": 1.0,
+          "reason": "User asks if assistant supports Chinese; no existing threads. Creating new thread to respond.",
+          "fallback_reason": ""
+        },
+        "created_at": 1781970296.993935
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 1.0,
+          "source": "llm",
+          "reason": "User asks if assistant supports Chinese; no existing threads. Creating new thread to respond."
+        },
+        "created_at": 1781970296.993948
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "需要平台回答边界，确认是否支持中文",
+            "current_user": "需要当前用户消息以回答",
+            "runtime": "需要运行时信息如渠道等以提供合适回复"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970302.832465
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 7,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-005",
+          "section_count": 3,
+          "section_names": [
+            "system_policy",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 170,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "current_user": 7,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970302.8325682
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "general",
+          "confidence": 0.95,
+          "reason": "User asks if system supports Chinese, a capability question without a business request.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"general\",\n  \"confidence\": 0.95,\n  \"reason\": \"User asks if system supports Chinese, a capability question without a business request.\"\n}"
+        },
+        "created_at": 1781970308.78219
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781970308.782293
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 0,
+          "accepted_count": 0,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781970308.791546
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "success"
+        },
+        "created_at": 1781970308.7915509
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 231,
+    "section_count": 3,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 7,
+        "token_estimate": 1,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你支持中文吗？",
+        "preview": "你支持中文吗？"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 104,
+        "token_estimate": 26,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": null}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": null}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 170,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "current_user": 7,
+        "runtime": 104
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [],
+      "dropped_sections": [],
+      "truncated_sections": []
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[current_user]\n你支持中文吗？\n\n[runtime]\n{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": null}"
+  },
+  "trace_persisted": "62d0e2e047da492d9666aadf05fb0945",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [],
+    "support_handoff": {},
+    "plans": [
+      {
+        "action": "general",
+        "confidence": 0.95,
+        "reason": "User asks if system supports Chinese, a capability question without a business request.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"general\",\n  \"confidence\": 0.95,\n  \"reason\": \"User asks if system supports Chinese, a capability question without a business request.\"\n}"
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "llm",
+      "confidence": 1.0,
+      "reason": "User asks if assistant supports Chinese; no existing threads. Creating new thread to respond.",
+      "fallback_reason": ""
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 1.0,
+      "source": "llm",
+      "reason": "User asks if assistant supports Chinese; no existing threads. Creating new thread to respond."
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": false,
+    "valid": null,
+    "failure_reason": "",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

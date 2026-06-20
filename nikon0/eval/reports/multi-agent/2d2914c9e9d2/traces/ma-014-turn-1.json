@@ -1,0 +1,1279 @@
+{
+  "trace": {
+    "trace_id": "278b9c56950f41e3921ea9c29db9832d",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-014",
+    "user_message": "冰箱温度应该怎么设置？",
+    "selected_agents": [
+      "support"
+    ],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 11,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-014",
+        "section_count": 3,
+        "section_names": [
+          "system_policy",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 174,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "current_user": 11,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      },
+      {
+        "message_chars": 11,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-014",
+        "section_count": 4,
+        "section_names": [
+          "system_policy",
+          "evidence",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 2471,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "evidence": 2284,
+            "current_user": 11,
+            "runtime": 117
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "evidence": 35,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "evidence",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [
+      {
+        "query": "冰箱温度应该怎么设置？",
+        "intent": "product_support",
+        "evidence_count": 3,
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "冰箱手册",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": true
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "冰箱手册"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 3,
+            "retrieval_trace": {
+              "query": "冰箱温度应该怎么设置？",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 3,
+              "score_threshold": 0.1,
+              "top1_score": 0.191217,
+              "retrieved_chunk_ids": [
+                "冰箱手册_0010",
+                "冰箱手册_0012",
+                "冰箱手册_0011"
+              ],
+              "filtered_chunk_ids": [
+                "冰箱手册_0010",
+                "冰箱手册_0012",
+                "冰箱手册_0011"
+              ],
+              "retrieved_manual_names": [
+                "冰箱手册",
+                "冰箱手册",
+                "冰箱手册"
+              ],
+              "filtered_manual_names": [
+                "冰箱手册",
+                "冰箱手册",
+                "冰箱手册"
+              ],
+              "source_queries": [
+                "冰箱温度应该怎么设置？"
+              ],
+              "manual_name_decisions": [
+                "冰箱手册"
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Manual17_38",
+                "Manual17_39",
+                "Manual17_42",
+                "Manual17_43",
+                "Manual17_44",
+                "fridge_01",
+                "fridge_02",
+                "fridge_03",
+                "fridge_04",
+                "fridge_05",
+                "Manual17_40",
+                "Manual17_41"
+              ]
+            }
+          }
+        ],
+        "product_resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "refrigerator",
+          "display_name": "冰箱",
+          "manual_names": [
+            "冰箱手册"
+          ],
+          "matched_terms": [
+            "冰箱"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "service_id": "product-support",
+        "tool_name": "resolve_product",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "search_product_manual",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "validate_answer_grounding",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      }
+    ],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [
+      {
+        "key": "product_support",
+        "value": {
+          "disambiguation_pending": false,
+          "disambiguation_candidates": [],
+          "last_query": "冰箱温度应该怎么设置？",
+          "evidence_count": 3,
+          "manual_names": [
+            "冰箱手册"
+          ],
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "refrigerator",
+            "display_name": "冰箱",
+            "manual_names": [
+              "冰箱手册"
+            ],
+            "matched_terms": [
+              "冰箱"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          },
+          "selected_product_id": "refrigerator",
+          "selected_display_name": "冰箱",
+          "allowed_manual_names": [
+            "冰箱手册"
+          ]
+        },
+        "reason": "product support answered with knowledge evidence",
+        "evidence_ids": [
+          "enterprise_rag:冰箱手册_0010",
+          "enterprise_rag:冰箱手册_0012",
+          "enterprise_rag:冰箱手册_0011"
+        ],
+        "provenance": "skill",
+        "confidence": 0.82
+      }
+    ],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781970640.9185011
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "llm",
+          "confidence": 0.95,
+          "reason": "用户询问冰箱温度设置方法，这是一个新话题，且当前无活跃线程和打开线程，因此需要创建新线程。",
+          "fallback_reason": ""
+        },
+        "created_at": 1781970646.1356852
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 0.95,
+          "source": "llm",
+          "reason": "用户询问冰箱温度设置方法，这是一个新话题，且当前无活跃线程和打开线程，因此需要创建新线程。"
+        },
+        "created_at": 1781970646.135693
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "current_user",
+            "runtime",
+            "evidence"
+          ],
+          "reasons": {
+            "system_policy": "通常必须保留，确保回答边界合规",
+            "current_user": "用户当前消息是问题来源",
+            "runtime": "提供运行上下文信息",
+            "evidence": "冰箱温度设置属于商品使用问题，需要检索知识库证据"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970652.942219
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 11,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-014",
+          "section_count": 3,
+          "section_names": [
+            "system_policy",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 174,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "current_user": 11,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970652.942314
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "User asks how to set refrigerator temperature, which is a product/manual question.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"User asks how to set refrigerator temperature, which is a product/manual question.\"\n}"
+        },
+        "created_at": 1781970657.848617
+      },
+      {
+        "stage": "agent.execution_start",
+        "message": "support agent started",
+        "payload": {
+          "agent": "support"
+        },
+        "created_at": 1781970657.848625
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.resolve_product",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970657.848634
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970657.848642
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.resolve_product returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970657.8486779
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970657.848683
+      },
+      {
+        "stage": "product.resolve",
+        "message": "product resolution status=resolved",
+        "payload": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "refrigerator",
+          "display_name": "冰箱",
+          "manual_names": [
+            "冰箱手册"
+          ],
+          "matched_terms": [
+            "冰箱"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        },
+        "created_at": 1781970657.8486981
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.search_product_manual",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970657.848703
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970657.848707
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.search_product_manual returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970667.758085
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970667.758092
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "evidence",
+            "current_user",
+            "system_policy",
+            "runtime"
+          ],
+          "reasons": {
+            "evidence": "用户询问冰箱温度设置，需要商品手册或知识库中的具体参数和指导。",
+            "current_user": "需要用户当前消息来理解问题。",
+            "system_policy": "确保回答符合平台边界和禁止事项。",
+            "runtime": "提供通道、图片数量等运行时信息以辅助处理。"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970672.340796
+      },
+      {
+        "stage": "context.tool_observations",
+        "message": "built prompt tool observations",
+        "payload": {
+          "item_count": 2,
+          "raw_result_refs": [
+            "trace://278b9c56950f41e3921ea9c29db9832d/tool_results/0",
+            "trace://278b9c56950f41e3921ea9c29db9832d/tool_results/1"
+          ]
+        },
+        "created_at": 1781970672.340957
+      },
+      {
+        "stage": "context.evidence_pack",
+        "message": "built prompt evidence pack",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:冰箱手册_0010",
+            "enterprise_rag:冰箱手册_0012",
+            "enterprise_rag:冰箱手册_0011"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:冰箱手册_0010",
+            "enterprise_rag:冰箱手册_0012",
+            "enterprise_rag:冰箱手册_0011"
+          ],
+          "deduplicated_evidence_ids": [],
+          "item_count": 3,
+          "source": "llm_span_selector"
+        },
+        "created_at": 1781970672.341334
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 11,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-014",
+          "section_count": 4,
+          "section_names": [
+            "system_policy",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 2471,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "evidence": 2284,
+              "current_user": 11,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "evidence",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970672.341579
+      },
+      {
+        "stage": "llm.answer",
+        "message": "generated product support answer",
+        "payload": {
+          "node": "product_support",
+          "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+          "evidence_count": 3
+        },
+        "created_at": 1781970681.718111
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.validate_answer_grounding",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970681.718239
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970681.718267
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.validate_answer_grounding returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970681.718542
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970681.718554
+      },
+      {
+        "stage": "evidence.usage",
+        "message": "recorded product-support evidence usage",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:冰箱手册_0010",
+            "enterprise_rag:冰箱手册_0012",
+            "enterprise_rag:冰箱手册_0011"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:冰箱手册_0010",
+            "enterprise_rag:冰箱手册_0012",
+            "enterprise_rag:冰箱手册_0011"
+          ],
+          "used_evidence_ids": [
+            "enterprise_rag:冰箱手册_0010",
+            "enterprise_rag:冰箱手册_0012",
+            "enterprise_rag:冰箱手册_0011"
+          ],
+          "grounding_checked": true,
+          "grounding": {
+            "grounded": true,
+            "missing_terms": [],
+            "evidence_count": 3,
+            "token_overlap": 1,
+            "reason": "answer is covered by evidence"
+          },
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "refrigerator",
+            "display_name": "冰箱",
+            "manual_names": [
+              "冰箱手册"
+            ],
+            "matched_terms": [
+              "冰箱"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          }
+        },
+        "created_at": 1781970681.718582
+      },
+      {
+        "stage": "agent.execution_stop",
+        "message": "support agent completed",
+        "payload": {
+          "agent": "support",
+          "status": "success"
+        },
+        "created_at": 1781970681.71864
+      },
+      {
+        "stage": "agent.handoff_created",
+        "message": "support handoff created",
+        "payload": {
+          "agent": "support",
+          "handoff": {
+            "stage": "diagnosis",
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "refrigerator",
+              "display_name": "冰箱",
+              "manual_names": [
+                "冰箱手册"
+              ],
+              "matched_terms": [
+                "冰箱"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "diagnosis_status": "grounded",
+            "symptoms": [
+              "冰箱温度应该怎么设置？"
+            ],
+            "attempted_steps": [],
+            "recommended_next_steps": [
+              "您可以根据需要调节冷藏室温度，方法如下。\n\n**操作方法：**\n1.  **找到控制面板**：冰箱正面有温度控制显示面板（如附图所示），上面有“REF.TEMP.”按钮（冷藏室温度调节按钮）和“POWER”按钮等。\n2.  **调节冷藏室温度**：按下“温度控制按钮”（即“REF.TEMP.”按钮），每按一次，冷藏室设定温度变化1℃。\n3.  **初始设定参考**：冷藏室初始设定温度通常为0℃或6℃。您可以在此基础上进行调节。\n\n**重要提醒：**\n- **实际温度与设定温度有差异**：冰箱内部的实际温度会随着存放食物的状态和数量变化，您设定的是“目标温度”，并非冰箱内部的实际实时温度。\n- **新机使用建议**：如果是初次使用冰箱，初始运行时制冷效果较弱，建议至少使用2~3天之后，再按照上述方法进行温度调节。"
+            ],
+            "safety_risks": [],
+            "evidence_ids": [
+              "enterprise_rag:冰箱手册_0010",
+              "enterprise_rag:冰箱手册_0012",
+              "enterprise_rag:冰箱手册_0011"
+            ],
+            "summary": "您可以根据需要调节冷藏室温度，方法如下。\n\n**操作方法：**\n1.  **找到控制面板**：冰箱正面有温度控制显示面板（如附图所示），上面有“REF.TEMP.”按钮（冷藏室温度调节按钮）和“POWER”按钮等。\n2.  **调节冷藏室温度**：按下“温度控制按钮”（即“REF.TEMP.”按钮），每按一次，冷藏室设定温度变化1℃。\n3.  **初始设定参考**：冷藏室初始设定温度通常为0℃或6℃。您可以在此基础上进行调节。\n\n**重要提醒：**\n- **实际温度与设定温度有差异**：冰箱内部的实际温度会随着存放食物的状态和数量变化，您设定的是“目标温度”，并非冰箱内部的实际实时温度。\n- **新机使用建议**：如果是初次使用冰箱，初始运行时制冷效果较弱，建议至少使用2~3天之后，再按照上述方法进行温度调节。"
+          }
+        },
+        "created_at": 1781970681.718658
+      },
+      {
+        "stage": "agent.replan",
+        "message": "replanned after support result",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "用户询问冰箱温度设置，support handoff已提供详细解答，可直接回复用户。",
+          "source": "llm",
+          "raw_response": "{\"action\": \"support\", \"confidence\": 0.95, \"reason\": \"用户询问冰箱温度设置，support handoff已提供详细解答，可直接回复用户。\"}"
+        },
+        "created_at": 1781970688.162484
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781970688.1626291
+      },
+      {
+        "stage": "memory_write_agent.request",
+        "message": "requested governed memory candidates",
+        "payload": {
+          "write_request": {
+            "source_agent": "support",
+            "execution_stage": "diagnosis",
+            "message": "冰箱温度应该怎么设置？",
+            "handoff": {
+              "stage": "diagnosis",
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "refrigerator",
+                "display_name": "冰箱",
+                "manual_names": [
+                  "冰箱手册"
+                ],
+                "matched_terms": [
+                  "冰箱"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "diagnosis_status": "grounded",
+              "symptoms": [
+                "冰箱温度应该怎么设置？"
+              ],
+              "attempted_steps": [],
+              "recommended_next_steps": [
+                "您可以根据需要调节冷藏室温度，方法如下。\n\n**操作方法：**\n1.  **找到控制面板**：冰箱正面有温度控制显示面板（如附图所示），上面有“REF.TEMP.”按钮（冷藏室温度调节按钮）和“POWER”按钮等。\n2.  **调节冷藏室温度**：按下“温度控制按钮”（即“REF.TEMP.”按钮），每按一次，冷藏室设定温度变化1℃。\n3.  **初始设定参考**：冷藏室初始设定温度通常为0℃或6℃。您可以在此基础上进行调节。\n\n**重要提醒：**\n- **实际温度与设定温度有差异**：冰箱内部的实际温度会随着存放食物的状态和数量变化，您设定的是“目标温度”，并非冰箱内部的实际实时温度。\n- **新机使用建议**：如果是初次使用冰箱，初始运行时制冷效果较弱，建议至少使用2~3天之后，再按照上述方法进行温度调节。"
+              ],
+              "safety_risks": [],
+              "evidence_ids": [
+                "enterprise_rag:冰箱手册_0010",
+                "enterprise_rag:冰箱手册_0012",
+                "enterprise_rag:冰箱手册_0011"
+              ],
+              "summary": "您可以根据需要调节冷藏室温度，方法如下。\n\n**操作方法：**\n1.  **找到控制面板**：冰箱正面有温度控制显示面板（如附图所示），上面有“REF.TEMP.”按钮（冷藏室温度调节按钮）和“POWER”按钮等。\n2.  **调节冷藏室温度**：按下“温度控制按钮”（即“REF.TEMP.”按钮），每按一次，冷藏室设定温度变化1℃。\n3.  **初始设定参考**：冷藏室初始设定温度通常为0℃或6℃。您可以在此基础上进行调节。\n\n**重要提醒：**\n- **实际温度与设定温度有差异**：冰箱内部的实际温度会随着存放食物的状态和数量变化，您设定的是“目标温度”，并非冰箱内部的实际实时温度。\n- **新机使用建议**：如果是初次使用冰箱，初始运行时制冷效果较弱，建议至少使用2~3天之后，再按照上述方法进行温度调节。"
+            },
+            "result_summary": "您可以根据需要调节冷藏室温度，方法如下。\n\n**操作方法：**\n1.  **找到控制面板**：冰箱正面有温度控制显示面板（如附图所示），上面有“REF.TEMP.”按钮（冷藏室温度调节按钮）和“POWER”按钮等。\n2.  **调节冷藏室温度**：按下“温度控制按钮”（即“REF.TEMP.”按钮），每按一次，冷藏室设定温度变化1℃。\n3.  **初始设定参考**：冷藏室初始设定温度通常为0℃或6℃。您可以在此基础上进行调节。\n\n**重要提醒：**\n- **实际温度与设定温度有差异**：冰箱内部的实际温度会随着存放食物的状态和数量变化，您设定的是“目标温度”，并非冰箱内部的实际实时温度。\n- **新机使用建议**：如果是初次使用冰箱，初始运行时制冷效果较弱，建议至少使用2~3天之后，再按照上述方法进行温度调节。",
+            "evidence_ids": [
+              "enterprise_rag:冰箱手册_0010",
+              "enterprise_rag:冰箱手册_0012",
+              "enterprise_rag:冰箱手册_0011"
+            ],
+            "target_thread_id": null
+          }
+        },
+        "created_at": 1781970688.162892
+      },
+      {
+        "stage": "memory_write_agent.validation_failed",
+        "message": "ValueError: candidate update_key is not allowed",
+        "payload": {
+          "source_agent": "support",
+          "execution_stage": "diagnosis"
+        },
+        "created_at": 1781970700.403394
+      },
+      {
+        "stage": "memory.write_validate",
+        "message": "candidate passed memory governance checks",
+        "payload": {
+          "candidate_id": "memcand_75e2db09552346d085837b8f8ad1e8f2",
+          "outcome": "accept",
+          "target_thread_id": null,
+          "reason": "candidate passed memory governance checks",
+          "conflicts": [],
+          "update": {
+            "key": "product_support",
+            "value": {
+              "disambiguation_pending": false,
+              "disambiguation_candidates": [],
+              "last_query": "冰箱温度应该怎么设置？",
+              "evidence_count": 3,
+              "manual_names": [
+                "冰箱手册"
+              ],
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "refrigerator",
+                "display_name": "冰箱",
+                "manual_names": [
+                  "冰箱手册"
+                ],
+                "matched_terms": [
+                  "冰箱"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "selected_product_id": "refrigerator",
+              "selected_display_name": "冰箱",
+              "allowed_manual_names": [
+                "冰箱手册"
+              ]
+            },
+            "reason": "product support answered with knowledge evidence",
+            "evidence_ids": [
+              "enterprise_rag:冰箱手册_0010",
+              "enterprise_rag:冰箱手册_0012",
+              "enterprise_rag:冰箱手册_0011"
+            ],
+            "provenance": "skill",
+            "confidence": 0.82
+          },
+          "degraded": false
+        },
+        "created_at": 1781970700.403522
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 1,
+          "accepted_count": 1,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781970700.420939
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "success"
+        },
+        "created_at": 1781970700.420944
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 2545,
+    "section_count": 4,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "evidence",
+        "source": "knowledge_runtime",
+        "priority": 35,
+        "chars": 2284,
+        "token_estimate": 571,
+        "char_budget": 2400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"items\": [{\"applicability\": {\"manual_name\": \"冰箱手册\"}, \"confidence\": 0.191217, \"evidence_id\": \"enterprise_rag:冰箱手册_0010\", \"raw_excerpt\": \"• 若墙壁插座松动，请勿插入电源插头。可能引发触电或火灾。 • 切勿拉扯电源线拔下冰箱插头。务必握紧插头直接从插座拔出，否则可能导致电线断开、短路，引发触电或火灾。 • 请勿用湿布清洁插头。清除电源插脚上的异物。 否则有火灾风险。 • 请勿将手伸入电器底部区域。 尖锐边缘可能造成人身伤害。 • 拔下电器插头后，至少等待5分钟再重新插入插座。 冷冻室异常运行可能导致物品损坏。 • 若电器长期不使用，请拔下电源插头。绝缘层老化可能引发火灾。 • 请勿让儿童触碰或玩耍电器正面控制面板。 • 冰箱冰柜使用的制冷剂及绝缘材料气体需要特殊处理。废弃前确保电器背部管道无损坏。 # 部件标识 <IMG:Manual17_38> # 温度控制 冰箱配有控制装置，可调节冷藏室温度。 # 温度控制显示面板 # 温度及功能调节 <IMG:Manual17_39> # 电源\", \"source\": {\"chunk_id\": \"冰箱手册_0010\", \"manual_name\": \"冰箱手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"冰箱手册\"}, \"confidence\": 0.18763, \"evidence_id\": \"enterprise_rag:冰箱手册_0012\", \"raw_excerpt\": \"• 需要快速制冷时请选择此功能。 • 需快速冷却食物时使用。按下超强制冷按钮一次，快速制冷运行，指示灯点亮。 • 超强制冷运行约2小时，运行结束后自动恢复原温度设定。如需提前停止快速制冷，再次按下超强制冷按钮，指示灯熄灭，超强制冷停止，冰箱恢复原温度设定。 <IMG:Manual17_42> # 自检功能 本功能可检查运行故障。若认为冰箱存在问题，按下温度控制按钮： - 若指示灯上下移动，说明冰箱无故障。 - 若指示灯不移动，请保持通电并联系就近售后服务人员。 # 门体报警 冰箱门长时间打开时，报警器鸣响。 # 低温催化除臭系统 （去除异味） # 功能特点 1. 除臭装置在去除异味的同时不会损害存放的食物。 <IMG:Manual17_43> 2. 建议异味较重的食物密封后再放入冰箱。尤其注意发酵食品等，异味可能扩散至其他食物。 # 食物正确存放方法 # 冰箱搁架 餐具或食物间隔合理放置。 <IMG:Manual17_44> # 瓶架 存放高度275毫米及以下的饮料瓶或酒瓶。（玻璃容器易碎，请小心放置。） <IMG:fridge_01> # 零食盒 存放饼干、面包等小食品。（请勿在此存放瓶子或罐子。） <IMG:fridge_02> # 果蔬盒 存放蔬菜或水果。 <IMG:fridge_03> # 乳制品盒 存放黄油、奶酪等乳制品。 <IMG:fridge_04> # 2升瓶架 存放2.0升瓶子或其他大型瓶子。 <IMG:fridge_05> # 食物存放 # 注意 • 请勿存放低温下易变质的食物，如香蕉、甜瓜。 • 热食需冷却后再存放。热食放入冰箱可能导致其他食物变质，并增加耗电量。 • 存放食物时请使用带盖容器，防止水分蒸发，保持食物口感与营养。\", \"source\": {\"chunk_id\": \"冰箱手册_0012\", \"manual_name\": \"冰箱手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"冰箱手册\"}, \"confidence\": 0.182801, \"evidence_id\": \"enterprise_rag:冰箱手册_0011\", \"raw_excerpt\": \"• 长按按钮3秒以上可开启或关闭冰箱。 <IMG:Manual17_40> # 冷藏室温度调节方法 • 冷藏室初始温度分别为0℃和6℃。您可根据需要调节各间室温度。 • 按下温度控制按钮，冷藏室温度每次调节1℃。 <IMG:Manual17_41> 实际内部温度随食物状态变化，设定温度为目标温度，非冰箱实际温度。 初始运行时制冷效果较弱，请至少使用2~3天后再按上述方法调节温度。 # 超强制冷\", \"source\": {\"chunk_id\": \"冰箱手册_0011\", \"manual_name\": \"冰箱手册\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"冰箱温度应该怎么设置？\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:冰箱手册_0010\", \"enterprise_rag:冰箱手册_0012\", \"enterprise_rag:冰箱手册_0011\"], \"retrieved_evidence_ids\": [\"enterprise_rag:冰箱手册_0010\", \"enterprise_rag:冰箱手册_0012\", \"enterprise_rag:冰箱手册_0011\"]}}",
+        "preview": "{\"items\": [{\"applicability\": {\"manual_name\": \"冰箱手册\"}, \"confidence\": 0.191217, \"evidence_id\": \"enterprise_rag:冰箱手册_0010\", \"raw_excerpt\": \"• 若墙壁插座松动，请勿插入电源插头。可能引发触电或火灾。 • 切勿拉扯电源线拔下冰箱插头。务必握紧插头直接从插座拔出，否则可能导致电线断开、短路，引发触电或火灾。 • 请勿用湿布清洁插头。清除电源插脚上的"
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 11,
+        "token_estimate": 2,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "冰箱温度应该怎么设置？",
+        "preview": "冰箱温度应该怎么设置？"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 117,
+        "token_estimate": 29,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "evidence",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 2471,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "evidence": 2284,
+        "current_user": 11,
+        "runtime": 117
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "evidence": 35,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "evidence",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [],
+      "dropped_sections": [],
+      "truncated_sections": []
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[evidence]\n{\"items\": [{\"applicability\": {\"manual_name\": \"冰箱手册\"}, \"confidence\": 0.191217, \"evidence_id\": \"enterprise_rag:冰箱手册_0010\", \"raw_excerpt\": \"• 若墙壁插座松动，请勿插入电源插头。可能引发触电或火灾。 • 切勿拉扯电源线拔下冰箱插头。务必握紧插头直接从插座拔出，否则可能导致电线断开、短路，引发触电或火灾。 • 请勿用湿布清洁插头。清除电源插脚上的异物。 否则有火灾风险。 • 请勿将手伸入电器底部区域。 尖锐边缘可能造成人身伤害。 • 拔下电器插头后，至少等待5分钟再重新插入插座。 冷冻室异常运行可能导致物品损坏。 • 若电器长期不使用，请拔下电源插头。绝缘层老化可能引发火灾。 • 请勿让儿童触碰或玩耍电器正面控制面板。 • 冰箱冰柜使用的制冷剂及绝缘材料气体需要特殊处理。废弃前确保电器背部管道无损坏。 # 部件标识 <IMG:Manual17_38> # 温度控制 冰箱配有控制装置，可调节冷藏室温度。 # 温度控制显示面板 # 温度及功能调节 <IMG:Manual17_39> # 电源\", \"source\": {\"chunk_id\": \"冰箱手册_0010\", \"manual_name\": \"冰箱手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"冰箱手册\"}, \"confidence\": 0.18763, \"evidence_id\": \"enterprise_rag:冰箱手册_0012\", \"raw_excerpt\": \"• 需要快速制冷时请选择此功能。 • 需快速冷却食物时使用。按下超强制冷按钮一次，快速制冷运行，指示灯点亮。 • 超强制冷运行约2小时，运行结束后自动恢复原温度设定。如需提前停止快速制冷，再次按下超强制冷按钮，指示灯熄灭，超强制冷停止，冰箱恢复原温度设定。 <IMG:Manual17_42> # 自检功能 本功能可"
+  },
+  "trace_persisted": "278b9c56950f41e3921ea9c29db9832d",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [
+      "support"
+    ],
+    "support_handoff": {
+      "stage": "diagnosis",
+      "product_resolution": {
+        "status": "resolved",
+        "source": "strong_signal",
+        "product_id": "refrigerator",
+        "display_name": "冰箱",
+        "manual_names": [
+          "冰箱手册"
+        ],
+        "matched_terms": [
+          "冰箱"
+        ],
+        "disclose_default_product": false,
+        "candidate_product_ids": [],
+        "reason": "user named product identity"
+      },
+      "diagnosis_status": "grounded",
+      "symptoms": [
+        "冰箱温度应该怎么设置？"
+      ],
+      "attempted_steps": [],
+      "recommended_next_steps": [
+        "您可以根据需要调节冷藏室温度，方法如下。\n\n**操作方法：**\n1.  **找到控制面板**：冰箱正面有温度控制显示面板（如附图所示），上面有“REF.TEMP.”按钮（冷藏室温度调节按钮）和“POWER”按钮等。\n2.  **调节冷藏室温度**：按下“温度控制按钮”（即“REF.TEMP.”按钮），每按一次，冷藏室设定温度变化1℃。\n3.  **初始设定参考**：冷藏室初始设定温度通常为0℃或6℃。您可以在此基础上进行调节。\n\n**重要提醒：**\n- **实际温度与设定温度有差异**：冰箱内部的实际温度会随着存放食物的状态和数量变化，您设定的是“目标温度”，并非冰箱内部的实际实时温度。\n- **新机使用建议**：如果是初次使用冰箱，初始运行时制冷效果较弱，建议至少使用2~3天之后，再按照上述方法进行温度调节。"
+      ],
+      "safety_risks": [],
+      "evidence_ids": [
+        "enterprise_rag:冰箱手册_0010",
+        "enterprise_rag:冰箱手册_0012",
+        "enterprise_rag:冰箱手册_0011"
+      ],
+      "summary": "您可以根据需要调节冷藏室温度，方法如下。\n\n**操作方法：**\n1.  **找到控制面板**：冰箱正面有温度控制显示面板（如附图所示），上面有“REF.TEMP.”按钮（冷藏室温度调节按钮）和“POWER”按钮等。\n2.  **调节冷藏室温度**：按下“温度控制按钮”（即“REF.TEMP.”按钮），每按一次，冷藏室设定温度变化1℃。\n3.  **初始设定参考**：冷藏室初始设定温度通常为0℃或6℃。您可以在此基础上进行调节。\n\n**重要提醒：**\n- **实际温度与设定温度有差异**：冰箱内部的实际温度会随着存放食物的状态和数量变化，您设定的是“目标温度”，并非冰箱内部的实际实时温度。\n- **新机使用建议**：如果是初次使用冰箱，初始运行时制冷效果较弱，建议至少使用2~3天之后，再按照上述方法进行温度调节。"
+    },
+    "plans": [
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "User asks how to set refrigerator temperature, which is a product/manual question.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"User asks how to set refrigerator temperature, which is a product/manual question.\"\n}"
+      },
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "用户询问冰箱温度设置，support handoff已提供详细解答，可直接回复用户。",
+        "source": "llm",
+        "raw_response": "{\"action\": \"support\", \"confidence\": 0.95, \"reason\": \"用户询问冰箱温度设置，support handoff已提供详细解答，可直接回复用户。\"}"
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "llm",
+      "confidence": 0.95,
+      "reason": "用户询问冰箱温度设置方法，这是一个新话题，且当前无活跃线程和打开线程，因此需要创建新线程。",
+      "fallback_reason": ""
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 0.95,
+      "source": "llm",
+      "reason": "用户询问冰箱温度设置方法，这是一个新话题，且当前无活跃线程和打开线程，因此需要创建新线程。"
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [
+      {
+        "candidate_id": "memcand_75e2db09552346d085837b8f8ad1e8f2",
+        "outcome": "accept",
+        "target_thread_id": null,
+        "reason": "candidate passed memory governance checks",
+        "conflicts": [],
+        "update": {
+          "key": "product_support",
+          "value": {
+            "disambiguation_pending": false,
+            "disambiguation_candidates": [],
+            "last_query": "冰箱温度应该怎么设置？",
+            "evidence_count": 3,
+            "manual_names": [
+              "冰箱手册"
+            ],
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "refrigerator",
+              "display_name": "冰箱",
+              "manual_names": [
+                "冰箱手册"
+              ],
+              "matched_terms": [
+                "冰箱"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "selected_product_id": "refrigerator",
+            "selected_display_name": "冰箱",
+            "allowed_manual_names": [
+              "冰箱手册"
+            ]
+          },
+          "reason": "product support answered with knowledge evidence",
+          "evidence_ids": [
+            "enterprise_rag:冰箱手册_0010",
+            "enterprise_rag:冰箱手册_0012",
+            "enterprise_rag:冰箱手册_0011"
+          ],
+          "provenance": "skill",
+          "confidence": 0.82
+        },
+        "degraded": false
+      }
+    ],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": true,
+    "valid": false,
+    "failure_reason": "ValueError: candidate update_key is not allowed",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

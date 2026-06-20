@@ -1,0 +1,1274 @@
+{
+  "trace": {
+    "trace_id": "964c96e622404f4c98e5baa1d6775d31",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-012",
+    "user_message": "空调滤网怎么清洁？",
+    "selected_agents": [
+      "support"
+    ],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 9,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-012",
+        "section_count": 3,
+        "section_names": [
+          "system_policy",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 172,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "current_user": 9,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      },
+      {
+        "message_chars": 9,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-012",
+        "section_count": 4,
+        "section_names": [
+          "system_policy",
+          "evidence",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 1978,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "evidence": 1793,
+            "current_user": 9,
+            "runtime": 117
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "evidence": 35,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "evidence",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [
+      {
+        "query": "空调滤网怎么清洁？",
+        "intent": "product_support",
+        "evidence_count": 2,
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": false
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "空调手册",
+                "AC900手册"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 2,
+            "retrieval_trace": {
+              "query": "空调滤网怎么清洁？",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 2,
+              "score_threshold": 0.1,
+              "top1_score": 0.091609,
+              "retrieved_chunk_ids": [
+                "空调手册_0010",
+                "空调手册_0011",
+                "空气净化器手册_0003"
+              ],
+              "filtered_chunk_ids": [
+                "空调手册_0010",
+                "空调手册_0011"
+              ],
+              "retrieved_manual_names": [
+                "空调手册",
+                "空调手册",
+                "空气净化器手册"
+              ],
+              "filtered_manual_names": [
+                "空调手册",
+                "空调手册"
+              ],
+              "source_queries": [
+                "空调滤网怎么清洁？"
+              ],
+              "manual_name_decisions": [
+                ""
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Manual01_27",
+                "Manual01_28",
+                "Manual01_29",
+                "Manual01_30",
+                "Manual01_31",
+                "Manual01_32",
+                "Manual01_33",
+                "Manual01_34"
+              ]
+            }
+          }
+        ],
+        "product_resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "air_conditioner",
+          "display_name": "空调",
+          "manual_names": [
+            "空调手册",
+            "AC900手册"
+          ],
+          "matched_terms": [
+            "空调"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "service_id": "product-support",
+        "tool_name": "resolve_product",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "search_product_manual",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "validate_answer_grounding",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      }
+    ],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [
+      {
+        "key": "product_support",
+        "value": {
+          "disambiguation_pending": false,
+          "disambiguation_candidates": [],
+          "last_query": "空调滤网怎么清洁？",
+          "evidence_count": 2,
+          "manual_names": [
+            "空调手册"
+          ],
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "air_conditioner",
+            "display_name": "空调",
+            "manual_names": [
+              "空调手册",
+              "AC900手册"
+            ],
+            "matched_terms": [
+              "空调"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          },
+          "selected_product_id": "air_conditioner",
+          "selected_display_name": "空调",
+          "allowed_manual_names": [
+            "空调手册",
+            "AC900手册"
+          ]
+        },
+        "reason": "product support answered with knowledge evidence",
+        "evidence_ids": [
+          "enterprise_rag:空调手册_0010",
+          "enterprise_rag:空调手册_0011"
+        ],
+        "provenance": "skill",
+        "confidence": 0.82
+      }
+    ],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781970530.3844721
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "llm",
+          "confidence": 0.95,
+          "reason": "User asks a new question about cleaning AC filter; no existing threads to continue or switch to.",
+          "fallback_reason": ""
+        },
+        "created_at": 1781970538.658632
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 0.95,
+          "source": "llm",
+          "reason": "User asks a new question about cleaning AC filter; no existing threads to continue or switch to."
+        },
+        "created_at": 1781970538.6586418
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "evidence",
+            "system_policy",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "evidence": "用户询问空调滤网清洁方法，需要知识库或商品手册中的清洁步骤作为证据。",
+            "system_policy": "需确认清洁相关的安全边界和禁止事项（如断电要求、不可水洗类型等）。",
+            "current_user": "保留用户当前消息用于后续回答。",
+            "runtime": "提供会话运行时信息（如图片数量、工具数量等），辅助决策。"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970545.286247
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 9,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-012",
+          "section_count": 3,
+          "section_names": [
+            "system_policy",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 172,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "current_user": 9,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970545.286516
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "The user is asking how to clean an air conditioner filter, which is a product maintenance and manual question. This falls under the 'support' category per the rules.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"The user is asking how to clean an air conditioner filter, which is a product maintenance and manual question. This falls under the 'support' category per the rules.\"\n}"
+        },
+        "created_at": 1781970550.122287
+      },
+      {
+        "stage": "agent.execution_start",
+        "message": "support agent started",
+        "payload": {
+          "agent": "support"
+        },
+        "created_at": 1781970550.122314
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.resolve_product",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970550.122345
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970550.122373
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.resolve_product returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970550.1225011
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970550.122515
+      },
+      {
+        "stage": "product.resolve",
+        "message": "product resolution status=resolved",
+        "payload": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "air_conditioner",
+          "display_name": "空调",
+          "manual_names": [
+            "空调手册",
+            "AC900手册"
+          ],
+          "matched_terms": [
+            "空调"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        },
+        "created_at": 1781970550.122564
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.search_product_manual",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970550.12258
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970550.122591
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.search_product_manual returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970559.8001559
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970559.800163
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "current_user",
+            "runtime",
+            "evidence"
+          ],
+          "reasons": {
+            "system_policy": "确保回答不越界，不提供错误或危险方法",
+            "current_user": "包含用户当前消息内容",
+            "runtime": "可能包含图片数量等信息，辅助判断清洁问题是否需要图片参考",
+            "evidence": "需要商品手册或知识库中关于空调滤网清洁的步骤"
+          },
+          "source": "llm",
+          "confidence": 0.9
+        },
+        "created_at": 1781970565.142185
+      },
+      {
+        "stage": "context.tool_observations",
+        "message": "built prompt tool observations",
+        "payload": {
+          "item_count": 2,
+          "raw_result_refs": [
+            "trace://964c96e622404f4c98e5baa1d6775d31/tool_results/0",
+            "trace://964c96e622404f4c98e5baa1d6775d31/tool_results/1"
+          ]
+        },
+        "created_at": 1781970565.142333
+      },
+      {
+        "stage": "context.evidence_pack",
+        "message": "built prompt evidence pack",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:空调手册_0010",
+            "enterprise_rag:空调手册_0011"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:空调手册_0010",
+            "enterprise_rag:空调手册_0011"
+          ],
+          "deduplicated_evidence_ids": [],
+          "item_count": 2,
+          "source": "llm_span_selector"
+        },
+        "created_at": 1781970565.1426299
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 9,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-012",
+          "section_count": 4,
+          "section_names": [
+            "system_policy",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 1978,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "evidence": 1793,
+              "current_user": 9,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "evidence",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970565.142826
+      },
+      {
+        "stage": "llm.answer",
+        "message": "generated product support answer",
+        "payload": {
+          "node": "product_support",
+          "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+          "evidence_count": 2
+        },
+        "created_at": 1781970573.396582
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.validate_answer_grounding",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970573.396698
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970573.396728
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.validate_answer_grounding returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970573.397044
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970573.397061
+      },
+      {
+        "stage": "evidence.usage",
+        "message": "recorded product-support evidence usage",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:空调手册_0010",
+            "enterprise_rag:空调手册_0011"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:空调手册_0010",
+            "enterprise_rag:空调手册_0011"
+          ],
+          "used_evidence_ids": [
+            "enterprise_rag:空调手册_0010",
+            "enterprise_rag:空调手册_0011"
+          ],
+          "grounding_checked": true,
+          "grounding": {
+            "grounded": true,
+            "missing_terms": [],
+            "evidence_count": 2,
+            "token_overlap": 28,
+            "reason": "answer is covered by evidence"
+          },
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "air_conditioner",
+            "display_name": "空调",
+            "manual_names": [
+              "空调手册",
+              "AC900手册"
+            ],
+            "matched_terms": [
+              "空调"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          }
+        },
+        "created_at": 1781970573.39713
+      },
+      {
+        "stage": "agent.execution_stop",
+        "message": "support agent completed",
+        "payload": {
+          "agent": "support",
+          "status": "success"
+        },
+        "created_at": 1781970573.3972008
+      },
+      {
+        "stage": "agent.handoff_created",
+        "message": "support handoff created",
+        "payload": {
+          "agent": "support",
+          "handoff": {
+            "stage": "diagnosis",
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "air_conditioner",
+              "display_name": "空调",
+              "manual_names": [
+                "空调手册",
+                "AC900手册"
+              ],
+              "matched_terms": [
+                "空调"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "diagnosis_status": "grounded",
+            "symptoms": [
+              "空调滤网怎么清洁？"
+            ],
+            "attempted_steps": [],
+            "recommended_next_steps": [
+              "您好，清洁空调滤网时，不同滤网类型的清洁方式有所不同。根据手册说明，您的空调可能配备**空气滤网**、**3M多重防护滤网**和**等离子滤网**，请注意区分清洁。**清洁前务必关闭电源并拔下电源线，否则可能导致触电。**\n\n以下是各类滤网的具体清洁步骤：\n\n**1. 清洁空气滤网（建议每两周一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，轻轻掀起盖板两侧。\n  3. 握住空气滤网的把手，轻轻向上提起，将其从机身中取出。\n  4. **清洁**：用吸尘器清理，或用温水冲洗。若污垢较难清理，可在温水中加入洗涤剂清洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：切勿使用**40摄氏度以上**的热水，以免造成滤网变形或变色；切勿使用挥发性物质。\n\n**2. 清洁3M多重防护滤网（建议每月清洁一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，先取出空气滤网（方法见上）。\n  3. 抽出3M多重防护滤网。\n  4. **清洁**：**仅能用吸尘器**清理滤网污垢。**切勿用水清洗**，以免造成滤网损坏。\n\n**3. 清洁等离子滤网（部分机型配备，建议每3个月清洁一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，取出空气滤网。\n  3. 在**10秒内**取下等离子滤网。\n  4. **清洁**：用吸尘器清理污垢；若污垢较难清理，可用温水冲洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：部分机型可能未配备等离子滤网，请以您机器实际情况为准。\n\n**最后提醒：**\n- 滤网的位置和形状可能因机型不同而有所差异，请以实际看到的为准。\n- 如果您不确定您的空调配备了哪种滤网，或者以上步骤与您机型不符，请提供您的空调具体型号或实物照片，我可以帮您进一步确认。"
+            ],
+            "safety_risks": [],
+            "evidence_ids": [
+              "enterprise_rag:空调手册_0010",
+              "enterprise_rag:空调手册_0011"
+            ],
+            "summary": "您好，清洁空调滤网时，不同滤网类型的清洁方式有所不同。根据手册说明，您的空调可能配备**空气滤网**、**3M多重防护滤网**和**等离子滤网**，请注意区分清洁。**清洁前务必关闭电源并拔下电源线，否则可能导致触电。**\n\n以下是各类滤网的具体清洁步骤：\n\n**1. 清洁空气滤网（建议每两周一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，轻轻掀起盖板两侧。\n  3. 握住空气滤网的把手，轻轻向上提起，将其从机身中取出。\n  4. **清洁**：用吸尘器清理，或用温水冲洗。若污垢较难清理，可在温水中加入洗涤剂清洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：切勿使用**40摄氏度以上**的热水，以免造成滤网变形或变色；切勿使用挥发性物质。\n\n**2. 清洁3M多重防护滤网（建议每月清洁一次）**\n- **步骤：**\n  1. **关"
+          }
+        },
+        "created_at": 1781970573.397224
+      },
+      {
+        "stage": "agent.replan",
+        "message": "replanned after support result",
+        "payload": {
+          "action": "general",
+          "confidence": 0.95,
+          "reason": "用户关于空调滤网清洁的问题已在支持交接中通过详细步骤得到解决，当前没有新问题或服务需求，因此选择一般性回应以确认问题是否已解决或询问进一步需求。",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"general\",\n  \"confidence\": 0.95,\n  \"reason\": \"用户关于空调滤网清洁的问题已在支持交接中通过详细步骤得到解决，当前没有新问题或服务需求，因此选择一般性回应以确认问题是否已解决或询问进一步需求。\"\n}"
+        },
+        "created_at": 1781970581.150792
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781970581.150932
+      },
+      {
+        "stage": "memory_write_agent.request",
+        "message": "requested governed memory candidates",
+        "payload": {
+          "write_request": {
+            "source_agent": "support",
+            "execution_stage": "diagnosis",
+            "message": "空调滤网怎么清洁？",
+            "handoff": {
+              "stage": "diagnosis",
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "air_conditioner",
+                "display_name": "空调",
+                "manual_names": [
+                  "空调手册",
+                  "AC900手册"
+                ],
+                "matched_terms": [
+                  "空调"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "diagnosis_status": "grounded",
+              "symptoms": [
+                "空调滤网怎么清洁？"
+              ],
+              "attempted_steps": [],
+              "recommended_next_steps": [
+                "您好，清洁空调滤网时，不同滤网类型的清洁方式有所不同。根据手册说明，您的空调可能配备**空气滤网**、**3M多重防护滤网**和**等离子滤网**，请注意区分清洁。**清洁前务必关闭电源并拔下电源线，否则可能导致触电。**\n\n以下是各类滤网的具体清洁步骤：\n\n**1. 清洁空气滤网（建议每两周一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，轻轻掀起盖板两侧。\n  3. 握住空气滤网的把手，轻轻向上提起，将其从机身中取出。\n  4. **清洁**：用吸尘器清理，或用温水冲洗。若污垢较难清理，可在温水中加入洗涤剂清洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：切勿使用**40摄氏度以上**的热水，以免造成滤网变形或变色；切勿使用挥发性物质。\n\n**2. 清洁3M多重防护滤网（建议每月清洁一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，先取出空气滤网（方法见上）。\n  3. 抽出3M多重防护滤网。\n  4. **清洁**：**仅能用吸尘器**清理滤网污垢。**切勿用水清洗**，以免造成滤网损坏。\n\n**3. 清洁等离子滤网（部分机型配备，建议每3个月清洁一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，取出空气滤网。\n  3. 在**10秒内**取下等离子滤网。\n  4. **清洁**：用吸尘器清理污垢；若污垢较难清理，可用温水冲洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：部分机型可能未配备等离子滤网，请以您机器实际情况为准。\n\n**最后提醒：**\n- 滤网的位置和形状可能因机型不同而有所差异，请以实际看到的为准。\n- 如果您不确定您的空调配备了哪种滤网，或者以上步骤与您机型不符，请提供您的空调具体型号或实物照片，我可以帮您进一步确认。"
+              ],
+              "safety_risks": [],
+              "evidence_ids": [
+                "enterprise_rag:空调手册_0010",
+                "enterprise_rag:空调手册_0011"
+              ],
+              "summary": "您好，清洁空调滤网时，不同滤网类型的清洁方式有所不同。根据手册说明，您的空调可能配备**空气滤网**、**3M多重防护滤网**和**等离子滤网**，请注意区分清洁。**清洁前务必关闭电源并拔下电源线，否则可能导致触电。**\n\n以下是各类滤网的具体清洁步骤：\n\n**1. 清洁空气滤网（建议每两周一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，轻轻掀起盖板两侧。\n  3. 握住空气滤网的把手，轻轻向上提起，将其从机身中取出。\n  4. **清洁**：用吸尘器清理，或用温水冲洗。若污垢较难清理，可在温水中加入洗涤剂清洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：切勿使用**40摄氏度以上**的热水，以免造成滤网变形或变色；切勿使用挥发性物质。\n\n**2. 清洁3M多重防护滤网（建议每月清洁一次）**\n- **步骤：**\n  1. **关"
+            },
+            "result_summary": "您好，清洁空调滤网时，不同滤网类型的清洁方式有所不同。根据手册说明，您的空调可能配备**空气滤网**、**3M多重防护滤网**和**等离子滤网**，请注意区分清洁。**清洁前务必关闭电源并拔下电源线，否则可能导致触电。**\n\n以下是各类滤网的具体清洁步骤：\n\n**1. 清洁空气滤网（建议每两周一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，轻轻掀起盖板两侧。\n  3. 握住空气滤网的把手，轻轻向上提起，将其从机身中取出。\n  4. **清洁**：用吸尘器清理，或用温水冲洗。若污垢较难清理，可在温水中加入洗涤剂清洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：切勿使用**40摄氏度以上**的热水，以免造成滤网变形或变色；切勿使用挥发性物质。\n\n**2. 清洁3M多重防护滤网（建议每月清洁一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，先取出空气滤网（方法见上）。\n  3. 抽出3M多重防护滤网。\n  4. **清洁**：**仅能用吸尘器**清理滤网污垢。**切勿用水清洗**，以免造成滤网损坏。\n\n**3. 清洁等离子滤网（部分机型配备，建议每3个月清洁一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，取出空气滤网。\n  3. 在**10秒内**取下等离子滤网。\n  4. **清洁**：用吸尘器清理污垢；若污垢较难清理，可用温水冲洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：部分机型可能未配备等离子滤网，请以您机器实际情况为准。\n\n**最后提醒：**\n- 滤网的位置和形状可能因机型不同而有所差异，请以实际看到的为准。\n- 如果您不确定您的空调配备了哪种滤网，或者以上步骤与您机型不符，请提供您的空调具体型号或实物照片，",
+            "evidence_ids": [
+              "enterprise_rag:空调手册_0010",
+              "enterprise_rag:空调手册_0011"
+            ],
+            "target_thread_id": null
+          }
+        },
+        "created_at": 1781970581.15119
+      },
+      {
+        "stage": "memory_write_agent.validation_failed",
+        "message": "ValueError: no usable memory candidates",
+        "payload": {
+          "source_agent": "support",
+          "execution_stage": "diagnosis"
+        },
+        "created_at": 1781970587.6126359
+      },
+      {
+        "stage": "memory.write_validate",
+        "message": "candidate passed memory governance checks",
+        "payload": {
+          "candidate_id": "memcand_84e2d32b0a254139b96fadcac7fab81a",
+          "outcome": "accept",
+          "target_thread_id": null,
+          "reason": "candidate passed memory governance checks",
+          "conflicts": [],
+          "update": {
+            "key": "product_support",
+            "value": {
+              "disambiguation_pending": false,
+              "disambiguation_candidates": [],
+              "last_query": "空调滤网怎么清洁？",
+              "evidence_count": 2,
+              "manual_names": [
+                "空调手册"
+              ],
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "air_conditioner",
+                "display_name": "空调",
+                "manual_names": [
+                  "空调手册",
+                  "AC900手册"
+                ],
+                "matched_terms": [
+                  "空调"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "selected_product_id": "air_conditioner",
+              "selected_display_name": "空调",
+              "allowed_manual_names": [
+                "空调手册",
+                "AC900手册"
+              ]
+            },
+            "reason": "product support answered with knowledge evidence",
+            "evidence_ids": [
+              "enterprise_rag:空调手册_0010",
+              "enterprise_rag:空调手册_0011"
+            ],
+            "provenance": "skill",
+            "confidence": 0.82
+          },
+          "degraded": false
+        },
+        "created_at": 1781970587.6127841
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 1,
+          "accepted_count": 1,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781970587.634655
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "success"
+        },
+        "created_at": 1781970587.63466
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 2052,
+    "section_count": 4,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "evidence",
+        "source": "knowledge_runtime",
+        "priority": 35,
+        "chars": 1793,
+        "token_estimate": 448,
+        "char_budget": 2400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"items\": [{\"applicability\": {\"manual_name\": \"空调手册\"}, \"confidence\": 0.091609, \"evidence_id\": \"enterprise_rag:空调手册_0010\", \"raw_excerpt\": \"# 注 若按住开 / 关键 3-5 秒而非 6 秒，空调将进入测试运行模式，该模式下空调会以强风制冷 18 分钟，之后恢复为工厂默认设置。 # 维护保养 定期清洁产品，以保持最佳运行性能，防止设备出现故障。 * 部分配件可能因机型不同而未配备。 # 3M 多重防护滤网 <IMG:Manual01_27> * 功能会根据机型有所调整。 <IMG:Manual01_28> # 注意 ・进行任何维护操作前，请关闭电源并拔下电源线，否则可能导致触电。 ・清洁滤网时，切勿使用 40 摄氏度以上的热水，以免造成滤网变形或变色。 ・清洁滤网时，切勿使用挥发性物质，以免损坏产品表面。 # 注 ・滤网的位置和形状可能因机型不同而有所差异。 ・请定期清洁室外机的热交换器盘管，盘管积垢可能会降低运行效率，增加能耗。 # 清洁空气滤网 建议每两周清洁一次空气滤网，必要时可增加清洁频率。 1 关闭电源并拔下电源线。 2 打开前盖板，轻轻掀起盖板两侧即可。 <IMG:Manual01_29> * 功能会根据机型有所调整。 3 握住空气滤网的把手，轻轻向上提起，将其从机身中取出。 <IMG:Manual01_30> * 功能会根据机型有所调整。 4 用吸尘器清理滤网，或用温水冲洗，若滤网污垢较难清理，可在温水中加入洗涤剂清洗。 5 将滤网置于阴凉处晾干。 # 清洁 3M 多重防护滤网 1 关闭电源并拔下电源线。 2 打开前盖板，取出空气滤网（详见 “清洁空气滤网”）。 3 抽出 3M 多重防护滤网。 <IMG:Manual01_31> * 功能会根据机型有所调整。 4 用吸尘器清理滤网污垢，切勿用水清洗 3M 多重防护滤网，以免造成滤网损坏。 # 注 滤网的位置和形状可能因机型不同而有所差异。\", \"source\": {\"chunk_id\": \"空调手册_0010\", \"manual_name\": \"空调手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"空调手册\"}, \"confidence\": 0.088917, \"evidence_id\": \"enterprise_rag:空调手册_0011\", \"raw_excerpt\": \"# 注 滤网的位置和形状可能因机型不同而有所差异。 # 清洁等离子滤网 1 关闭电源并拔下电源线。 2 打开前盖板，取出空气滤网（详见 “清洁空气滤网”）。 3 在 10 秒内取下等离子滤网。 <IMG:Manual01_32> * 功能会根据机型有所调整。 4 用吸尘器清理滤网污垢，若污垢较难清理，可用温水冲洗。 5 将滤网置于阴凉处晾干。 # 注 ・滤网的位置可能因机型不同而有所差异。 ・部分机型可能未配备等离子滤网。 # 故障排除 # 自诊断功能 本产品内置自诊断功能，若发生故障，室内机指示灯会以 2 秒为间隔闪烁，出现此情况请联系当地经销商或服务中心。 # 报修前检查 报修前，请先检查以下事项，若问题仍未解决，再联系当地服务中心。 <IMG:Manual01_33> <IMG:Manual01_34>\", \"source\": {\"chunk_id\": \"空调手册_0011\", \"manual_name\": \"空调手册\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"空调滤网怎么清洁？\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:空调手册_0010\", \"enterprise_rag:空调手册_0011\"], \"retrieved_evidence_ids\": [\"enterprise_rag:空调手册_0010\", \"enterprise_rag:空调手册_0011\"]}}",
+        "preview": "{\"items\": [{\"applicability\": {\"manual_name\": \"空调手册\"}, \"confidence\": 0.091609, \"evidence_id\": \"enterprise_rag:空调手册_0010\", \"raw_excerpt\": \"# 注 若按住开 / 关键 3-5 秒而非 6 秒，空调将进入测试运行模式，该模式下空调会以强风制冷 18 分钟，之后恢复为工厂默认设置。 # 维护保养 定期清洁产品，以保持最佳运行性能，防止设备出现故障。"
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 9,
+        "token_estimate": 2,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "空调滤网怎么清洁？",
+        "preview": "空调滤网怎么清洁？"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 117,
+        "token_estimate": 29,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "evidence",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 1978,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "evidence": 1793,
+        "current_user": 9,
+        "runtime": 117
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "evidence": 35,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "evidence",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [],
+      "dropped_sections": [],
+      "truncated_sections": []
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[evidence]\n{\"items\": [{\"applicability\": {\"manual_name\": \"空调手册\"}, \"confidence\": 0.091609, \"evidence_id\": \"enterprise_rag:空调手册_0010\", \"raw_excerpt\": \"# 注 若按住开 / 关键 3-5 秒而非 6 秒，空调将进入测试运行模式，该模式下空调会以强风制冷 18 分钟，之后恢复为工厂默认设置。 # 维护保养 定期清洁产品，以保持最佳运行性能，防止设备出现故障。 * 部分配件可能因机型不同而未配备。 # 3M 多重防护滤网 <IMG:Manual01_27> * 功能会根据机型有所调整。 <IMG:Manual01_28> # 注意 ・进行任何维护操作前，请关闭电源并拔下电源线，否则可能导致触电。 ・清洁滤网时，切勿使用 40 摄氏度以上的热水，以免造成滤网变形或变色。 ・清洁滤网时，切勿使用挥发性物质，以免损坏产品表面。 # 注 ・滤网的位置和形状可能因机型不同而有所差异。 ・请定期清洁室外机的热交换器盘管，盘管积垢可能会降低运行效率，增加能耗。 # 清洁空气滤网 建议每两周清洁一次空气滤网，必要时可增加清洁频率。 1 关闭电源并拔下电源线。 2 打开前盖板，轻轻掀起盖板两侧即可。 <IMG:Manual01_29> * 功能会根据机型有所调整。 3 握住空气滤网的把手，轻轻向上提起，将其从机身中取出。 <IMG:Manual01_30> * 功能会根据机型有所调整。 4 用吸尘器清理滤网，或用温水冲洗，若滤网污垢较难清理，可在温水中加入洗涤剂清洗。 5 将滤网置于阴凉处晾干。 # 清洁 3M 多重防护滤网 1 关闭电源并拔下电源线。 2 打开前盖板，取出空气滤网（详见 “清洁空气滤网”）。 3 抽出 3M 多重防护滤网。 <IMG:Manual01_31> * 功能会根据机型有所调整。 4 用吸尘器清理滤网污垢，切勿用水清洗 3M 多重防护滤网，以免造成滤网损坏。 # 注 滤网的位置和形状可能因机型不同而有所差异。\", \"source\": {\""
+  },
+  "trace_persisted": "964c96e622404f4c98e5baa1d6775d31",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [
+      "support"
+    ],
+    "support_handoff": {
+      "stage": "diagnosis",
+      "product_resolution": {
+        "status": "resolved",
+        "source": "strong_signal",
+        "product_id": "air_conditioner",
+        "display_name": "空调",
+        "manual_names": [
+          "空调手册",
+          "AC900手册"
+        ],
+        "matched_terms": [
+          "空调"
+        ],
+        "disclose_default_product": false,
+        "candidate_product_ids": [],
+        "reason": "user named product identity"
+      },
+      "diagnosis_status": "grounded",
+      "symptoms": [
+        "空调滤网怎么清洁？"
+      ],
+      "attempted_steps": [],
+      "recommended_next_steps": [
+        "您好，清洁空调滤网时，不同滤网类型的清洁方式有所不同。根据手册说明，您的空调可能配备**空气滤网**、**3M多重防护滤网**和**等离子滤网**，请注意区分清洁。**清洁前务必关闭电源并拔下电源线，否则可能导致触电。**\n\n以下是各类滤网的具体清洁步骤：\n\n**1. 清洁空气滤网（建议每两周一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，轻轻掀起盖板两侧。\n  3. 握住空气滤网的把手，轻轻向上提起，将其从机身中取出。\n  4. **清洁**：用吸尘器清理，或用温水冲洗。若污垢较难清理，可在温水中加入洗涤剂清洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：切勿使用**40摄氏度以上**的热水，以免造成滤网变形或变色；切勿使用挥发性物质。\n\n**2. 清洁3M多重防护滤网（建议每月清洁一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，先取出空气滤网（方法见上）。\n  3. 抽出3M多重防护滤网。\n  4. **清洁**：**仅能用吸尘器**清理滤网污垢。**切勿用水清洗**，以免造成滤网损坏。\n\n**3. 清洁等离子滤网（部分机型配备，建议每3个月清洁一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，取出空气滤网。\n  3. 在**10秒内**取下等离子滤网。\n  4. **清洁**：用吸尘器清理污垢；若污垢较难清理，可用温水冲洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：部分机型可能未配备等离子滤网，请以您机器实际情况为准。\n\n**最后提醒：**\n- 滤网的位置和形状可能因机型不同而有所差异，请以实际看到的为准。\n- 如果您不确定您的空调配备了哪种滤网，或者以上步骤与您机型不符，请提供您的空调具体型号或实物照片，我可以帮您进一步确认。"
+      ],
+      "safety_risks": [],
+      "evidence_ids": [
+        "enterprise_rag:空调手册_0010",
+        "enterprise_rag:空调手册_0011"
+      ],
+      "summary": "您好，清洁空调滤网时，不同滤网类型的清洁方式有所不同。根据手册说明，您的空调可能配备**空气滤网**、**3M多重防护滤网**和**等离子滤网**，请注意区分清洁。**清洁前务必关闭电源并拔下电源线，否则可能导致触电。**\n\n以下是各类滤网的具体清洁步骤：\n\n**1. 清洁空气滤网（建议每两周一次）**\n- **步骤：**\n  1. **关闭电源并拔下电源线。**\n  2. 打开前盖板，轻轻掀起盖板两侧。\n  3. 握住空气滤网的把手，轻轻向上提起，将其从机身中取出。\n  4. **清洁**：用吸尘器清理，或用温水冲洗。若污垢较难清理，可在温水中加入洗涤剂清洗。\n  5. 将滤网置于阴凉处晾干。\n- **注意**：切勿使用**40摄氏度以上**的热水，以免造成滤网变形或变色；切勿使用挥发性物质。\n\n**2. 清洁3M多重防护滤网（建议每月清洁一次）**\n- **步骤：**\n  1. **关"
+    },
+    "plans": [
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "The user is asking how to clean an air conditioner filter, which is a product maintenance and manual question. This falls under the 'support' category per the rules.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"The user is asking how to clean an air conditioner filter, which is a product maintenance and manual question. This falls under the 'support' category per the rules.\"\n}"
+      },
+      {
+        "action": "general",
+        "confidence": 0.95,
+        "reason": "用户关于空调滤网清洁的问题已在支持交接中通过详细步骤得到解决，当前没有新问题或服务需求，因此选择一般性回应以确认问题是否已解决或询问进一步需求。",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"general\",\n  \"confidence\": 0.95,\n  \"reason\": \"用户关于空调滤网清洁的问题已在支持交接中通过详细步骤得到解决，当前没有新问题或服务需求，因此选择一般性回应以确认问题是否已解决或询问进一步需求。\"\n}"
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "llm",
+      "confidence": 0.95,
+      "reason": "User asks a new question about cleaning AC filter; no existing threads to continue or switch to.",
+      "fallback_reason": ""
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 0.95,
+      "source": "llm",
+      "reason": "User asks a new question about cleaning AC filter; no existing threads to continue or switch to."
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [
+      {
+        "candidate_id": "memcand_84e2d32b0a254139b96fadcac7fab81a",
+        "outcome": "accept",
+        "target_thread_id": null,
+        "reason": "candidate passed memory governance checks",
+        "conflicts": [],
+        "update": {
+          "key": "product_support",
+          "value": {
+            "disambiguation_pending": false,
+            "disambiguation_candidates": [],
+            "last_query": "空调滤网怎么清洁？",
+            "evidence_count": 2,
+            "manual_names": [
+              "空调手册"
+            ],
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "air_conditioner",
+              "display_name": "空调",
+              "manual_names": [
+                "空调手册",
+                "AC900手册"
+              ],
+              "matched_terms": [
+                "空调"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "selected_product_id": "air_conditioner",
+            "selected_display_name": "空调",
+            "allowed_manual_names": [
+              "空调手册",
+              "AC900手册"
+            ]
+          },
+          "reason": "product support answered with knowledge evidence",
+          "evidence_ids": [
+            "enterprise_rag:空调手册_0010",
+            "enterprise_rag:空调手册_0011"
+          ],
+          "provenance": "skill",
+          "confidence": 0.82
+        },
+        "degraded": false
+      }
+    ],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": true,
+    "valid": false,
+    "failure_reason": "ValueError: no usable memory candidates",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

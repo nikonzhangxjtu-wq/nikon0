@@ -1,0 +1,1084 @@
+{
+  "trace": {
+    "trace_id": "eb17d0a78827466e9a540339ab800c8b",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-023",
+    "user_message": "VR 头显镜片如何清洁？",
+    "selected_agents": [
+      "support"
+    ],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 12,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-023",
+        "section_count": 3,
+        "section_names": [
+          "system_policy",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 175,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "current_user": 12,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      },
+      {
+        "message_chars": 12,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-023",
+        "section_count": 4,
+        "section_names": [
+          "system_policy",
+          "evidence",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 2588,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "evidence": 2400,
+            "current_user": 12,
+            "runtime": 117
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "evidence": 35,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "evidence",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [
+            "evidence"
+          ],
+          "dropped_sections": [],
+          "truncated_sections": [
+            "evidence"
+          ]
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [
+      {
+        "query": "VR 头显镜片如何清洁？",
+        "intent": "product_support",
+        "evidence_count": 3,
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "VR头显手册",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": true
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "VR头显手册"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 3,
+            "retrieval_trace": {
+              "query": "VR 头显镜片如何清洁？",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 3,
+              "score_threshold": 0.1,
+              "top1_score": 0.170029,
+              "retrieved_chunk_ids": [
+                "VR头显手册_0010",
+                "VR头显手册_0009",
+                "VR头显手册_0004"
+              ],
+              "filtered_chunk_ids": [
+                "VR头显手册_0010",
+                "VR头显手册_0009",
+                "VR头显手册_0004"
+              ],
+              "retrieved_manual_names": [
+                "VR头显手册",
+                "VR头显手册",
+                "VR头显手册"
+              ],
+              "filtered_manual_names": [
+                "VR头显手册",
+                "VR头显手册",
+                "VR头显手册"
+              ],
+              "source_queries": [
+                "VR 头显镜片如何清洁？"
+              ],
+              "manual_name_decisions": [
+                "VR头显手册"
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Manual38_5",
+                "vr_01",
+                "vr_02",
+                "vr_03",
+                "vr_04",
+                "Manual38_1",
+                "Manual38_2",
+                "Manual38_3",
+                "Manual38_4"
+              ]
+            }
+          }
+        ],
+        "product_resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "vr_headset",
+          "display_name": "VR 头显",
+          "manual_names": [
+            "VR头显手册"
+          ],
+          "matched_terms": [
+            "VR 头显"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "service_id": "product-support",
+        "tool_name": "resolve_product",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "search_product_manual",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "validate_answer_grounding",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      }
+    ],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781971001.498671
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "llm",
+          "confidence": 0.95,
+          "reason": "User asks how to clean VR headset lenses, no existing threads, creating new thread to provide cleaning instructions.",
+          "fallback_reason": ""
+        },
+        "created_at": 1781971011.794092
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 0.95,
+          "source": "llm",
+          "reason": "User asks how to clean VR headset lenses, no existing threads, creating new thread to provide cleaning instructions."
+        },
+        "created_at": 1781971011.794101
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "清洁VR头显镜片涉及产品使用安全边界，需要检查平台禁止事项",
+            "evidence": "用户询问清洁方法，需要商品知识库检索证据原文片段",
+            "current_user": "需要当前用户消息作为查询依据",
+            "runtime": "提供渠道和资源数量等运行时信息"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781971018.570675
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 12,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-023",
+          "section_count": 3,
+          "section_names": [
+            "system_policy",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 175,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "current_user": 12,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781971018.570953
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "The user is asking how to clean VR headset lenses, which is a product maintenance question. This falls under 'support' for product/manual/diagnosis inquiries.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"The user is asking how to clean VR headset lenses, which is a product maintenance question. This falls under 'support' for product/manual/diagnosis inquiries.\"\n}"
+        },
+        "created_at": 1781971022.7598531
+      },
+      {
+        "stage": "agent.execution_start",
+        "message": "support agent started",
+        "payload": {
+          "agent": "support"
+        },
+        "created_at": 1781971022.759868
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.resolve_product",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781971022.759884
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781971022.759897
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.resolve_product returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781971022.759988
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781971022.7599978
+      },
+      {
+        "stage": "product.resolve",
+        "message": "product resolution status=resolved",
+        "payload": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "vr_headset",
+          "display_name": "VR 头显",
+          "manual_names": [
+            "VR头显手册"
+          ],
+          "matched_terms": [
+            "VR 头显"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        },
+        "created_at": 1781971022.760024
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.search_product_manual",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781971022.760032
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781971022.7600372
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.search_product_manual returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781971032.746509
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781971032.74652
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "平台回答边界和禁止事项必须保留",
+            "evidence": "用户询问VR头显镜片清洁方法，需要知识库或商品手册中的清洁步骤",
+            "current_user": "必须包含用户当前消息以进行回答",
+            "runtime": "channel等运行时信息用于适配回答格式"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781971039.343762
+      },
+      {
+        "stage": "context.tool_observations",
+        "message": "built prompt tool observations",
+        "payload": {
+          "item_count": 2,
+          "raw_result_refs": [
+            "trace://eb17d0a78827466e9a540339ab800c8b/tool_results/0",
+            "trace://eb17d0a78827466e9a540339ab800c8b/tool_results/1"
+          ]
+        },
+        "created_at": 1781971039.3439639
+      },
+      {
+        "stage": "context.evidence_pack",
+        "message": "built prompt evidence pack",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:VR头显手册_0010",
+            "enterprise_rag:VR头显手册_0009",
+            "enterprise_rag:VR头显手册_0004"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:VR头显手册_0010",
+            "enterprise_rag:VR头显手册_0009",
+            "enterprise_rag:VR头显手册_0004"
+          ],
+          "deduplicated_evidence_ids": [],
+          "item_count": 3,
+          "source": "llm_span_selector"
+        },
+        "created_at": 1781971039.344398
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 12,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-023",
+          "section_count": 4,
+          "section_names": [
+            "system_policy",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 2588,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "evidence": 2400,
+              "current_user": 12,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "evidence",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [
+              "evidence"
+            ],
+            "dropped_sections": [],
+            "truncated_sections": [
+              "evidence"
+            ]
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781971039.344636
+      },
+      {
+        "stage": "llm.answer",
+        "message": "generated product support answer",
+        "payload": {
+          "node": "product_support",
+          "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+          "evidence_count": 3
+        },
+        "created_at": 1781971049.15422
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.validate_answer_grounding",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781971049.1544042
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781971049.154469
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.validate_answer_grounding returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781971049.154901
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781971049.154918
+      },
+      {
+        "stage": "evidence.usage",
+        "message": "recorded product-support evidence usage",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:VR头显手册_0010",
+            "enterprise_rag:VR头显手册_0009",
+            "enterprise_rag:VR头显手册_0004"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:VR头显手册_0010",
+            "enterprise_rag:VR头显手册_0009",
+            "enterprise_rag:VR头显手册_0004"
+          ],
+          "used_evidence_ids": [
+            "enterprise_rag:VR头显手册_0010",
+            "enterprise_rag:VR头显手册_0009",
+            "enterprise_rag:VR头显手册_0004"
+          ],
+          "grounding_checked": true,
+          "grounding": {
+            "grounded": true,
+            "missing_terms": [],
+            "evidence_count": 3,
+            "token_overlap": 4,
+            "reason": "answer is covered by evidence"
+          },
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "vr_headset",
+            "display_name": "VR 头显",
+            "manual_names": [
+              "VR头显手册"
+            ],
+            "matched_terms": [
+              "VR 头显"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          }
+        },
+        "created_at": 1781971049.1549592
+      },
+      {
+        "stage": "agent.execution_stop",
+        "message": "support agent completed",
+        "payload": {
+          "agent": "support",
+          "status": "success"
+        },
+        "created_at": 1781971049.155025
+      },
+      {
+        "stage": "agent.handoff_created",
+        "message": "support handoff created",
+        "payload": {
+          "agent": "support",
+          "handoff": {
+            "stage": "diagnosis",
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "vr_headset",
+              "display_name": "VR 头显",
+              "manual_names": [
+                "VR头显手册"
+              ],
+              "matched_terms": [
+                "VR 头显"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "diagnosis_status": "grounded",
+            "symptoms": [
+              "VR 头显镜片如何清洁？"
+            ],
+            "attempted_steps": [],
+            "recommended_next_steps": [
+              "VR头显镜片清洁方法如下：\n\n**步骤：**  \n1. **准备**：仅使用专用柔软干布（如镜片擦拭布）。请勿使用纸巾、普通面纸或其他非镜片专用纸质产品，以免刮伤镜片。  \n2. **擦拭**：用专用柔软干布轻轻擦拭镜片表面，去除灰尘或污渍。无需加水或清洁液，只需干擦即可。  \n3. **注意**：避免长时间接触水或灰尘，否则可能损坏镜片并缩短使用寿命。\n\n**安全提醒：**  \n- 清洁前务必拔下电源线并断开所有其他线缆，防止意外通电。  \n- 请勿使用溶剂、化学药剂或经化学处理的清洁布擦拭产品外壳或镜片，否则可能损伤涂层或导致外壳老化/变色。  \n- 若镜片沾染顽固污渍且干擦无法去除，建议使用微湿的专用镜片清洁布（不含酒精）后立即擦干，但手册未明确推荐湿擦，如需进一步建议，请告知具体污渍情况。  \n\n如果您使用的是特定型号的VR头显，或有其他清洁部位（如遮光罩、耳塞、通风口）的需求，可以参考手册中相关说明（遮光罩可水洗、耳塞用中性洗涤剂手洗等），但镜片请严格遵循上述干擦方法。"
+            ],
+            "safety_risks": [],
+            "evidence_ids": [
+              "enterprise_rag:VR头显手册_0010",
+              "enterprise_rag:VR头显手册_0009",
+              "enterprise_rag:VR头显手册_0004"
+            ],
+            "summary": "VR头显镜片清洁方法如下：\n\n**步骤：**  \n1. **准备**：仅使用专用柔软干布（如镜片擦拭布）。请勿使用纸巾、普通面纸或其他非镜片专用纸质产品，以免刮伤镜片。  \n2. **擦拭**：用专用柔软干布轻轻擦拭镜片表面，去除灰尘或污渍。无需加水或清洁液，只需干擦即可。  \n3. **注意**：避免长时间接触水或灰尘，否则可能损坏镜片并缩短使用寿命。\n\n**安全提醒：**  \n- 清洁前务必拔下电源线并断开所有其他线缆，防止意外通电。  \n- 请勿使用溶剂、化学药剂或经化学处理的清洁布擦拭产品外壳或镜片，否则可能损伤涂层或导致外壳老化/变色。  \n- 若镜片沾染顽固污渍且干擦无法去除，建议使用微湿的专用镜片清洁布（不含酒精）后立即擦干，但手册未明确推荐湿擦，如需进一步建议，请告知具体污渍情况。  \n\n如果您使用的是特定型号的VR头显，或有其他清洁部位（如遮光罩、耳塞、通风口）的需求，可"
+          }
+        },
+        "created_at": 1781971049.155045
+      },
+      {
+        "stage": "agent.replan",
+        "message": "replanned after support result",
+        "payload": {
+          "action": "clarify",
+          "confidence": 0.0,
+          "reason": "invalid delegation: ValueError",
+          "source": "fallback",
+          "raw_response": ""
+        },
+        "created_at": 1781971056.325852
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781971056.325932
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 0,
+          "accepted_count": 0,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781971056.343495
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "needs_more_info"
+        },
+        "created_at": 1781971056.343499
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 2662,
+    "section_count": 4,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "evidence",
+        "source": "knowledge_runtime",
+        "priority": 35,
+        "chars": 2400,
+        "token_estimate": 600,
+        "char_budget": 2400,
+        "truncated": true,
+        "metadata": {},
+        "content": "\n[truncated: kept most recent/relevant tail]\n手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"VR头显手册\"}, \"confidence\": 0.168368, \"evidence_id\": \"enterprise_rag:VR头显手册_0009\", \"raw_excerpt\": \"# 提示 ● 配置设置需要家长控制密码。 ● 所设限制适用于主机所有用户。 # VR头显 正面<IMG:vr_01> <IMG:vr_02>A）前侧追踪灯 后侧灯光 蓝色：已开机 所有灯蓝色：VR模式 灯灭：已关机 B）前侧头托 C）后侧头托 D）AUX接口 E）HDMI接口 F）镜罩 G）线缆挂钩 H）麦克风 I）遮光罩 J）镜罩调节键 K）前侧追踪灯 后侧<IMG:vr_03> <IMG:vr_04>A）头带 B）附着传感器 C）镜片 D）调节旋钮 E）头带释放键 F）后侧追踪灯 G）线控 H）立体声耳机插孔 I）电源键 J）麦克风静音键 K）音量加键 L）音量减键 # 处理器单元 正面<IMG:Manual38_1> A）状态指示灯 白色：已开机 红色：待机模式 B）AUX端口 C）HDMI输出端口 背面<IMG:Manual38_2> A）HDMI电视端口 B）HDMI PS4端口 C）USB端口 D）DC IN 12V接口 E）通风口 # 立体声耳机 <IMG:Manual38_3>A）耳塞 # 更换耳塞 立体声耳机出厂时已安装M号耳塞。可更换为S号或L号耳塞以获得更贴合的佩戴效果。取下时，旋转耳塞后将其拔下即可。<IMG:Manual38_4> 请牢固安装耳塞，防止使用过程中意外脱落。 # 保养与清洁 清洁时请务必遵守以下说明。 ● 出于安全考虑，清洁前请拔下电源线并断开其他所有线缆。 ● 请勿使用溶剂或其他化学药剂清洁产品外壳。 ● 请勿使用经化学处理的清洁布擦拭产品。 # 处理器单元外壳、VR头显外壳、头托、接口 若有污渍，用柔软干布擦拭即可。 若处理器单元、电源线或其他部件上的接口变脏，可能导致信号传输异常。若耳机或头显接口不洁，还可能出现噪音或声音中断。 # 镜片 仅使用专用柔软干布擦拭镜片。请勿使用纸巾等非镜片专用纸质产品。\", \"source\": {\"chunk_id\": \"VR头显手册_0009\", \"manual_name\": \"VR头显手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"VR头显手册\"}, \"confidence\": 0.160233, \"evidence_id\": \"enterprise_rag:VR头显手册_0004\", \"raw_excerpt\": \"# 使用与操作 ● 连接前，检查接口是否无灰尘及细小杂物。 ● 请勿抓着线缆甩动VR头显或电源适配器。 ● 待头显上的追踪灯熄灭后，再取下VR头显或拔下头显连接线。灯光亮起时取下或拔线可能导致设备故障。 ● 请勿在产品上放置物品、投掷或摔落产品，或使其遭受强烈物理撞击。 ● 请将本产品放置在幼儿接触不到的地方。幼儿可能吞咽细小零件、拉扯线缆导致处理器单元或VR头显坠落，或将线缆缠绕在身上，可能造成人身伤害、意外或设备故障。 ● 雷雨天气时，请勿触碰电源线、电源适配器或处理器单元。 ● 请勿让液体或细小颗粒进入产品内部（接口、通风口等）。若发生此情况，请立即停止使用并断开电源。 ● 请勿将产品暴露在灰尘、烟雾或蒸汽中。灰尘等物质可能引发火灾或触电。 ● 产品开机时，避免身体长时间接触处理器单元、电源适配器或通风口排出的空气。长时间接触可能导致低温烫伤*。 * 低温烫伤是指皮肤长时间接触温度相对较低（40℃及以上）的物体所造成的烫伤。 ● 若VR头显、立体声耳机或立体声头戴设备（另售）导致皮肤不适，请停止使用。若使用后皮肤不适症状未消退，请立即停止使用并就医。 ● 本产品及其部件由金属和塑料制成。废弃时，请遵守当地法规妥善处理此类材料。 ● 请遵守以下注意事项，防止产品外壳老化或变色： ○ 请勿在产品上使用溶剂或其他化学药剂。 ○ 避免橡胶或乙烯基材料与产品长时间接触。 ● 以高音量使用头显或耳机可能导致永久性听力损伤。请将音量调至安全水平。随着时间推移，过大的音量可能听起来正常，但实际上会损害您的听力。若您出现耳鸣、耳部不适或听觉模糊，请停止聆听并检查听力。音量越大，听力受损越快。为保护听力： ○ 缩短以高音量使用头显或耳机的时间。 ○ 请勿调高音量以隔绝环境噪音。 ○ 若听不到身边人说话，请调低音量。\", \"source\": {\"chunk_id\": \"VR头显手册_0004\", \"manual_name\": \"VR头显手册\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"VR 头显镜片如何清洁？\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:VR头显手册_0010\", \"enterprise_rag:VR头显手册_0009\", \"enterprise_rag:VR头显手册_0004\"], \"retrieved_evidence_ids\": [\"enterprise_rag:VR头显手册_0010\", \"enterprise_rag:VR头显手册_0009\", \"enterprise_rag:VR头显手册_0004\"]}}",
+        "preview": "\n[truncated: kept most recent/relevant tail]\n手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"VR头显手册\"}, \"confidence\": 0.168368, \"evidence_id\": \"enterprise_rag:VR头显手册_0009\", \"raw_excerpt\": \"# 提示 ● 配置设置需要家长控制密码。 ● 所设"
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 12,
+        "token_estimate": 3,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "VR 头显镜片如何清洁？",
+        "preview": "VR 头显镜片如何清洁？"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 117,
+        "token_estimate": 29,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "evidence",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 2588,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "evidence": 2400,
+        "current_user": 12,
+        "runtime": 117
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "evidence": 35,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "evidence",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [
+        "evidence"
+      ],
+      "dropped_sections": [],
+      "truncated_sections": [
+        "evidence"
+      ]
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[evidence]\n\n[truncated: kept most recent/relevant tail]\n手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"VR头显手册\"}, \"confidence\": 0.168368, \"evidence_id\": \"enterprise_rag:VR头显手册_0009\", \"raw_excerpt\": \"# 提示 ● 配置设置需要家长控制密码。 ● 所设限制适用于主机所有用户。 # VR头显 正面<IMG:vr_01> <IMG:vr_02>A）前侧追踪灯 后侧灯光 蓝色：已开机 所有灯蓝色：VR模式 灯灭：已关机 B）前侧头托 C）后侧头托 D）AUX接口 E）HDMI接口 F）镜罩 G）线缆挂钩 H）麦克风 I）遮光罩 J）镜罩调节键 K）前侧追踪灯 后侧<IMG:vr_03> <IMG:vr_04>A）头带 B）附着传感器 C）镜片 D）调节旋钮 E）头带释放键 F）后侧追踪灯 G）线控 H）立体声耳机插孔 I）电源键 J）麦克风静音键 K）音量加键 L）音量减键 # 处理器单元 正面<IMG:Manual38_1> A）状态指示灯 白色：已开机 红色：待机模式 B）AUX端口 C）HDMI输出端口 背面<IMG:Manual38_2> A）HDMI电视端口 B）HDMI PS4端口 C）USB端口 D）DC IN 12V接口 E）通风口 # 立体声耳机 <IMG:Manual38_3>A）耳塞 # 更换耳塞 立体声耳机出厂时已安装M号耳塞。可更换为S号或L号耳塞以获得更贴合的佩戴效果。取下时，旋转耳塞后将其拔下即可。<IMG:Manual38_4> 请牢固安装耳塞，防止使用过程中意外脱落。 # 保养与清洁 清洁时请务必遵守以下说明。 ● 出于安全考虑，清洁前请拔下电源线并断开其他所有线缆。 ● 请勿使用溶剂或其他化学药剂清洁产品外壳。 ● 请勿使用经化学处理的清洁布擦拭产品。 # 处理器单元外壳、VR头显外壳、头托、接口 若有污渍，"
+  },
+  "trace_persisted": "eb17d0a78827466e9a540339ab800c8b",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [
+      "support"
+    ],
+    "support_handoff": {
+      "stage": "diagnosis",
+      "product_resolution": {
+        "status": "resolved",
+        "source": "strong_signal",
+        "product_id": "vr_headset",
+        "display_name": "VR 头显",
+        "manual_names": [
+          "VR头显手册"
+        ],
+        "matched_terms": [
+          "VR 头显"
+        ],
+        "disclose_default_product": false,
+        "candidate_product_ids": [],
+        "reason": "user named product identity"
+      },
+      "diagnosis_status": "grounded",
+      "symptoms": [
+        "VR 头显镜片如何清洁？"
+      ],
+      "attempted_steps": [],
+      "recommended_next_steps": [
+        "VR头显镜片清洁方法如下：\n\n**步骤：**  \n1. **准备**：仅使用专用柔软干布（如镜片擦拭布）。请勿使用纸巾、普通面纸或其他非镜片专用纸质产品，以免刮伤镜片。  \n2. **擦拭**：用专用柔软干布轻轻擦拭镜片表面，去除灰尘或污渍。无需加水或清洁液，只需干擦即可。  \n3. **注意**：避免长时间接触水或灰尘，否则可能损坏镜片并缩短使用寿命。\n\n**安全提醒：**  \n- 清洁前务必拔下电源线并断开所有其他线缆，防止意外通电。  \n- 请勿使用溶剂、化学药剂或经化学处理的清洁布擦拭产品外壳或镜片，否则可能损伤涂层或导致外壳老化/变色。  \n- 若镜片沾染顽固污渍且干擦无法去除，建议使用微湿的专用镜片清洁布（不含酒精）后立即擦干，但手册未明确推荐湿擦，如需进一步建议，请告知具体污渍情况。  \n\n如果您使用的是特定型号的VR头显，或有其他清洁部位（如遮光罩、耳塞、通风口）的需求，可以参考手册中相关说明（遮光罩可水洗、耳塞用中性洗涤剂手洗等），但镜片请严格遵循上述干擦方法。"
+      ],
+      "safety_risks": [],
+      "evidence_ids": [
+        "enterprise_rag:VR头显手册_0010",
+        "enterprise_rag:VR头显手册_0009",
+        "enterprise_rag:VR头显手册_0004"
+      ],
+      "summary": "VR头显镜片清洁方法如下：\n\n**步骤：**  \n1. **准备**：仅使用专用柔软干布（如镜片擦拭布）。请勿使用纸巾、普通面纸或其他非镜片专用纸质产品，以免刮伤镜片。  \n2. **擦拭**：用专用柔软干布轻轻擦拭镜片表面，去除灰尘或污渍。无需加水或清洁液，只需干擦即可。  \n3. **注意**：避免长时间接触水或灰尘，否则可能损坏镜片并缩短使用寿命。\n\n**安全提醒：**  \n- 清洁前务必拔下电源线并断开所有其他线缆，防止意外通电。  \n- 请勿使用溶剂、化学药剂或经化学处理的清洁布擦拭产品外壳或镜片，否则可能损伤涂层或导致外壳老化/变色。  \n- 若镜片沾染顽固污渍且干擦无法去除，建议使用微湿的专用镜片清洁布（不含酒精）后立即擦干，但手册未明确推荐湿擦，如需进一步建议，请告知具体污渍情况。  \n\n如果您使用的是特定型号的VR头显，或有其他清洁部位（如遮光罩、耳塞、通风口）的需求，可"
+    },
+    "plans": [
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "The user is asking how to clean VR headset lenses, which is a product maintenance question. This falls under 'support' for product/manual/diagnosis inquiries.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"The user is asking how to clean VR headset lenses, which is a product maintenance question. This falls under 'support' for product/manual/diagnosis inquiries.\"\n}"
+      },
+      {
+        "action": "clarify",
+        "confidence": 0.0,
+        "reason": "invalid delegation: ValueError",
+        "source": "fallback",
+        "raw_response": ""
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "llm",
+      "confidence": 0.95,
+      "reason": "User asks how to clean VR headset lenses, no existing threads, creating new thread to provide cleaning instructions.",
+      "fallback_reason": ""
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 0.95,
+      "source": "llm",
+      "reason": "User asks how to clean VR headset lenses, no existing threads, creating new thread to provide cleaning instructions."
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": false,
+    "valid": null,
+    "failure_reason": "",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

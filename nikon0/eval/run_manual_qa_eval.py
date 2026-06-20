@@ -14,9 +14,26 @@ from nikon0.app.schemas.agent import AgentRequest
 from nikon0.eval.runtime_profiles import build_profiled_eval_runtime, EvalRuntimeProfile
 
 
+def _trace_payload(response: Any) -> dict[str, Any]:
+    debug = getattr(response, "debug", {}) or {}
+    return {
+        "trace": debug.get("trace") or {},
+        "context_debug": debug.get("context_debug") or {},
+        "loop": debug.get("loop") or {},
+        "plan": debug.get("plan"),
+        "skill_selection": debug.get("skill_selection"),
+        "skill_manifests": debug.get("skill_manifests") or [],
+        "memory_governance": debug.get("memory_governance") or {},
+        "trace_persisted": debug.get("trace_persisted"),
+        "transcript_entries": debug.get("transcript_entries"),
+    }
+
+
 async def run_one(
     runtime: AgentRuntime,
     item: dict,
+    *,
+    save_trace: bool = False,
 ) -> dict[str, Any]:
     """Run an item, including its explicit prior user turns when provided."""
     case_id = item["case_id"]
@@ -46,7 +63,7 @@ async def run_one(
         debug = getattr(response, "debug", {}) or {}
         selection = debug.get("skill_selection", {})
         loop_info = debug.get("loop", {})
-        return {
+        result = {
             "case_id": case_id,
             "category": item.get("category", ""),
             "message": message,
@@ -67,6 +84,9 @@ async def run_one(
             "trace_id": getattr(response, "trace_id", ""),
             "error": None,
         }
+        if save_trace:
+            result["trace_payload"] = _trace_payload(response)
+        return result
     except Exception as exc:
         elapsed = time.perf_counter() - start
         return {
@@ -112,11 +132,13 @@ async def run_all(
     manual_dir: str | Path,
     *,
     limit: int | None = None,
+    case_id: str | None = None,
     profile: EvalRuntimeProfile = EvalRuntimeProfile.PRODUCTION_LIKE,
     use_real_llm: bool | None = None,
     local_rag: bool | None = None,
     mock_case_intake_tool: bool | None = None,
     show_progress: bool = False,
+    save_traces: bool = False,
 ) -> dict[str, Any]:
     """运行所有 QA items."""
     run_dir = Path(output_dir)
@@ -130,10 +152,14 @@ async def run_all(
             if line:
                 items.append(json.loads(line))
 
-    if limit:
+    if case_id:
+        items = [item for item in items if item.get("case_id") == case_id]
+        if not items:
+            raise ValueError(f"case_id not found in dataset: {case_id}")
+    elif limit:
         items = items[:limit]
 
-    print(f"Building runtime (profile={profile.value})...")
+    print(f"Building runtime (profile={profile.value})...", flush=True)
     deterministic_profile = profile in {EvalRuntimeProfile.DETERMINISTIC, EvalRuntimeProfile.LEGACY_EVAL}
     resolved_use_real_llm = (not deterministic_profile) if use_real_llm is None else use_real_llm
     resolved_local_rag = deterministic_profile if local_rag is None else local_rag
@@ -168,8 +194,19 @@ async def run_all(
             sys.stdout.write(f"\r[{i+1}/{len(items)}] {cid} ({cat})... ")
             sys.stdout.flush()
 
-        result = await run_one(runtime, item)
+        result = await run_one(runtime, item, save_trace=save_traces)
         results.append(result)
+        if save_traces and result.get("trace_payload") is not None:
+            trace_dir = run_dir / "traces"
+            trace_dir.mkdir(parents=True, exist_ok=True)
+            trace_path = trace_dir / f"{cid}.json"
+            trace_doc = {key: value for key, value in result.items() if key != "trace_payload"}
+            trace_doc["debug"] = result["trace_payload"]
+            trace_path.write_text(
+                json.dumps(trace_doc, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print(f"Trace saved to {trace_path}", flush=True)
         if show_progress:
             _print_progress(
                 i + 1,
@@ -224,8 +261,12 @@ async def run_all(
     }
 
     # 保存结果
+    result_rows = [
+        {key: value for key, value in row.items() if key != "trace_payload"}
+        for row in results
+    ]
     (run_dir / "raw_results.jsonl").write_text(
-        "\n".join(json.dumps(r, ensure_ascii=False) for r in results) + "\n",
+        "\n".join(json.dumps(r, ensure_ascii=False) for r in result_rows) + "\n",
         encoding="utf-8",
     )
     (run_dir / "report.json").write_text(
@@ -247,6 +288,8 @@ if __name__ == "__main__":
     parser.add_argument("--output", default="nikon0/eval/reports/manual-qa-eval-150")
     parser.add_argument("--manual-dir", default="/Users/nikonzhang/compeletion/手册")
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--case-id", default=None, help="Run a single dataset case by case_id.")
+    parser.add_argument("--save-traces", action="store_true", help="Write full debug trace JSON per case under <output>/traces/.")
     parser.add_argument("--profile", default="production_like",
                         choices=["deterministic", "production_like", "production_like_no_llm", "legacy_eval"])
     llm_group = parser.add_mutually_exclusive_group()
@@ -263,9 +306,11 @@ if __name__ == "__main__":
         output_dir=args.output,
         manual_dir=args.manual_dir,
         limit=args.limit,
+        case_id=args.case_id,
         profile=EvalRuntimeProfile(args.profile),
         use_real_llm=args.use_real_llm,
         local_rag=args.local_rag,
         mock_case_intake_tool=args.mock_case_intake_tool,
         show_progress=args.progress,
+        save_traces=args.save_traces,
     ))

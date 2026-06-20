@@ -1,0 +1,1120 @@
+{
+  "trace": {
+    "trace_id": "73e1ae521c35427ba8960705abb7f946",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-020",
+    "user_message": "空气炸锅不加热，我已经检查插座还是不行",
+    "selected_agents": [
+      "support"
+    ],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 19,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-020",
+        "section_count": 4,
+        "section_names": [
+          "system_policy",
+          "memory",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 243,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "memory": 61,
+            "current_user": 19,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "memory": 30,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "memory",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      },
+      {
+        "message_chars": 19,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-020",
+        "section_count": 5,
+        "section_names": [
+          "system_policy",
+          "memory",
+          "evidence",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 2656,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "memory": 61,
+            "evidence": 2400,
+            "current_user": 19,
+            "runtime": 117
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "memory": 30,
+            "evidence": 35,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "evidence",
+            "memory",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [
+            "evidence"
+          ],
+          "dropped_sections": [],
+          "truncated_sections": [
+            "evidence"
+          ]
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [
+      {
+        "query": "空气炸锅不加热，我已经检查插座还是不行",
+        "intent": "product_support",
+        "evidence_count": 3,
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "Airfryer",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": true
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "Airfryer"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 3,
+            "retrieval_trace": {
+              "query": "空气炸锅不加热，我已经检查插座还是不行",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 3,
+              "score_threshold": 0.1,
+              "top1_score": 0.086178,
+              "retrieved_chunk_ids": [
+                "Airfryer_0019",
+                "Airfryer_0026",
+                "Airfryer_0008"
+              ],
+              "filtered_chunk_ids": [
+                "Airfryer_0019",
+                "Airfryer_0026",
+                "Airfryer_0008"
+              ],
+              "retrieved_manual_names": [
+                "Airfryer",
+                "Airfryer",
+                "Airfryer"
+              ],
+              "filtered_manual_names": [
+                "Airfryer",
+                "Airfryer",
+                "Airfryer"
+              ],
+              "source_queries": [
+                "空气炸锅不加热，我已经检查插座还是不行"
+              ],
+              "manual_name_decisions": [
+                "Airfryer"
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Manual08_5",
+                "Manual08_6",
+                "air_fryer_01",
+                "air_fryer_12",
+                "air_fryer_13"
+              ]
+            }
+          }
+        ],
+        "product_resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "airfryer",
+          "display_name": "Airfryer 空气炸锅",
+          "manual_names": [
+            "Airfryer"
+          ],
+          "matched_terms": [
+            "空气炸锅"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "service_id": "product-support",
+        "tool_name": "resolve_product",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "search_product_manual",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "validate_answer_grounding",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      }
+    ],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781970864.010695
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "deterministic",
+          "confidence": 1.0,
+          "reason": "session has no active thread",
+          "fallback_reason": "SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /compatible-mode/v1/chat/completions (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1017)')))"
+        },
+        "created_at": 1781970869.021834
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 1.0,
+          "source": "deterministic",
+          "reason": "session has no active thread"
+        },
+        "created_at": 1781970869.021854
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "memory",
+            "conversation",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "确保回答边界合规",
+            "memory": "获取当前活动产品/问题上下文",
+            "conversation": "可能涉及历史消息（但当前为空）",
+            "evidence": "需要空气炸锅不加热的知识库证据",
+            "current_user": "用户最新消息",
+            "runtime": "运行时信息（如图片数量等）"
+          },
+          "source": "llm",
+          "confidence": 0.8
+        },
+        "created_at": 1781970874.9394
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 19,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-020",
+          "section_count": 4,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 243,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 61,
+              "current_user": 19,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970874.939639
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "User reports air fryer not heating after checking outlet, indicating a product diagnosis issue appropriate for support.",
+          "source": "llm",
+          "raw_response": "{\"action\": \"support\", \"confidence\": 0.95, \"reason\": \"User reports air fryer not heating after checking outlet, indicating a product diagnosis issue appropriate for support.\"}"
+        },
+        "created_at": 1781970880.86237
+      },
+      {
+        "stage": "agent.execution_start",
+        "message": "support agent started",
+        "payload": {
+          "agent": "support"
+        },
+        "created_at": 1781970880.862396
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.resolve_product",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970880.862425
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970880.8624508
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.resolve_product returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970880.8625731
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970880.862585
+      },
+      {
+        "stage": "product.resolve",
+        "message": "product resolution status=resolved",
+        "payload": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "airfryer",
+          "display_name": "Airfryer 空气炸锅",
+          "manual_names": [
+            "Airfryer"
+          ],
+          "matched_terms": [
+            "空气炸锅"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        },
+        "created_at": 1781970880.862627
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.search_product_manual",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970880.862643
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970880.862653
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.search_product_manual returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970890.5386019
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970890.538611
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "memory",
+            "conversation",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "需要遵守回答边界和禁止事项",
+            "memory": "用户提到'还是不行'，需要回顾之前上下文",
+            "conversation": "需要查看之前对话内容（虽然为空，但保留以备后续）",
+            "evidence": "空气炸锅不加热属于商品故障，需要检索知识库或手册",
+            "current_user": "包含用户当前消息",
+            "runtime": "提供运行时信息（如图片数量等）"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970897.6281931
+      },
+      {
+        "stage": "context.tool_observations",
+        "message": "built prompt tool observations",
+        "payload": {
+          "item_count": 2,
+          "raw_result_refs": [
+            "trace://73e1ae521c35427ba8960705abb7f946/tool_results/0",
+            "trace://73e1ae521c35427ba8960705abb7f946/tool_results/1"
+          ]
+        },
+        "created_at": 1781970897.628333
+      },
+      {
+        "stage": "context.evidence_pack",
+        "message": "built prompt evidence pack",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:Airfryer_0019",
+            "enterprise_rag:Airfryer_0026",
+            "enterprise_rag:Airfryer_0008"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:Airfryer_0019",
+            "enterprise_rag:Airfryer_0026",
+            "enterprise_rag:Airfryer_0008"
+          ],
+          "deduplicated_evidence_ids": [],
+          "item_count": 3,
+          "source": "llm_span_selector"
+        },
+        "created_at": 1781970897.628736
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 19,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-020",
+          "section_count": 5,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 2656,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 61,
+              "evidence": 2400,
+              "current_user": 19,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "evidence",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [
+              "evidence"
+            ],
+            "dropped_sections": [],
+            "truncated_sections": [
+              "evidence"
+            ]
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970897.628951
+      },
+      {
+        "stage": "llm.answer",
+        "message": "generated product support answer",
+        "payload": {
+          "node": "product_support",
+          "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+          "evidence_count": 3
+        },
+        "created_at": 1781970906.7625432
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.validate_answer_grounding",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970906.762656
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970906.7626848
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.validate_answer_grounding returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970906.763084
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970906.763097
+      },
+      {
+        "stage": "evidence.usage",
+        "message": "recorded product-support evidence usage",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:Airfryer_0019",
+            "enterprise_rag:Airfryer_0026",
+            "enterprise_rag:Airfryer_0008"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:Airfryer_0019",
+            "enterprise_rag:Airfryer_0026",
+            "enterprise_rag:Airfryer_0008"
+          ],
+          "used_evidence_ids": [
+            "enterprise_rag:Airfryer_0019",
+            "enterprise_rag:Airfryer_0026",
+            "enterprise_rag:Airfryer_0008"
+          ],
+          "grounding_checked": true,
+          "grounding": {
+            "grounded": true,
+            "missing_terms": [],
+            "evidence_count": 3,
+            "token_overlap": 1,
+            "reason": "answer is covered by evidence"
+          },
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "airfryer",
+            "display_name": "Airfryer 空气炸锅",
+            "manual_names": [
+              "Airfryer"
+            ],
+            "matched_terms": [
+              "空气炸锅"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          }
+        },
+        "created_at": 1781970906.763128
+      },
+      {
+        "stage": "agent.execution_stop",
+        "message": "support agent completed",
+        "payload": {
+          "agent": "support",
+          "status": "success"
+        },
+        "created_at": 1781970906.7631922
+      },
+      {
+        "stage": "agent.handoff_created",
+        "message": "support handoff created",
+        "payload": {
+          "agent": "support",
+          "handoff": {
+            "stage": "diagnosis",
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "airfryer",
+              "display_name": "Airfryer 空气炸锅",
+              "manual_names": [
+                "Airfryer"
+              ],
+              "matched_terms": [
+                "空气炸锅"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "diagnosis_status": "grounded",
+            "symptoms": [
+              "空气炸锅不加热，我已经检查插座还是不行"
+            ],
+            "attempted_steps": [],
+            "recommended_next_steps": [
+              "感谢您的反馈。您已经检查了插座，这很好。根据我目前看到的空气炸锅使用说明，操作的第一步确实是“将插头插入墙上的电源插座”（参考证据：Airfryer_0019）。既然插座没问题，但机器仍不加热，现有手册中没有提供不加热故障的具体排查步骤，因此我无法直接判断原因。\n\n为了进一步帮您分析，请先确认以下几个情况：  \n1. 插上电源后，空气炸锅的面板或指示灯是否亮起？  \n2. 您是否设置了合适的温度和时间，并按下启动/开始键？  \n3. 机器有没有任何异常声音、异味或屏幕报错信息？  \n\n**安全提醒**：在进一步检查前，请先拔掉电源插头，等待机器冷却。如果面板完全无反应，或您尝试以上操作后仍无法加热，建议不要自行拆机，应联系售后或专业维修人员处理。  \n\n如果您能补充更多机器现象（例如是否有任何按键响应、是否通电等），我可以对照手册继续判断。"
+            ],
+            "safety_risks": [],
+            "evidence_ids": [
+              "enterprise_rag:Airfryer_0019",
+              "enterprise_rag:Airfryer_0026",
+              "enterprise_rag:Airfryer_0008"
+            ],
+            "summary": "感谢您的反馈。您已经检查了插座，这很好。根据我目前看到的空气炸锅使用说明，操作的第一步确实是“将插头插入墙上的电源插座”（参考证据：Airfryer_0019）。既然插座没问题，但机器仍不加热，现有手册中没有提供不加热故障的具体排查步骤，因此我无法直接判断原因。\n\n为了进一步帮您分析，请先确认以下几个情况：  \n1. 插上电源后，空气炸锅的面板或指示灯是否亮起？  \n2. 您是否设置了合适的温度和时间，并按下启动/开始键？  \n3. 机器有没有任何异常声音、异味或屏幕报错信息？  \n\n**安全提醒**：在进一步检查前，请先拔掉电源插头，等待机器冷却。如果面板完全无反应，或您尝试以上操作后仍无法加热，建议不要自行拆机，应联系售后或专业维修人员处理。  \n\n如果您能补充更多机器现象（例如是否有任何按键响应、是否通电等），我可以对照手册继续判断。"
+          }
+        },
+        "created_at": 1781970906.7632132
+      },
+      {
+        "stage": "agent.replan",
+        "message": "replanned after support result",
+        "payload": {
+          "action": "clarify",
+          "confidence": 0.9,
+          "reason": "The support handoff diagnosis is grounded but incomplete; the support agent asked for additional details (panel lights, settings, etc.) which the user has not yet provided. Clarifying is the appropriate next step to continue troubleshooting before considering service.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"clarify\",\n  \"confidence\": 0.9,\n  \"reason\": \"The support handoff diagnosis is grounded but incomplete; the support agent asked for additional details (panel lights, settings, etc.) which the user has not yet provided. Clarifying is the appropriate next step to continue troubleshooting before considering service.\"\n}"
+        },
+        "created_at": 1781970912.555021
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781970912.555105
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 0,
+          "accepted_count": 0,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781970912.563286
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "needs_more_info"
+        },
+        "created_at": 1781970912.5632918
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 2741,
+    "section_count": 5,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "memory",
+        "source": "memory",
+        "priority": 30,
+        "chars": 61,
+        "token_estimate": 15,
+        "char_budget": 1400,
+        "truncated": false,
+        "metadata": {},
+        "content": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-020",
+        "preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-020"
+      },
+      {
+        "name": "evidence",
+        "source": "knowledge_runtime",
+        "priority": 35,
+        "chars": 2400,
+        "token_estimate": 600,
+        "char_budget": 2400,
+        "truncated": true,
+        "metadata": {},
+        "content": "\n[truncated: kept most recent/relevant tail]\n a largerange of ingredients.Consult the‘Food table for the right quantities and approximate cooking times.\", \"source\": {\"chunk_id\": \"Airfryer_0019\", \"manual_name\": \"Airfryer\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"Airfryer\"}, \"confidence\": 0.081994, \"evidence_id\": \"enterprise_rag:Airfryer_0026\", \"raw_excerpt\": \"10 Pull out the pan and check if the ingredients are ready<IMG:air_fryer_12>Caution The Air fryer panis hot after the cooking process.Always place it on a heat resistant work top(eg.trivet,etc.)when you remove the pan from the device. Note If the ingredients are not ready yet, simply slide the pan back into the Airfryer by the handle and add a few extra minutes to the set time 11 To remove small ingredients (e.g. fries),lift the basket out of the pan by sliding the lid first, and then pressing the basket release button<IMG:air_fryer_13> Caution\", \"source\": {\"chunk_id\": \"Airfryer_0026\", \"manual_name\": \"Airfryer\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"Airfryer\"}, \"confidence\": 0.074389, \"evidence_id\": \"enterprise_rag:Airfryer_0008\", \"raw_excerpt\": \"not used according to the instructions in the user manual, the guarantee becomes invalid and refuses any liability for damage caused. Always place and use the appliance on a dry stable,level and horizontal surface. Always unplug the appliance after use Let the appliance cool downfor approx.30 minutes before you handle or clean it Make sure the ingredients prepared in this appliance come out golden-yellow instead of dark or brown. Remove burnt remnants. Do not fry fresh potatoes at a temperature above 180 (to minimise the production of a cry l amide) Be careful when cleaning the upper area of the cooking chamber: Hot heating element, edge of Metalparts. Always make sure that the food is fully cooked in the Airfryer. Always make sure that you have the control over your Air fryer,also\", \"source\": {\"chunk_id\": \"Airfryer_0008\", \"manual_name\": \"Airfryer\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"空气炸锅不加热，我已经检查插座还是不行\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:Airfryer_0019\", \"enterprise_rag:Airfryer_0026\", \"enterprise_rag:Airfryer_0008\"], \"retrieved_evidence_ids\": [\"enterprise_rag:Airfryer_0019\", \"enterprise_rag:Airfryer_0026\", \"enterprise_rag:Airfryer_0008\"]}}",
+        "preview": "\n[truncated: kept most recent/relevant tail]\n a largerange of ingredients.Consult the‘Food table for the right quantities and approximate cooking times.\", \"source\": {\"chunk_id\": \"Airfryer_0019\", \"manual_name\": \"Airfryer\"}, \"source_type\": \"e"
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 19,
+        "token_estimate": 4,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "空气炸锅不加热，我已经检查插座还是不行",
+        "preview": "空气炸锅不加热，我已经检查插座还是不行"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 117,
+        "token_estimate": 29,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "memory",
+      "evidence",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 2656,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "memory": 61,
+        "evidence": 2400,
+        "current_user": 19,
+        "runtime": 117
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "memory": 30,
+        "evidence": 35,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "evidence",
+        "memory",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [
+        "evidence"
+      ],
+      "dropped_sections": [],
+      "truncated_sections": [
+        "evidence"
+      ]
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[memory]\n[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-020\n\n[evidence]\n\n[truncated: kept most recent/relevant tail]\n a largerange of ingredients.Consult the‘Food table for the right quantities and approximate cooking times.\", \"source\": {\"chunk_id\": \"Airfryer_0019\", \"manual_name\": \"Airfryer\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"Airfryer\"}, \"confidence\": 0.081994, \"evidence_id\": \"enterprise_rag:Airfryer_0026\", \"raw_excerpt\": \"10 Pull out the pan and check if the ingredients are ready<IMG:air_fryer_12>Caution The Air fryer panis hot after the cooking process.Always place it on a heat resistant work top(eg.trivet,etc.)when you remove the pan from the device. Note If the ingredients are not ready yet, simply slide the pan back into the Airfryer by the handle and add a few extra minutes to the set time 11 To remove small ingredients (e.g. fries),lift the "
+  },
+  "trace_persisted": "73e1ae521c35427ba8960705abb7f946",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [
+      "support"
+    ],
+    "support_handoff": {
+      "stage": "diagnosis",
+      "product_resolution": {
+        "status": "resolved",
+        "source": "strong_signal",
+        "product_id": "airfryer",
+        "display_name": "Airfryer 空气炸锅",
+        "manual_names": [
+          "Airfryer"
+        ],
+        "matched_terms": [
+          "空气炸锅"
+        ],
+        "disclose_default_product": false,
+        "candidate_product_ids": [],
+        "reason": "user named product identity"
+      },
+      "diagnosis_status": "grounded",
+      "symptoms": [
+        "空气炸锅不加热，我已经检查插座还是不行"
+      ],
+      "attempted_steps": [],
+      "recommended_next_steps": [
+        "感谢您的反馈。您已经检查了插座，这很好。根据我目前看到的空气炸锅使用说明，操作的第一步确实是“将插头插入墙上的电源插座”（参考证据：Airfryer_0019）。既然插座没问题，但机器仍不加热，现有手册中没有提供不加热故障的具体排查步骤，因此我无法直接判断原因。\n\n为了进一步帮您分析，请先确认以下几个情况：  \n1. 插上电源后，空气炸锅的面板或指示灯是否亮起？  \n2. 您是否设置了合适的温度和时间，并按下启动/开始键？  \n3. 机器有没有任何异常声音、异味或屏幕报错信息？  \n\n**安全提醒**：在进一步检查前，请先拔掉电源插头，等待机器冷却。如果面板完全无反应，或您尝试以上操作后仍无法加热，建议不要自行拆机，应联系售后或专业维修人员处理。  \n\n如果您能补充更多机器现象（例如是否有任何按键响应、是否通电等），我可以对照手册继续判断。"
+      ],
+      "safety_risks": [],
+      "evidence_ids": [
+        "enterprise_rag:Airfryer_0019",
+        "enterprise_rag:Airfryer_0026",
+        "enterprise_rag:Airfryer_0008"
+      ],
+      "summary": "感谢您的反馈。您已经检查了插座，这很好。根据我目前看到的空气炸锅使用说明，操作的第一步确实是“将插头插入墙上的电源插座”（参考证据：Airfryer_0019）。既然插座没问题，但机器仍不加热，现有手册中没有提供不加热故障的具体排查步骤，因此我无法直接判断原因。\n\n为了进一步帮您分析，请先确认以下几个情况：  \n1. 插上电源后，空气炸锅的面板或指示灯是否亮起？  \n2. 您是否设置了合适的温度和时间，并按下启动/开始键？  \n3. 机器有没有任何异常声音、异味或屏幕报错信息？  \n\n**安全提醒**：在进一步检查前，请先拔掉电源插头，等待机器冷却。如果面板完全无反应，或您尝试以上操作后仍无法加热，建议不要自行拆机，应联系售后或专业维修人员处理。  \n\n如果您能补充更多机器现象（例如是否有任何按键响应、是否通电等），我可以对照手册继续判断。"
+    },
+    "plans": [
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "User reports air fryer not heating after checking outlet, indicating a product diagnosis issue appropriate for support.",
+        "source": "llm",
+        "raw_response": "{\"action\": \"support\", \"confidence\": 0.95, \"reason\": \"User reports air fryer not heating after checking outlet, indicating a product diagnosis issue appropriate for support.\"}"
+      },
+      {
+        "action": "clarify",
+        "confidence": 0.9,
+        "reason": "The support handoff diagnosis is grounded but incomplete; the support agent asked for additional details (panel lights, settings, etc.) which the user has not yet provided. Clarifying is the appropriate next step to continue troubleshooting before considering service.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"clarify\",\n  \"confidence\": 0.9,\n  \"reason\": \"The support handoff diagnosis is grounded but incomplete; the support agent asked for additional details (panel lights, settings, etc.) which the user has not yet provided. Clarifying is the appropriate next step to continue troubleshooting before considering service.\"\n}"
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "deterministic",
+      "confidence": 1.0,
+      "reason": "session has no active thread",
+      "fallback_reason": "SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /compatible-mode/v1/chat/completions (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1017)')))"
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 1.0,
+      "source": "deterministic",
+      "reason": "session has no active thread"
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": false,
+    "valid": null,
+    "failure_reason": "",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

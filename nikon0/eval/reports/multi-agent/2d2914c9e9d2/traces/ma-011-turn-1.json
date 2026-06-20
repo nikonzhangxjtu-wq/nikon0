@@ -1,0 +1,1313 @@
+{
+  "trace": {
+    "trace_id": "cfe05220c0a047e9827466c205974c77",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-011",
+    "user_message": "洗碗机第一次使用前要做什么？",
+    "selected_agents": [
+      "support"
+    ],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 14,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-011",
+        "section_count": 3,
+        "section_names": [
+          "system_policy",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 177,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "current_user": 14,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      },
+      {
+        "message_chars": 14,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-011",
+        "section_count": 5,
+        "section_names": [
+          "system_policy",
+          "memory",
+          "evidence",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 2651,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "memory": 61,
+            "evidence": 2400,
+            "current_user": 14,
+            "runtime": 117
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "memory": 30,
+            "evidence": 35,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "evidence",
+            "memory",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [
+            "evidence"
+          ],
+          "dropped_sections": [],
+          "truncated_sections": [
+            "evidence"
+          ]
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [
+      {
+        "query": "洗碗机第一次使用前要做什么？",
+        "intent": "product_support",
+        "evidence_count": 3,
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "洗碗机手册",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": true
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "洗碗机手册"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 3,
+            "retrieval_trace": {
+              "query": "洗碗机第一次使用前要做什么？",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 3,
+              "score_threshold": 0.1,
+              "top1_score": 0.099641,
+              "retrieved_chunk_ids": [
+                "洗碗机手册_0006",
+                "洗碗机手册_0010",
+                "洗碗机手册_0000"
+              ],
+              "filtered_chunk_ids": [
+                "洗碗机手册_0006",
+                "洗碗机手册_0010",
+                "洗碗机手册_0000"
+              ],
+              "retrieved_manual_names": [
+                "洗碗机手册",
+                "洗碗机手册",
+                "洗碗机手册"
+              ],
+              "filtered_manual_names": [
+                "洗碗机手册",
+                "洗碗机手册",
+                "洗碗机手册"
+              ],
+              "source_queries": [
+                "洗碗机第一次使用前要做什么？"
+              ],
+              "manual_name_decisions": [
+                "洗碗机手册"
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Dish_washer_07",
+                "Dish_washer_01",
+                "Dish_washer_02",
+                "Manual06_8",
+                "Manual06_9",
+                "Manual06_10"
+              ]
+            }
+          }
+        ],
+        "product_resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "dishwasher",
+          "display_name": "洗碗机",
+          "manual_names": [
+            "洗碗机手册"
+          ],
+          "matched_terms": [
+            "洗碗机"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "service_id": "product-support",
+        "tool_name": "resolve_product",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "search_product_manual",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "validate_answer_grounding",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      }
+    ],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [
+      {
+        "key": "product_support",
+        "value": {
+          "disambiguation_pending": false,
+          "disambiguation_candidates": [],
+          "last_query": "洗碗机第一次使用前要做什么？",
+          "evidence_count": 3,
+          "manual_names": [
+            "洗碗机手册"
+          ],
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "dishwasher",
+            "display_name": "洗碗机",
+            "manual_names": [
+              "洗碗机手册"
+            ],
+            "matched_terms": [
+              "洗碗机"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          },
+          "selected_product_id": "dishwasher",
+          "selected_display_name": "洗碗机",
+          "allowed_manual_names": [
+            "洗碗机手册"
+          ]
+        },
+        "reason": "product support answered with knowledge evidence",
+        "evidence_ids": [
+          "enterprise_rag:洗碗机手册_0006",
+          "enterprise_rag:洗碗机手册_0010",
+          "enterprise_rag:洗碗机手册_0000"
+        ],
+        "provenance": "skill",
+        "confidence": 0.82
+      }
+    ],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781970455.107234
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "llm",
+          "confidence": 0.95,
+          "reason": "User asks about first use of dishwasher. No active thread; creating new thread to provide instructions.",
+          "fallback_reason": ""
+        },
+        "created_at": 1781970462.08429
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 0.95,
+          "source": "llm",
+          "reason": "User asks about first use of dishwasher. No active thread; creating new thread to provide instructions."
+        },
+        "created_at": 1781970462.084299
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "current_user",
+            "runtime",
+            "evidence"
+          ],
+          "reasons": {
+            "system_policy": "必须遵守平台回答边界和禁止事项",
+            "current_user": "需要知道用户当前提问的内容",
+            "runtime": "需要知道当前的通道和上下文信息",
+            "evidence": "问题涉及商品使用步骤，需要检索知识库证据"
+          },
+          "source": "llm",
+          "confidence": 0.8
+        },
+        "created_at": 1781970466.237768
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 14,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-011",
+          "section_count": 3,
+          "section_names": [
+            "system_policy",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 177,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "current_user": 14,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970466.238007
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "The user asks about first-time use of a dishwasher, which is a product/manual question. This directly maps to the support action per the rules.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"The user asks about first-time use of a dishwasher, which is a product/manual question. This directly maps to the support action per the rules.\"\n}"
+        },
+        "created_at": 1781970471.60484
+      },
+      {
+        "stage": "agent.execution_start",
+        "message": "support agent started",
+        "payload": {
+          "agent": "support"
+        },
+        "created_at": 1781970471.604865
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.resolve_product",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970471.604892
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970471.604915
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.resolve_product returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970471.605029
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970471.6050408
+      },
+      {
+        "stage": "product.resolve",
+        "message": "product resolution status=resolved",
+        "payload": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "dishwasher",
+          "display_name": "洗碗机",
+          "manual_names": [
+            "洗碗机手册"
+          ],
+          "matched_terms": [
+            "洗碗机"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        },
+        "created_at": 1781970471.605075
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.search_product_manual",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970471.605088
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970471.6050959
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.search_product_manual returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970481.313031
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970481.313038
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "memory",
+            "conversation",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "确保回答符合平台边界和禁止事项",
+            "memory": "查看当前会话是否有已记录的上下文",
+            "conversation": "虽然为空，但维持一致性",
+            "evidence": "需要商品/知识库检索证据来回答首次使用步骤",
+            "current_user": "包含用户当前消息",
+            "runtime": "提供图片、工具等运行时信息"
+          },
+          "source": "llm",
+          "confidence": 0.9
+        },
+        "created_at": 1781970486.778125
+      },
+      {
+        "stage": "context.tool_observations",
+        "message": "built prompt tool observations",
+        "payload": {
+          "item_count": 2,
+          "raw_result_refs": [
+            "trace://cfe05220c0a047e9827466c205974c77/tool_results/0",
+            "trace://cfe05220c0a047e9827466c205974c77/tool_results/1"
+          ]
+        },
+        "created_at": 1781970486.778267
+      },
+      {
+        "stage": "context.evidence_pack",
+        "message": "built prompt evidence pack",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:洗碗机手册_0006",
+            "enterprise_rag:洗碗机手册_0010",
+            "enterprise_rag:洗碗机手册_0000"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:洗碗机手册_0006",
+            "enterprise_rag:洗碗机手册_0010",
+            "enterprise_rag:洗碗机手册_0000"
+          ],
+          "deduplicated_evidence_ids": [],
+          "item_count": 3,
+          "source": "llm_span_selector"
+        },
+        "created_at": 1781970486.778632
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 14,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-011",
+          "section_count": 5,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 2651,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 61,
+              "evidence": 2400,
+              "current_user": 14,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "evidence",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [
+              "evidence"
+            ],
+            "dropped_sections": [],
+            "truncated_sections": [
+              "evidence"
+            ]
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970486.7788439
+      },
+      {
+        "stage": "llm.answer",
+        "message": "generated product support answer",
+        "payload": {
+          "node": "product_support",
+          "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+          "evidence_count": 3
+        },
+        "created_at": 1781970501.698742
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.validate_answer_grounding",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970501.698859
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970501.698889
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.validate_answer_grounding returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970501.6992362
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970501.69925
+      },
+      {
+        "stage": "evidence.usage",
+        "message": "recorded product-support evidence usage",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:洗碗机手册_0006",
+            "enterprise_rag:洗碗机手册_0010",
+            "enterprise_rag:洗碗机手册_0000"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:洗碗机手册_0006",
+            "enterprise_rag:洗碗机手册_0010",
+            "enterprise_rag:洗碗机手册_0000"
+          ],
+          "used_evidence_ids": [
+            "enterprise_rag:洗碗机手册_0006",
+            "enterprise_rag:洗碗机手册_0010",
+            "enterprise_rag:洗碗机手册_0000"
+          ],
+          "grounding_checked": true,
+          "grounding": {
+            "grounded": true,
+            "missing_terms": [],
+            "evidence_count": 3,
+            "token_overlap": 4,
+            "reason": "answer is covered by evidence"
+          },
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "dishwasher",
+            "display_name": "洗碗机",
+            "manual_names": [
+              "洗碗机手册"
+            ],
+            "matched_terms": [
+              "洗碗机"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          }
+        },
+        "created_at": 1781970501.699281
+      },
+      {
+        "stage": "agent.execution_stop",
+        "message": "support agent completed",
+        "payload": {
+          "agent": "support",
+          "status": "success"
+        },
+        "created_at": 1781970501.6993449
+      },
+      {
+        "stage": "agent.handoff_created",
+        "message": "support handoff created",
+        "payload": {
+          "agent": "support",
+          "handoff": {
+            "stage": "diagnosis",
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "dishwasher",
+              "display_name": "洗碗机",
+              "manual_names": [
+                "洗碗机手册"
+              ],
+              "matched_terms": [
+                "洗碗机"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "diagnosis_status": "grounded",
+            "symptoms": [
+              "洗碗机第一次使用前要做什么？"
+            ],
+            "attempted_steps": [],
+            "recommended_next_steps": [
+              "洗碗机第一次使用前，您需要完成以下几个关键步骤：\n\n**结论**：首次使用前，您需要先调节软水系统，然后向盐箱注入水并添加洗碗机专用软化盐，最后建议空载运行一次最短程序。\n\n**具体步骤如下：**\n\n1.  **调节软水系统**  \n    请使用产品附带的试纸测定您家中的供水硬度，然后按照手册说明将软水系统调节至对应的硬度档位（正确调节可提升洗涤效果）。\n\n2.  **添加专用软化盐（必须在启动机器前完成）**  \n    - 取出下层碗篮，以便操作盐箱。\n    - 逆时针旋转打开盐箱盖。\n    - **首次使用前，请先向软水系统注入约1升水**（手册中标记为步骤C）。\n    - 使用随附的盐斗向盐箱内添加洗碗机专用软化盐（约可装入2公斤）。**注意：只能使用洗碗机专用软化盐，请勿使用食盐等含不溶物的盐，否则会损坏软水系统。**\n    - 为加速溶解，可用勺子搅拌。\n    - 加满后，将盖子盖紧并拧紧。\n\n3.  **运行最短程序（空载）**  \n    如果您加盐后不立即开始正常的洗涤程序，**请空载运行一次最短程序**，这样可以溶解并冲散机器内散落的盐粒，避免残留的盐腐蚀内腔。\n\n**安全提醒**：\n- **请务必在启动机器前完成上述加盐注水操作**，否则程序中盐箱进水会导致无法正常加盐。\n- 加盐后，盐量指示灯可能仍会亮一段时间，这是正常的（因不同品牌盐的溶解速度不同）。\n- 此外，首次使用前建议您先阅读整本用户手册，并检查安装是否正确（供水、排水、支脚水平等）。\n\n请问您还需要了解首次添加洗涤剂或亮碟剂的步骤吗？"
+            ],
+            "safety_risks": [],
+            "evidence_ids": [
+              "enterprise_rag:洗碗机手册_0006",
+              "enterprise_rag:洗碗机手册_0010",
+              "enterprise_rag:洗碗机手册_0000"
+            ],
+            "summary": "洗碗机第一次使用前，您需要完成以下几个关键步骤：\n\n**结论**：首次使用前，您需要先调节软水系统，然后向盐箱注入水并添加洗碗机专用软化盐，最后建议空载运行一次最短程序。\n\n**具体步骤如下：**\n\n1.  **调节软水系统**  \n    请使用产品附带的试纸测定您家中的供水硬度，然后按照手册说明将软水系统调节至对应的硬度档位（正确调节可提升洗涤效果）。\n\n2.  **添加专用软化盐（必须在启动机器前完成）**  \n    - 取出下层碗篮，以便操作盐箱。\n    - 逆时针旋转打开盐箱盖。\n    - **首次使用前，请先向软水系统注入约1升水**（手册中标记为步骤C）。\n    - 使用随附的盐斗向盐箱内添加洗碗机专用软化盐（约可装入2公斤）。**注意：只能使用洗碗机专用软化盐，请勿使用食盐等含不溶物的盐，否则会损坏软水系统。**\n    - 为加速溶解，可用勺子搅拌。\n    - "
+          }
+        },
+        "created_at": 1781970501.6993668
+      },
+      {
+        "stage": "agent.replan",
+        "message": "replanned after support result",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "用户询问洗碗机首次使用步骤，支持交接已提供完整诊断和答案，下一步应交付该解答给用户，无需转服务或澄清。",
+          "source": "llm",
+          "raw_response": "{\"action\": \"support\", \"confidence\": 0.95, \"reason\": \"用户询问洗碗机首次使用步骤，支持交接已提供完整诊断和答案，下一步应交付该解答给用户，无需转服务或澄清。\"}"
+        },
+        "created_at": 1781970510.845686
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781970510.845838
+      },
+      {
+        "stage": "memory_write_agent.request",
+        "message": "requested governed memory candidates",
+        "payload": {
+          "write_request": {
+            "source_agent": "support",
+            "execution_stage": "diagnosis",
+            "message": "洗碗机第一次使用前要做什么？",
+            "handoff": {
+              "stage": "diagnosis",
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "dishwasher",
+                "display_name": "洗碗机",
+                "manual_names": [
+                  "洗碗机手册"
+                ],
+                "matched_terms": [
+                  "洗碗机"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "diagnosis_status": "grounded",
+              "symptoms": [
+                "洗碗机第一次使用前要做什么？"
+              ],
+              "attempted_steps": [],
+              "recommended_next_steps": [
+                "洗碗机第一次使用前，您需要完成以下几个关键步骤：\n\n**结论**：首次使用前，您需要先调节软水系统，然后向盐箱注入水并添加洗碗机专用软化盐，最后建议空载运行一次最短程序。\n\n**具体步骤如下：**\n\n1.  **调节软水系统**  \n    请使用产品附带的试纸测定您家中的供水硬度，然后按照手册说明将软水系统调节至对应的硬度档位（正确调节可提升洗涤效果）。\n\n2.  **添加专用软化盐（必须在启动机器前完成）**  \n    - 取出下层碗篮，以便操作盐箱。\n    - 逆时针旋转打开盐箱盖。\n    - **首次使用前，请先向软水系统注入约1升水**（手册中标记为步骤C）。\n    - 使用随附的盐斗向盐箱内添加洗碗机专用软化盐（约可装入2公斤）。**注意：只能使用洗碗机专用软化盐，请勿使用食盐等含不溶物的盐，否则会损坏软水系统。**\n    - 为加速溶解，可用勺子搅拌。\n    - 加满后，将盖子盖紧并拧紧。\n\n3.  **运行最短程序（空载）**  \n    如果您加盐后不立即开始正常的洗涤程序，**请空载运行一次最短程序**，这样可以溶解并冲散机器内散落的盐粒，避免残留的盐腐蚀内腔。\n\n**安全提醒**：\n- **请务必在启动机器前完成上述加盐注水操作**，否则程序中盐箱进水会导致无法正常加盐。\n- 加盐后，盐量指示灯可能仍会亮一段时间，这是正常的（因不同品牌盐的溶解速度不同）。\n- 此外，首次使用前建议您先阅读整本用户手册，并检查安装是否正确（供水、排水、支脚水平等）。\n\n请问您还需要了解首次添加洗涤剂或亮碟剂的步骤吗？"
+              ],
+              "safety_risks": [],
+              "evidence_ids": [
+                "enterprise_rag:洗碗机手册_0006",
+                "enterprise_rag:洗碗机手册_0010",
+                "enterprise_rag:洗碗机手册_0000"
+              ],
+              "summary": "洗碗机第一次使用前，您需要完成以下几个关键步骤：\n\n**结论**：首次使用前，您需要先调节软水系统，然后向盐箱注入水并添加洗碗机专用软化盐，最后建议空载运行一次最短程序。\n\n**具体步骤如下：**\n\n1.  **调节软水系统**  \n    请使用产品附带的试纸测定您家中的供水硬度，然后按照手册说明将软水系统调节至对应的硬度档位（正确调节可提升洗涤效果）。\n\n2.  **添加专用软化盐（必须在启动机器前完成）**  \n    - 取出下层碗篮，以便操作盐箱。\n    - 逆时针旋转打开盐箱盖。\n    - **首次使用前，请先向软水系统注入约1升水**（手册中标记为步骤C）。\n    - 使用随附的盐斗向盐箱内添加洗碗机专用软化盐（约可装入2公斤）。**注意：只能使用洗碗机专用软化盐，请勿使用食盐等含不溶物的盐，否则会损坏软水系统。**\n    - 为加速溶解，可用勺子搅拌。\n    - "
+            },
+            "result_summary": "洗碗机第一次使用前，您需要完成以下几个关键步骤：\n\n**结论**：首次使用前，您需要先调节软水系统，然后向盐箱注入水并添加洗碗机专用软化盐，最后建议空载运行一次最短程序。\n\n**具体步骤如下：**\n\n1.  **调节软水系统**  \n    请使用产品附带的试纸测定您家中的供水硬度，然后按照手册说明将软水系统调节至对应的硬度档位（正确调节可提升洗涤效果）。\n\n2.  **添加专用软化盐（必须在启动机器前完成）**  \n    - 取出下层碗篮，以便操作盐箱。\n    - 逆时针旋转打开盐箱盖。\n    - **首次使用前，请先向软水系统注入约1升水**（手册中标记为步骤C）。\n    - 使用随附的盐斗向盐箱内添加洗碗机专用软化盐（约可装入2公斤）。**注意：只能使用洗碗机专用软化盐，请勿使用食盐等含不溶物的盐，否则会损坏软水系统。**\n    - 为加速溶解，可用勺子搅拌。\n    - 加满后，将盖子盖紧并拧紧。\n\n3.  **运行最短程序（空载）**  \n    如果您加盐后不立即开始正常的洗涤程序，**请空载运行一次最短程序**，这样可以溶解并冲散机器内散落的盐粒，避免残留的盐腐蚀内腔。\n\n**安全提醒**：\n- **请务必在启动机器前完成上述加盐注水操作**，否则程序中盐箱进水会导致无法正常加盐。\n- 加盐后，盐量指示灯可能仍会亮一段时间，这是正常的（因不同品牌盐的溶解速度不同）。\n- 此外，首次使用前建议您先阅读整本用户手册，并检查安装是否正确（供水、排水、支脚水平等）。\n\n请问您还需要了解首次添加洗涤剂或亮碟剂的步骤吗？",
+            "evidence_ids": [
+              "enterprise_rag:洗碗机手册_0006",
+              "enterprise_rag:洗碗机手册_0010",
+              "enterprise_rag:洗碗机手册_0000"
+            ],
+            "target_thread_id": null
+          }
+        },
+        "created_at": 1781970510.846124
+      },
+      {
+        "stage": "memory_write_agent.validation_failed",
+        "message": "ValueError: candidate update_key is not allowed",
+        "payload": {
+          "source_agent": "support",
+          "execution_stage": "diagnosis"
+        },
+        "created_at": 1781970530.3554308
+      },
+      {
+        "stage": "memory.write_validate",
+        "message": "candidate passed memory governance checks",
+        "payload": {
+          "candidate_id": "memcand_c9e3e57e72174703943cf51fe6070982",
+          "outcome": "accept",
+          "target_thread_id": null,
+          "reason": "candidate passed memory governance checks",
+          "conflicts": [],
+          "update": {
+            "key": "product_support",
+            "value": {
+              "disambiguation_pending": false,
+              "disambiguation_candidates": [],
+              "last_query": "洗碗机第一次使用前要做什么？",
+              "evidence_count": 3,
+              "manual_names": [
+                "洗碗机手册"
+              ],
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "dishwasher",
+                "display_name": "洗碗机",
+                "manual_names": [
+                  "洗碗机手册"
+                ],
+                "matched_terms": [
+                  "洗碗机"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "selected_product_id": "dishwasher",
+              "selected_display_name": "洗碗机",
+              "allowed_manual_names": [
+                "洗碗机手册"
+              ]
+            },
+            "reason": "product support answered with knowledge evidence",
+            "evidence_ids": [
+              "enterprise_rag:洗碗机手册_0006",
+              "enterprise_rag:洗碗机手册_0010",
+              "enterprise_rag:洗碗机手册_0000"
+            ],
+            "provenance": "skill",
+            "confidence": 0.82
+          },
+          "degraded": false
+        },
+        "created_at": 1781970530.355625
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 1,
+          "accepted_count": 1,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781970530.3779788
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "success"
+        },
+        "created_at": 1781970530.377985
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 2736,
+    "section_count": 5,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "memory",
+        "source": "memory",
+        "priority": 30,
+        "chars": 61,
+        "token_estimate": 15,
+        "char_budget": 1400,
+        "truncated": false,
+        "metadata": {},
+        "content": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-011",
+        "preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-011"
+      },
+      {
+        "name": "evidence",
+        "source": "knowledge_runtime",
+        "priority": 35,
+        "chars": 2400,
+        "token_estimate": 600,
+        "char_budget": 2400,
+        "truncated": true,
+        "metadata": {},
+        "content": "\n[truncated: kept most recent/relevant tail]\n用洗碗机专用盐。 产品中只能使用洗碗机专用软化盐。 建议使用颗粒或粉末状软化盐。 请勿使用食盐等含不溶物的盐，否则软水系统性能会逐渐下降。 启动产品时盐箱会进水，因此请在启动机器前添加软化盐。 1. 先取出下层碗篮以便添加软化盐。 2. 逆时针旋转盐箱盖打开（A、B）。 <IMG:Dish_washer_07> 首次使用前，向软水系统注入 1 升水（C）。<IMG:Dish_washer_01> 使用盐斗向盐箱加盐（D）。 为加速盐的溶解，可用勺子搅拌。 <IMG:Dish_washer_02> 盐箱约可装入 2 公斤软化盐。 4. 盐箱加满后盖上盖子并拧紧。 5. 若加盐后不立即启动洗涤程序，请空载运行最短程序，溶解并冲散机器内散落的盐。 由于市场上不同盐品牌的颗粒大小不同，且水硬度可能存在差异，盐在水中的溶解可能需要数小时。因此，加盐后盐量指示灯可能仍会亮一段时间。 # 洗涤剂 机器可使用粉末或块状洗涤剂。 机器中只能使用洗碗机专用洗涤剂。 建议不使用含氯和磷酸盐的洗涤剂，以免污染环境。 若洗涤程序结束后餐具仍潮湿或玻璃器皿上有水垢，请联系洗涤剂生产商。 # 添加洗涤剂\", \"source\": {\"chunk_id\": \"洗碗机手册_0006\", \"manual_name\": \"洗碗机手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"洗碗机手册\"}, \"confidence\": 0.096516, \"evidence_id\": \"enterprise_rag:洗碗机手册_0010\", \"raw_excerpt\": \"・放入洗碗机前擦去餐具上的大块食物残渣（骨头、种子等）。・尽可能将细长窄小的物品放在碗篮中间区域。・洗碗机内有两个独立碗篮。 将较脏、较大的物品放在下层碗篮，较小、精致、较轻的物品放在上层碗篮。・将碗、杯、锅等中空器具倒扣在洗碗机中，避免深处积水。 A 为防止受伤，餐叉、面包刀等尖锐刀具请务必尖头朝下或水平放置在碗篮中。・先取出下层碗篮的餐具，再取出上层碗篮的餐具。 # 洗碗机装载建议 <IMG:Manual06_8> <IMG:Manual06_9> #餐具错误装载方式 <IMG:Manual06_10>\", \"source\": {\"chunk_id\": \"洗碗机手册_0010\", \"manual_name\": \"洗碗机手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"洗碗机手册\"}, \"confidence\": 0.094917, \"evidence_id\": \"enterprise_rag:洗碗机手册_0000\", \"raw_excerpt\": \"# 洗碗机 # 请先阅读本用户手册！ 尊敬的用户： 本产品采用先进工艺制造，并经过严格的质量检测，希望您能获得最佳使用效果。 因此，在使用产品前请仔细阅读整本用户手册，并妥善保管以备日后参考。若将产品转赠或出售给他人，请一并附上本手册。 # 本用户手册将帮助您快速、安全地使用产品。・安装和启动产品前请阅读用户手册。・请始终遵守安全说明。・请将本用户手册放在随手可取的地方以备日后查阅。・请同时阅读随产品提供的其他文件。请注意，本手册也适用于其他几款型号。不同型号之间的差异将在手册中注明。 # 符号说明 本用户手册中使用以下符号： 重要信息或使用提示 关乎生命和财产安全的危险情况警告 触电危险 1. 洗碗机 3 2. 重要安全说明 5 一般安全 5 预期用途 5 儿童安全 6 3. 安装 7 合适的安装位置 7 供水连接 7 排水连接 8 支脚调节 9 防漏水保护系统 + 9 电气连接 9 首次使用 9 包装材料处理 10 产品运输 10 旧产品处理 10 预约启动设置 24 盐量指示灯 25 亮碟剂指示灯 25 亮碟剂剂量设置 25 机器启动 25 6. 维护与清洁 28 产品外表面清洁 28 机器内部清洁 28 过滤器清洁 28 进水管滤网清洁 29 喷淋臂清洁 30 7. 故障排除 31 4. 预洗 11 节能提示 11 软水系统 11 软水系统调节 11 添加专用盐 12 洗涤剂 13 添加洗涤剂 13 洗涤块 14 亮碟剂 15 餐具篮 18 可折叠下层篮架丝（2 根） 18 空载上层篮高度调节 19 负载上层篮高度调节 20 5. 程序选择与机器操作 21 按键及说明 22 程序选择 23 程序附加功能 23 程序进程查看 23 取消程序 24 更改程序 24 # 洗碗机\", \"source\": {\"chunk_id\": \"洗碗机手册_0000\", \"manual_name\": \"洗碗机手册\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"洗碗机第一次使用前要做什么？\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:洗碗机手册_0006\", \"enterprise_rag:洗碗机手册_0010\", \"enterprise_rag:洗碗机手册_0000\"], \"retrieved_evidence_ids\": [\"enterprise_rag:洗碗机手册_0006\", \"enterprise_rag:洗碗机手册_0010\", \"enterprise_rag:洗碗机手册_0000\"]}}",
+        "preview": "\n[truncated: kept most recent/relevant tail]\n用洗碗机专用盐。 产品中只能使用洗碗机专用软化盐。 建议使用颗粒或粉末状软化盐。 请勿使用食盐等含不溶物的盐，否则软水系统性能会逐渐下降。 启动产品时盐箱会进水，因此请在启动机器前添加软化盐。 1. 先取出下层碗篮以便添加软化盐。 2. 逆时针旋转盐箱盖打开（A、B）。 <IMG:Dish_washer_07> 首次使用前，向软水系统注入 1 升水（C）。<IMG:Dish_washer"
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 14,
+        "token_estimate": 3,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "洗碗机第一次使用前要做什么？",
+        "preview": "洗碗机第一次使用前要做什么？"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 117,
+        "token_estimate": 29,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "memory",
+      "evidence",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 2651,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "memory": 61,
+        "evidence": 2400,
+        "current_user": 14,
+        "runtime": 117
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "memory": 30,
+        "evidence": 35,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "evidence",
+        "memory",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [
+        "evidence"
+      ],
+      "dropped_sections": [],
+      "truncated_sections": [
+        "evidence"
+      ]
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[memory]\n[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-011\n\n[evidence]\n\n[truncated: kept most recent/relevant tail]\n用洗碗机专用盐。 产品中只能使用洗碗机专用软化盐。 建议使用颗粒或粉末状软化盐。 请勿使用食盐等含不溶物的盐，否则软水系统性能会逐渐下降。 启动产品时盐箱会进水，因此请在启动机器前添加软化盐。 1. 先取出下层碗篮以便添加软化盐。 2. 逆时针旋转盐箱盖打开（A、B）。 <IMG:Dish_washer_07> 首次使用前，向软水系统注入 1 升水（C）。<IMG:Dish_washer_01> 使用盐斗向盐箱加盐（D）。 为加速盐的溶解，可用勺子搅拌。 <IMG:Dish_washer_02> 盐箱约可装入 2 公斤软化盐。 4. 盐箱加满后盖上盖子并拧紧。 5. 若加盐后不立即启动洗涤程序，请空载运行最短程序，溶解并冲散机器内散落的盐。 由于市场上不同盐品牌的颗粒大小不同，且水硬度可能存在差异，盐在水中的溶解可能需要数小时。因此，加盐后盐量指示灯可能仍会亮一段时间。 # 洗涤剂 机器可使用粉末或块状洗涤剂。 机器中只能使用洗碗机专用洗涤剂。 建议不使用含氯和磷酸盐的洗涤剂，以免污染环境。 若洗涤程序结束后餐具仍潮湿或玻璃器皿上有水垢，请联系洗涤剂生产商。 # 添加洗涤剂\", \"source\": {\"chunk_id\": \"洗碗机手册_0006\", \"manual_name\": \"洗碗机手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"洗碗机手册\"}, \"confidence\": 0.096516, \"evidence_id\": \"enterprise_rag:洗碗机手册_0010\", \"raw_excerpt\": \"・放入洗碗机前擦去餐具上的大块食物残渣（骨头、种子等）。・尽可能将细长窄小的物品放在碗篮中间区域。・洗碗机内有两个独"
+  },
+  "trace_persisted": "cfe05220c0a047e9827466c205974c77",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [
+      "support"
+    ],
+    "support_handoff": {
+      "stage": "diagnosis",
+      "product_resolution": {
+        "status": "resolved",
+        "source": "strong_signal",
+        "product_id": "dishwasher",
+        "display_name": "洗碗机",
+        "manual_names": [
+          "洗碗机手册"
+        ],
+        "matched_terms": [
+          "洗碗机"
+        ],
+        "disclose_default_product": false,
+        "candidate_product_ids": [],
+        "reason": "user named product identity"
+      },
+      "diagnosis_status": "grounded",
+      "symptoms": [
+        "洗碗机第一次使用前要做什么？"
+      ],
+      "attempted_steps": [],
+      "recommended_next_steps": [
+        "洗碗机第一次使用前，您需要完成以下几个关键步骤：\n\n**结论**：首次使用前，您需要先调节软水系统，然后向盐箱注入水并添加洗碗机专用软化盐，最后建议空载运行一次最短程序。\n\n**具体步骤如下：**\n\n1.  **调节软水系统**  \n    请使用产品附带的试纸测定您家中的供水硬度，然后按照手册说明将软水系统调节至对应的硬度档位（正确调节可提升洗涤效果）。\n\n2.  **添加专用软化盐（必须在启动机器前完成）**  \n    - 取出下层碗篮，以便操作盐箱。\n    - 逆时针旋转打开盐箱盖。\n    - **首次使用前，请先向软水系统注入约1升水**（手册中标记为步骤C）。\n    - 使用随附的盐斗向盐箱内添加洗碗机专用软化盐（约可装入2公斤）。**注意：只能使用洗碗机专用软化盐，请勿使用食盐等含不溶物的盐，否则会损坏软水系统。**\n    - 为加速溶解，可用勺子搅拌。\n    - 加满后，将盖子盖紧并拧紧。\n\n3.  **运行最短程序（空载）**  \n    如果您加盐后不立即开始正常的洗涤程序，**请空载运行一次最短程序**，这样可以溶解并冲散机器内散落的盐粒，避免残留的盐腐蚀内腔。\n\n**安全提醒**：\n- **请务必在启动机器前完成上述加盐注水操作**，否则程序中盐箱进水会导致无法正常加盐。\n- 加盐后，盐量指示灯可能仍会亮一段时间，这是正常的（因不同品牌盐的溶解速度不同）。\n- 此外，首次使用前建议您先阅读整本用户手册，并检查安装是否正确（供水、排水、支脚水平等）。\n\n请问您还需要了解首次添加洗涤剂或亮碟剂的步骤吗？"
+      ],
+      "safety_risks": [],
+      "evidence_ids": [
+        "enterprise_rag:洗碗机手册_0006",
+        "enterprise_rag:洗碗机手册_0010",
+        "enterprise_rag:洗碗机手册_0000"
+      ],
+      "summary": "洗碗机第一次使用前，您需要完成以下几个关键步骤：\n\n**结论**：首次使用前，您需要先调节软水系统，然后向盐箱注入水并添加洗碗机专用软化盐，最后建议空载运行一次最短程序。\n\n**具体步骤如下：**\n\n1.  **调节软水系统**  \n    请使用产品附带的试纸测定您家中的供水硬度，然后按照手册说明将软水系统调节至对应的硬度档位（正确调节可提升洗涤效果）。\n\n2.  **添加专用软化盐（必须在启动机器前完成）**  \n    - 取出下层碗篮，以便操作盐箱。\n    - 逆时针旋转打开盐箱盖。\n    - **首次使用前，请先向软水系统注入约1升水**（手册中标记为步骤C）。\n    - 使用随附的盐斗向盐箱内添加洗碗机专用软化盐（约可装入2公斤）。**注意：只能使用洗碗机专用软化盐，请勿使用食盐等含不溶物的盐，否则会损坏软水系统。**\n    - 为加速溶解，可用勺子搅拌。\n    - "
+    },
+    "plans": [
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "The user asks about first-time use of a dishwasher, which is a product/manual question. This directly maps to the support action per the rules.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"The user asks about first-time use of a dishwasher, which is a product/manual question. This directly maps to the support action per the rules.\"\n}"
+      },
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "用户询问洗碗机首次使用步骤，支持交接已提供完整诊断和答案，下一步应交付该解答给用户，无需转服务或澄清。",
+        "source": "llm",
+        "raw_response": "{\"action\": \"support\", \"confidence\": 0.95, \"reason\": \"用户询问洗碗机首次使用步骤，支持交接已提供完整诊断和答案，下一步应交付该解答给用户，无需转服务或澄清。\"}"
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "llm",
+      "confidence": 0.95,
+      "reason": "User asks about first use of dishwasher. No active thread; creating new thread to provide instructions.",
+      "fallback_reason": ""
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 0.95,
+      "source": "llm",
+      "reason": "User asks about first use of dishwasher. No active thread; creating new thread to provide instructions."
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [
+      {
+        "candidate_id": "memcand_c9e3e57e72174703943cf51fe6070982",
+        "outcome": "accept",
+        "target_thread_id": null,
+        "reason": "candidate passed memory governance checks",
+        "conflicts": [],
+        "update": {
+          "key": "product_support",
+          "value": {
+            "disambiguation_pending": false,
+            "disambiguation_candidates": [],
+            "last_query": "洗碗机第一次使用前要做什么？",
+            "evidence_count": 3,
+            "manual_names": [
+              "洗碗机手册"
+            ],
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "dishwasher",
+              "display_name": "洗碗机",
+              "manual_names": [
+                "洗碗机手册"
+              ],
+              "matched_terms": [
+                "洗碗机"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "selected_product_id": "dishwasher",
+            "selected_display_name": "洗碗机",
+            "allowed_manual_names": [
+              "洗碗机手册"
+            ]
+          },
+          "reason": "product support answered with knowledge evidence",
+          "evidence_ids": [
+            "enterprise_rag:洗碗机手册_0006",
+            "enterprise_rag:洗碗机手册_0010",
+            "enterprise_rag:洗碗机手册_0000"
+          ],
+          "provenance": "skill",
+          "confidence": 0.82
+        },
+        "degraded": false
+      }
+    ],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": true,
+    "valid": false,
+    "failure_reason": "ValueError: candidate update_key is not allowed",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

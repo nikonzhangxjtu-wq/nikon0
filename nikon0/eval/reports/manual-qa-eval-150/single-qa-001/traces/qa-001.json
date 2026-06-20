@@ -1,0 +1,1528 @@
+{
+  "case_id": "qa-001",
+  "category": "product_support",
+  "message": "空气炸锅怎么连接WiFi和手机App？",
+  "golden_answer": "将空气炸锅插入电源，确保智能设备在家庭WiFi范围内。下载NutriU App，在'My Appliances'中选择连接的空气炸锅，按照App指示完成WiFi连接和配对。WiFi LED常亮表示连接成功。需连接2.4 GHz 802.11 b/g/n家庭WiFi。",
+  "answer": "### 连接WiFi和手机App的操作步骤\n\n您的空气炸锅支持WiFi连接，可以通过NutriU App实现远程控制。请按以下步骤操作：\n\n1. **插上电源**：将空气炸锅的插头插入墙上插座。\n2. **确保设备在WiFi范围内**：将您的智能手机或平板电脑放在家庭WiFi信号覆盖良好的位置。\n3. **下载NutriU App**：在App Store或通过注册流程下载NutriU App，并完成注册。\n4. **在App中添加设备**：打开App，进入您的个人资料，在“我的设备”中选择已连接的空气炸锅。\n5. **启动配对**：\n   - 方法一：长按空气炸锅界面上的“温度下调”按钮，然后按照App提示操作。\n   - 方法二：直接在NutriU App的设置中启动配对流程。\n6. **完成WiFi连接**：在App中按照屏幕提示将空气炸锅连接到您家里的WiFi，并完成App与设备的配对。\n7. **确认连接成功**：当空气炸锅界面上的WiFi指示灯变为**常亮**时，表示已成功连接。  \n   *指示灯状态说明（参考设备手册）*：\n   - 熄灭：未连接\n   - 常亮：已连接家庭WiFi\n   - 闪烁：正在设置或重新连接\n   - 长间隔闪烁：WiFi功能故障，请联系客服\n\n### 重要提醒\n- 您的家庭WiFi必须为**2.4GHz 802.11 b/g/n**频段（不支持5GHz）。\n- 一次只能配对**一台**智能设备。如果另一台设备开始配对，当前设备会被断开，需要重新配对。\n- 配对过程中如需取消，可在App中操作，或直接拔掉空气炸锅电源。\n- 建议在首次使用前先拆除所有包装材料和贴纸，并按清洁章节要求清洗设备。\n\n如果按以上步骤仍无法连接，请确认您的WiFi频段是否为2.4GHz，并检查设备是否在路由器信号范围内。如问题持续，请联系人工客服进一步排查。",
+  "status": "ok",
+  "selected_skill": "product_support",
+  "selection_source": "model",
+  "risk_level": "low",
+  "actions": [
+    {
+      "kind": "agent",
+      "name": "supervisor",
+      "status": "success",
+      "detail": "loop_stop=no_tool_calls",
+      "payload": {}
+    },
+    {
+      "kind": "skill",
+      "name": "product_support",
+      "status": "success",
+      "detail": "",
+      "payload": {}
+    },
+    {
+      "kind": "tool",
+      "name": "product-support.resolve_product",
+      "status": "success",
+      "detail": "",
+      "payload": {
+        "resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "airfryer",
+          "display_name": "Airfryer 空气炸锅",
+          "manual_names": [
+            "Airfryer"
+          ],
+          "matched_terms": [
+            "空气炸锅"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        }
+      }
+    },
+    {
+      "kind": "tool",
+      "name": "product-support.search_product_manual",
+      "status": "success",
+      "detail": "",
+      "payload": {
+        "answer_hints": [
+          "[Airfryer] App with your smart Airfryer. The Wifi setup process can be cancelled via the App or by unplugging the Airfryer. You can pair only one smart device at the sametime to your Air fryer.Ifa second user starts the pairing process,the first user is kicked out andhasto pair again the next time when cooking with the Air fryer. To start the pairing process, long press the temperature down button and follow the instructions in the App, or start it from the settings in the NutriU App  # Voice control  1. Download the NutriU App  2. Connect the NutriU App with your Air fryer  3. Give consent to\"remote cooking\"  4. Connect the NutriU App with your voice assistant App.This connection can be done directly while on boarding or later in the settings of the Nut ri U App.In case you do not see the option to",
+          "[Airfryer] that your smart device is within reach of your home Wi Fi network before you start the easy W iF is et-upprocess. 3 Download the App on your smart device from the App store or from the registration process and select the connected Air fryer in your profile under\"My Appliances\" 4 Follow the instructions in the App to connect your Air fryer to your WiFi and to pair your Air fryer. 5 When the WiFiLED on the user interface of the Air fryer is solid on,the Air fryer is connected.  # Note  ·Make sure to connect your Airfryer to a 2.4 GHz 802.11 b/g/n home WiFi The easy W iF is et-up is needed to connect the Air fryer to your home Wi Fi The pairing process is to connect the NutriU App with your smart Airfryer. The Wifi setup process can be cancelled via the App or by unplugging the Airfryer. You",
+          "[Airfryer] <IMG:Manual08_1>  # Before first use  1Remove all packing material  2Remove any stickers or labels (if available) from the appliance  3Thoroughly clean the appliance before first use, as indicated in the cleaning chapter.  # The App  Your Air fryer is Wi Fi enabled and allows you to connect with the App to gain the full Air fryer experience. Within the App you can select your favorite recipes,send it to the Air fryer and start it from your smart device.You can start,monitor and adjust the cooking process onyour smart device from wherever you are,even if you are not at home.  Connecting your Airfryer to the App  Put the plug of the Air fryer in the wall outlet. 2 Make sure that your smart device is within reach of your home Wi Fi network before you start the easy W iF is et-upprocess. 3\n[图片证据]\n类型: product_prompt\n图片意图: 说明Wi-Fi指示灯不同状态对应的连接状态和故障信息，以辅助用户判断设备联网情况\nOCR: WiFi Indicator Status | The Wi-Fi indicator is off | The Wi-Fi indicator is on | The Wi-Fi indicator is blinking | The Wi-Fi indicator is blinking with long break in between\n指示/提示: name=Wi-Fi indicator，state=off/on/blinking/blinking with long break，meaning=No connection / Connected to Home WiFi / In set-up mode or reconnecting / Wi-Fi functionality defect\n父文本上下文: Connecting your Airfryer to the App... Put the plug of the Air fryer in the wall outlet. 2 Make sure that your smart device is within reach of your home Wi Fi network before you start the easy W iF is et-upprocess."
+        ],
+        "evidence": [
+          {
+            "evidence_id": "enterprise_rag:Airfryer_0016",
+            "source": "enterprise_rag",
+            "text": "App with your smart Airfryer. The Wifi setup process can be cancelled via the App or by unplugging the Airfryer. You can pair only one smart device at the sametime to your Air fryer.Ifa second user starts the pairing process,the first user is kicked out andhasto pair again the next time when cooking with the Air fryer. To start the pairing process, long press the temperature down button and follow the instructions in the App, or start it from the settings in the NutriU App  # Voice control  1. Download the NutriU App  2. Connect the NutriU App with your Air fryer  3. Give consent to\"remote cooking\"  4. Connect the NutriU App with your voice assistant App.This connection can be done directly while on boarding or later in the settings of the Nut ri U App.In case you do not see the option to",
+            "payload": {
+              "chunk_id": "Airfryer_0016",
+              "manual_name": "Airfryer",
+              "score": 0.157208,
+              "image_ids": [],
+              "image_evidence": [],
+              "knowledge_version": null,
+              "tenant_id": null
+            },
+            "confidence": 0.157208
+          },
+          {
+            "evidence_id": "enterprise_rag:Airfryer_0015",
+            "source": "enterprise_rag",
+            "text": "that your smart device is within reach of your home Wi Fi network before you start the easy W iF is et-upprocess. 3 Download the App on your smart device from the App store or from the registration process and select the connected Air fryer in your profile under\"My Appliances\" 4 Follow the instructions in the App to connect your Air fryer to your WiFi and to pair your Air fryer. 5 When the WiFiLED on the user interface of the Air fryer is solid on,the Air fryer is connected.  # Note  ·Make sure to connect your Airfryer to a 2.4 GHz 802.11 b/g/n home WiFi The easy W iF is et-up is needed to connect the Air fryer to your home Wi Fi The pairing process is to connect the NutriU App with your smart Airfryer. The Wifi setup process can be cancelled via the App or by unplugging the Airfryer. You",
+            "payload": {
+              "chunk_id": "Airfryer_0015",
+              "manual_name": "Airfryer",
+              "score": 0.157183,
+              "image_ids": [],
+              "image_evidence": [],
+              "knowledge_version": null,
+              "tenant_id": null
+            },
+            "confidence": 0.157183
+          },
+          {
+            "evidence_id": "enterprise_rag:Airfryer_0014",
+            "source": "enterprise_rag",
+            "text": "<IMG:Manual08_1>  # Before first use  1Remove all packing material  2Remove any stickers or labels (if available) from the appliance  3Thoroughly clean the appliance before first use, as indicated in the cleaning chapter.  # The App  Your Air fryer is Wi Fi enabled and allows you to connect with the App to gain the full Air fryer experience. Within the App you can select your favorite recipes,send it to the Air fryer and start it from your smart device.You can start,monitor and adjust the cooking process onyour smart device from wherever you are,even if you are not at home.  Connecting your Airfryer to the App  Put the plug of the Air fryer in the wall outlet. 2 Make sure that your smart device is within reach of your home Wi Fi network before you start the easy W iF is et-upprocess. 3",
+            "payload": {
+              "chunk_id": "Airfryer_0014",
+              "manual_name": "Airfryer",
+              "score": 0.157008,
+              "image_ids": [
+                "Manual08_1"
+              ],
+              "image_evidence": [
+                {
+                  "image_id": "Manual08_1",
+                  "image_type": "product_prompt",
+                  "match_reason": "文本命中片段附带图片",
+                  "prompt_text": "类型: product_prompt\n图片意图: 说明Wi-Fi指示灯不同状态对应的连接状态和故障信息，以辅助用户判断设备联网情况\nOCR: WiFi Indicator Status | The Wi-Fi indicator is off | The Wi-Fi indicator is on | The Wi-Fi indicator is blinking | The Wi-Fi indicator is blinking with long break in between\n指示/提示: name=Wi-Fi indicator，state=off/on/blinking/blinking with long break，meaning=No connection / Connected to Home WiFi / In set-up mode or reconnecting / Wi-Fi functionality defect\n父文本上下文: Connecting your Airfryer to the App... Put the plug of the Air fryer in the wall outlet. 2 Make sure that your smart device is within reach of your home Wi Fi network before you start the easy W iF is et-upprocess.",
+                  "score": 0.157008,
+                  "parent_chunk_ids": [
+                    "Airfryer_0014"
+                  ]
+                }
+              ],
+              "knowledge_version": null,
+              "tenant_id": null
+            },
+            "confidence": 0.157008
+          }
+        ],
+        "manual_names": [
+          "Airfryer"
+        ],
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "Airfryer",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": true
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "Airfryer"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 3,
+            "retrieval_trace": {
+              "query": "空气炸锅怎么连接WiFi和手机App？",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 3,
+              "score_threshold": 0.1,
+              "top1_score": 0.157208,
+              "retrieved_chunk_ids": [
+                "Airfryer_0016",
+                "Airfryer_0015",
+                "Airfryer_0014"
+              ],
+              "filtered_chunk_ids": [
+                "Airfryer_0016",
+                "Airfryer_0015",
+                "Airfryer_0014"
+              ],
+              "retrieved_manual_names": [
+                "Airfryer",
+                "Airfryer",
+                "Airfryer"
+              ],
+              "filtered_manual_names": [
+                "Airfryer",
+                "Airfryer",
+                "Airfryer"
+              ],
+              "source_queries": [
+                "空气炸锅怎么连接WiFi和手机App？"
+              ],
+              "manual_name_decisions": [
+                "Airfryer"
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Manual08_1"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "tool",
+      "name": "product-support.validate_answer_grounding",
+      "status": "success",
+      "detail": "",
+      "payload": {
+        "grounded": true,
+        "missing_terms": [],
+        "evidence_count": 3,
+        "token_overlap": 6,
+        "reason": "answer is covered by evidence"
+      }
+    }
+  ],
+  "elapsed_sec": 50.371,
+  "loop_turns": 1,
+  "prior_turn_count": 0,
+  "conversation_mode": "single_turn",
+  "trace_id": "25113ec7d0cd407f9458c41aee1e070f",
+  "error": null,
+  "debug": {
+    "trace": {
+      "trace_id": "25113ec7d0cd407f9458c41aee1e070f",
+      "session_id": "eval-qa-001",
+      "user_message": "空气炸锅怎么连接WiFi和手机App？",
+      "selected_agents": [
+        "supervisor"
+      ],
+      "selected_skills": [
+        "product_support"
+      ],
+      "context_events": [
+        {
+          "message_chars": 19,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 37,
+          "memory_preview": "[Memory View]\nsession_id: eval-qa-001",
+          "section_count": 4,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 219,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 37,
+              "current_user": 19,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        {
+          "message_chars": 19,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 37,
+          "memory_preview": "[Memory View]\nsession_id: eval-qa-001",
+          "section_count": 5,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 2632,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 37,
+              "evidence": 2400,
+              "current_user": 19,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "evidence",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [
+              "evidence"
+            ],
+            "dropped_sections": [],
+            "truncated_sections": [
+              "evidence"
+            ]
+          },
+          "strategy": "context_pack_v1"
+        }
+      ],
+      "knowledge_calls": [
+        {
+          "query": "空气炸锅怎么连接WiFi和手机App？",
+          "intent": "product_support",
+          "evidence_count": 3,
+          "backend_trace": [
+            {
+              "backend": "enterprise_rag",
+              "ok": true,
+              "collection": "manual_chunks_v1",
+              "image_collection": "manual_images_v1",
+              "dense_field": "dense_vector",
+              "sparse_enabled": true,
+              "rerank": "enabled",
+              "knowledge_version": null,
+              "tenant_id": null,
+              "manual_name_decision": {
+                "manual_name": "Airfryer",
+                "confidence": 1.0,
+                "source": "product_resolver",
+                "reason": "restricted by resolved product manuals",
+                "should_filter": true
+              },
+              "permission_filter": {
+                "allowed_manual_names": [
+                  "Airfryer"
+                ]
+              },
+              "raw_count": 3,
+              "filtered_count": 3,
+              "retrieval_trace": {
+                "query": "空气炸锅怎么连接WiFi和手机App？",
+                "top_k": 3,
+                "raw_count": 3,
+                "filtered_count": 3,
+                "score_threshold": 0.1,
+                "top1_score": 0.157208,
+                "retrieved_chunk_ids": [
+                  "Airfryer_0016",
+                  "Airfryer_0015",
+                  "Airfryer_0014"
+                ],
+                "filtered_chunk_ids": [
+                  "Airfryer_0016",
+                  "Airfryer_0015",
+                  "Airfryer_0014"
+                ],
+                "retrieved_manual_names": [
+                  "Airfryer",
+                  "Airfryer",
+                  "Airfryer"
+                ],
+                "filtered_manual_names": [
+                  "Airfryer",
+                  "Airfryer",
+                  "Airfryer"
+                ],
+                "source_queries": [
+                  "空气炸锅怎么连接WiFi和手机App？"
+                ],
+                "manual_name_decisions": [
+                  "Airfryer"
+                ],
+                "image_vector_hits": [],
+                "ocr_entity_hits": [],
+                "selected_image_ids": [
+                  "Manual08_1"
+                ]
+              }
+            }
+          ],
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "airfryer",
+            "display_name": "Airfryer 空气炸锅",
+            "manual_names": [
+              "Airfryer"
+            ],
+            "matched_terms": [
+              "空气炸锅"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          }
+        }
+      ],
+      "tool_calls": [
+        {
+          "service_id": "product-support",
+          "tool_name": "resolve_product",
+          "ok": true,
+          "error_code": null,
+          "provider": null,
+          "source_service": null
+        },
+        {
+          "service_id": "product-support",
+          "tool_name": "search_product_manual",
+          "ok": true,
+          "error_code": null,
+          "provider": null,
+          "source_service": null
+        },
+        {
+          "service_id": "product-support",
+          "tool_name": "validate_answer_grounding",
+          "ok": true,
+          "error_code": null,
+          "provider": null,
+          "source_service": null
+        }
+      ],
+      "safety_decisions": [
+        {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "reason": "phase1 safety gate allowed low-risk response",
+          "blocked_actions": [],
+          "approval_request": null,
+          "handoff_request": null
+        }
+      ],
+      "memory_updates": [
+        {
+          "key": "product_support",
+          "value": {
+            "disambiguation_pending": false,
+            "disambiguation_candidates": [],
+            "last_query": "空气炸锅怎么连接WiFi和手机App？",
+            "evidence_count": 3,
+            "manual_names": [
+              "Airfryer"
+            ],
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "airfryer",
+              "display_name": "Airfryer 空气炸锅",
+              "manual_names": [
+                "Airfryer"
+              ],
+              "matched_terms": [
+                "空气炸锅"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "selected_product_id": "airfryer",
+            "selected_display_name": "Airfryer 空气炸锅",
+            "allowed_manual_names": [
+              "Airfryer"
+            ]
+          },
+          "reason": "product support answered with knowledge evidence",
+          "evidence_ids": [
+            "enterprise_rag:Airfryer_0016",
+            "enterprise_rag:Airfryer_0015",
+            "enterprise_rag:Airfryer_0014"
+          ],
+          "provenance": "skill",
+          "confidence": 0.82
+        }
+      ],
+      "events": [
+        {
+          "stage": "runtime.start",
+          "message": "received agent request",
+          "payload": {
+            "channel": "web"
+          },
+          "created_at": 1781947249.054347
+        },
+        {
+          "stage": "memory.read_plan",
+          "message": "selected governed memory read scope",
+          "payload": {
+            "thread_ids": [],
+            "include_session_facts": false,
+            "include_workflow": true,
+            "include_ticket_history": false,
+            "source": "llm",
+            "confidence": 0.95,
+            "reason": "User asks about connecting an air fryer to WiFi and app, which is a new topic. No existing threads or active thread, so creating a new thread.",
+            "fallback_reason": ""
+          },
+          "created_at": 1781947257.610989
+        },
+        {
+          "stage": "memory.thread_decision",
+          "message": "selected issue thread lifecycle action",
+          "payload": {
+            "action": "create_thread",
+            "thread_id": null,
+            "confidence": 0.95,
+            "source": "llm",
+            "reason": "User asks about connecting an air fryer to WiFi and app, which is a new topic. No existing threads or active thread, so creating a new thread."
+          },
+          "created_at": 1781947257.611001
+        },
+        {
+          "stage": "context.read_plan",
+          "message": "planned context sections",
+          "payload": {
+            "included_sections": [
+              "system_policy",
+              "memory",
+              "conversation",
+              "evidence",
+              "current_user",
+              "runtime"
+            ],
+            "reasons": {
+              "system_policy": "确保回答不违反平台规定",
+              "memory": "记录当前活跃产品和问题以便后续跟踪",
+              "conversation": "保留对话上下文，为空但也需要",
+              "evidence": "需要商品手册或知识库检索来提供连接WiFi和App的具体步骤",
+              "current_user": "用户当前消息是问题主体",
+              "runtime": "提供通道和图片数量等运行时信息"
+            },
+            "source": "llm",
+            "confidence": 0.8
+          },
+          "created_at": 1781947263.383422
+        },
+        {
+          "stage": "context.govern",
+          "message": "built context pack",
+          "payload": {
+            "message_chars": 19,
+            "image_count": 0,
+            "transcript_chars": 0,
+            "memory_chars": 37,
+            "memory_preview": "[Memory View]\nsession_id: eval-qa-001",
+            "section_count": 4,
+            "section_names": [
+              "system_policy",
+              "memory",
+              "current_user",
+              "runtime"
+            ],
+            "budget_report": {
+              "total_budget": 9000,
+              "used_chars": 219,
+              "section_budgets": {},
+              "section_chars": {
+                "system_policy": 59,
+                "memory": 37,
+                "current_user": 19,
+                "runtime": 104
+              },
+              "section_priorities": {
+                "system_policy": 10,
+                "memory": 30,
+                "current_user": 5,
+                "runtime": 60
+              },
+              "degradation_order": [
+                "runtime",
+                "memory",
+                "system_policy",
+                "current_user"
+              ],
+              "degraded_sections": [],
+              "dropped_sections": [],
+              "truncated_sections": []
+            },
+            "strategy": "context_pack_v1"
+          },
+          "created_at": 1781947263.383639
+        },
+        {
+          "stage": "planner.plan",
+          "message": "planner produced routing plan",
+          "payload": {
+            "intents": [
+              {
+                "intent": "product_support",
+                "confidence": 0.82,
+                "reason": "matched product support or troubleshooting signal"
+              }
+            ],
+            "candidates": [
+              {
+                "kind": "skill",
+                "name": "product_support",
+                "confidence": 0.8,
+                "reason": "manual QA via product_support"
+              }
+            ],
+            "recommended_skill": "product_support",
+            "is_composite": false,
+            "risk_level": "low"
+          },
+          "created_at": 1781947263.3837419
+        },
+        {
+          "stage": "loop.turn_start",
+          "message": "turn 1 started",
+          "payload": {
+            "turn": 1
+          },
+          "created_at": 1781947263.383764
+        },
+        {
+          "stage": "agent.match",
+          "message": "supervisor: supervisor is the default orchestrator",
+          "payload": {
+            "matched": true,
+            "confidence": 1.0
+          },
+          "created_at": 1781947263.383775
+        },
+        {
+          "stage": "agent.select",
+          "message": "selected supervisor",
+          "payload": {
+            "turn": 1,
+            "reason": "supervisor is the default orchestrator"
+          },
+          "created_at": 1781947263.383782
+        },
+        {
+          "stage": "skill.selection",
+          "message": "selection source=model",
+          "payload": {
+            "selected_skill": "product_support",
+            "candidates": [
+              {
+                "name": "tool_echo",
+                "matched": false,
+                "confidence": 0.0,
+                "reason": "not selected by model",
+                "source": "model"
+              },
+              {
+                "name": "case_intake",
+                "matched": false,
+                "confidence": 0.0,
+                "reason": "not selected by model",
+                "source": "model"
+              },
+              {
+                "name": "product_support",
+                "matched": true,
+                "confidence": 0.95,
+                "reason": "询问连接WiFi和App操作步骤，属产品使用说明",
+                "source": "model"
+              }
+            ],
+            "source": "model",
+            "reason": "model selected product_support; 询问连接WiFi和App操作步骤，属产品使用说明",
+            "confidence": 0.95,
+            "rejected": [
+              {
+                "name": "tool_echo",
+                "reason": "not selected by model",
+                "confidence": 0.0
+              },
+              {
+                "name": "case_intake",
+                "reason": "not selected by model",
+                "confidence": 0.0
+              }
+            ]
+          },
+          "created_at": 1781947267.375392
+        },
+        {
+          "stage": "skill.select",
+          "message": "selected product_support",
+          "payload": {
+            "confidence": 0.95,
+            "reason": "model selected product_support; 询问连接WiFi和App操作步骤，属产品使用说明",
+            "selection_source": "model"
+          },
+          "created_at": 1781947267.375508
+        },
+        {
+          "stage": "tool.preflight",
+          "message": "product-support.resolve_product",
+          "payload": {
+            "risk_level": "low",
+            "requires_approval": false
+          },
+          "created_at": 1781947267.37553
+        },
+        {
+          "stage": "tool.pre_tool",
+          "message": "pre_tool accepted product-support.resolve_product",
+          "payload": {
+            "tool_name": "resolve_product"
+          },
+          "created_at": 1781947267.3755531
+        },
+        {
+          "stage": "tool.result",
+          "message": "product-support.resolve_product returned ok",
+          "payload": {
+            "ok": true,
+            "error_code": null
+          },
+          "created_at": 1781947267.3756642
+        },
+        {
+          "stage": "tool.post_tool",
+          "message": "post_tool recorded ok=True for product-support.resolve_product",
+          "payload": {
+            "tool_name": "resolve_product"
+          },
+          "created_at": 1781947267.375679
+        },
+        {
+          "stage": "product.resolve",
+          "message": "product resolution status=resolved",
+          "payload": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "airfryer",
+            "display_name": "Airfryer 空气炸锅",
+            "manual_names": [
+              "Airfryer"
+            ],
+            "matched_terms": [
+              "空气炸锅"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          },
+          "created_at": 1781947267.378037
+        },
+        {
+          "stage": "tool.preflight",
+          "message": "product-support.search_product_manual",
+          "payload": {
+            "risk_level": "low",
+            "requires_approval": false
+          },
+          "created_at": 1781947267.378052
+        },
+        {
+          "stage": "tool.pre_tool",
+          "message": "pre_tool accepted product-support.search_product_manual",
+          "payload": {
+            "tool_name": "search_product_manual"
+          },
+          "created_at": 1781947267.3780632
+        },
+        {
+          "stage": "tool.result",
+          "message": "product-support.search_product_manual returned ok",
+          "payload": {
+            "ok": true,
+            "error_code": null
+          },
+          "created_at": 1781947283.770371
+        },
+        {
+          "stage": "tool.post_tool",
+          "message": "post_tool recorded ok=True for product-support.search_product_manual",
+          "payload": {
+            "tool_name": "search_product_manual"
+          },
+          "created_at": 1781947283.77038
+        },
+        {
+          "stage": "context.read_plan",
+          "message": "planned context sections",
+          "payload": {
+            "included_sections": [
+              "system_policy",
+              "current_user",
+              "runtime",
+              "memory",
+              "conversation",
+              "evidence"
+            ],
+            "reasons": {
+              "system_policy": "确保回答不跨越平台禁止事项",
+              "current_user": "包含用户当前消息文本",
+              "runtime": "提供通道、图片数量等运行时信息",
+              "memory": "维持对话记忆，便于后续引用",
+              "conversation": "保持对话上下文摘要，虽初始为空但为后续对话准备",
+              "evidence": "需要检索商品手册或知识库中空气炸锅连接WiFi和App的具体步骤"
+            },
+            "source": "llm",
+            "confidence": 0.95
+          },
+          "created_at": 1781947289.368115
+        },
+        {
+          "stage": "context.tool_observations",
+          "message": "built prompt tool observations",
+          "payload": {
+            "item_count": 2,
+            "raw_result_refs": [
+              "trace://25113ec7d0cd407f9458c41aee1e070f/tool_results/0",
+              "trace://25113ec7d0cd407f9458c41aee1e070f/tool_results/1"
+            ]
+          },
+          "created_at": 1781947289.368366
+        },
+        {
+          "stage": "context.evidence_pack",
+          "message": "built prompt evidence pack",
+          "payload": {
+            "retrieved_evidence_ids": [
+              "enterprise_rag:Airfryer_0016",
+              "enterprise_rag:Airfryer_0015",
+              "enterprise_rag:Airfryer_0014"
+            ],
+            "included_evidence_ids": [
+              "enterprise_rag:Airfryer_0016",
+              "enterprise_rag:Airfryer_0015",
+              "enterprise_rag:Airfryer_0014"
+            ],
+            "deduplicated_evidence_ids": [],
+            "item_count": 3,
+            "source": "llm_span_selector"
+          },
+          "created_at": 1781947289.3688571
+        },
+        {
+          "stage": "context.govern",
+          "message": "built context pack",
+          "payload": {
+            "message_chars": 19,
+            "image_count": 0,
+            "transcript_chars": 0,
+            "memory_chars": 37,
+            "memory_preview": "[Memory View]\nsession_id: eval-qa-001",
+            "section_count": 5,
+            "section_names": [
+              "system_policy",
+              "memory",
+              "evidence",
+              "current_user",
+              "runtime"
+            ],
+            "budget_report": {
+              "total_budget": 9000,
+              "used_chars": 2632,
+              "section_budgets": {},
+              "section_chars": {
+                "system_policy": 59,
+                "memory": 37,
+                "evidence": 2400,
+                "current_user": 19,
+                "runtime": 117
+              },
+              "section_priorities": {
+                "system_policy": 10,
+                "memory": 30,
+                "evidence": 35,
+                "current_user": 5,
+                "runtime": 60
+              },
+              "degradation_order": [
+                "runtime",
+                "evidence",
+                "memory",
+                "system_policy",
+                "current_user"
+              ],
+              "degraded_sections": [
+                "evidence"
+              ],
+              "dropped_sections": [],
+              "truncated_sections": [
+                "evidence"
+              ]
+            },
+            "strategy": "context_pack_v1"
+          },
+          "created_at": 1781947289.369104
+        },
+        {
+          "stage": "llm.answer",
+          "message": "generated product support answer",
+          "payload": {
+            "node": "product_support",
+            "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+            "evidence_count": 3
+          },
+          "created_at": 1781947299.387171
+        },
+        {
+          "stage": "tool.preflight",
+          "message": "product-support.validate_answer_grounding",
+          "payload": {
+            "risk_level": "low",
+            "requires_approval": false
+          },
+          "created_at": 1781947299.387263
+        },
+        {
+          "stage": "tool.pre_tool",
+          "message": "pre_tool accepted product-support.validate_answer_grounding",
+          "payload": {
+            "tool_name": "validate_answer_grounding"
+          },
+          "created_at": 1781947299.387291
+        },
+        {
+          "stage": "tool.result",
+          "message": "product-support.validate_answer_grounding returned ok",
+          "payload": {
+            "ok": true,
+            "error_code": null
+          },
+          "created_at": 1781947299.388705
+        },
+        {
+          "stage": "tool.post_tool",
+          "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+          "payload": {
+            "tool_name": "validate_answer_grounding"
+          },
+          "created_at": 1781947299.388719
+        },
+        {
+          "stage": "evidence.usage",
+          "message": "recorded product-support evidence usage",
+          "payload": {
+            "retrieved_evidence_ids": [
+              "enterprise_rag:Airfryer_0016",
+              "enterprise_rag:Airfryer_0015",
+              "enterprise_rag:Airfryer_0014"
+            ],
+            "included_evidence_ids": [
+              "enterprise_rag:Airfryer_0016",
+              "enterprise_rag:Airfryer_0015",
+              "enterprise_rag:Airfryer_0014"
+            ],
+            "used_evidence_ids": [
+              "enterprise_rag:Airfryer_0016",
+              "enterprise_rag:Airfryer_0015",
+              "enterprise_rag:Airfryer_0014"
+            ],
+            "grounding_checked": true,
+            "grounding": {
+              "grounded": true,
+              "missing_terms": [],
+              "evidence_count": 3,
+              "token_overlap": 6,
+              "reason": "answer is covered by evidence"
+            },
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "airfryer",
+              "display_name": "Airfryer 空气炸锅",
+              "manual_names": [
+                "Airfryer"
+              ],
+              "matched_terms": [
+                "空气炸锅"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            }
+          },
+          "created_at": 1781947299.3887491
+        },
+        {
+          "stage": "skill.run",
+          "message": "product_support returned success",
+          "payload": {
+            "risk_level": "low",
+            "evidence_count": 3,
+            "state_update_count": 1
+          },
+          "created_at": 1781947299.3888261
+        },
+        {
+          "stage": "loop.stop",
+          "message": "no tool calls requested",
+          "payload": {
+            "turn": 1
+          },
+          "created_at": 1781947299.388855
+        },
+        {
+          "stage": "safety.check",
+          "message": "phase1 safety gate allowed low-risk response",
+          "payload": {
+            "allowed": true,
+            "risk_level": "low",
+            "requires_human": false,
+            "approval_id": null,
+            "handoff_id": null
+          },
+          "created_at": 1781947299.3889549
+        },
+        {
+          "stage": "memory.write_validate",
+          "message": "candidate passed memory governance checks",
+          "payload": {
+            "candidate_id": "memcand_f9aa70d98b5d427cbcb67b40256776f5",
+            "outcome": "accept",
+            "target_thread_id": null,
+            "reason": "candidate passed memory governance checks",
+            "conflicts": [],
+            "update": {
+              "key": "product_support",
+              "value": {
+                "disambiguation_pending": false,
+                "disambiguation_candidates": [],
+                "last_query": "空气炸锅怎么连接WiFi和手机App？",
+                "evidence_count": 3,
+                "manual_names": [
+                  "Airfryer"
+                ],
+                "product_resolution": {
+                  "status": "resolved",
+                  "source": "strong_signal",
+                  "product_id": "airfryer",
+                  "display_name": "Airfryer 空气炸锅",
+                  "manual_names": [
+                    "Airfryer"
+                  ],
+                  "matched_terms": [
+                    "空气炸锅"
+                  ],
+                  "disclose_default_product": false,
+                  "candidate_product_ids": [],
+                  "reason": "user named product identity"
+                },
+                "selected_product_id": "airfryer",
+                "selected_display_name": "Airfryer 空气炸锅",
+                "allowed_manual_names": [
+                  "Airfryer"
+                ]
+              },
+              "reason": "product support answered with knowledge evidence",
+              "evidence_ids": [
+                "enterprise_rag:Airfryer_0016",
+                "enterprise_rag:Airfryer_0015",
+                "enterprise_rag:Airfryer_0014"
+              ],
+              "provenance": "skill",
+              "confidence": 0.82
+            },
+            "degraded": false
+          },
+          "created_at": 1781947299.389246
+        },
+        {
+          "stage": "memory.update",
+          "message": "applied governed session issue updates",
+          "payload": {
+            "candidate_count": 1,
+            "accepted_count": 1,
+            "confirmation_count": 0,
+            "rejected_count": 0,
+            "degraded": false
+          },
+          "created_at": 1781947299.422843
+        },
+        {
+          "stage": "runtime.stop",
+          "message": "completed agent request",
+          "payload": {
+            "status": "success"
+          },
+          "created_at": 1781947299.4228501
+        }
+      ],
+      "final_risk_level": "low"
+    },
+    "context_debug": {
+      "rendered_chars": 2717,
+      "section_count": 5,
+      "sections": [
+        {
+          "name": "system_policy",
+          "source": "runtime",
+          "priority": 10,
+          "chars": 59,
+          "token_estimate": 14,
+          "char_budget": 800,
+          "truncated": false,
+          "metadata": {},
+          "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+          "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+        },
+        {
+          "name": "memory",
+          "source": "memory",
+          "priority": 30,
+          "chars": 37,
+          "token_estimate": 9,
+          "char_budget": 1400,
+          "truncated": false,
+          "metadata": {},
+          "content": "[Memory View]\nsession_id: eval-qa-001",
+          "preview": "[Memory View]\nsession_id: eval-qa-001"
+        },
+        {
+          "name": "evidence",
+          "source": "knowledge_runtime",
+          "priority": 35,
+          "chars": 2400,
+          "token_estimate": 600,
+          "char_budget": 2400,
+          "truncated": true,
+          "metadata": {},
+          "content": "\n[truncated: kept most recent/relevant tail]\n \"Airfryer\"}, \"confidence\": 0.157183, \"evidence_id\": \"enterprise_rag:Airfryer_0015\", \"raw_excerpt\": \"that your smart device is within reach of your home Wi Fi network before you start the easy W iF is et-upprocess. 3 Download the App on your smart device from the App store or from the registration process and select the connected Air fryer in your profile under\\\"My Appliances\\\" 4 Follow the instructions in the App to connect your Air fryer to your WiFi and to pair your Air fryer. 5 When the WiFiLED on the user interface of the Air fryer is solid on,the Air fryer is connected. # Note ·Make sure to connect your Airfryer to a 2.4 GHz 802.11 b/g/n home WiFi The easy W iF is et-up is needed to connect the Air fryer to your home Wi Fi The pairing process is to connect the NutriU App with your smart Airfryer. The Wifi setup process can be cancelled via the App or by unplugging the Airfryer. You\", \"source\": {\"chunk_id\": \"Airfryer_0015\", \"manual_name\": \"Airfryer\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"Airfryer\"}, \"confidence\": 0.157008, \"evidence_id\": \"enterprise_rag:Airfryer_0014\", \"raw_excerpt\": \"<IMG:Manual08_1> # Before first use 1Remove all packing material 2Remove any stickers or labels (if available) from the appliance 3Thoroughly clean the appliance before first use, as indicated in the cleaning chapter. # The App Your Air fryer is Wi Fi enabled and allows you to connect with the App to gain the full Air fryer experience. Within the App you can select your favorite recipes,send it to the Air fryer and start it from your smart device.You can start,monitor and adjust the cooking process onyour smart device from wherever you are,even if you are not at home. Connecting your Airfryer to the App Put the plug of the Air fryer in the wall outlet. 2 Make sure that your smart device is within reach of your home Wi Fi network before you start the easy W iF is et-upprocess. 3\", \"source\": {\"chunk_id\": \"Airfryer_0014\", \"manual_name\": \"Airfryer\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"空气炸锅怎么连接WiFi和手机App？\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:Airfryer_0016\", \"enterprise_rag:Airfryer_0015\", \"enterprise_rag:Airfryer_0014\"], \"retrieved_evidence_ids\": [\"enterprise_rag:Airfryer_0016\", \"enterprise_rag:Airfryer_0015\", \"enterprise_rag:Airfryer_0014\"]}}",
+          "preview": "\n[truncated: kept most recent/relevant tail]\n \"Airfryer\"}, \"confidence\": 0.157183, \"evidence_id\": \"enterprise_rag:Airfryer_0015\", \"raw_excerpt\": \"that your smart device is within reach of your home Wi Fi network before you start the easy W "
+        },
+        {
+          "name": "current_user",
+          "source": "request",
+          "priority": 5,
+          "chars": 19,
+          "token_estimate": 4,
+          "char_budget": 800,
+          "truncated": false,
+          "metadata": {},
+          "content": "空气炸锅怎么连接WiFi和手机App？",
+          "preview": "空气炸锅怎么连接WiFi和手机App？"
+        },
+        {
+          "name": "runtime",
+          "source": "runtime",
+          "priority": 60,
+          "chars": 117,
+          "token_estimate": 29,
+          "char_budget": 400,
+          "truncated": false,
+          "metadata": {},
+          "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 1, \"selected_skill\": \"product_support\"}",
+          "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 1, \"selected_skill\": \"product_support\"}"
+        }
+      ],
+      "section_names": [
+        "system_policy",
+        "memory",
+        "evidence",
+        "current_user",
+        "runtime"
+      ],
+      "budget_report": {
+        "total_budget": 9000,
+        "used_chars": 2632,
+        "section_budgets": {},
+        "section_chars": {
+          "system_policy": 59,
+          "memory": 37,
+          "evidence": 2400,
+          "current_user": 19,
+          "runtime": 117
+        },
+        "section_priorities": {
+          "system_policy": 10,
+          "memory": 30,
+          "evidence": 35,
+          "current_user": 5,
+          "runtime": 60
+        },
+        "degradation_order": [
+          "runtime",
+          "evidence",
+          "memory",
+          "system_policy",
+          "current_user"
+        ],
+        "degraded_sections": [
+          "evidence"
+        ],
+        "dropped_sections": [],
+        "truncated_sections": [
+          "evidence"
+        ]
+      },
+      "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[memory]\n[Memory View]\nsession_id: eval-qa-001\n\n[evidence]\n\n[truncated: kept most recent/relevant tail]\n \"Airfryer\"}, \"confidence\": 0.157183, \"evidence_id\": \"enterprise_rag:Airfryer_0015\", \"raw_excerpt\": \"that your smart device is within reach of your home Wi Fi network before you start the easy W iF is et-upprocess. 3 Download the App on your smart device from the App store or from the registration process and select the connected Air fryer in your profile under\\\"My Appliances\\\" 4 Follow the instructions in the App to connect your Air fryer to your WiFi and to pair your Air fryer. 5 When the WiFiLED on the user interface of the Air fryer is solid on,the Air fryer is connected. # Note ·Make sure to connect your Airfryer to a 2.4 GHz 802.11 b/g/n home WiFi The easy W iF is et-up is needed to connect the Air fryer to your home Wi Fi The pairing process is to connect the NutriU App with your smart"
+    },
+    "loop": {
+      "turn_count": 1,
+      "stop_reason": "no_tool_calls",
+      "steps": [
+        {
+          "turn": 1,
+          "selected_agent": "supervisor",
+          "tool_call_count": 0,
+          "tool_result_count": 0,
+          "stop_reason": "no_tool_calls"
+        }
+      ]
+    },
+    "plan": {
+      "intents": [
+        {
+          "intent": "product_support",
+          "confidence": 0.82,
+          "reason": "matched product support or troubleshooting signal"
+        }
+      ],
+      "candidates": [
+        {
+          "kind": "skill",
+          "name": "product_support",
+          "confidence": 0.8,
+          "reason": "manual QA via product_support"
+        }
+      ],
+      "steps": [
+        {
+          "step_id": "product_support",
+          "capability": "product_support",
+          "purpose": "answer product troubleshooting question",
+          "status": "pending"
+        }
+      ],
+      "recommended_skill": "product_support",
+      "risk_level": "low",
+      "needs_general_handle": false,
+      "is_composite": false
+    },
+    "skill_selection": {
+      "selected_skill": "product_support",
+      "candidates": [
+        {
+          "name": "tool_echo",
+          "matched": false,
+          "confidence": 0.0,
+          "reason": "not selected by model",
+          "source": "model"
+        },
+        {
+          "name": "case_intake",
+          "matched": false,
+          "confidence": 0.0,
+          "reason": "not selected by model",
+          "source": "model"
+        },
+        {
+          "name": "product_support",
+          "matched": true,
+          "confidence": 0.95,
+          "reason": "询问连接WiFi和App操作步骤，属产品使用说明",
+          "source": "model"
+        }
+      ],
+      "source": "model",
+      "reason": "model selected product_support; 询问连接WiFi和App操作步骤，属产品使用说明",
+      "confidence": 0.95,
+      "rejected": [
+        {
+          "name": "tool_echo",
+          "reason": "not selected by model",
+          "confidence": 0.0
+        },
+        {
+          "name": "case_intake",
+          "reason": "not selected by model",
+          "confidence": 0.0
+        }
+      ]
+    },
+    "skill_manifests": [
+      {
+        "name": "tool_echo",
+        "title": "Tool Echo",
+        "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        },
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "tool_result": {
+              "type": "object"
+            }
+          }
+        },
+        "capabilities": [
+          "tool_runtime_smoke_test"
+        ],
+        "required_tools": [
+          "mock.echo"
+        ],
+        "risk_level": "low",
+        "sticky_policy": {
+          "enabled": false,
+          "continue_when": [],
+          "exit_when": [],
+          "max_turns": 4,
+          "priority": 100
+        },
+        "fallback_policy": {
+          "allow_general_fallback": true,
+          "allow_handoff": false,
+          "retry_on_tool_error": false
+        }
+      },
+      {
+        "name": "case_intake",
+        "title": "Case Intake",
+        "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string"
+            },
+            "session_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "message",
+            "session_id"
+          ]
+        },
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "missing_slots": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "ticket_payload": {
+              "type": "object"
+            }
+          }
+        },
+        "capabilities": [
+          "repair_intake",
+          "refund_intake",
+          "complaint_intake",
+          "case_intake_cancel"
+        ],
+        "required_tools": [
+          "case-intake.extract_case_slots",
+          "case-intake.collect_case_intake",
+          "case-intake.try_cancel_case_intake"
+        ],
+        "risk_level": "medium",
+        "sticky_policy": {
+          "enabled": true,
+          "continue_when": [
+            "collecting"
+          ],
+          "exit_when": [
+            "ready",
+            "cancelled"
+          ],
+          "max_turns": 6,
+          "priority": 10
+        },
+        "fallback_policy": {
+          "allow_general_fallback": false,
+          "allow_handoff": true,
+          "retry_on_tool_error": true
+        }
+      },
+      {
+        "name": "product_support",
+        "title": "商品技术支持",
+        "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        },
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "answer": {
+              "type": "string"
+            },
+            "evidence": {
+              "type": "array"
+            }
+          }
+        },
+        "capabilities": [
+          "manual_qa",
+          "product_usage",
+          "installation",
+          "cleaning_maintenance",
+          "replacement_schedule",
+          "technical_specs",
+          "feature_explanation",
+          "troubleshooting",
+          "safety_limits"
+        ],
+        "required_tools": [
+          "product-support.resolve_product",
+          "product-support.search_product_manual",
+          "product-support.validate_answer_grounding"
+        ],
+        "risk_level": "low",
+        "sticky_policy": {
+          "enabled": false,
+          "continue_when": [],
+          "exit_when": [],
+          "max_turns": 4,
+          "priority": 100
+        },
+        "fallback_policy": {
+          "allow_general_fallback": true,
+          "allow_handoff": false,
+          "retry_on_tool_error": false
+        }
+      }
+    ],
+    "memory_governance": {
+      "read_plan": {
+        "thread_ids": [],
+        "include_session_facts": false,
+        "include_workflow": true,
+        "include_ticket_history": false,
+        "source": "llm",
+        "confidence": 0.95,
+        "reason": "User asks about connecting an air fryer to WiFi and app, which is a new topic. No existing threads or active thread, so creating a new thread.",
+        "fallback_reason": ""
+      },
+      "thread_decision": {
+        "action": "create_thread",
+        "thread_id": null,
+        "confidence": 0.95,
+        "source": "llm",
+        "reason": "User asks about connecting an air fryer to WiFi and app, which is a new topic. No existing threads or active thread, so creating a new thread."
+      },
+      "write_gate_enabled": true,
+      "write_decisions": [
+        {
+          "candidate_id": "memcand_f9aa70d98b5d427cbcb67b40256776f5",
+          "outcome": "accept",
+          "target_thread_id": null,
+          "reason": "candidate passed memory governance checks",
+          "conflicts": [],
+          "update": {
+            "key": "product_support",
+            "value": {
+              "disambiguation_pending": false,
+              "disambiguation_candidates": [],
+              "last_query": "空气炸锅怎么连接WiFi和手机App？",
+              "evidence_count": 3,
+              "manual_names": [
+                "Airfryer"
+              ],
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "airfryer",
+                "display_name": "Airfryer 空气炸锅",
+                "manual_names": [
+                  "Airfryer"
+                ],
+                "matched_terms": [
+                  "空气炸锅"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "selected_product_id": "airfryer",
+              "selected_display_name": "Airfryer 空气炸锅",
+              "allowed_manual_names": [
+                "Airfryer"
+              ]
+            },
+            "reason": "product support answered with knowledge evidence",
+            "evidence_ids": [
+              "enterprise_rag:Airfryer_0016",
+              "enterprise_rag:Airfryer_0015",
+              "enterprise_rag:Airfryer_0014"
+            ],
+            "provenance": "skill",
+            "confidence": 0.82
+          },
+          "degraded": false
+        }
+      ],
+      "degraded": false,
+      "store_profile": {
+        "store_type": "RedisMysqlSessionIssueStore",
+        "redis_ok": true,
+        "mysql_ok": true,
+        "sql_dialect": "mysql",
+        "schema_version": 1,
+        "degraded": false
+      }
+    },
+    "trace_persisted": "25113ec7d0cd407f9458c41aee1e070f",
+    "transcript_entries": 2
+  }
+}

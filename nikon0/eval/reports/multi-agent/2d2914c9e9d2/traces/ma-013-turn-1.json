@@ -1,0 +1,1107 @@
+{
+  "trace": {
+    "trace_id": "acfc443d5f17413facc0435496da0ae5",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-013",
+    "user_message": "空调显示 E2 怎么处理？",
+    "selected_agents": [
+      "support"
+    ],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 13,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-013",
+        "section_count": 4,
+        "section_names": [
+          "system_policy",
+          "memory",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 237,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "memory": 61,
+            "current_user": 13,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "memory": 30,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "memory",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      },
+      {
+        "message_chars": 13,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-013",
+        "section_count": 4,
+        "section_names": [
+          "system_policy",
+          "evidence",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 2589,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "evidence": 2400,
+            "current_user": 13,
+            "runtime": 117
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "evidence": 35,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "evidence",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [
+            "evidence"
+          ],
+          "dropped_sections": [],
+          "truncated_sections": [
+            "evidence"
+          ]
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [
+      {
+        "query": "空调显示 E2 怎么处理？",
+        "intent": "product_support",
+        "evidence_count": 3,
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": false
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "空调手册",
+                "AC900手册"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 3,
+            "retrieval_trace": {
+              "query": "空调显示 E2 怎么处理？",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 3,
+              "score_threshold": 0.1,
+              "top1_score": 0.122767,
+              "retrieved_chunk_ids": [
+                "空调手册_0004",
+                "空调手册_0006",
+                "空调手册_0010"
+              ],
+              "filtered_chunk_ids": [
+                "空调手册_0004",
+                "空调手册_0006",
+                "空调手册_0010"
+              ],
+              "retrieved_manual_names": [
+                "空调手册",
+                "空调手册",
+                "空调手册"
+              ],
+              "filtered_manual_names": [
+                "空调手册",
+                "空调手册",
+                "空调手册"
+              ],
+              "source_queries": [
+                "空调显示 E2 怎么处理？"
+              ],
+              "manual_name_decisions": [
+                ""
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Manual01_0",
+                "Manual01_1",
+                "air_conditioner_01",
+                "Manual01_2",
+                "Manual01_3",
+                "Manual01_10",
+                "Manual01_11",
+                "Manual01_12",
+                "Manual01_13",
+                "Manual01_27",
+                "Manual01_28",
+                "Manual01_29",
+                "Manual01_30",
+                "Manual01_31"
+              ]
+            }
+          }
+        ],
+        "product_resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "air_conditioner",
+          "display_name": "空调",
+          "manual_names": [
+            "空调手册",
+            "AC900手册"
+          ],
+          "matched_terms": [
+            "空调"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "service_id": "product-support",
+        "tool_name": "resolve_product",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "search_product_manual",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "validate_answer_grounding",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      }
+    ],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781970587.6401541
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "llm",
+          "confidence": 0.9,
+          "reason": "User asks about air conditioner error code E2, new topic.",
+          "fallback_reason": ""
+        },
+        "created_at": 1781970594.748084
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 0.9,
+          "source": "llm",
+          "reason": "User asks about air conditioner error code E2, new topic."
+        },
+        "created_at": 1781970594.748093
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "memory",
+            "conversation",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "保持回答边界和合规性",
+            "memory": "记录当前会话状态，以便后续追问",
+            "conversation": "虽然当前为空，但预留用于后续上下文",
+            "evidence": "需要检索空调E2故障码的处理方案",
+            "current_user": "需要用户的当前消息内容",
+            "runtime": "提供通道和图片数量等运行时信息"
+          },
+          "source": "llm",
+          "confidence": 0.9
+        },
+        "created_at": 1781970601.251581
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 13,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-013",
+          "section_count": 4,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 237,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 61,
+              "current_user": 13,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970601.251868
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "User is asking about an E2 error code on an air conditioner, which is a product diagnosis question.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"User is asking about an E2 error code on an air conditioner, which is a product diagnosis question.\"\n}"
+        },
+        "created_at": 1781970606.797538
+      },
+      {
+        "stage": "agent.execution_start",
+        "message": "support agent started",
+        "payload": {
+          "agent": "support"
+        },
+        "created_at": 1781970606.797567
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.resolve_product",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970606.797596
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970606.797624
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.resolve_product returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970606.797747
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970606.79776
+      },
+      {
+        "stage": "product.resolve",
+        "message": "product resolution status=resolved",
+        "payload": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "air_conditioner",
+          "display_name": "空调",
+          "manual_names": [
+            "空调手册",
+            "AC900手册"
+          ],
+          "matched_terms": [
+            "空调"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        },
+        "created_at": 1781970606.7977972
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.search_product_manual",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970606.7978098
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970606.797819
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.search_product_manual returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970616.507842
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970616.50785
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "回答边界和禁止事项，如不可随意承诺维修等",
+            "evidence": "需要查询空调E2故障码的处理方法",
+            "current_user": "用户当前消息是本次请求的内容",
+            "runtime": "需要知道当前渠道、图片信息等运行时上下文"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970621.553136
+      },
+      {
+        "stage": "context.tool_observations",
+        "message": "built prompt tool observations",
+        "payload": {
+          "item_count": 2,
+          "raw_result_refs": [
+            "trace://acfc443d5f17413facc0435496da0ae5/tool_results/0",
+            "trace://acfc443d5f17413facc0435496da0ae5/tool_results/1"
+          ]
+        },
+        "created_at": 1781970621.553272
+      },
+      {
+        "stage": "context.evidence_pack",
+        "message": "built prompt evidence pack",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:空调手册_0004",
+            "enterprise_rag:空调手册_0006",
+            "enterprise_rag:空调手册_0010"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:空调手册_0004",
+            "enterprise_rag:空调手册_0006",
+            "enterprise_rag:空调手册_0010"
+          ],
+          "deduplicated_evidence_ids": [],
+          "item_count": 3,
+          "source": "llm_span_selector"
+        },
+        "created_at": 1781970621.553642
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 13,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-013",
+          "section_count": 4,
+          "section_names": [
+            "system_policy",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 2589,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "evidence": 2400,
+              "current_user": 13,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "evidence",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [
+              "evidence"
+            ],
+            "dropped_sections": [],
+            "truncated_sections": [
+              "evidence"
+            ]
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970621.553828
+      },
+      {
+        "stage": "llm.answer",
+        "message": "generated product support answer",
+        "payload": {
+          "node": "product_support",
+          "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+          "evidence_count": 3
+        },
+        "created_at": 1781970629.839766
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.validate_answer_grounding",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970629.8399072
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970629.839937
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.validate_answer_grounding returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970629.840298
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970629.8403132
+      },
+      {
+        "stage": "evidence.usage",
+        "message": "recorded product-support evidence usage",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:空调手册_0004",
+            "enterprise_rag:空调手册_0006",
+            "enterprise_rag:空调手册_0010"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:空调手册_0004",
+            "enterprise_rag:空调手册_0006",
+            "enterprise_rag:空调手册_0010"
+          ],
+          "used_evidence_ids": [
+            "enterprise_rag:空调手册_0004",
+            "enterprise_rag:空调手册_0006",
+            "enterprise_rag:空调手册_0010"
+          ],
+          "grounding_checked": true,
+          "grounding": {
+            "grounded": true,
+            "missing_terms": [],
+            "evidence_count": 3,
+            "token_overlap": 2,
+            "reason": "answer is covered by evidence"
+          },
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "air_conditioner",
+            "display_name": "空调",
+            "manual_names": [
+              "空调手册",
+              "AC900手册"
+            ],
+            "matched_terms": [
+              "空调"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          }
+        },
+        "created_at": 1781970629.840344
+      },
+      {
+        "stage": "agent.execution_stop",
+        "message": "support agent completed",
+        "payload": {
+          "agent": "support",
+          "status": "success"
+        },
+        "created_at": 1781970629.840406
+      },
+      {
+        "stage": "agent.handoff_created",
+        "message": "support handoff created",
+        "payload": {
+          "agent": "support",
+          "handoff": {
+            "stage": "diagnosis",
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "air_conditioner",
+              "display_name": "空调",
+              "manual_names": [
+                "空调手册",
+                "AC900手册"
+              ],
+              "matched_terms": [
+                "空调"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "diagnosis_status": "grounded",
+            "symptoms": [
+              "空调显示 E2 怎么处理？"
+            ],
+            "attempted_steps": [],
+            "recommended_next_steps": [
+              "很抱歉，根据我目前查到的空调手册内容，**没有找到关于显示屏显示“E2”的具体含义和处理步骤**。手册的“故障排除”章节可能包含自诊断功能和报修前检查的内容，但您提供的资料片段中未包含该章节的具体信息，因此我无法给出针对“E2”代码的确切解决方法。\n\n为了帮您进一步确认，建议您：\n\n1. **查阅您空调自带的说明书**，找到“故障排除”或“自诊断功能”部分，看是否有关于“E2”代码的解释。\n2. **提供空调的具体型号**（通常在室内机侧面或室外机铭牌上），这样我可以帮您查找更匹配的维修资料。\n3. 如果您手边没有说明书，也可以尝试以下通用排查（非手册直接支持，仅供参考）：\n   - 关闭空调电源，等待3-5分钟后重新开机，看故障代码是否消失。\n   - 检查室内机滤网是否过脏（手册建议每两周清洁一次），过脏可能导致保护性停机并显示故障代码。\n\n如需进一步协助，请补充空调型号，我将尽力帮您对照资料。"
+            ],
+            "safety_risks": [],
+            "evidence_ids": [
+              "enterprise_rag:空调手册_0004",
+              "enterprise_rag:空调手册_0006",
+              "enterprise_rag:空调手册_0010"
+            ],
+            "summary": "很抱歉，根据我目前查到的空调手册内容，**没有找到关于显示屏显示“E2”的具体含义和处理步骤**。手册的“故障排除”章节可能包含自诊断功能和报修前检查的内容，但您提供的资料片段中未包含该章节的具体信息，因此我无法给出针对“E2”代码的确切解决方法。\n\n为了帮您进一步确认，建议您：\n\n1. **查阅您空调自带的说明书**，找到“故障排除”或“自诊断功能”部分，看是否有关于“E2”代码的解释。\n2. **提供空调的具体型号**（通常在室内机侧面或室外机铭牌上），这样我可以帮您查找更匹配的维修资料。\n3. 如果您手边没有说明书，也可以尝试以下通用排查（非手册直接支持，仅供参考）：\n   - 关闭空调电源，等待3-5分钟后重新开机，看故障代码是否消失。\n   - 检查室内机滤网是否过脏（手册建议每两周清洁一次），过脏可能导致保护性停机并显示故障代码。\n\n如需进一步协助，请补充空调型号，我将尽力帮您"
+          }
+        },
+        "created_at": 1781970629.840426
+      },
+      {
+        "stage": "agent.replan",
+        "message": "replanned after support result",
+        "payload": {
+          "action": "clarify",
+          "confidence": 0.9,
+          "reason": "Support handoff indicates that the E2 error code is not found in the manual, and the user's specific air conditioner model is needed for further diagnosis. A clarifying question to ask for the model is the most appropriate next step before deciding whether service is required.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"clarify\",\n  \"confidence\": 0.9,\n  \"reason\": \"Support handoff indicates that the E2 error code is not found in the manual, and the user's specific air conditioner model is needed for further diagnosis. A clarifying question to ask for the model is the most appropriate next step before deciding whether service is required.\"\n}"
+        },
+        "created_at": 1781970640.896429
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781970640.8965771
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 0,
+          "accepted_count": 0,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781970640.912517
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "needs_more_info"
+        },
+        "created_at": 1781970640.912522
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 2663,
+    "section_count": 4,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "evidence",
+        "source": "knowledge_runtime",
+        "priority": 35,
+        "chars": 2400,
+        "token_estimate": 600,
+        "char_budget": 2400,
+        "truncated": true,
+        "metadata": {},
+        "content": "\n[truncated: kept most recent/relevant tail]\nG:Manual01_2> 2 装入新电池，确保电池正、负极安装正确。 <IMG:Manual01_3> 3 重新装上电池盖。 # 注 若遥控器显示屏开始变暗，请更换电池。\", \"source\": {\"chunk_id\": \"空调手册_0004\", \"manual_name\": \"空调手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"空调手册\"}, \"confidence\": 0.089844, \"evidence_id\": \"enterprise_rag:空调手册_0006\", \"raw_excerpt\": \"# 注 ・此模式下温度由系统自动调节，无法手动设置，且显示屏不会显示设定温度。 # 室内换气（循环模式） 该模式仅实现室内空气循环，不改变室内温度，循环模式下制冷指示灯亮起。 1 按下开 / 关键开启电源。 2 反复按下模式键，选择循环模式，显示屏上会显示风扇图标。 <IMG:Manual01_10> 3 按下风速键调节风扇转速。 # 调节风扇转速 1 反复按下风速键调节风扇转速，选择风向箭头图标可开启自然风模式，风扇转速自动调节。 <IMG:Manual01_11> # 调节出风方向 1 左右调节出风方向时，按下对应按键选择所需方向，选择自动摆风图标可实现出风方向自动调节。 2 上下调节出风方向时，反复按下对应按键选择所需方向，选择自动摆风图标可实现出风方向自动调节。 # 注 ・部分机型不支持上下调节出风方向。 ・随意调节导风板可能导致产品故障。 ・空调重启后，将按照之前设置的出风方向运行，导风板状态可能与遥控器显示图标不一致，此时可再次按下出风方向调节键进行调整。 # 定时设置 使用定时功能可节约能源，让空调更高效地运行。 # 设置当前时间 1 按住设定 / 清除键 3 秒以上，显示屏底部的上午 / 下午图标开始闪烁。 <IMG:Manual01_12> 2 按下上升 / 下降键调整分钟数。 3 按下设定 / 清除键完成设置。 # 定时开机 1 按下定时开键，显示屏底部对应的图标开始闪烁。 <IMG:Manual01_13> 2 按下上升 / 下降键调整分钟数。 3 按下设定 / 清除键完成设置。 4 定时设置完成后，显示屏会显示当前时间和定时开图标。\", \"source\": {\"chunk_id\": \"空调手册_0006\", \"manual_name\": \"空调手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"空调手册\"}, \"confidence\": 0.085835, \"evidence_id\": \"enterprise_rag:空调手册_0010\", \"raw_excerpt\": \"# 注 若按住开 / 关键 3-5 秒而非 6 秒，空调将进入测试运行模式，该模式下空调会以强风制冷 18 分钟，之后恢复为工厂默认设置。 # 维护保养 定期清洁产品，以保持最佳运行性能，防止设备出现故障。 * 部分配件可能因机型不同而未配备。 # 3M 多重防护滤网 <IMG:Manual01_27> * 功能会根据机型有所调整。 <IMG:Manual01_28> # 注意 ・进行任何维护操作前，请关闭电源并拔下电源线，否则可能导致触电。 ・清洁滤网时，切勿使用 40 摄氏度以上的热水，以免造成滤网变形或变色。 ・清洁滤网时，切勿使用挥发性物质，以免损坏产品表面。 # 注 ・滤网的位置和形状可能因机型不同而有所差异。 ・请定期清洁室外机的热交换器盘管，盘管积垢可能会降低运行效率，增加能耗。 # 清洁空气滤网 建议每两周清洁一次空气滤网，必要时可增加清洁频率。 1 关闭电源并拔下电源线。 2 打开前盖板，轻轻掀起盖板两侧即可。 <IMG:Manual01_29> * 功能会根据机型有所调整。 3 握住空气滤网的把手，轻轻向上提起，将其从机身中取出。 <IMG:Manual01_30> * 功能会根据机型有所调整。 4 用吸尘器清理滤网，或用温水冲洗，若滤网污垢较难清理，可在温水中加入洗涤剂清洗。 5 将滤网置于阴凉处晾干。 # 清洁 3M 多重防护滤网 1 关闭电源并拔下电源线。 2 打开前盖板，取出空气滤网（详见 “清洁空气滤网”）。 3 抽出 3M 多重防护滤网。 <IMG:Manual01_31> * 功能会根据机型有所调整。 4 用吸尘器清理滤网污垢，切勿用水清洗 3M 多重防护滤网，以免造成滤网损坏。 # 注 滤网的位置和形状可能因机型不同而有所差异。\", \"source\": {\"chunk_id\": \"空调手册_0010\", \"manual_name\": \"空调手册\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"空调显示 E2 怎么处理？\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:空调手册_0004\", \"enterprise_rag:空调手册_0006\", \"enterprise_rag:空调手册_0010\"], \"retrieved_evidence_ids\": [\"enterprise_rag:空调手册_0004\", \"enterprise_rag:空调手册_0006\", \"enterprise_rag:空调手册_0010\"]}}",
+        "preview": "\n[truncated: kept most recent/relevant tail]\nG:Manual01_2> 2 装入新电池，确保电池正、负极安装正确。 <IMG:Manual01_3> 3 重新装上电池盖。 # 注 若遥控器显示屏开始变暗，请更换电池。\", \"source\": {\"chunk_id\": \"空调手册_0004\", \"manual_name\": \"空调手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicabil"
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 13,
+        "token_estimate": 3,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "空调显示 E2 怎么处理？",
+        "preview": "空调显示 E2 怎么处理？"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 117,
+        "token_estimate": 29,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "evidence",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 2589,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "evidence": 2400,
+        "current_user": 13,
+        "runtime": 117
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "evidence": 35,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "evidence",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [
+        "evidence"
+      ],
+      "dropped_sections": [],
+      "truncated_sections": [
+        "evidence"
+      ]
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[evidence]\n\n[truncated: kept most recent/relevant tail]\nG:Manual01_2> 2 装入新电池，确保电池正、负极安装正确。 <IMG:Manual01_3> 3 重新装上电池盖。 # 注 若遥控器显示屏开始变暗，请更换电池。\", \"source\": {\"chunk_id\": \"空调手册_0004\", \"manual_name\": \"空调手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"空调手册\"}, \"confidence\": 0.089844, \"evidence_id\": \"enterprise_rag:空调手册_0006\", \"raw_excerpt\": \"# 注 ・此模式下温度由系统自动调节，无法手动设置，且显示屏不会显示设定温度。 # 室内换气（循环模式） 该模式仅实现室内空气循环，不改变室内温度，循环模式下制冷指示灯亮起。 1 按下开 / 关键开启电源。 2 反复按下模式键，选择循环模式，显示屏上会显示风扇图标。 <IMG:Manual01_10> 3 按下风速键调节风扇转速。 # 调节风扇转速 1 反复按下风速键调节风扇转速，选择风向箭头图标可开启自然风模式，风扇转速自动调节。 <IMG:Manual01_11> # 调节出风方向 1 左右调节出风方向时，按下对应按键选择所需方向，选择自动摆风图标可实现出风方向自动调节。 2 上下调节出风方向时，反复按下对应按键选择所需方向，选择自动摆风图标可实现出风方向自动调节。 # 注 ・部分机型不支持上下调节出风方向。 ・随意调节导风板可能导致产品故障。 ・空调重启后，将按照之前设置的出风方向运行，导风板状态可能与遥控器显示图标不一致，此时可再次按下出风方向调节键进行调整。 # 定时设置 使用定时功能可节约能源，让空调更高效地运行。 # 设置当前时间 1 按住设定 / 清除键 3 秒以上，显示屏底部的上午 / 下午图标开始闪烁。 <IMG:Manual01_12> 2 按下"
+  },
+  "trace_persisted": "acfc443d5f17413facc0435496da0ae5",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [
+      "support"
+    ],
+    "support_handoff": {
+      "stage": "diagnosis",
+      "product_resolution": {
+        "status": "resolved",
+        "source": "strong_signal",
+        "product_id": "air_conditioner",
+        "display_name": "空调",
+        "manual_names": [
+          "空调手册",
+          "AC900手册"
+        ],
+        "matched_terms": [
+          "空调"
+        ],
+        "disclose_default_product": false,
+        "candidate_product_ids": [],
+        "reason": "user named product identity"
+      },
+      "diagnosis_status": "grounded",
+      "symptoms": [
+        "空调显示 E2 怎么处理？"
+      ],
+      "attempted_steps": [],
+      "recommended_next_steps": [
+        "很抱歉，根据我目前查到的空调手册内容，**没有找到关于显示屏显示“E2”的具体含义和处理步骤**。手册的“故障排除”章节可能包含自诊断功能和报修前检查的内容，但您提供的资料片段中未包含该章节的具体信息，因此我无法给出针对“E2”代码的确切解决方法。\n\n为了帮您进一步确认，建议您：\n\n1. **查阅您空调自带的说明书**，找到“故障排除”或“自诊断功能”部分，看是否有关于“E2”代码的解释。\n2. **提供空调的具体型号**（通常在室内机侧面或室外机铭牌上），这样我可以帮您查找更匹配的维修资料。\n3. 如果您手边没有说明书，也可以尝试以下通用排查（非手册直接支持，仅供参考）：\n   - 关闭空调电源，等待3-5分钟后重新开机，看故障代码是否消失。\n   - 检查室内机滤网是否过脏（手册建议每两周清洁一次），过脏可能导致保护性停机并显示故障代码。\n\n如需进一步协助，请补充空调型号，我将尽力帮您对照资料。"
+      ],
+      "safety_risks": [],
+      "evidence_ids": [
+        "enterprise_rag:空调手册_0004",
+        "enterprise_rag:空调手册_0006",
+        "enterprise_rag:空调手册_0010"
+      ],
+      "summary": "很抱歉，根据我目前查到的空调手册内容，**没有找到关于显示屏显示“E2”的具体含义和处理步骤**。手册的“故障排除”章节可能包含自诊断功能和报修前检查的内容，但您提供的资料片段中未包含该章节的具体信息，因此我无法给出针对“E2”代码的确切解决方法。\n\n为了帮您进一步确认，建议您：\n\n1. **查阅您空调自带的说明书**，找到“故障排除”或“自诊断功能”部分，看是否有关于“E2”代码的解释。\n2. **提供空调的具体型号**（通常在室内机侧面或室外机铭牌上），这样我可以帮您查找更匹配的维修资料。\n3. 如果您手边没有说明书，也可以尝试以下通用排查（非手册直接支持，仅供参考）：\n   - 关闭空调电源，等待3-5分钟后重新开机，看故障代码是否消失。\n   - 检查室内机滤网是否过脏（手册建议每两周清洁一次），过脏可能导致保护性停机并显示故障代码。\n\n如需进一步协助，请补充空调型号，我将尽力帮您"
+    },
+    "plans": [
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "User is asking about an E2 error code on an air conditioner, which is a product diagnosis question.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"User is asking about an E2 error code on an air conditioner, which is a product diagnosis question.\"\n}"
+      },
+      {
+        "action": "clarify",
+        "confidence": 0.9,
+        "reason": "Support handoff indicates that the E2 error code is not found in the manual, and the user's specific air conditioner model is needed for further diagnosis. A clarifying question to ask for the model is the most appropriate next step before deciding whether service is required.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"clarify\",\n  \"confidence\": 0.9,\n  \"reason\": \"Support handoff indicates that the E2 error code is not found in the manual, and the user's specific air conditioner model is needed for further diagnosis. A clarifying question to ask for the model is the most appropriate next step before deciding whether service is required.\"\n}"
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "llm",
+      "confidence": 0.9,
+      "reason": "User asks about air conditioner error code E2, new topic.",
+      "fallback_reason": ""
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 0.9,
+      "source": "llm",
+      "reason": "User asks about air conditioner error code E2, new topic."
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": false,
+    "valid": null,
+    "failure_reason": "",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

@@ -7,6 +7,8 @@ from uuid import uuid4
 from nikon0.agent.base import AgentRegistry
 from nikon0.agent.context_governance import ContextGovernance
 from nikon0.agent.loop import AgentLoop
+from nikon0.agent.multi_agent import MultiAgentCoordinator, ServiceAgent, SupportAgent
+from nikon0.agent.delegation import AgentDelegationPlanner
 from nikon0.agent.planner import RuleBasedPlanner
 from nikon0.agent.supervisor import SupervisorAgent
 from nikon0.app.schemas.storage import TranscriptEntry
@@ -24,6 +26,7 @@ from nikon0.context.read_planner import DeterministicContextReadPlanner, LlmCont
 from nikon0.context.runtime import ContextRuntime
 from nikon0.knowledge.runtime import EnterpriseRagBackend, KnowledgeRuntime
 from nikon0.memory.governance import IssueThreadLifecycleManager, MemoryReadPlanner, MemoryWriteGate
+from nikon0.memory.write_agent import MemoryWriteAgent, MemoryWriteRequest
 from nikon0.memory.persistence import build_memory_store_from_env
 from nikon0.memory.session import InMemorySessionIssueStore
 from nikon0.memory.view import MemoryViewBuilder
@@ -57,6 +60,10 @@ class AgentRuntime:
         memory_view_builder: MemoryViewBuilder | None = None,
         memory_write_gate: MemoryWriteGate | None = None,
         memory_read_planner: MemoryReadPlanner | None = None,
+        multi_agent_coordinator: MultiAgentCoordinator | None = None,
+        multi_agent_enabled: bool | None = None,
+        memory_write_agent: MemoryWriteAgent | None = None,
+        memory_write_agent_enabled: bool | None = None,
         max_turns: int = 4,
     ) -> None:
         self.skill_registry = skill_registry or SkillRegistry(_build_default_skills(answer_generator=answer_generator))
@@ -76,6 +83,12 @@ class AgentRuntime:
         self.memory_write_gate = memory_write_gate or MemoryWriteGate()
         self.memory_read_planner = memory_read_planner or MemoryReadPlanner(
             lifecycle=IssueThreadLifecycleManager(),
+        )
+        self.multi_agent_coordinator = multi_agent_coordinator
+        self.multi_agent_enabled = _multi_agent_enabled() if multi_agent_enabled is None else bool(multi_agent_enabled)
+        self.memory_write_agent = memory_write_agent
+        self.memory_write_agent_enabled = (
+            _memory_write_agent_enabled() if memory_write_agent_enabled is None else bool(memory_write_agent_enabled)
         )
         self.max_turns = max(1, int(max_turns))
 
@@ -124,24 +137,34 @@ class AgentRuntime:
             trace=trace,
         )
         context = await self.context_governance.agovern(context)
-        context.plan = self.planner.plan(context)
-        trace.add_event(
-            "planner.plan",
-            "planner produced routing plan",
-            intents=[intent.model_dump() for intent in context.plan.intents],
-            candidates=[candidate.model_dump() for candidate in context.plan.candidates],
-            recommended_skill=context.plan.recommended_skill,
-            is_composite=context.plan.is_composite,
-            risk_level=context.plan.risk_level,
-        )
-
-        loop = AgentLoop(
-            agent_registry=self.agent_registry,
-            tool_runtime=self.tool_runtime,
-            max_turns=self.max_turns,
-        )
-        loop_result = await loop.run(context)
-        result = loop_result.result
+        multi_agent_outcome = None
+        if self.multi_agent_enabled and self.multi_agent_coordinator is not None:
+            multi_agent_outcome = await self.multi_agent_coordinator.run(context)
+            result = multi_agent_outcome.result
+            loop_turn_count = len(multi_agent_outcome.agent_stages) or 1
+            loop_stop_reason = "multi_agent_complete"
+            loop_steps = []
+        else:
+            context.plan = self.planner.plan(context)
+            trace.add_event(
+                "planner.plan",
+                "planner produced routing plan",
+                intents=[intent.model_dump() for intent in context.plan.intents],
+                candidates=[candidate.model_dump() for candidate in context.plan.candidates],
+                recommended_skill=context.plan.recommended_skill,
+                is_composite=context.plan.is_composite,
+                risk_level=context.plan.risk_level,
+            )
+            loop = AgentLoop(
+                agent_registry=self.agent_registry,
+                tool_runtime=self.tool_runtime,
+                max_turns=self.max_turns,
+            )
+            loop_result = await loop.run(context)
+            result = loop_result.result
+            loop_turn_count = loop_result.turn_count
+            loop_stop_reason = loop_result.stop_reason
+            loop_steps = [step.__dict__ for step in loop_result.steps]
         safety = await self.safety_gate.check(context, result)
         trace.final_risk_level = safety.risk_level
 
@@ -164,8 +187,51 @@ class AgentRuntime:
             risk_level=result.risk_level,
             selected_skill=context.selected_skill,
         )
+        memory_write_agent_debug = {
+            "enabled": self.memory_write_agent_enabled and self.memory_write_agent is not None,
+            "triggered": False,
+            "valid": None,
+            "failure_reason": "",
+            "candidate_count": 0,
+            "blocked": False,
+        }
+        memory_write_agent_blocked = False
+        if self._should_run_memory_write_agent(multi_agent_outcome, result, session_state):
+            memory_write_agent_debug["triggered"] = True
+            memory_request = self._memory_write_request(context, multi_agent_outcome, result, thread_decision.thread_id)
+            trace.add_event(
+                "memory_write_agent.request",
+                "requested governed memory candidates",
+                write_request=memory_request.model_dump(mode="json"),
+            )
+            proposal = await self.memory_write_agent.propose(memory_request)  # type: ignore[union-attr]
+            memory_write_agent_debug.update(
+                valid=proposal.valid,
+                failure_reason=proposal.failure_reason,
+                candidate_count=len(proposal.candidates),
+            )
+            if proposal.valid:
+                candidates.extend(proposal.candidates)
+                trace.add_event(
+                    "memory_write_agent.result",
+                    "memory write agent returned candidates",
+                    candidate_count=len(proposal.candidates),
+                    source_agent=memory_request.source_agent,
+                    execution_stage=memory_request.execution_stage,
+                )
+            else:
+                trace.add_event(
+                    "memory_write_agent.validation_failed",
+                    proposal.failure_reason,
+                    source_agent=memory_request.source_agent,
+                    execution_stage=memory_request.execution_stage,
+                )
+                if memory_request.execution_stage == "service_workflow" and result.risk_level == "high":
+                    memory_write_agent_blocked = True
+                    memory_write_agent_debug["blocked"] = True
+                    candidates = []
         for candidate in candidates:
-            candidate.target_thread_id = thread_decision.thread_id
+            candidate.target_thread_id = candidate.target_thread_id or thread_decision.thread_id
             candidate.create_thread = thread_decision.action == "create_thread"
 
         gate_enabled = _memory_write_gate_enabled()
@@ -204,13 +270,19 @@ class AgentRuntime:
         )
         memory_degraded = False
         try:
-            updated_state = self.memory_store.apply_updates(
-                request.session_id,
-                accepted_updates,
-                turn_id=trace.trace_id,
-                target_thread_id=thread_decision.thread_id,
-                create_thread=thread_decision.action == "create_thread",
-            )
+            if memory_write_agent_blocked:
+                answer = "当前服务状态无法可靠保存，已转人工处理，请勿重复提交。"
+                status = "handoff_required"
+                updated_state = session_state
+                trace.add_event("memory_write_agent.blocked", "blocked high-risk service after write-agent failure")
+            else:
+                updated_state = self.memory_store.apply_updates(
+                    request.session_id,
+                    accepted_updates,
+                    turn_id=trace.trace_id,
+                    target_thread_id=thread_decision.thread_id,
+                    create_thread=thread_decision.action == "create_thread",
+                )
         except Exception as exc:  # noqa: BLE001
             if result.risk_level in {"high", "medium"}:
                 answer = "当前服务状态无法可靠保存，已转人工处理，请勿重复提交。"
@@ -277,7 +349,7 @@ class AgentRuntime:
                 kind="agent",
                 name=context.selected_agent or (trace.selected_agents[-1] if trace.selected_agents else "unknown"),
                 status=status,
-                detail=f"loop_stop={loop_result.stop_reason}",
+                detail=f"loop_stop={loop_stop_reason}",
             )
         ]
         actions.extend(
@@ -331,9 +403,15 @@ class AgentRuntime:
                 "trace_persisted": stored_trace.trace_id,
                 "transcript_entries": len(self.transcript_store.list_for_session(request.session_id)),
                 "loop": {
-                    "turn_count": loop_result.turn_count,
-                    "stop_reason": loop_result.stop_reason,
-                    "steps": [step.__dict__ for step in loop_result.steps],
+                    "turn_count": loop_turn_count,
+                    "stop_reason": loop_stop_reason,
+                    "steps": loop_steps,
+                },
+                "multi_agent": {
+                    "enabled": self.multi_agent_enabled and self.multi_agent_coordinator is not None,
+                    "agent_stages": list(multi_agent_outcome.agent_stages) if multi_agent_outcome else [],
+                    "support_handoff": dict(multi_agent_outcome.support_handoff) if multi_agent_outcome else {},
+                    "plans": [item.model_dump() for item in multi_agent_outcome.plans] if multi_agent_outcome else [],
                 },
                 "plan": context.plan.model_dump() if context.plan else None,
                 "skill_selection": context.skill_selection.model_dump() if context.skill_selection else None,
@@ -346,6 +424,7 @@ class AgentRuntime:
                     "degraded": memory_degraded,
                     "store_profile": _memory_store_profile(self.memory_store),
                 },
+                "memory_write_agent": memory_write_agent_debug,
             },
         )
 
@@ -358,6 +437,30 @@ class AgentRuntime:
             target_thread_id=candidate.target_thread_id,
             reason="memory write gate disabled",
             update=candidate.update,
+        )
+
+    def _should_run_memory_write_agent(self, multi_agent_outcome, result, session_state) -> bool:
+        if not self.memory_write_agent_enabled or self.memory_write_agent is None or multi_agent_outcome is None:
+            return False
+        if multi_agent_outcome.agent_stages and multi_agent_outcome.agent_stages[-1] == "service":
+            return True
+        if result.evidence or result.state_updates:
+            return True
+        return bool(session_state.active_thread_id and session_state.turn_count and session_state.turn_count % 4 == 0)
+
+    @staticmethod
+    def _memory_write_request(context: AgentContext, multi_agent_outcome, result, thread_id: str | None) -> MemoryWriteRequest:
+        stages = list(multi_agent_outcome.agent_stages)
+        source_agent = "service" if stages and stages[-1] == "service" else "support"
+        execution_stage = "service_workflow" if source_agent == "service" else "diagnosis"
+        return MemoryWriteRequest(
+            source_agent=source_agent,
+            execution_stage=execution_stage,
+            message=context.request.message,
+            handoff=dict(multi_agent_outcome.support_handoff),
+            result_summary=result.answer_draft[:800],
+            evidence_ids=[item.evidence_id for item in result.evidence],
+            target_thread_id=thread_id,
         )
 
     def _persist_memory_audit(self, session_id, decisions, thread_event, *, turn_id: str = "") -> None:
@@ -414,6 +517,7 @@ def _context_debug_payload(context: AgentContext) -> dict:
 def build_default_runtime() -> AgentRuntime:
     answer_generator = _build_default_answer_generator()
     skill_registry = _build_default_skill_registry(answer_generator=answer_generator)
+    multi_agent_coordinator = _build_default_multi_agent_coordinator(skill_registry)
     return AgentRuntime(
         skill_registry=skill_registry,
         answer_generator=answer_generator,
@@ -423,6 +527,8 @@ def build_default_runtime() -> AgentRuntime:
         transcript_store=JsonlTranscriptStore.default(),
         approval_store=JsonlApprovalStore.default(),
         memory_read_planner=_build_default_memory_read_planner(),
+        multi_agent_coordinator=multi_agent_coordinator,
+        memory_write_agent=_build_default_memory_write_agent(),
     )
 
 
@@ -433,6 +539,67 @@ def _memory_write_gate_enabled() -> bool:
         return bool(getattr(settings, "nikon0_memory_write_gate_enabled", True))
     except Exception:  # noqa: BLE001
         return True
+
+
+def _multi_agent_enabled() -> bool:
+    try:
+        from app.core.config import settings
+        return bool(getattr(settings, "nikon0_multi_agent_enabled", False))
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def _memory_write_agent_enabled() -> bool:
+    try:
+        from app.core.config import settings
+        return bool(getattr(settings, "nikon0_memory_write_agent_enabled", False))
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def _build_default_memory_write_agent() -> MemoryWriteAgent | None:
+    if not _memory_write_agent_enabled():
+        return None
+    try:
+        from app.core.config import settings
+        model = getattr(settings, "simple_llm_model", "") or getattr(settings, "gen_model", "")
+        if not model:
+            return None
+        return MemoryWriteAgent(BailianOllamaChatClient(model=model, temperature=0.0, max_tokens=512, timeout=20))
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _build_default_multi_agent_coordinator(skill_registry: SkillRegistry) -> MultiAgentCoordinator | None:
+    if not _multi_agent_enabled():
+        return None
+    try:
+        from app.core.config import settings
+
+        model = (
+            getattr(settings, "simple_llm_model", "")
+            or getattr(settings, "gen_model", "")
+            or getattr(settings, "router_llm_model", "")
+        )
+        support = skill_registry.get("product_support")
+        service = skill_registry.get("case_intake")
+        if not model or not isinstance(support, ProductSupportSkill) or not isinstance(service, CaseIntakeSkill):
+            return None
+        planner = AgentDelegationPlanner(
+            BailianOllamaChatClient(
+                model=model,
+                temperature=0.0,
+                max_tokens=384,
+                timeout=20,
+            )
+        )
+        return MultiAgentCoordinator(
+            planner=planner,
+            support_agent=SupportAgent(support),
+            service_agent=ServiceAgent(service),
+        )
+    except Exception:  # noqa: BLE001
+        return None
 
 
 def _memory_store_profile(store) -> dict:

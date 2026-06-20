@@ -1,0 +1,1338 @@
+{
+  "trace": {
+    "trace_id": "70fbe64d52d945e5b2f1a249b5ce7110",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-022",
+    "user_message": "咖啡机怎么除垢？",
+    "selected_agents": [
+      "support"
+    ],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 8,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-022",
+        "section_count": 4,
+        "section_names": [
+          "system_policy",
+          "memory",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 232,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "memory": 61,
+            "current_user": 8,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "memory": 30,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "memory",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      },
+      {
+        "message_chars": 8,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-022",
+        "section_count": 5,
+        "section_names": [
+          "system_policy",
+          "memory",
+          "evidence",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 2645,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "memory": 61,
+            "evidence": 2400,
+            "current_user": 8,
+            "runtime": 117
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "memory": 30,
+            "evidence": 35,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "evidence",
+            "memory",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [
+            "evidence"
+          ],
+          "dropped_sections": [],
+          "truncated_sections": [
+            "evidence"
+          ]
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [
+      {
+        "query": "咖啡机怎么除垢？",
+        "intent": "product_support",
+        "evidence_count": 3,
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "Coffee_Machine",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": true
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "Coffee_Machine"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 3,
+            "retrieval_trace": {
+              "query": "咖啡机怎么除垢？",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 3,
+              "score_threshold": 0.1,
+              "top1_score": 0.193839,
+              "retrieved_chunk_ids": [
+                "Coffee_Machine_0020",
+                "Coffee_Machine_0027",
+                "Coffee_Machine_0029"
+              ],
+              "filtered_chunk_ids": [
+                "Coffee_Machine_0020",
+                "Coffee_Machine_0027",
+                "Coffee_Machine_0029"
+              ],
+              "retrieved_manual_names": [
+                "Coffee_Machine",
+                "Coffee_Machine",
+                "Coffee_Machine"
+              ],
+              "filtered_manual_names": [
+                "Coffee_Machine",
+                "Coffee_Machine",
+                "Coffee_Machine"
+              ],
+              "source_queries": [
+                "咖啡机怎么除垢？"
+              ],
+              "manual_name_decisions": [
+                "Coffee_Machine"
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Manual07_10",
+                "Manual07_11",
+                "Manual07_12",
+                "Manual07_13",
+                "Manual07_14",
+                "Manual07_19",
+                "Manual07_16",
+                "Manual07_17",
+                "Manual07_18",
+                "Manual07_38",
+                "Manual07_39",
+                "Manual07_40",
+                "Manual07_41",
+                "Manual07_42",
+                "Manual07_43",
+                "Manual07_44",
+                "Manual07_47",
+                "Manual07_48",
+                "Manual07_49"
+              ]
+            }
+          }
+        ],
+        "product_resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "nespresso",
+          "display_name": "Nespresso 咖啡机",
+          "manual_names": [
+            "Coffee_Machine"
+          ],
+          "matched_terms": [
+            "咖啡机"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "service_id": "product-support",
+        "tool_name": "resolve_product",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "search_product_manual",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "validate_answer_grounding",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      }
+    ],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [
+      {
+        "key": "product_support",
+        "value": {
+          "disambiguation_pending": false,
+          "disambiguation_candidates": [],
+          "last_query": "咖啡机怎么除垢？",
+          "evidence_count": 3,
+          "manual_names": [
+            "Coffee_Machine"
+          ],
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "nespresso",
+            "display_name": "Nespresso 咖啡机",
+            "manual_names": [
+              "Coffee_Machine"
+            ],
+            "matched_terms": [
+              "咖啡机"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          },
+          "selected_product_id": "nespresso",
+          "selected_display_name": "Nespresso 咖啡机",
+          "allowed_manual_names": [
+            "Coffee_Machine"
+          ]
+        },
+        "reason": "product support answered with knowledge evidence",
+        "evidence_ids": [
+          "enterprise_rag:Coffee_Machine_0020",
+          "enterprise_rag:Coffee_Machine_0027",
+          "enterprise_rag:Coffee_Machine_0029"
+        ],
+        "provenance": "skill",
+        "confidence": 0.82
+      }
+    ],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781970932.660392
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "llm",
+          "confidence": 1.0,
+          "reason": "No existing threads or active session; user asks about coffee machine descaling, creating new thread.",
+          "fallback_reason": ""
+        },
+        "created_at": 1781970940.252727
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 1.0,
+          "source": "llm",
+          "reason": "No existing threads or active session; user asks about coffee machine descaling, creating new thread."
+        },
+        "created_at": 1781970940.252741
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "memory",
+            "conversation",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "需要遵守回答边界和禁止事项",
+            "memory": "可能需要回顾用户历史或产品信息",
+            "conversation": "需要最近对话上下文",
+            "evidence": "商品除垢知识需要检索证据",
+            "current_user": "用户当前消息是核心输入",
+            "runtime": "运行时信息用于处理图片或工具"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970946.63884
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 8,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-022",
+          "section_count": 4,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 232,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 61,
+              "current_user": 8,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970946.6390662
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "用户询问咖啡机除垢方法，属于产品维护/诊断问题，应由support处理。",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"用户询问咖啡机除垢方法，属于产品维护/诊断问题，应由support处理。\"\n}"
+        },
+        "created_at": 1781970951.340083
+      },
+      {
+        "stage": "agent.execution_start",
+        "message": "support agent started",
+        "payload": {
+          "agent": "support"
+        },
+        "created_at": 1781970951.340101
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.resolve_product",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970951.34012
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970951.340137
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.resolve_product returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970951.340215
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970951.340224
+      },
+      {
+        "stage": "product.resolve",
+        "message": "product resolution status=resolved",
+        "payload": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "nespresso",
+          "display_name": "Nespresso 咖啡机",
+          "manual_names": [
+            "Coffee_Machine"
+          ],
+          "matched_terms": [
+            "咖啡机"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        },
+        "created_at": 1781970951.34025
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.search_product_manual",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970951.340259
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970951.340265
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.search_product_manual returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970961.043315
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970961.043327
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "memory",
+            "conversation",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "定义回答边界",
+            "memory": "检查当前会话是否已有指定商品或上下文",
+            "conversation": "维护对话连续性",
+            "evidence": "需要检索咖啡机除垢的相关知识或手册",
+            "current_user": "获取用户当前消息内容",
+            "runtime": "获取运行时信息如渠道和附件"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970967.4291918
+      },
+      {
+        "stage": "context.tool_observations",
+        "message": "built prompt tool observations",
+        "payload": {
+          "item_count": 2,
+          "raw_result_refs": [
+            "trace://70fbe64d52d945e5b2f1a249b5ce7110/tool_results/0",
+            "trace://70fbe64d52d945e5b2f1a249b5ce7110/tool_results/1"
+          ]
+        },
+        "created_at": 1781970967.4293592
+      },
+      {
+        "stage": "context.evidence_pack",
+        "message": "built prompt evidence pack",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:Coffee_Machine_0020",
+            "enterprise_rag:Coffee_Machine_0027",
+            "enterprise_rag:Coffee_Machine_0029"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:Coffee_Machine_0020",
+            "enterprise_rag:Coffee_Machine_0027",
+            "enterprise_rag:Coffee_Machine_0029"
+          ],
+          "deduplicated_evidence_ids": [],
+          "item_count": 3,
+          "source": "llm_span_selector"
+        },
+        "created_at": 1781970967.429857
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 8,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-022",
+          "section_count": 5,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 2645,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 61,
+              "evidence": 2400,
+              "current_user": 8,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "evidence",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [
+              "evidence"
+            ],
+            "dropped_sections": [],
+            "truncated_sections": [
+              "evidence"
+            ]
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970967.430124
+      },
+      {
+        "stage": "llm.answer",
+        "message": "generated product support answer",
+        "payload": {
+          "node": "product_support",
+          "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+          "evidence_count": 3
+        },
+        "created_at": 1781970976.116075
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.validate_answer_grounding",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970976.116268
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970976.1163058
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.validate_answer_grounding returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970976.117192
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970976.117208
+      },
+      {
+        "stage": "evidence.usage",
+        "message": "recorded product-support evidence usage",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:Coffee_Machine_0020",
+            "enterprise_rag:Coffee_Machine_0027",
+            "enterprise_rag:Coffee_Machine_0029"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:Coffee_Machine_0020",
+            "enterprise_rag:Coffee_Machine_0027",
+            "enterprise_rag:Coffee_Machine_0029"
+          ],
+          "used_evidence_ids": [
+            "enterprise_rag:Coffee_Machine_0020",
+            "enterprise_rag:Coffee_Machine_0027",
+            "enterprise_rag:Coffee_Machine_0029"
+          ],
+          "grounding_checked": true,
+          "grounding": {
+            "grounded": true,
+            "missing_terms": [],
+            "evidence_count": 3,
+            "token_overlap": 8,
+            "reason": "answer is covered by evidence"
+          },
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "nespresso",
+            "display_name": "Nespresso 咖啡机",
+            "manual_names": [
+              "Coffee_Machine"
+            ],
+            "matched_terms": [
+              "咖啡机"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          }
+        },
+        "created_at": 1781970976.117245
+      },
+      {
+        "stage": "agent.execution_stop",
+        "message": "support agent completed",
+        "payload": {
+          "agent": "support",
+          "status": "success"
+        },
+        "created_at": 1781970976.117321
+      },
+      {
+        "stage": "agent.handoff_created",
+        "message": "support handoff created",
+        "payload": {
+          "agent": "support",
+          "handoff": {
+            "stage": "diagnosis",
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "nespresso",
+              "display_name": "Nespresso 咖啡机",
+              "manual_names": [
+                "Coffee_Machine"
+              ],
+              "matched_terms": [
+                "咖啡机"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "diagnosis_status": "grounded",
+            "symptoms": [
+              "咖啡机怎么除垢？"
+            ],
+            "attempted_steps": [],
+            "recommended_next_steps": [
+              "根据手册提供的除垢流程，以下是您的 Nespresso 咖啡机除垢步骤。开始前请先确认您已准备好专用除垢液和饮用纯净水。\n\n### ✅ 除垢操作步骤\n\n1. **准备除垢混合液**  \n   - 在水箱中加入 **0.5 L（约17 oz）的饮用水**，再倒入 **1份专用除垢液**。  \n   - ⚠️ 请勿使用其他清洁剂或强腐蚀性液体。\n\n2. **放置接水容器**  \n   - 在咖啡出口下方放置一个容量 **不小于1 L（34 oz）** 的容器，用于收集除垢废液。\n\n3. **进入除垢模式**  \n   - 在机器开机状态下，**同时按住 Espresso 和 Lungo 按钮3秒钟**。  \n   - 两个按钮的 LED 灯会开始**闪烁**，表示已进入除垢模式。\n\n4. **排放第一次除垢液**  \n   - 按下 **Lungo 按钮**，等待水箱中的除垢混合液完全排空（容器会接满废液）。\n\n5. **循环除垢**  \n   - 将容器中收集的废液**倒回水箱**，然后重复步骤4（即重新将容器放回出口下，再按 Lungo 按钮排空）。\n\n6. **冲洗水箱**  \n   - 倒空并冲洗水箱，然后加入干净的饮用水。\n\n7. **清水冲洗管路**  \n   - 再次将容器放在出口下，按下 **Lungo 按钮**，让清水流过机器，将残留除垢液冲净。\n\n8. **退出除垢模式**  \n   - 同时按住 **Espresso 和 Lungo 按钮3秒钟**，LED 灯熄灭即恢复正常模式。\n\n---\n\n### 🛡️ 安全提醒\n- **清洁前务必拔掉电源插头**，避免触电风险。  \n- **切勿将机器或任何部件浸入水中**。  \n- 只使用专用除垢液，不要使用强清洁剂、溶剂或尖锐工具。  \n- 日常可用柔软湿布擦拭咖啡出口，维护单元可拆开单独清洗。\n\n如果您在操作中遇到问题（如指示灯异常、不出水、咖啡流出极慢等），请查看机器包装盒内附的「Welcome to」文件夹中的联系方式，致电 Nespresso Club 寻求帮助。"
+            ],
+            "safety_risks": [],
+            "evidence_ids": [
+              "enterprise_rag:Coffee_Machine_0020",
+              "enterprise_rag:Coffee_Machine_0027",
+              "enterprise_rag:Coffee_Machine_0029"
+            ],
+            "summary": "根据手册提供的除垢流程，以下是您的 Nespresso 咖啡机除垢步骤。开始前请先确认您已准备好专用除垢液和饮用纯净水。\n\n### ✅ 除垢操作步骤\n\n1. **准备除垢混合液**  \n   - 在水箱中加入 **0.5 L（约17 oz）的饮用水**，再倒入 **1份专用除垢液**。  \n   - ⚠️ 请勿使用其他清洁剂或强腐蚀性液体。\n\n2. **放置接水容器**  \n   - 在咖啡出口下方放置一个容量 **不小于1 L（34 oz）** 的容器，用于收集除垢废液。\n\n3. **进入除垢模式**  \n   - 在机器开机状态下，**同时按住 Espresso 和 Lungo 按钮3秒钟**。  \n   - 两个按钮的 LED 灯会开始**闪烁**，表示已进入除垢模式。\n\n4. **排放第一次除垢液**  \n   - 按下 **Lungo 按钮**，等待水箱中的除垢混合液完全排空（容"
+          }
+        },
+        "created_at": 1781970976.117343
+      },
+      {
+        "stage": "agent.replan",
+        "message": "replanned after support result",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "The user's question about coffee machine descaling has been fully addressed with a resolved diagnosis and clear step-by-step instructions. No service need, clarification, or handoff is required. The support stage is complete.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"The user's question about coffee machine descaling has been fully addressed with a resolved diagnosis and clear step-by-step instructions. No service need, clarification, or handoff is required. The support stage is complete.\"\n}"
+        },
+        "created_at": 1781970983.857342
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781970983.857507
+      },
+      {
+        "stage": "memory_write_agent.request",
+        "message": "requested governed memory candidates",
+        "payload": {
+          "write_request": {
+            "source_agent": "support",
+            "execution_stage": "diagnosis",
+            "message": "咖啡机怎么除垢？",
+            "handoff": {
+              "stage": "diagnosis",
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "nespresso",
+                "display_name": "Nespresso 咖啡机",
+                "manual_names": [
+                  "Coffee_Machine"
+                ],
+                "matched_terms": [
+                  "咖啡机"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "diagnosis_status": "grounded",
+              "symptoms": [
+                "咖啡机怎么除垢？"
+              ],
+              "attempted_steps": [],
+              "recommended_next_steps": [
+                "根据手册提供的除垢流程，以下是您的 Nespresso 咖啡机除垢步骤。开始前请先确认您已准备好专用除垢液和饮用纯净水。\n\n### ✅ 除垢操作步骤\n\n1. **准备除垢混合液**  \n   - 在水箱中加入 **0.5 L（约17 oz）的饮用水**，再倒入 **1份专用除垢液**。  \n   - ⚠️ 请勿使用其他清洁剂或强腐蚀性液体。\n\n2. **放置接水容器**  \n   - 在咖啡出口下方放置一个容量 **不小于1 L（34 oz）** 的容器，用于收集除垢废液。\n\n3. **进入除垢模式**  \n   - 在机器开机状态下，**同时按住 Espresso 和 Lungo 按钮3秒钟**。  \n   - 两个按钮的 LED 灯会开始**闪烁**，表示已进入除垢模式。\n\n4. **排放第一次除垢液**  \n   - 按下 **Lungo 按钮**，等待水箱中的除垢混合液完全排空（容器会接满废液）。\n\n5. **循环除垢**  \n   - 将容器中收集的废液**倒回水箱**，然后重复步骤4（即重新将容器放回出口下，再按 Lungo 按钮排空）。\n\n6. **冲洗水箱**  \n   - 倒空并冲洗水箱，然后加入干净的饮用水。\n\n7. **清水冲洗管路**  \n   - 再次将容器放在出口下，按下 **Lungo 按钮**，让清水流过机器，将残留除垢液冲净。\n\n8. **退出除垢模式**  \n   - 同时按住 **Espresso 和 Lungo 按钮3秒钟**，LED 灯熄灭即恢复正常模式。\n\n---\n\n### 🛡️ 安全提醒\n- **清洁前务必拔掉电源插头**，避免触电风险。  \n- **切勿将机器或任何部件浸入水中**。  \n- 只使用专用除垢液，不要使用强清洁剂、溶剂或尖锐工具。  \n- 日常可用柔软湿布擦拭咖啡出口，维护单元可拆开单独清洗。\n\n如果您在操作中遇到问题（如指示灯异常、不出水、咖啡流出极慢等），请查看机器包装盒内附的「Welcome to」文件夹中的联系方式，致电 Nespresso Club 寻求帮助。"
+              ],
+              "safety_risks": [],
+              "evidence_ids": [
+                "enterprise_rag:Coffee_Machine_0020",
+                "enterprise_rag:Coffee_Machine_0027",
+                "enterprise_rag:Coffee_Machine_0029"
+              ],
+              "summary": "根据手册提供的除垢流程，以下是您的 Nespresso 咖啡机除垢步骤。开始前请先确认您已准备好专用除垢液和饮用纯净水。\n\n### ✅ 除垢操作步骤\n\n1. **准备除垢混合液**  \n   - 在水箱中加入 **0.5 L（约17 oz）的饮用水**，再倒入 **1份专用除垢液**。  \n   - ⚠️ 请勿使用其他清洁剂或强腐蚀性液体。\n\n2. **放置接水容器**  \n   - 在咖啡出口下方放置一个容量 **不小于1 L（34 oz）** 的容器，用于收集除垢废液。\n\n3. **进入除垢模式**  \n   - 在机器开机状态下，**同时按住 Espresso 和 Lungo 按钮3秒钟**。  \n   - 两个按钮的 LED 灯会开始**闪烁**，表示已进入除垢模式。\n\n4. **排放第一次除垢液**  \n   - 按下 **Lungo 按钮**，等待水箱中的除垢混合液完全排空（容"
+            },
+            "result_summary": "根据手册提供的除垢流程，以下是您的 Nespresso 咖啡机除垢步骤。开始前请先确认您已准备好专用除垢液和饮用纯净水。\n\n### ✅ 除垢操作步骤\n\n1. **准备除垢混合液**  \n   - 在水箱中加入 **0.5 L（约17 oz）的饮用水**，再倒入 **1份专用除垢液**。  \n   - ⚠️ 请勿使用其他清洁剂或强腐蚀性液体。\n\n2. **放置接水容器**  \n   - 在咖啡出口下方放置一个容量 **不小于1 L（34 oz）** 的容器，用于收集除垢废液。\n\n3. **进入除垢模式**  \n   - 在机器开机状态下，**同时按住 Espresso 和 Lungo 按钮3秒钟**。  \n   - 两个按钮的 LED 灯会开始**闪烁**，表示已进入除垢模式。\n\n4. **排放第一次除垢液**  \n   - 按下 **Lungo 按钮**，等待水箱中的除垢混合液完全排空（容器会接满废液）。\n\n5. **循环除垢**  \n   - 将容器中收集的废液**倒回水箱**，然后重复步骤4（即重新将容器放回出口下，再按 Lungo 按钮排空）。\n\n6. **冲洗水箱**  \n   - 倒空并冲洗水箱，然后加入干净的饮用水。\n\n7. **清水冲洗管路**  \n   - 再次将容器放在出口下，按下 **Lungo 按钮**，让清水流过机器，将残留除垢液冲净。\n\n8. **退出除垢模式**  \n   - 同时按住 **Espresso 和 Lungo 按钮3秒钟**，LED 灯熄灭即恢复正常模式。\n\n---\n\n### 🛡️ 安全提醒\n- **清洁前务必拔掉电源插头**，避免触电风险。  \n- **切勿将机器或任何部件浸入水中**。  \n- 只使用专用除垢液，不要使用强清洁剂、溶剂或尖锐工具。  \n- 日常可用柔软湿布擦拭咖啡出口，维护单元可拆开单独清洗。\n\n如果您在操作中遇",
+            "evidence_ids": [
+              "enterprise_rag:Coffee_Machine_0020",
+              "enterprise_rag:Coffee_Machine_0027",
+              "enterprise_rag:Coffee_Machine_0029"
+            ],
+            "target_thread_id": null
+          }
+        },
+        "created_at": 1781970983.857793
+      },
+      {
+        "stage": "memory_write_agent.validation_failed",
+        "message": "ValueError: candidate update_key is not allowed",
+        "payload": {
+          "source_agent": "support",
+          "execution_stage": "diagnosis"
+        },
+        "created_at": 1781971001.4671638
+      },
+      {
+        "stage": "memory.write_validate",
+        "message": "candidate passed memory governance checks",
+        "payload": {
+          "candidate_id": "memcand_feb42984cc0b47d781f94c08a394e5db",
+          "outcome": "accept",
+          "target_thread_id": null,
+          "reason": "candidate passed memory governance checks",
+          "conflicts": [],
+          "update": {
+            "key": "product_support",
+            "value": {
+              "disambiguation_pending": false,
+              "disambiguation_candidates": [],
+              "last_query": "咖啡机怎么除垢？",
+              "evidence_count": 3,
+              "manual_names": [
+                "Coffee_Machine"
+              ],
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "nespresso",
+                "display_name": "Nespresso 咖啡机",
+                "manual_names": [
+                  "Coffee_Machine"
+                ],
+                "matched_terms": [
+                  "咖啡机"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "selected_product_id": "nespresso",
+              "selected_display_name": "Nespresso 咖啡机",
+              "allowed_manual_names": [
+                "Coffee_Machine"
+              ]
+            },
+            "reason": "product support answered with knowledge evidence",
+            "evidence_ids": [
+              "enterprise_rag:Coffee_Machine_0020",
+              "enterprise_rag:Coffee_Machine_0027",
+              "enterprise_rag:Coffee_Machine_0029"
+            ],
+            "provenance": "skill",
+            "confidence": 0.82
+          },
+          "degraded": false
+        },
+        "created_at": 1781971001.467316
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 1,
+          "accepted_count": 1,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781971001.490124
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "success"
+        },
+        "created_at": 1781971001.490131
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 2730,
+    "section_count": 5,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "memory",
+        "source": "memory",
+        "priority": 30,
+        "chars": 61,
+        "token_estimate": 15,
+        "char_budget": 1400,
+        "truncated": false,
+        "metadata": {},
+        "content": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-022",
+        "preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-022"
+      },
+      {
+        "name": "evidence",
+        "source": "knowledge_runtime",
+        "priority": 35,
+        "chars": 2400,
+        "token_estimate": 600,
+        "char_budget": 2400,
+        "truncated": true,
+        "metadata": {},
+        "content": "\n[truncated: kept most recent/relevant tail]\nonfidence\": 0.145152, \"evidence_id\": \"enterprise_rag:Coffee_Machine_0027\", \"raw_excerpt\": \"0.5 L / 17 oz of drinkable water and add 1 descaling liquid.<IMG:Manual07_38> 4.Place a container (minimum volume 1 L / 34 oz) under the cofee outlet. <IMG:Manual07_39> 5.To enter the descaling mode, while the machine is turned on, press both the Espresso and Lungo button for 3 seconds.<IMG:Manual07_40> Both LEDs blink.<IMG:Manual07_41> 6.Press the Lungo button and wait until the water tank is empty.<IMG:Manual07_42> 7.Refll the water tank with the used descaling solution collected in the container and repeat step 4 and 6.<IMG:Manual07_43> 8.empty and rinse the water tank. fill with drinkable water. <IMG:Manual07_44> 9.When ready, repeat step 4 and 6 to now rinse the machine. 10.To exit the descaling mode, press both the Epresso and Lungo button for 3\", \"source\": {\"chunk_id\": \"Coffee_Machine_0027\", \"manual_name\": \"Coffee_Machine\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"Coffee_Machine\"}, \"confidence\": 0.14427, \"evidence_id\": \"enterprise_rag:Coffee_Machine_0029\", \"raw_excerpt\": \"trical shock and fire. Never immerse the appliance or part of it in water. Make sure to unplug the machine before cleaning. Do not use any strong cleaning agent or solvent cleaner. Do not use sharp objects, brushes or sharp abrasives. Do not place in a dishwasher. Clean the cofee outlet regularly with a soft damp cloth. <IMG:Manual07_47> Maintenance unit can be removed in separate pieces for easy cleaning.<IMG:Manual07_48> # TROUBLeSHOOTINg<IMG:Manual07_49> # CONTACT THe CLUBShould you need any additional information, in case of problems or simply to seek advice, call the Club. Contact details for your nearest Club can be found in the «Welcome to » folder in your machine box # DISPOSAL AND eNVIRONMeNTAL PROTeCTION Packaging materials and appliance contain recyclable\", \"source\": {\"chunk_id\": \"Coffee_Machine_0029\", \"manual_name\": \"Coffee_Machine\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"咖啡机怎么除垢？\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:Coffee_Machine_0020\", \"enterprise_rag:Coffee_Machine_0027\", \"enterprise_rag:Coffee_Machine_0029\"], \"retrieved_evidence_ids\": [\"enterprise_rag:Coffee_Machine_0020\", \"enterprise_rag:Coffee_Machine_0027\", \"enterprise_rag:Coffee_Machine_0029\"]}}",
+        "preview": "\n[truncated: kept most recent/relevant tail]\nonfidence\": 0.145152, \"evidence_id\": \"enterprise_rag:Coffee_Machine_0027\", \"raw_excerpt\": \"0.5 L / 17 oz of drinkable water and add 1 descaling liquid.<IMG:Manual07_38> 4.Place a container (minim"
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 8,
+        "token_estimate": 2,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "咖啡机怎么除垢？",
+        "preview": "咖啡机怎么除垢？"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 117,
+        "token_estimate": 29,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "memory",
+      "evidence",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 2645,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "memory": 61,
+        "evidence": 2400,
+        "current_user": 8,
+        "runtime": 117
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "memory": 30,
+        "evidence": 35,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "evidence",
+        "memory",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [
+        "evidence"
+      ],
+      "dropped_sections": [],
+      "truncated_sections": [
+        "evidence"
+      ]
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[memory]\n[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-022\n\n[evidence]\n\n[truncated: kept most recent/relevant tail]\nonfidence\": 0.145152, \"evidence_id\": \"enterprise_rag:Coffee_Machine_0027\", \"raw_excerpt\": \"0.5 L / 17 oz of drinkable water and add 1 descaling liquid.<IMG:Manual07_38> 4.Place a container (minimum volume 1 L / 34 oz) under the cofee outlet. <IMG:Manual07_39> 5.To enter the descaling mode, while the machine is turned on, press both the Espresso and Lungo button for 3 seconds.<IMG:Manual07_40> Both LEDs blink.<IMG:Manual07_41> 6.Press the Lungo button and wait until the water tank is empty.<IMG:Manual07_42> 7.Refll the water tank with the used descaling solution collected in the container and repeat step 4 and 6.<IMG:Manual07_43> 8.empty and rinse the water tank. fill with drinkable water. <IMG:Manual07_44> 9.When ready, repeat step 4 and 6 to now rinse the machine. 10."
+  },
+  "trace_persisted": "70fbe64d52d945e5b2f1a249b5ce7110",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [
+      "support"
+    ],
+    "support_handoff": {
+      "stage": "diagnosis",
+      "product_resolution": {
+        "status": "resolved",
+        "source": "strong_signal",
+        "product_id": "nespresso",
+        "display_name": "Nespresso 咖啡机",
+        "manual_names": [
+          "Coffee_Machine"
+        ],
+        "matched_terms": [
+          "咖啡机"
+        ],
+        "disclose_default_product": false,
+        "candidate_product_ids": [],
+        "reason": "user named product identity"
+      },
+      "diagnosis_status": "grounded",
+      "symptoms": [
+        "咖啡机怎么除垢？"
+      ],
+      "attempted_steps": [],
+      "recommended_next_steps": [
+        "根据手册提供的除垢流程，以下是您的 Nespresso 咖啡机除垢步骤。开始前请先确认您已准备好专用除垢液和饮用纯净水。\n\n### ✅ 除垢操作步骤\n\n1. **准备除垢混合液**  \n   - 在水箱中加入 **0.5 L（约17 oz）的饮用水**，再倒入 **1份专用除垢液**。  \n   - ⚠️ 请勿使用其他清洁剂或强腐蚀性液体。\n\n2. **放置接水容器**  \n   - 在咖啡出口下方放置一个容量 **不小于1 L（34 oz）** 的容器，用于收集除垢废液。\n\n3. **进入除垢模式**  \n   - 在机器开机状态下，**同时按住 Espresso 和 Lungo 按钮3秒钟**。  \n   - 两个按钮的 LED 灯会开始**闪烁**，表示已进入除垢模式。\n\n4. **排放第一次除垢液**  \n   - 按下 **Lungo 按钮**，等待水箱中的除垢混合液完全排空（容器会接满废液）。\n\n5. **循环除垢**  \n   - 将容器中收集的废液**倒回水箱**，然后重复步骤4（即重新将容器放回出口下，再按 Lungo 按钮排空）。\n\n6. **冲洗水箱**  \n   - 倒空并冲洗水箱，然后加入干净的饮用水。\n\n7. **清水冲洗管路**  \n   - 再次将容器放在出口下，按下 **Lungo 按钮**，让清水流过机器，将残留除垢液冲净。\n\n8. **退出除垢模式**  \n   - 同时按住 **Espresso 和 Lungo 按钮3秒钟**，LED 灯熄灭即恢复正常模式。\n\n---\n\n### 🛡️ 安全提醒\n- **清洁前务必拔掉电源插头**，避免触电风险。  \n- **切勿将机器或任何部件浸入水中**。  \n- 只使用专用除垢液，不要使用强清洁剂、溶剂或尖锐工具。  \n- 日常可用柔软湿布擦拭咖啡出口，维护单元可拆开单独清洗。\n\n如果您在操作中遇到问题（如指示灯异常、不出水、咖啡流出极慢等），请查看机器包装盒内附的「Welcome to」文件夹中的联系方式，致电 Nespresso Club 寻求帮助。"
+      ],
+      "safety_risks": [],
+      "evidence_ids": [
+        "enterprise_rag:Coffee_Machine_0020",
+        "enterprise_rag:Coffee_Machine_0027",
+        "enterprise_rag:Coffee_Machine_0029"
+      ],
+      "summary": "根据手册提供的除垢流程，以下是您的 Nespresso 咖啡机除垢步骤。开始前请先确认您已准备好专用除垢液和饮用纯净水。\n\n### ✅ 除垢操作步骤\n\n1. **准备除垢混合液**  \n   - 在水箱中加入 **0.5 L（约17 oz）的饮用水**，再倒入 **1份专用除垢液**。  \n   - ⚠️ 请勿使用其他清洁剂或强腐蚀性液体。\n\n2. **放置接水容器**  \n   - 在咖啡出口下方放置一个容量 **不小于1 L（34 oz）** 的容器，用于收集除垢废液。\n\n3. **进入除垢模式**  \n   - 在机器开机状态下，**同时按住 Espresso 和 Lungo 按钮3秒钟**。  \n   - 两个按钮的 LED 灯会开始**闪烁**，表示已进入除垢模式。\n\n4. **排放第一次除垢液**  \n   - 按下 **Lungo 按钮**，等待水箱中的除垢混合液完全排空（容"
+    },
+    "plans": [
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "用户询问咖啡机除垢方法，属于产品维护/诊断问题，应由support处理。",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"用户询问咖啡机除垢方法，属于产品维护/诊断问题，应由support处理。\"\n}"
+      },
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "The user's question about coffee machine descaling has been fully addressed with a resolved diagnosis and clear step-by-step instructions. No service need, clarification, or handoff is required. The support stage is complete.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"The user's question about coffee machine descaling has been fully addressed with a resolved diagnosis and clear step-by-step instructions. No service need, clarification, or handoff is required. The support stage is complete.\"\n}"
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "llm",
+      "confidence": 1.0,
+      "reason": "No existing threads or active session; user asks about coffee machine descaling, creating new thread.",
+      "fallback_reason": ""
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 1.0,
+      "source": "llm",
+      "reason": "No existing threads or active session; user asks about coffee machine descaling, creating new thread."
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [
+      {
+        "candidate_id": "memcand_feb42984cc0b47d781f94c08a394e5db",
+        "outcome": "accept",
+        "target_thread_id": null,
+        "reason": "candidate passed memory governance checks",
+        "conflicts": [],
+        "update": {
+          "key": "product_support",
+          "value": {
+            "disambiguation_pending": false,
+            "disambiguation_candidates": [],
+            "last_query": "咖啡机怎么除垢？",
+            "evidence_count": 3,
+            "manual_names": [
+              "Coffee_Machine"
+            ],
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "nespresso",
+              "display_name": "Nespresso 咖啡机",
+              "manual_names": [
+                "Coffee_Machine"
+              ],
+              "matched_terms": [
+                "咖啡机"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "selected_product_id": "nespresso",
+            "selected_display_name": "Nespresso 咖啡机",
+            "allowed_manual_names": [
+              "Coffee_Machine"
+            ]
+          },
+          "reason": "product support answered with knowledge evidence",
+          "evidence_ids": [
+            "enterprise_rag:Coffee_Machine_0020",
+            "enterprise_rag:Coffee_Machine_0027",
+            "enterprise_rag:Coffee_Machine_0029"
+          ],
+          "provenance": "skill",
+          "confidence": 0.82
+        },
+        "degraded": false
+      }
+    ],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": true,
+    "valid": false,
+    "failure_reason": "ValueError: candidate update_key is not allowed",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

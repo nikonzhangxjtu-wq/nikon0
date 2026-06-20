@@ -26,6 +26,8 @@ class StateUpdateCandidate(BaseModel):
     confidence: float = Field(default=0.8, ge=0.0, le=1.0)
     risk_level: RiskLevel = "low"
     idempotency_key: str = ""
+    source_agent: str = ""
+    execution_stage: str = ""
     created_at: float = Field(default_factory=time.time)
 
 

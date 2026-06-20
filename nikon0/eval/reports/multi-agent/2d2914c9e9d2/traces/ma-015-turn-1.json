@@ -1,0 +1,1331 @@
+{
+  "trace": {
+    "trace_id": "01cd3e1b48804599b682cd493dc8ef82",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-015",
+    "user_message": "冰箱有异味怎么处理？",
+    "selected_agents": [
+      "support"
+    ],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 10,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-015",
+        "section_count": 4,
+        "section_names": [
+          "system_policy",
+          "memory",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 234,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "memory": 61,
+            "current_user": 10,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "memory": 30,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "memory",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      },
+      {
+        "message_chars": 10,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-015",
+        "section_count": 5,
+        "section_names": [
+          "system_policy",
+          "memory",
+          "evidence",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 2647,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "memory": 61,
+            "evidence": 2400,
+            "current_user": 10,
+            "runtime": 117
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "memory": 30,
+            "evidence": 35,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "evidence",
+            "memory",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [
+            "evidence"
+          ],
+          "dropped_sections": [],
+          "truncated_sections": [
+            "evidence"
+          ]
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [
+      {
+        "query": "冰箱有异味怎么处理？",
+        "intent": "product_support",
+        "evidence_count": 3,
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "冰箱手册",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": true
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "冰箱手册"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 3,
+            "retrieval_trace": {
+              "query": "冰箱有异味怎么处理？",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 3,
+              "score_threshold": 0.1,
+              "top1_score": 0.137633,
+              "retrieved_chunk_ids": [
+                "冰箱手册_0015",
+                "冰箱手册_0016",
+                "冰箱手册_0006"
+              ],
+              "filtered_chunk_ids": [
+                "冰箱手册_0015",
+                "冰箱手册_0016",
+                "冰箱手册_0006"
+              ],
+              "retrieved_manual_names": [
+                "冰箱手册",
+                "冰箱手册",
+                "冰箱手册"
+              ],
+              "filtered_manual_names": [
+                "冰箱手册",
+                "冰箱手册",
+                "冰箱手册"
+              ],
+              "source_queries": [
+                "冰箱有异味怎么处理？"
+              ],
+              "manual_name_decisions": [
+                "冰箱手册"
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Manual17_47",
+                "Manual17_48",
+                "Manual17_49",
+                "Manual17_50",
+                "Manual17_51",
+                "Manual17_52",
+                "Manual17_23",
+                "Manual17_24",
+                "Manual17_25",
+                "Manual17_26",
+                "Manual17_27",
+                "Manual17_28",
+                "Manual17_29",
+                "Manual17_30"
+              ]
+            }
+          }
+        ],
+        "product_resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "refrigerator",
+          "display_name": "冰箱",
+          "manual_names": [
+            "冰箱手册"
+          ],
+          "matched_terms": [
+            "冰箱"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "service_id": "product-support",
+        "tool_name": "resolve_product",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "search_product_manual",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "validate_answer_grounding",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      }
+    ],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [
+      {
+        "key": "product_support",
+        "value": {
+          "disambiguation_pending": false,
+          "disambiguation_candidates": [],
+          "last_query": "冰箱有异味怎么处理？",
+          "evidence_count": 3,
+          "manual_names": [
+            "冰箱手册"
+          ],
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "refrigerator",
+            "display_name": "冰箱",
+            "manual_names": [
+              "冰箱手册"
+            ],
+            "matched_terms": [
+              "冰箱"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          },
+          "selected_product_id": "refrigerator",
+          "selected_display_name": "冰箱",
+          "allowed_manual_names": [
+            "冰箱手册"
+          ]
+        },
+        "reason": "product support answered with knowledge evidence",
+        "evidence_ids": [
+          "enterprise_rag:冰箱手册_0015",
+          "enterprise_rag:冰箱手册_0016",
+          "enterprise_rag:冰箱手册_0006"
+        ],
+        "provenance": "skill",
+        "confidence": 0.82
+      }
+    ],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781970700.427616
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "llm",
+          "confidence": 1.0,
+          "reason": "用户询问冰箱异味处理方法，这是一个常见的新问题，没有相关现有线程，因此创建新线程并启用工作流以便提供步骤化建议。",
+          "fallback_reason": ""
+        },
+        "created_at": 1781970705.63235
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 1.0,
+          "source": "llm",
+          "reason": "用户询问冰箱异味处理方法，这是一个常见的新问题，没有相关现有线程，因此创建新线程并启用工作流以便提供步骤化建议。"
+        },
+        "created_at": 1781970705.632363
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "memory",
+            "conversation",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "明确回答边界，避免不当建议",
+            "memory": "记录当前会话，便于后续上下文关联",
+            "conversation": "保留对话历史，虽然当前为空但后续可能需要",
+            "evidence": "冰箱异味处理方法需要知识库或手册中的具体步骤",
+            "current_user": "必须包含用户最新消息",
+            "runtime": "提供运行时信息，如图片数量等"
+          },
+          "source": "llm",
+          "confidence": 0.9
+        },
+        "created_at": 1781970712.6029289
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 10,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-015",
+          "section_count": 4,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 234,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 61,
+              "current_user": 10,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970712.603125
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "User asks for a solution to refrigerator odor, which is a product usage and diagnosis question, fitting the support action category.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"User asks for a solution to refrigerator odor, which is a product usage and diagnosis question, fitting the support action category.\"\n}"
+        },
+        "created_at": 1781970716.2471192
+      },
+      {
+        "stage": "agent.execution_start",
+        "message": "support agent started",
+        "payload": {
+          "agent": "support"
+        },
+        "created_at": 1781970716.247146
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.resolve_product",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970716.247176
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970716.247204
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.resolve_product returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970716.247332
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970716.247345
+      },
+      {
+        "stage": "product.resolve",
+        "message": "product resolution status=resolved",
+        "payload": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "refrigerator",
+          "display_name": "冰箱",
+          "manual_names": [
+            "冰箱手册"
+          ],
+          "matched_terms": [
+            "冰箱"
+          ],
+          "disclose_default_product": false,
+          "candidate_product_ids": [],
+          "reason": "user named product identity"
+        },
+        "created_at": 1781970716.24739
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.search_product_manual",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970716.247405
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970716.247416
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.search_product_manual returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970726.543232
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970726.543238
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "current_user",
+            "runtime",
+            "system_policy",
+            "evidence",
+            "memory"
+          ],
+          "reasons": {
+            "current_user": "用户当前消息是问题输入的基础",
+            "runtime": "需要运行时信息以判断上下文",
+            "system_policy": "确保回答不违反平台边界",
+            "evidence": "冰箱异味处理需要商品手册或知识库证据",
+            "memory": "保留用于后续可能的上下文关联"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970731.036633
+      },
+      {
+        "stage": "context.tool_observations",
+        "message": "built prompt tool observations",
+        "payload": {
+          "item_count": 2,
+          "raw_result_refs": [
+            "trace://01cd3e1b48804599b682cd493dc8ef82/tool_results/0",
+            "trace://01cd3e1b48804599b682cd493dc8ef82/tool_results/1"
+          ]
+        },
+        "created_at": 1781970731.036812
+      },
+      {
+        "stage": "context.evidence_pack",
+        "message": "built prompt evidence pack",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:冰箱手册_0015",
+            "enterprise_rag:冰箱手册_0016",
+            "enterprise_rag:冰箱手册_0006"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:冰箱手册_0015",
+            "enterprise_rag:冰箱手册_0016",
+            "enterprise_rag:冰箱手册_0006"
+          ],
+          "deduplicated_evidence_ids": [],
+          "item_count": 3,
+          "source": "llm_span_selector"
+        },
+        "created_at": 1781970731.037295
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 10,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-015",
+          "section_count": 5,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 2647,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 61,
+              "evidence": 2400,
+              "current_user": 10,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "evidence",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [
+              "evidence"
+            ],
+            "dropped_sections": [],
+            "truncated_sections": [
+              "evidence"
+            ]
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970731.037577
+      },
+      {
+        "stage": "llm.answer",
+        "message": "generated product support answer",
+        "payload": {
+          "node": "product_support",
+          "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+          "evidence_count": 3
+        },
+        "created_at": 1781970747.856234
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.validate_answer_grounding",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970747.856349
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970747.856373
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.validate_answer_grounding returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970747.856631
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970747.856641
+      },
+      {
+        "stage": "evidence.usage",
+        "message": "recorded product-support evidence usage",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:冰箱手册_0015",
+            "enterprise_rag:冰箱手册_0016",
+            "enterprise_rag:冰箱手册_0006"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:冰箱手册_0015",
+            "enterprise_rag:冰箱手册_0016",
+            "enterprise_rag:冰箱手册_0006"
+          ],
+          "used_evidence_ids": [
+            "enterprise_rag:冰箱手册_0015",
+            "enterprise_rag:冰箱手册_0016",
+            "enterprise_rag:冰箱手册_0006"
+          ],
+          "grounding_checked": true,
+          "grounding": {
+            "grounded": true,
+            "missing_terms": [],
+            "evidence_count": 3,
+            "token_overlap": 6,
+            "reason": "answer is covered by evidence"
+          },
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "refrigerator",
+            "display_name": "冰箱",
+            "manual_names": [
+              "冰箱手册"
+            ],
+            "matched_terms": [
+              "冰箱"
+            ],
+            "disclose_default_product": false,
+            "candidate_product_ids": [],
+            "reason": "user named product identity"
+          }
+        },
+        "created_at": 1781970747.8566651
+      },
+      {
+        "stage": "agent.execution_stop",
+        "message": "support agent completed",
+        "payload": {
+          "agent": "support",
+          "status": "success"
+        },
+        "created_at": 1781970747.856717
+      },
+      {
+        "stage": "agent.handoff_created",
+        "message": "support handoff created",
+        "payload": {
+          "agent": "support",
+          "handoff": {
+            "stage": "diagnosis",
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "refrigerator",
+              "display_name": "冰箱",
+              "manual_names": [
+                "冰箱手册"
+              ],
+              "matched_terms": [
+                "冰箱"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "diagnosis_status": "grounded",
+            "symptoms": [
+              "冰箱有异味怎么处理？"
+            ],
+            "attempted_steps": [],
+            "recommended_next_steps": [
+              "您好！冰箱有异味可以按以下步骤排查处理。\n\n---\n\n### 1️⃣ 先判断是否为紧急情况\n如果闻到异味的同时还伴有**冒烟**或**刺鼻气味（类似燃气味）**，请**立即拔下电源插头**，并联系售后服务中心。继续使用可能导致损坏或火灾。  \n> 依据：手册说明“发现冰箱冰柜有异味或冒烟时，立即拔下电源插头并联系售后服务中心”。\n\n---\n\n### 2️⃣ 普通异味的日常处理\n如果只是常见食物混合气味，请先检查：\n- **是否有变质食物**，及时清理扔掉。\n- **异味较重的食物是否密封存放**，建议用保鲜盒或密封袋包装。\n\n这两点能解决大部分日常异味问题。\n\n---\n\n### 3️⃣ 清洁除臭装置（如异味仍存）\n如果清洁后味道还是比较大，可以处理冰箱内部的**除臭装置**，它能吸附异味并可重复使用。操作步骤如下：\n1. 用一字螺丝刀插入除臭装置盖板顶部，轻轻拉出盖板。\n2. 拉出内部的除臭装置。\n3. 用吹风机**吹干**或放在**日晒**下晾晒，即可去除吸附的异味。\n4. 晾干后按原路装回盖板和装置。\n> ⚠️ **注意**：操作时请勿将螺丝刀伸入冷气出风口，以免损坏部件或引发危险。\n\n---\n\n### 4️⃣ 如仍未解决\n如果以上方法都试过但异味持续，建议联系售后服务中心进行专业检查。\n\n---\n\n**重要安全提醒**：清洁冰箱时请勿向内部直接喷水，也不要用酒精、汽油、苯、稀释剂等清洁剂，以免腐蚀或渗入电气部件引发触电或火灾。用水擦拭后务必用干布擦干。"
+            ],
+            "safety_risks": [],
+            "evidence_ids": [
+              "enterprise_rag:冰箱手册_0015",
+              "enterprise_rag:冰箱手册_0016",
+              "enterprise_rag:冰箱手册_0006"
+            ],
+            "summary": "您好！冰箱有异味可以按以下步骤排查处理。\n\n---\n\n### 1️⃣ 先判断是否为紧急情况\n如果闻到异味的同时还伴有**冒烟**或**刺鼻气味（类似燃气味）**，请**立即拔下电源插头**，并联系售后服务中心。继续使用可能导致损坏或火灾。  \n> 依据：手册说明“发现冰箱冰柜有异味或冒烟时，立即拔下电源插头并联系售后服务中心”。\n\n---\n\n### 2️⃣ 普通异味的日常处理\n如果只是常见食物混合气味，请先检查：\n- **是否有变质食物**，及时清理扔掉。\n- **异味较重的食物是否密封存放**，建议用保鲜盒或密封袋包装。\n\n这两点能解决大部分日常异味问题。\n\n---\n\n### 3️⃣ 清洁除臭装置（如异味仍存）\n如果清洁后味道还是比较大，可以处理冰箱内部的**除臭装置**，它能吸附异味并可重复使用。操作步骤如下：\n1. 用一字螺丝刀插入除臭装置盖板顶部，轻轻拉出盖板。\n2. 拉出内部的除"
+          }
+        },
+        "created_at": 1781970747.856734
+      },
+      {
+        "stage": "agent.replan",
+        "message": "replanned after support result",
+        "payload": {
+          "action": "support",
+          "confidence": 0.9,
+          "reason": "用户询问冰箱异味处理，support阶段已生成详细诊断和步骤，无需转至service或clarify，应直接通过support agent将响应发送给用户。",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.9,\n  \"reason\": \"用户询问冰箱异味处理，support阶段已生成详细诊断和步骤，无需转至service或clarify，应直接通过support agent将响应发送给用户。\"\n}"
+        },
+        "created_at": 1781970764.056596
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781970764.056731
+      },
+      {
+        "stage": "memory_write_agent.request",
+        "message": "requested governed memory candidates",
+        "payload": {
+          "write_request": {
+            "source_agent": "support",
+            "execution_stage": "diagnosis",
+            "message": "冰箱有异味怎么处理？",
+            "handoff": {
+              "stage": "diagnosis",
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "refrigerator",
+                "display_name": "冰箱",
+                "manual_names": [
+                  "冰箱手册"
+                ],
+                "matched_terms": [
+                  "冰箱"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "diagnosis_status": "grounded",
+              "symptoms": [
+                "冰箱有异味怎么处理？"
+              ],
+              "attempted_steps": [],
+              "recommended_next_steps": [
+                "您好！冰箱有异味可以按以下步骤排查处理。\n\n---\n\n### 1️⃣ 先判断是否为紧急情况\n如果闻到异味的同时还伴有**冒烟**或**刺鼻气味（类似燃气味）**，请**立即拔下电源插头**，并联系售后服务中心。继续使用可能导致损坏或火灾。  \n> 依据：手册说明“发现冰箱冰柜有异味或冒烟时，立即拔下电源插头并联系售后服务中心”。\n\n---\n\n### 2️⃣ 普通异味的日常处理\n如果只是常见食物混合气味，请先检查：\n- **是否有变质食物**，及时清理扔掉。\n- **异味较重的食物是否密封存放**，建议用保鲜盒或密封袋包装。\n\n这两点能解决大部分日常异味问题。\n\n---\n\n### 3️⃣ 清洁除臭装置（如异味仍存）\n如果清洁后味道还是比较大，可以处理冰箱内部的**除臭装置**，它能吸附异味并可重复使用。操作步骤如下：\n1. 用一字螺丝刀插入除臭装置盖板顶部，轻轻拉出盖板。\n2. 拉出内部的除臭装置。\n3. 用吹风机**吹干**或放在**日晒**下晾晒，即可去除吸附的异味。\n4. 晾干后按原路装回盖板和装置。\n> ⚠️ **注意**：操作时请勿将螺丝刀伸入冷气出风口，以免损坏部件或引发危险。\n\n---\n\n### 4️⃣ 如仍未解决\n如果以上方法都试过但异味持续，建议联系售后服务中心进行专业检查。\n\n---\n\n**重要安全提醒**：清洁冰箱时请勿向内部直接喷水，也不要用酒精、汽油、苯、稀释剂等清洁剂，以免腐蚀或渗入电气部件引发触电或火灾。用水擦拭后务必用干布擦干。"
+              ],
+              "safety_risks": [],
+              "evidence_ids": [
+                "enterprise_rag:冰箱手册_0015",
+                "enterprise_rag:冰箱手册_0016",
+                "enterprise_rag:冰箱手册_0006"
+              ],
+              "summary": "您好！冰箱有异味可以按以下步骤排查处理。\n\n---\n\n### 1️⃣ 先判断是否为紧急情况\n如果闻到异味的同时还伴有**冒烟**或**刺鼻气味（类似燃气味）**，请**立即拔下电源插头**，并联系售后服务中心。继续使用可能导致损坏或火灾。  \n> 依据：手册说明“发现冰箱冰柜有异味或冒烟时，立即拔下电源插头并联系售后服务中心”。\n\n---\n\n### 2️⃣ 普通异味的日常处理\n如果只是常见食物混合气味，请先检查：\n- **是否有变质食物**，及时清理扔掉。\n- **异味较重的食物是否密封存放**，建议用保鲜盒或密封袋包装。\n\n这两点能解决大部分日常异味问题。\n\n---\n\n### 3️⃣ 清洁除臭装置（如异味仍存）\n如果清洁后味道还是比较大，可以处理冰箱内部的**除臭装置**，它能吸附异味并可重复使用。操作步骤如下：\n1. 用一字螺丝刀插入除臭装置盖板顶部，轻轻拉出盖板。\n2. 拉出内部的除"
+            },
+            "result_summary": "您好！冰箱有异味可以按以下步骤排查处理。\n\n---\n\n### 1️⃣ 先判断是否为紧急情况\n如果闻到异味的同时还伴有**冒烟**或**刺鼻气味（类似燃气味）**，请**立即拔下电源插头**，并联系售后服务中心。继续使用可能导致损坏或火灾。  \n> 依据：手册说明“发现冰箱冰柜有异味或冒烟时，立即拔下电源插头并联系售后服务中心”。\n\n---\n\n### 2️⃣ 普通异味的日常处理\n如果只是常见食物混合气味，请先检查：\n- **是否有变质食物**，及时清理扔掉。\n- **异味较重的食物是否密封存放**，建议用保鲜盒或密封袋包装。\n\n这两点能解决大部分日常异味问题。\n\n---\n\n### 3️⃣ 清洁除臭装置（如异味仍存）\n如果清洁后味道还是比较大，可以处理冰箱内部的**除臭装置**，它能吸附异味并可重复使用。操作步骤如下：\n1. 用一字螺丝刀插入除臭装置盖板顶部，轻轻拉出盖板。\n2. 拉出内部的除臭装置。\n3. 用吹风机**吹干**或放在**日晒**下晾晒，即可去除吸附的异味。\n4. 晾干后按原路装回盖板和装置。\n> ⚠️ **注意**：操作时请勿将螺丝刀伸入冷气出风口，以免损坏部件或引发危险。\n\n---\n\n### 4️⃣ 如仍未解决\n如果以上方法都试过但异味持续，建议联系售后服务中心进行专业检查。\n\n---\n\n**重要安全提醒**：清洁冰箱时请勿向内部直接喷水，也不要用酒精、汽油、苯、稀释剂等清洁剂，以免腐蚀或渗入电气部件引发触电或火灾。用水擦拭后务必用干布擦干。",
+            "evidence_ids": [
+              "enterprise_rag:冰箱手册_0015",
+              "enterprise_rag:冰箱手册_0016",
+              "enterprise_rag:冰箱手册_0006"
+            ],
+            "target_thread_id": null
+          }
+        },
+        "created_at": 1781970764.056968
+      },
+      {
+        "stage": "memory_write_agent.validation_failed",
+        "message": "ValueError: candidate update_key is not allowed",
+        "payload": {
+          "source_agent": "support",
+          "execution_stage": "diagnosis"
+        },
+        "created_at": 1781970775.987979
+      },
+      {
+        "stage": "memory.write_validate",
+        "message": "candidate passed memory governance checks",
+        "payload": {
+          "candidate_id": "memcand_26548fbca1704462aae8d52b50e0c45a",
+          "outcome": "accept",
+          "target_thread_id": null,
+          "reason": "candidate passed memory governance checks",
+          "conflicts": [],
+          "update": {
+            "key": "product_support",
+            "value": {
+              "disambiguation_pending": false,
+              "disambiguation_candidates": [],
+              "last_query": "冰箱有异味怎么处理？",
+              "evidence_count": 3,
+              "manual_names": [
+                "冰箱手册"
+              ],
+              "product_resolution": {
+                "status": "resolved",
+                "source": "strong_signal",
+                "product_id": "refrigerator",
+                "display_name": "冰箱",
+                "manual_names": [
+                  "冰箱手册"
+                ],
+                "matched_terms": [
+                  "冰箱"
+                ],
+                "disclose_default_product": false,
+                "candidate_product_ids": [],
+                "reason": "user named product identity"
+              },
+              "selected_product_id": "refrigerator",
+              "selected_display_name": "冰箱",
+              "allowed_manual_names": [
+                "冰箱手册"
+              ]
+            },
+            "reason": "product support answered with knowledge evidence",
+            "evidence_ids": [
+              "enterprise_rag:冰箱手册_0015",
+              "enterprise_rag:冰箱手册_0016",
+              "enterprise_rag:冰箱手册_0006"
+            ],
+            "provenance": "skill",
+            "confidence": 0.82
+          },
+          "degraded": false
+        },
+        "created_at": 1781970775.98812
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 1,
+          "accepted_count": 1,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781970776.0117152
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "success"
+        },
+        "created_at": 1781970776.011721
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 2732,
+    "section_count": 5,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "memory",
+        "source": "memory",
+        "priority": 30,
+        "chars": 61,
+        "token_estimate": 15,
+        "char_budget": 1400,
+        "truncated": false,
+        "metadata": {},
+        "content": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-015",
+        "preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-015"
+      },
+      {
+        "name": "evidence",
+        "source": "knowledge_runtime",
+        "priority": 35,
+        "chars": 2400,
+        "token_estimate": 600,
+        "char_budget": 2400,
+        "truncated": true,
+        "metadata": {},
+        "content": "\n[truncated: kept most recent/relevant tail]\n- 除臭装置可使用吹风机吹干或日晒去除吸附异味后重复使用。 # 注意 请勿将螺丝刀伸入冷气出风口。 # 门体换向\", \"source\": {\"chunk_id\": \"冰箱手册_0015\", \"manual_name\": \"冰箱手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"冰箱手册\"}, \"confidence\": 0.137467, \"evidence_id\": \"enterprise_rag:冰箱手册_0016\", \"raw_excerpt\": \"• 本冰箱设计为可换向门体，可根据厨房布局选择左开或右开。 # 注意 如需换向门体，必须联系售后服务人员。 门体换向不在保修范围内。 # 清洁 # 清洁前 务必拔下电源插头或关闭家中总开关。 # 外部清洁 用温热湿布擦拭冰箱外部，可使用或不使用清洁剂。若使用清洁剂，务必用干净湿布擦净。 # 内部清洁 清洁方法同上。 # 清洁后 检查电源线无损坏、电源插头无过热、插头牢固插入插座。 # 警告 用水清洗后务必用布擦干电器。 请勿使用研磨剂、汽油、苯、稀释剂、盐酸、沸水、硬毛刷等，以免损坏冰箱部件。 联系维修前请查阅本清单，可节省时间与费用。本清单包含常见问题，非电器制造或材料缺陷导致。 # 故障 可能原因 # 冰箱不运行 • 电源插头可能未插紧。重新牢固插入。 • 家中保险丝熔断或断路器跳闸。检查并/或更换保险丝，复位断路器。 • 停电。检查家中其他电器是否运行。 # 冷藏室温度过高 • 温度控制未设置在合适位置。 参阅温度控制章节。 • 电器靠近热源。 • 天气炎热—开门频繁。 • 门体长时间打开。 • 包装卡住门体或堵塞冷藏室风道。 # 震动或异响 • 冰箱安装地面不平或放置不稳。通过调节底脚调平冰箱。 • 物品掉落或存放在冰箱后方。 # 冷冻食物结霜或冰晶 • 门体未关严或包装卡住门体。 • 开门过于频繁或时间过长。 • 包装内结霜属正常现象。 # 箱体表面产生湿气 • 安装环境湿度大或潮湿时易出现此现象。用干毛巾擦拭即可。 # 故障 可能原因 # 冰箱内部积水、有异味 • 开门过于频繁或时间过长。 • 潮湿天气下，开门时空气中湿气进入冰箱。# 冰箱有异味 • 异味较重的食物应密封存放。 • 检查是否有变质食物。\", \"source\": {\"chunk_id\": \"冰箱手册_0016\", \"manual_name\": \"冰箱手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"冰箱手册\"}, \"confidence\": 0.135337, \"evidence_id\": \"enterprise_rag:冰箱手册_0006\", \"raw_excerpt\": \"• 本冰箱冰柜采用环保制冷剂天然气（异丁烷，R600a），即使少量（80~90克）也具有可燃性。运输、安装或使用过程中因严重损坏导致制冷剂泄漏时，任何火花都可能引发火灾或烧伤。 <IMG:Manual17_23> # 请勿向冰箱内外直接喷水。请勿在冰箱上使用酒精或矿物类清洁剂（如苯、稀释剂）。 这些物质可能腐蚀或渗入绝缘层及电气部件，导致触电、火灾或冰箱损坏。 <IMG:Manual17_24> # 发现冰箱冰柜有异味或冒烟时，立即拔下电源插头并联系售后服务中心。 继续使用可能导致损坏或火灾。 <IMG:Manual17_25> # 重要安全说明 # 除专业工程师外，任何人不得拆卸、维修或改装冰箱冰柜。 可能导致受伤、触电或火灾。 <IMG:Manual17_26> # 请勿将冰箱冰柜用于非家用用途（存放药品、实验材料或移动使用）。 可能引发火灾、触电、存放物品变质或化学反应等意外风险。 <IMG:Manual17_27> # 废弃处理冰箱冰柜时，请拆下冰箱门。 否则可能导致儿童被困在内。 <IMG:Manual17_28> # 本电器不适合肢体、感官或精神障碍者，以及缺乏经验和知识的人员（包括儿童）使用，除非有负责其安全的人员对其进行使用监督或指导。 # 应看管儿童，确保其不玩耍本电器。 # 重要安全说明 # 将冰箱冰柜安装在坚固平整的地面上。 安装在不稳定位置，开关门时冰箱可能倾倒，导致伤亡。 <IMG:Manual17_29> # 请勿将手或金属物品伸入冰箱冷气出口、盖板、底部及背部隔热格栅（排气孔）。 可能引发触电或受伤。 <IMG:Manual17_30> # 注意 违反本说明可能导致受伤或房屋、物品损坏。请务必小心。 # 请勿用湿手触碰冷冻室内的食物或容器。\", \"source\": {\"chunk_id\": \"冰箱手册_0006\", \"manual_name\": \"冰箱手册\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"冰箱有异味怎么处理？\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:冰箱手册_0015\", \"enterprise_rag:冰箱手册_0016\", \"enterprise_rag:冰箱手册_0006\"], \"retrieved_evidence_ids\": [\"enterprise_rag:冰箱手册_0015\", \"enterprise_rag:冰箱手册_0016\", \"enterprise_rag:冰箱手册_0006\"]}}",
+        "preview": "\n[truncated: kept most recent/relevant tail]\n- 除臭装置可使用吹风机吹干或日晒去除吸附异味后重复使用。 # 注意 请勿将螺丝刀伸入冷气出风口。 # 门体换向\", \"source\": {\"chunk_id\": \"冰箱手册_0015\", \"manual_name\": \"冰箱手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"冰箱手册\"},"
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 10,
+        "token_estimate": 2,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "冰箱有异味怎么处理？",
+        "preview": "冰箱有异味怎么处理？"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 117,
+        "token_estimate": 29,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "memory",
+      "evidence",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 2647,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "memory": 61,
+        "evidence": 2400,
+        "current_user": 10,
+        "runtime": 117
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "memory": 30,
+        "evidence": 35,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "evidence",
+        "memory",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [
+        "evidence"
+      ],
+      "dropped_sections": [],
+      "truncated_sections": [
+        "evidence"
+      ]
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[memory]\n[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-015\n\n[evidence]\n\n[truncated: kept most recent/relevant tail]\n- 除臭装置可使用吹风机吹干或日晒去除吸附异味后重复使用。 # 注意 请勿将螺丝刀伸入冷气出风口。 # 门体换向\", \"source\": {\"chunk_id\": \"冰箱手册_0015\", \"manual_name\": \"冰箱手册\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"冰箱手册\"}, \"confidence\": 0.137467, \"evidence_id\": \"enterprise_rag:冰箱手册_0016\", \"raw_excerpt\": \"• 本冰箱设计为可换向门体，可根据厨房布局选择左开或右开。 # 注意 如需换向门体，必须联系售后服务人员。 门体换向不在保修范围内。 # 清洁 # 清洁前 务必拔下电源插头或关闭家中总开关。 # 外部清洁 用温热湿布擦拭冰箱外部，可使用或不使用清洁剂。若使用清洁剂，务必用干净湿布擦净。 # 内部清洁 清洁方法同上。 # 清洁后 检查电源线无损坏、电源插头无过热、插头牢固插入插座。 # 警告 用水清洗后务必用布擦干电器。 请勿使用研磨剂、汽油、苯、稀释剂、盐酸、沸水、硬毛刷等，以免损坏冰箱部件。 联系维修前请查阅本清单，可节省时间与费用。本清单包含常见问题，非电器制造或材料缺陷导致。 # 故障 可能原因 # 冰箱不运行 • 电源插头可能未插紧。重新牢固插入。 • 家中保险丝熔断或断路器跳闸。检查并/或更换保险丝，复位断路器。 • 停电。检查家中其他电器是否运行。 # 冷藏室温度过高 • 温度控制未设置在合适位置。 参阅温度控制章节。 • 电器靠近热源。 • 天气炎热—开门频繁。 • 门体长时间打开。 • 包装卡住门体或堵塞冷藏室风道。 # 震动或异响 • 冰箱安装地面不平或放置不稳。通过"
+  },
+  "trace_persisted": "01cd3e1b48804599b682cd493dc8ef82",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [
+      "support"
+    ],
+    "support_handoff": {
+      "stage": "diagnosis",
+      "product_resolution": {
+        "status": "resolved",
+        "source": "strong_signal",
+        "product_id": "refrigerator",
+        "display_name": "冰箱",
+        "manual_names": [
+          "冰箱手册"
+        ],
+        "matched_terms": [
+          "冰箱"
+        ],
+        "disclose_default_product": false,
+        "candidate_product_ids": [],
+        "reason": "user named product identity"
+      },
+      "diagnosis_status": "grounded",
+      "symptoms": [
+        "冰箱有异味怎么处理？"
+      ],
+      "attempted_steps": [],
+      "recommended_next_steps": [
+        "您好！冰箱有异味可以按以下步骤排查处理。\n\n---\n\n### 1️⃣ 先判断是否为紧急情况\n如果闻到异味的同时还伴有**冒烟**或**刺鼻气味（类似燃气味）**，请**立即拔下电源插头**，并联系售后服务中心。继续使用可能导致损坏或火灾。  \n> 依据：手册说明“发现冰箱冰柜有异味或冒烟时，立即拔下电源插头并联系售后服务中心”。\n\n---\n\n### 2️⃣ 普通异味的日常处理\n如果只是常见食物混合气味，请先检查：\n- **是否有变质食物**，及时清理扔掉。\n- **异味较重的食物是否密封存放**，建议用保鲜盒或密封袋包装。\n\n这两点能解决大部分日常异味问题。\n\n---\n\n### 3️⃣ 清洁除臭装置（如异味仍存）\n如果清洁后味道还是比较大，可以处理冰箱内部的**除臭装置**，它能吸附异味并可重复使用。操作步骤如下：\n1. 用一字螺丝刀插入除臭装置盖板顶部，轻轻拉出盖板。\n2. 拉出内部的除臭装置。\n3. 用吹风机**吹干**或放在**日晒**下晾晒，即可去除吸附的异味。\n4. 晾干后按原路装回盖板和装置。\n> ⚠️ **注意**：操作时请勿将螺丝刀伸入冷气出风口，以免损坏部件或引发危险。\n\n---\n\n### 4️⃣ 如仍未解决\n如果以上方法都试过但异味持续，建议联系售后服务中心进行专业检查。\n\n---\n\n**重要安全提醒**：清洁冰箱时请勿向内部直接喷水，也不要用酒精、汽油、苯、稀释剂等清洁剂，以免腐蚀或渗入电气部件引发触电或火灾。用水擦拭后务必用干布擦干。"
+      ],
+      "safety_risks": [],
+      "evidence_ids": [
+        "enterprise_rag:冰箱手册_0015",
+        "enterprise_rag:冰箱手册_0016",
+        "enterprise_rag:冰箱手册_0006"
+      ],
+      "summary": "您好！冰箱有异味可以按以下步骤排查处理。\n\n---\n\n### 1️⃣ 先判断是否为紧急情况\n如果闻到异味的同时还伴有**冒烟**或**刺鼻气味（类似燃气味）**，请**立即拔下电源插头**，并联系售后服务中心。继续使用可能导致损坏或火灾。  \n> 依据：手册说明“发现冰箱冰柜有异味或冒烟时，立即拔下电源插头并联系售后服务中心”。\n\n---\n\n### 2️⃣ 普通异味的日常处理\n如果只是常见食物混合气味，请先检查：\n- **是否有变质食物**，及时清理扔掉。\n- **异味较重的食物是否密封存放**，建议用保鲜盒或密封袋包装。\n\n这两点能解决大部分日常异味问题。\n\n---\n\n### 3️⃣ 清洁除臭装置（如异味仍存）\n如果清洁后味道还是比较大，可以处理冰箱内部的**除臭装置**，它能吸附异味并可重复使用。操作步骤如下：\n1. 用一字螺丝刀插入除臭装置盖板顶部，轻轻拉出盖板。\n2. 拉出内部的除"
+    },
+    "plans": [
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "User asks for a solution to refrigerator odor, which is a product usage and diagnosis question, fitting the support action category.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"User asks for a solution to refrigerator odor, which is a product usage and diagnosis question, fitting the support action category.\"\n}"
+      },
+      {
+        "action": "support",
+        "confidence": 0.9,
+        "reason": "用户询问冰箱异味处理，support阶段已生成详细诊断和步骤，无需转至service或clarify，应直接通过support agent将响应发送给用户。",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.9,\n  \"reason\": \"用户询问冰箱异味处理，support阶段已生成详细诊断和步骤，无需转至service或clarify，应直接通过support agent将响应发送给用户。\"\n}"
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "llm",
+      "confidence": 1.0,
+      "reason": "用户询问冰箱异味处理方法，这是一个常见的新问题，没有相关现有线程，因此创建新线程并启用工作流以便提供步骤化建议。",
+      "fallback_reason": ""
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 1.0,
+      "source": "llm",
+      "reason": "用户询问冰箱异味处理方法，这是一个常见的新问题，没有相关现有线程，因此创建新线程并启用工作流以便提供步骤化建议。"
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [
+      {
+        "candidate_id": "memcand_26548fbca1704462aae8d52b50e0c45a",
+        "outcome": "accept",
+        "target_thread_id": null,
+        "reason": "candidate passed memory governance checks",
+        "conflicts": [],
+        "update": {
+          "key": "product_support",
+          "value": {
+            "disambiguation_pending": false,
+            "disambiguation_candidates": [],
+            "last_query": "冰箱有异味怎么处理？",
+            "evidence_count": 3,
+            "manual_names": [
+              "冰箱手册"
+            ],
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "refrigerator",
+              "display_name": "冰箱",
+              "manual_names": [
+                "冰箱手册"
+              ],
+              "matched_terms": [
+                "冰箱"
+              ],
+              "disclose_default_product": false,
+              "candidate_product_ids": [],
+              "reason": "user named product identity"
+            },
+            "selected_product_id": "refrigerator",
+            "selected_display_name": "冰箱",
+            "allowed_manual_names": [
+              "冰箱手册"
+            ]
+          },
+          "reason": "product support answered with knowledge evidence",
+          "evidence_ids": [
+            "enterprise_rag:冰箱手册_0015",
+            "enterprise_rag:冰箱手册_0016",
+            "enterprise_rag:冰箱手册_0006"
+          ],
+          "provenance": "skill",
+          "confidence": 0.82
+        },
+        "degraded": false
+      }
+    ],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": true,
+    "valid": false,
+    "failure_reason": "ValueError: candidate update_key is not allowed",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

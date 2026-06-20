@@ -152,6 +152,18 @@ class ToolRuntime:
         return result
 
     async def call(self, context: AgentContext, request: ToolCallRequest) -> ToolCallResult:
+        scoped_tools = context.allowed_tool_names
+        full_name = f"{request.service_id}.{request.tool_name}"
+        if scoped_tools and full_name not in scoped_tools:
+            message = f"tool not allowed for selected agent: {full_name}"
+            context.trace.add_event("tool.agent_scope_denied", message, allowed_tools=sorted(scoped_tools))
+            return ToolCallResult(
+                ok=False,
+                service_id=request.service_id,
+                tool_name=request.tool_name,
+                error_code="agent_tool_scope_denied",
+                error_message=message,
+            )
         context.trace.add_event(
             "tool.preflight",
             f"{request.service_id}.{request.tool_name}",

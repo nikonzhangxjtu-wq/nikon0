@@ -1,0 +1,45 @@
+{
+  "dataset": "nikon0/eval/datasets/agent_qa_eval_150_manual.jsonl",
+  "runtime_profile": "production_like",
+  "runtime_profile_audit": {
+    "runtime_profile": "production_like",
+    "context_profile": "production_like_llm",
+    "context_governance_enabled": true,
+    "llm_context_components_enabled": {
+      "read_planner": true,
+      "conversation_compactor": true,
+      "evidence_span_selector": true
+    },
+    "mock_skill_enabled": false,
+    "mock_tool_names": [
+      "mock.echo"
+    ],
+    "case_intake_tool_mode": "production",
+    "rag_backend_policy": {
+      "primary": "enterprise_rag",
+      "local_rag": false,
+      "structured_manual_fallback": true
+    },
+    "eval_runtime_matches_production": true,
+    "production_mismatch_reasons": [],
+    "memory_store_type": "RedisMysqlSessionIssueStore"
+  },
+  "use_real_llm": true,
+  "local_rag": false,
+  "mock_case_intake_tool": false,
+  "total_items": 1,
+  "total_elapsed_sec": 50.4,
+  "avg_sec_per_item": 50.37,
+  "ok_count": 1,
+  "error_count": 0,
+  "by_category": {
+    "product_support": {
+      "total": 1,
+      "ok": 1,
+      "error": 0,
+      "empty": 0
+    }
+  },
+  "multi_turn_cases": 0,
+  "true_multi_turn_cases": 0
+}

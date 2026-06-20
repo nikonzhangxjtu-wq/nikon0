@@ -272,6 +272,8 @@ class Settings(BaseSettings):
     nikon0_memory_llm_planner_timeout: int = Field(default=12, alias="NIKON0_MEMORY_LLM_PLANNER_TIMEOUT")
     nikon0_memory_llm_planner_max_tokens: int = Field(default=512, alias="NIKON0_MEMORY_LLM_PLANNER_MAX_TOKENS")
     nikon0_memory_persistence_strict: bool = Field(default=False, alias="NIKON0_MEMORY_PERSISTENCE_STRICT")
+    nikon0_multi_agent_enabled: bool = Field(default=False, alias="NIKON0_MULTI_AGENT_ENABLED")
+    nikon0_memory_write_agent_enabled: bool = Field(default=False, alias="NIKON0_MEMORY_WRITE_AGENT_ENABLED")
 
     # ---- Multimodal Manual Images V2 ----
     # True：启用手册图片 collection 召回；失败时自动回退纯文本 RAG。

@@ -1,0 +1,1133 @@
+{
+  "trace": {
+    "trace_id": "33901a73480a4a19b3c7dd7e8a7594dc",
+    "session_id": "eval:multiagent:2d2914c9e9d2:ma-018",
+    "user_message": "相机怎么装 EF-S 镜头？",
+    "selected_agents": [
+      "support"
+    ],
+    "selected_skills": [],
+    "context_events": [
+      {
+        "message_chars": 14,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-018",
+        "section_count": 3,
+        "section_names": [
+          "system_policy",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 177,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "current_user": 14,
+            "runtime": 104
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [],
+          "dropped_sections": [],
+          "truncated_sections": []
+        },
+        "strategy": "context_pack_v1"
+      },
+      {
+        "message_chars": 14,
+        "image_count": 0,
+        "transcript_chars": 0,
+        "memory_chars": 61,
+        "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-018",
+        "section_count": 6,
+        "section_names": [
+          "system_policy",
+          "memory",
+          "tool_observations",
+          "evidence",
+          "current_user",
+          "runtime"
+        ],
+        "budget_report": {
+          "total_budget": 9000,
+          "used_chars": 3394,
+          "section_budgets": {},
+          "section_chars": {
+            "system_policy": 59,
+            "memory": 61,
+            "tool_observations": 743,
+            "evidence": 2400,
+            "current_user": 14,
+            "runtime": 117
+          },
+          "section_priorities": {
+            "system_policy": 10,
+            "memory": 30,
+            "tool_observations": 40,
+            "evidence": 35,
+            "current_user": 5,
+            "runtime": 60
+          },
+          "degradation_order": [
+            "runtime",
+            "tool_observations",
+            "evidence",
+            "memory",
+            "system_policy",
+            "current_user"
+          ],
+          "degraded_sections": [
+            "evidence"
+          ],
+          "dropped_sections": [],
+          "truncated_sections": [
+            "evidence"
+          ]
+        },
+        "strategy": "context_pack_v1"
+      }
+    ],
+    "knowledge_calls": [
+      {
+        "query": "相机怎么装 EF-S 镜头？",
+        "intent": "product_support",
+        "evidence_count": 3,
+        "backend_trace": [
+          {
+            "backend": "enterprise_rag",
+            "ok": true,
+            "collection": "manual_chunks_v1",
+            "image_collection": "manual_images_v1",
+            "dense_field": "dense_vector",
+            "sparse_enabled": true,
+            "rerank": "enabled",
+            "knowledge_version": null,
+            "tenant_id": null,
+            "manual_name_decision": {
+              "manual_name": "DSLR_Camera",
+              "confidence": 1.0,
+              "source": "product_resolver",
+              "reason": "restricted by resolved product manuals",
+              "should_filter": true
+            },
+            "permission_filter": {
+              "allowed_manual_names": [
+                "DSLR_Camera"
+              ]
+            },
+            "raw_count": 3,
+            "filtered_count": 3,
+            "retrieval_trace": {
+              "query": "相机怎么装 EF-S 镜头？",
+              "top_k": 3,
+              "raw_count": 3,
+              "filtered_count": 3,
+              "score_threshold": 0.1,
+              "top1_score": 0.297014,
+              "retrieved_chunk_ids": [
+                "DSLR_Camera_0042",
+                "DSLR_Camera_0043",
+                "DSLR_Camera_0331"
+              ],
+              "filtered_chunk_ids": [
+                "DSLR_Camera_0042",
+                "DSLR_Camera_0043",
+                "DSLR_Camera_0331"
+              ],
+              "retrieved_manual_names": [
+                "DSLR_Camera",
+                "DSLR_Camera",
+                "DSLR_Camera"
+              ],
+              "filtered_manual_names": [
+                "DSLR_Camera",
+                "DSLR_Camera",
+                "DSLR_Camera"
+              ],
+              "source_queries": [
+                "相机怎么装 EF-S 镜头？"
+              ],
+              "manual_name_decisions": [
+                "DSLR_Camera"
+              ],
+              "image_vector_hits": [],
+              "ocr_entity_hits": [],
+              "selected_image_ids": [
+                "Manual10_22",
+                "Manual10_23",
+                "Manual10_24",
+                "Manual10_248"
+              ]
+            }
+          }
+        ],
+        "product_resolution": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "canon_dslr",
+          "display_name": "Canon EOS 单反相机",
+          "manual_names": [
+            "DSLR_Camera"
+          ],
+          "matched_terms": [
+            "EF-S"
+          ],
+          "disclose_default_product": true,
+          "candidate_product_ids": [],
+          "reason": "inferred product from technical signal"
+        }
+      }
+    ],
+    "tool_calls": [
+      {
+        "service_id": "product-support",
+        "tool_name": "resolve_product",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "search_product_manual",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      },
+      {
+        "service_id": "product-support",
+        "tool_name": "validate_answer_grounding",
+        "ok": true,
+        "error_code": null,
+        "provider": null,
+        "source_service": null
+      }
+    ],
+    "safety_decisions": [
+      {
+        "allowed": true,
+        "risk_level": "low",
+        "requires_human": false,
+        "reason": "phase1 safety gate allowed low-risk response",
+        "blocked_actions": [],
+        "approval_request": null,
+        "handoff_request": null
+      }
+    ],
+    "memory_updates": [],
+    "events": [
+      {
+        "stage": "runtime.start",
+        "message": "received agent request",
+        "payload": {
+          "channel": "web"
+        },
+        "created_at": 1781970806.0920289
+      },
+      {
+        "stage": "memory.read_plan",
+        "message": "selected governed memory read scope",
+        "payload": {
+          "thread_ids": [],
+          "include_session_facts": false,
+          "include_workflow": true,
+          "include_ticket_history": false,
+          "source": "deterministic",
+          "confidence": 1.0,
+          "reason": "session has no active thread",
+          "fallback_reason": "SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /compatible-mode/v1/chat/completions (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1017)')))"
+        },
+        "created_at": 1781970811.100536
+      },
+      {
+        "stage": "memory.thread_decision",
+        "message": "selected issue thread lifecycle action",
+        "payload": {
+          "action": "create_thread",
+          "thread_id": null,
+          "confidence": 1.0,
+          "source": "deterministic",
+          "reason": "session has no active thread"
+        },
+        "created_at": 1781970811.100555
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "确保回答符合平台边界和禁止事项",
+            "evidence": "用户询问具体安装步骤，需要知识库或商品手册证据",
+            "current_user": "需要当前用户消息的内容",
+            "runtime": "需要运行时信息如渠道等"
+          },
+          "source": "llm",
+          "confidence": 0.9
+        },
+        "created_at": 1781970817.68535
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 14,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-018",
+          "section_count": 3,
+          "section_names": [
+            "system_policy",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 177,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "current_user": 14,
+              "runtime": 104
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [],
+            "dropped_sections": [],
+            "truncated_sections": []
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970817.685525
+      },
+      {
+        "stage": "agent.delegation_plan",
+        "message": "initial delegation plan",
+        "payload": {
+          "action": "support",
+          "confidence": 0.95,
+          "reason": "User asks for instructions on installing an EF-S lens, a product/manual question that falls under support.",
+          "source": "llm",
+          "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"User asks for instructions on installing an EF-S lens, a product/manual question that falls under support.\"\n}"
+        },
+        "created_at": 1781970822.187289
+      },
+      {
+        "stage": "agent.execution_start",
+        "message": "support agent started",
+        "payload": {
+          "agent": "support"
+        },
+        "created_at": 1781970822.187317
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.resolve_product",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970822.187348
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970822.187377
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.resolve_product returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970822.18753
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.resolve_product",
+        "payload": {
+          "tool_name": "resolve_product"
+        },
+        "created_at": 1781970822.1875432
+      },
+      {
+        "stage": "product.resolve",
+        "message": "product resolution status=resolved",
+        "payload": {
+          "status": "resolved",
+          "source": "strong_signal",
+          "product_id": "canon_dslr",
+          "display_name": "Canon EOS 单反相机",
+          "manual_names": [
+            "DSLR_Camera"
+          ],
+          "matched_terms": [
+            "EF-S"
+          ],
+          "disclose_default_product": true,
+          "candidate_product_ids": [],
+          "reason": "inferred product from technical signal"
+        },
+        "created_at": 1781970822.1875882
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.search_product_manual",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970822.1876092
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970822.1876202
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.search_product_manual returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970831.8428118
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.search_product_manual",
+        "payload": {
+          "tool_name": "search_product_manual"
+        },
+        "created_at": 1781970831.842818
+      },
+      {
+        "stage": "context.read_plan",
+        "message": "planned context sections",
+        "payload": {
+          "included_sections": [
+            "system_policy",
+            "memory",
+            "conversation",
+            "tool_observations",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "reasons": {
+            "system_policy": "平台回答边界和禁止事项，必须保留",
+            "memory": "需要当前会话记忆、active product/issue 信息",
+            "conversation": "最近对话摘要为空但需要保持结构",
+            "tool_observations": "可能已有工具执行结果需要引用",
+            "evidence": "商品安装问题需要知识库或手册证据",
+            "current_user": "用户当前消息是核心输入",
+            "runtime": "包含渠道、图片数量等运行时信息"
+          },
+          "source": "llm",
+          "confidence": 0.95
+        },
+        "created_at": 1781970835.8278232
+      },
+      {
+        "stage": "context.tool_observations",
+        "message": "built prompt tool observations",
+        "payload": {
+          "item_count": 2,
+          "raw_result_refs": [
+            "trace://33901a73480a4a19b3c7dd7e8a7594dc/tool_results/0",
+            "trace://33901a73480a4a19b3c7dd7e8a7594dc/tool_results/1"
+          ]
+        },
+        "created_at": 1781970835.827991
+      },
+      {
+        "stage": "context.evidence_pack",
+        "message": "built prompt evidence pack",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:DSLR_Camera_0042",
+            "enterprise_rag:DSLR_Camera_0043",
+            "enterprise_rag:DSLR_Camera_0331"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:DSLR_Camera_0042",
+            "enterprise_rag:DSLR_Camera_0043",
+            "enterprise_rag:DSLR_Camera_0331"
+          ],
+          "deduplicated_evidence_ids": [],
+          "item_count": 3,
+          "source": "llm_span_selector"
+        },
+        "created_at": 1781970835.8283799
+      },
+      {
+        "stage": "context.govern",
+        "message": "built context pack",
+        "payload": {
+          "message_chars": 14,
+          "image_count": 0,
+          "transcript_chars": 0,
+          "memory_chars": 61,
+          "memory_preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-018",
+          "section_count": 6,
+          "section_names": [
+            "system_policy",
+            "memory",
+            "tool_observations",
+            "evidence",
+            "current_user",
+            "runtime"
+          ],
+          "budget_report": {
+            "total_budget": 9000,
+            "used_chars": 3394,
+            "section_budgets": {},
+            "section_chars": {
+              "system_policy": 59,
+              "memory": 61,
+              "tool_observations": 743,
+              "evidence": 2400,
+              "current_user": 14,
+              "runtime": 117
+            },
+            "section_priorities": {
+              "system_policy": 10,
+              "memory": 30,
+              "tool_observations": 40,
+              "evidence": 35,
+              "current_user": 5,
+              "runtime": 60
+            },
+            "degradation_order": [
+              "runtime",
+              "tool_observations",
+              "evidence",
+              "memory",
+              "system_policy",
+              "current_user"
+            ],
+            "degraded_sections": [
+              "evidence"
+            ],
+            "dropped_sections": [],
+            "truncated_sections": [
+              "evidence"
+            ]
+          },
+          "strategy": "context_pack_v1"
+        },
+        "created_at": 1781970835.828584
+      },
+      {
+        "stage": "llm.answer",
+        "message": "generated product support answer",
+        "payload": {
+          "node": "product_support",
+          "prompt": "PRODUCT_SUPPORT_SYSTEM_PROMPT",
+          "evidence_count": 3
+        },
+        "created_at": 1781970843.938117
+      },
+      {
+        "stage": "tool.preflight",
+        "message": "product-support.validate_answer_grounding",
+        "payload": {
+          "risk_level": "low",
+          "requires_approval": false
+        },
+        "created_at": 1781970843.938228
+      },
+      {
+        "stage": "tool.pre_tool",
+        "message": "pre_tool accepted product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970843.9382558
+      },
+      {
+        "stage": "tool.result",
+        "message": "product-support.validate_answer_grounding returned ok",
+        "payload": {
+          "ok": true,
+          "error_code": null
+        },
+        "created_at": 1781970843.938613
+      },
+      {
+        "stage": "tool.post_tool",
+        "message": "post_tool recorded ok=True for product-support.validate_answer_grounding",
+        "payload": {
+          "tool_name": "validate_answer_grounding"
+        },
+        "created_at": 1781970843.938626
+      },
+      {
+        "stage": "evidence.usage",
+        "message": "recorded product-support evidence usage",
+        "payload": {
+          "retrieved_evidence_ids": [
+            "enterprise_rag:DSLR_Camera_0042",
+            "enterprise_rag:DSLR_Camera_0043",
+            "enterprise_rag:DSLR_Camera_0331"
+          ],
+          "included_evidence_ids": [
+            "enterprise_rag:DSLR_Camera_0042",
+            "enterprise_rag:DSLR_Camera_0043",
+            "enterprise_rag:DSLR_Camera_0331"
+          ],
+          "used_evidence_ids": [
+            "enterprise_rag:DSLR_Camera_0042",
+            "enterprise_rag:DSLR_Camera_0043",
+            "enterprise_rag:DSLR_Camera_0331"
+          ],
+          "grounding_checked": true,
+          "grounding": {
+            "grounded": true,
+            "missing_terms": [],
+            "evidence_count": 3,
+            "token_overlap": 2,
+            "reason": "answer is covered by evidence"
+          },
+          "product_resolution": {
+            "status": "resolved",
+            "source": "strong_signal",
+            "product_id": "canon_dslr",
+            "display_name": "Canon EOS 单反相机",
+            "manual_names": [
+              "DSLR_Camera"
+            ],
+            "matched_terms": [
+              "EF-S"
+            ],
+            "disclose_default_product": true,
+            "candidate_product_ids": [],
+            "reason": "inferred product from technical signal"
+          }
+        },
+        "created_at": 1781970843.938654
+      },
+      {
+        "stage": "agent.execution_stop",
+        "message": "support agent completed",
+        "payload": {
+          "agent": "support",
+          "status": "success"
+        },
+        "created_at": 1781970843.9387121
+      },
+      {
+        "stage": "agent.handoff_created",
+        "message": "support handoff created",
+        "payload": {
+          "agent": "support",
+          "handoff": {
+            "stage": "diagnosis",
+            "product_resolution": {
+              "status": "resolved",
+              "source": "strong_signal",
+              "product_id": "canon_dslr",
+              "display_name": "Canon EOS 单反相机",
+              "manual_names": [
+                "DSLR_Camera"
+              ],
+              "matched_terms": [
+                "EF-S"
+              ],
+              "disclose_default_product": true,
+              "candidate_product_ids": [],
+              "reason": "inferred product from technical signal"
+            },
+            "diagnosis_status": "grounded",
+            "symptoms": [
+              "相机怎么装 EF-S 镜头？"
+            ],
+            "attempted_steps": [],
+            "recommended_next_steps": [
+              "根据您问题中的「EF-S」，当前默认按 **Canon EOS 单反相机** 为您解答；如您的实际产品不符，请告诉我正确型号。\n\n您询问的是如何安装 EF-S 镜头，我理解您使用的是 **Canon EOS 单反相机**（系统已默认按该产品解答）。根据产品手册，安装步骤如下：\n\n---\n\n### 📷 安装 EF-S 镜头步骤\n\n1. **准备工作**  \n   - 取下相机机身盖和镜头后盖。  \n   - **将镜头上的对焦模式开关拨到 <AF>**（自动对焦），否则自动对焦将无法工作。  \n   - 取下镜头前盖。\n\n2. **对准安装标记**  \n   - 在相机卡口处找到 **白色 EF-S 镜头安装标记**（一个白色小点或白线）。  \n   - 将 EF-S 镜头上的对应标记与相机的 **白色标记** 对齐。\n\n3. **旋转镜头到位**  \n   - 保持标记对齐，按箭头方向（通常为顺时针）平稳旋转镜头，直到听到 **“咔嗒”一声锁紧**。\n\n4. **检查安装**  \n   - 轻轻尝试旋转镜头，确认已牢固锁定（不应晃动）。\n\n> ⚠️ **重要提醒**：  \n> - 如果是安装 **非 EF-S 镜头**（如 EF 镜头），应使用 **红色 EF 镜头安装标记** 对齐。  \n> - 安装或拆卸镜头时，请**保持机身卡口朝下**，防止灰尘进入相机内部。  \n> - 拆卸镜头时，需按住 **镜头释放按钮**，然后按箭头方向旋转至停止位置再取下。\n\n---\n\n如果您在操作中遇到镜头无法卡入或标识不清等问题，请告知您的相机具体型号，以便进一步给出指导。"
+            ],
+            "safety_risks": [],
+            "evidence_ids": [
+              "enterprise_rag:DSLR_Camera_0042",
+              "enterprise_rag:DSLR_Camera_0043",
+              "enterprise_rag:DSLR_Camera_0331"
+            ],
+            "summary": "根据您问题中的「EF-S」，当前默认按 **Canon EOS 单反相机** 为您解答；如您的实际产品不符，请告诉我正确型号。\n\n您询问的是如何安装 EF-S 镜头，我理解您使用的是 **Canon EOS 单反相机**（系统已默认按该产品解答）。根据产品手册，安装步骤如下：\n\n---\n\n### 📷 安装 EF-S 镜头步骤\n\n1. **准备工作**  \n   - 取下相机机身盖和镜头后盖。  \n   - **将镜头上的对焦模式开关拨到 <AF>**（自动对焦），否则自动对焦将无法工作。  \n   - 取下镜头前盖。\n\n2. **对准安装标记**  \n   - 在相机卡口处找到 **白色 EF-S 镜头安装标记**（一个白色小点或白线）。  \n   - 将 EF-S 镜头上的对应标记与相机的 **白色标记** 对齐。\n\n3. **旋转镜头到位**  \n   - 保持标记对齐，按箭头方向（通"
+          }
+        },
+        "created_at": 1781970843.9387321
+      },
+      {
+        "stage": "agent.replan",
+        "message": "replanned after support result",
+        "payload": {
+          "action": "clarify",
+          "confidence": 0.0,
+          "reason": "invalid delegation: SSLError",
+          "source": "fallback",
+          "raw_response": ""
+        },
+        "created_at": 1781970848.944353
+      },
+      {
+        "stage": "safety.check",
+        "message": "phase1 safety gate allowed low-risk response",
+        "payload": {
+          "allowed": true,
+          "risk_level": "low",
+          "requires_human": false,
+          "approval_id": null,
+          "handoff_id": null
+        },
+        "created_at": 1781970848.9444969
+      },
+      {
+        "stage": "memory.update",
+        "message": "applied governed session issue updates",
+        "payload": {
+          "candidate_count": 0,
+          "accepted_count": 0,
+          "confirmation_count": 0,
+          "rejected_count": 0,
+          "degraded": false
+        },
+        "created_at": 1781970848.9579241
+      },
+      {
+        "stage": "runtime.stop",
+        "message": "completed agent request",
+        "payload": {
+          "status": "needs_more_info"
+        },
+        "created_at": 1781970848.957929
+      }
+    ],
+    "final_risk_level": "low"
+  },
+  "context_debug": {
+    "rendered_chars": 3501,
+    "section_count": 6,
+    "sections": [
+      {
+        "name": "system_policy",
+        "source": "runtime",
+        "priority": 10,
+        "chars": 59,
+        "token_estimate": 14,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。",
+        "preview": "你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。"
+      },
+      {
+        "name": "memory",
+        "source": "memory",
+        "priority": 30,
+        "chars": 61,
+        "token_estimate": 15,
+        "char_budget": 1400,
+        "truncated": false,
+        "metadata": {},
+        "content": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-018",
+        "preview": "[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-018"
+      },
+      {
+        "name": "tool_observations",
+        "source": "tool_runtime",
+        "priority": 40,
+        "chars": 743,
+        "token_estimate": 185,
+        "char_budget": 1200,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"items\": [{\"data_keys\": [\"resolution\"], \"error_code\": null, \"error_message\": \"\", \"metadata\": {\"provider\": null, \"source_service\": null}, \"raw_result_ref\": \"trace://33901a73480a4a19b3c7dd7e8a7594dc/tool_results/0\", \"status\": \"success\", \"summary\": \"tool returned data keys: resolution\", \"tool\": \"product-support.resolve_product\"}, {\"data_keys\": [\"answer_hints\", \"backend_trace\", \"evidence\", \"manual_names\"], \"error_code\": null, \"error_message\": \"\", \"metadata\": {\"provider\": null, \"source_service\": null}, \"raw_result_ref\": \"trace://33901a73480a4a19b3c7dd7e8a7594dc/tool_results/1\", \"status\": \"success\", \"summary\": \"tool returned data keys: answer_hints, backend_trace, evidence, manual_names\", \"tool\": \"product-support.search_product_manual\"}]}",
+        "preview": "{\"items\": [{\"data_keys\": [\"resolution\"], \"error_code\": null, \"error_message\": \"\", \"metadata\": {\"provider\": null, \"source_service\": null}, \"raw_result_ref\": \"trace://33901a73480a4a19b3c7dd7e8a7594dc/tool_results/0\", \"status\": \"success\", \"sum"
+      },
+      {
+        "name": "evidence",
+        "source": "knowledge_runtime",
+        "priority": 35,
+        "chars": 2400,
+        "token_estimate": 600,
+        "char_budget": 2400,
+        "truncated": true,
+        "metadata": {},
+        "content": "\n[truncated: kept most recent/relevant tail]\ne lens. Align theEF-Slenswiththecamera's whiteEF-Slensmountindexandturn the lens as shown by the arrow until it clicks in place. When attaching a lens other than an EF-S lens,align the lens with the red EF lens index mark. EF-S Lens mount index EF lens mount index\", \"source\": {\"chunk_id\": \"DSLR_Camera_0042\", \"manual_name\": \"DSLR_Camera\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"DSLR_Camera\"}, \"confidence\": 0.083304, \"evidence_id\": \"enterprise_rag:DSLR_Camera_0043\", \"raw_excerpt\": \"<IMG:Manual10_22> # On the lens, set the focus mode switch to<AF>. ●If it is set to , autofocus will not be possible. Remove the front lens cap. <IMG:Manual10_23> # Detaching the Lens # While pressing the lens release button, turn the lens as shown by the arrow. ●Turn the lens until it stops, then detach it. When ataching or detaching the lens, take care to prevent dust from entering the camera through the lens mount. <IMG:Manual10_24> # Installing and Removing the CF Card The captured image will be recorded onto the CF card (optional). Although the thickness is different, a Type I or Type Il CF card can be inserted intothecamera.Thecamera is alsocompatiblewithMicrodrive and CF cards with 2 GB or higher capacity. # Installing the Card # Open the cover. Slide the cover as\", \"source\": {\"chunk_id\": \"DSLR_Camera_0043\", \"manual_name\": \"DSLR_Camera\"}, \"source_type\": \"enterprise_rag\"}, {\"applicability\": {\"manual_name\": \"DSLR_Camera\"}, \"confidence\": 0.079075, \"evidence_id\": \"enterprise_rag:DSLR_Camera_0331\", \"raw_excerpt\": \"<IMG:Manual10_248> # ·Type Recording media: Digital, single-lens reflex, AF/AE camera with builtin flash Type I or lIl CFcard \\\\* Compatible with Microdrive and 2GB or larger CF cards 22.5 x 15.0mm EF lenses (including EF-S lenses) (35mm-equivalent focal length is equal to approx.1.6 times the marked focal length.) Image size: Compatible lenses: Lens mount: #\", \"source\": {\"chunk_id\": \"DSLR_Camera_0331\", \"manual_name\": \"DSLR_Camera\"}, \"source_type\": \"enterprise_rag\"}], \"query\": \"相机怎么装 EF-S 镜头？\", \"usage\": {\"deduplicated_evidence_ids\": [], \"included_evidence_ids\": [\"enterprise_rag:DSLR_Camera_0042\", \"enterprise_rag:DSLR_Camera_0043\", \"enterprise_rag:DSLR_Camera_0331\"], \"retrieved_evidence_ids\": [\"enterprise_rag:DSLR_Camera_0042\", \"enterprise_rag:DSLR_Camera_0043\", \"enterprise_rag:DSLR_Camera_0331\"]}}",
+        "preview": "\n[truncated: kept most recent/relevant tail]\ne lens. Align theEF-Slenswiththecamera's whiteEF-Slensmountindexandturn the lens as shown by the arrow until it clicks in place. When attaching a lens other than an EF-S lens,align the lens with "
+      },
+      {
+        "name": "current_user",
+        "source": "request",
+        "priority": 5,
+        "chars": 14,
+        "token_estimate": 3,
+        "char_budget": 800,
+        "truncated": false,
+        "metadata": {},
+        "content": "相机怎么装 EF-S 镜头？",
+        "preview": "相机怎么装 EF-S 镜头？"
+      },
+      {
+        "name": "runtime",
+        "source": "runtime",
+        "priority": 60,
+        "chars": 117,
+        "token_estimate": 29,
+        "char_budget": 400,
+        "truncated": false,
+        "metadata": {},
+        "content": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}",
+        "preview": "{\"available_tool_count\": 10, \"channel\": \"web\", \"image_count\": 0, \"loop_turn\": 0, \"selected_skill\": \"product_support\"}"
+      }
+    ],
+    "section_names": [
+      "system_policy",
+      "memory",
+      "tool_observations",
+      "evidence",
+      "current_user",
+      "runtime"
+    ],
+    "budget_report": {
+      "total_budget": 9000,
+      "used_chars": 3394,
+      "section_budgets": {},
+      "section_chars": {
+        "system_policy": 59,
+        "memory": 61,
+        "tool_observations": 743,
+        "evidence": 2400,
+        "current_user": 14,
+        "runtime": 117
+      },
+      "section_priorities": {
+        "system_policy": 10,
+        "memory": 30,
+        "tool_observations": 40,
+        "evidence": 35,
+        "current_user": 5,
+        "runtime": 60
+      },
+      "degradation_order": [
+        "runtime",
+        "tool_observations",
+        "evidence",
+        "memory",
+        "system_policy",
+        "current_user"
+      ],
+      "degraded_sections": [
+        "evidence"
+      ],
+      "dropped_sections": [],
+      "truncated_sections": [
+        "evidence"
+      ]
+    },
+    "governed_context_preview": "[Context Pack]\n\n[system_policy]\n你是 nikon0 企业助手。必须基于可见上下文和工具证据回答；不能编造业务动作、订单状态、退款、维修结论或手册内容。\n\n[memory]\n[Memory View]\nsession_id: eval:multiagent:2d2914c9e9d2:ma-018\n\n[tool_observations]\n{\"items\": [{\"data_keys\": [\"resolution\"], \"error_code\": null, \"error_message\": \"\", \"metadata\": {\"provider\": null, \"source_service\": null}, \"raw_result_ref\": \"trace://33901a73480a4a19b3c7dd7e8a7594dc/tool_results/0\", \"status\": \"success\", \"summary\": \"tool returned data keys: resolution\", \"tool\": \"product-support.resolve_product\"}, {\"data_keys\": [\"answer_hints\", \"backend_trace\", \"evidence\", \"manual_names\"], \"error_code\": null, \"error_message\": \"\", \"metadata\": {\"provider\": null, \"source_service\": null}, \"raw_result_ref\": \"trace://33901a73480a4a19b3c7dd7e8a7594dc/tool_results/1\", \"status\": \"success\", \"summary\": \"tool returned data keys: answer_hints, backend_trace, evidence, manual_names\", \"tool\": \"product-support.search_product_manual\"}]}\n\n[evidence]\n\n[truncated: kept most recent/relevant tail]\ne lens. Align "
+  },
+  "trace_persisted": "33901a73480a4a19b3c7dd7e8a7594dc",
+  "transcript_entries": 2,
+  "loop": {
+    "turn_count": 1,
+    "stop_reason": "multi_agent_complete",
+    "steps": []
+  },
+  "multi_agent": {
+    "enabled": true,
+    "agent_stages": [
+      "support"
+    ],
+    "support_handoff": {
+      "stage": "diagnosis",
+      "product_resolution": {
+        "status": "resolved",
+        "source": "strong_signal",
+        "product_id": "canon_dslr",
+        "display_name": "Canon EOS 单反相机",
+        "manual_names": [
+          "DSLR_Camera"
+        ],
+        "matched_terms": [
+          "EF-S"
+        ],
+        "disclose_default_product": true,
+        "candidate_product_ids": [],
+        "reason": "inferred product from technical signal"
+      },
+      "diagnosis_status": "grounded",
+      "symptoms": [
+        "相机怎么装 EF-S 镜头？"
+      ],
+      "attempted_steps": [],
+      "recommended_next_steps": [
+        "根据您问题中的「EF-S」，当前默认按 **Canon EOS 单反相机** 为您解答；如您的实际产品不符，请告诉我正确型号。\n\n您询问的是如何安装 EF-S 镜头，我理解您使用的是 **Canon EOS 单反相机**（系统已默认按该产品解答）。根据产品手册，安装步骤如下：\n\n---\n\n### 📷 安装 EF-S 镜头步骤\n\n1. **准备工作**  \n   - 取下相机机身盖和镜头后盖。  \n   - **将镜头上的对焦模式开关拨到 <AF>**（自动对焦），否则自动对焦将无法工作。  \n   - 取下镜头前盖。\n\n2. **对准安装标记**  \n   - 在相机卡口处找到 **白色 EF-S 镜头安装标记**（一个白色小点或白线）。  \n   - 将 EF-S 镜头上的对应标记与相机的 **白色标记** 对齐。\n\n3. **旋转镜头到位**  \n   - 保持标记对齐，按箭头方向（通常为顺时针）平稳旋转镜头，直到听到 **“咔嗒”一声锁紧**。\n\n4. **检查安装**  \n   - 轻轻尝试旋转镜头，确认已牢固锁定（不应晃动）。\n\n> ⚠️ **重要提醒**：  \n> - 如果是安装 **非 EF-S 镜头**（如 EF 镜头），应使用 **红色 EF 镜头安装标记** 对齐。  \n> - 安装或拆卸镜头时，请**保持机身卡口朝下**，防止灰尘进入相机内部。  \n> - 拆卸镜头时，需按住 **镜头释放按钮**，然后按箭头方向旋转至停止位置再取下。\n\n---\n\n如果您在操作中遇到镜头无法卡入或标识不清等问题，请告知您的相机具体型号，以便进一步给出指导。"
+      ],
+      "safety_risks": [],
+      "evidence_ids": [
+        "enterprise_rag:DSLR_Camera_0042",
+        "enterprise_rag:DSLR_Camera_0043",
+        "enterprise_rag:DSLR_Camera_0331"
+      ],
+      "summary": "根据您问题中的「EF-S」，当前默认按 **Canon EOS 单反相机** 为您解答；如您的实际产品不符，请告诉我正确型号。\n\n您询问的是如何安装 EF-S 镜头，我理解您使用的是 **Canon EOS 单反相机**（系统已默认按该产品解答）。根据产品手册，安装步骤如下：\n\n---\n\n### 📷 安装 EF-S 镜头步骤\n\n1. **准备工作**  \n   - 取下相机机身盖和镜头后盖。  \n   - **将镜头上的对焦模式开关拨到 <AF>**（自动对焦），否则自动对焦将无法工作。  \n   - 取下镜头前盖。\n\n2. **对准安装标记**  \n   - 在相机卡口处找到 **白色 EF-S 镜头安装标记**（一个白色小点或白线）。  \n   - 将 EF-S 镜头上的对应标记与相机的 **白色标记** 对齐。\n\n3. **旋转镜头到位**  \n   - 保持标记对齐，按箭头方向（通"
+    },
+    "plans": [
+      {
+        "action": "support",
+        "confidence": 0.95,
+        "reason": "User asks for instructions on installing an EF-S lens, a product/manual question that falls under support.",
+        "source": "llm",
+        "raw_response": "{\n  \"action\": \"support\",\n  \"confidence\": 0.95,\n  \"reason\": \"User asks for instructions on installing an EF-S lens, a product/manual question that falls under support.\"\n}"
+      },
+      {
+        "action": "clarify",
+        "confidence": 0.0,
+        "reason": "invalid delegation: SSLError",
+        "source": "fallback",
+        "raw_response": ""
+      }
+    ]
+  },
+  "plan": null,
+  "skill_selection": null,
+  "skill_manifests": [
+    {
+      "name": "tool_echo",
+      "title": "Tool Echo",
+      "description": "Calls mock.echo to verify ToolRuntime lifecycle.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tool_result": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "tool_runtime_smoke_test"
+      ],
+      "required_tools": [
+        "mock.echo"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    },
+    {
+      "name": "case_intake",
+      "title": "Case Intake",
+      "description": "Collects repair, refund, and complaint intake fields via MCP tools.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "session_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message",
+          "session_id"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "missing_slots": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ticket_payload": {
+            "type": "object"
+          }
+        }
+      },
+      "capabilities": [
+        "repair_intake",
+        "refund_intake",
+        "complaint_intake",
+        "case_intake_cancel"
+      ],
+      "required_tools": [
+        "case-intake.extract_case_slots",
+        "case-intake.collect_case_intake",
+        "case-intake.try_cancel_case_intake"
+      ],
+      "risk_level": "medium",
+      "sticky_policy": {
+        "enabled": true,
+        "continue_when": [
+          "collecting"
+        ],
+        "exit_when": [
+          "ready",
+          "cancelled"
+        ],
+        "max_turns": 6,
+        "priority": 10
+      },
+      "fallback_policy": {
+        "allow_general_fallback": false,
+        "allow_handoff": true,
+        "retry_on_tool_error": true
+      }
+    },
+    {
+      "name": "product_support",
+      "title": "商品技术支持",
+      "description": "商品说明书知识问答：基于产品手册 RAG 回答使用、安装、清洁保养、参数规格、功能模式、故障排查与安全限制等问题；不处理退款/物流/订单/投诉受理。",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          }
+        }
+      },
+      "capabilities": [
+        "manual_qa",
+        "product_usage",
+        "installation",
+        "cleaning_maintenance",
+        "replacement_schedule",
+        "technical_specs",
+        "feature_explanation",
+        "troubleshooting",
+        "safety_limits"
+      ],
+      "required_tools": [
+        "product-support.resolve_product",
+        "product-support.search_product_manual",
+        "product-support.validate_answer_grounding"
+      ],
+      "risk_level": "low",
+      "sticky_policy": {
+        "enabled": false,
+        "continue_when": [],
+        "exit_when": [],
+        "max_turns": 4,
+        "priority": 100
+      },
+      "fallback_policy": {
+        "allow_general_fallback": true,
+        "allow_handoff": false,
+        "retry_on_tool_error": false
+      }
+    }
+  ],
+  "memory_governance": {
+    "read_plan": {
+      "thread_ids": [],
+      "include_session_facts": false,
+      "include_workflow": true,
+      "include_ticket_history": false,
+      "source": "deterministic",
+      "confidence": 1.0,
+      "reason": "session has no active thread",
+      "fallback_reason": "SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /compatible-mode/v1/chat/completions (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1017)')))"
+    },
+    "thread_decision": {
+      "action": "create_thread",
+      "thread_id": null,
+      "confidence": 1.0,
+      "source": "deterministic",
+      "reason": "session has no active thread"
+    },
+    "write_gate_enabled": true,
+    "write_decisions": [],
+    "degraded": false,
+    "store_profile": {
+      "store_type": "RedisMysqlSessionIssueStore",
+      "redis_ok": true,
+      "mysql_ok": true,
+      "sql_dialect": "mysql",
+      "schema_version": 1,
+      "degraded": false
+    }
+  },
+  "memory_write_agent": {
+    "enabled": true,
+    "triggered": false,
+    "valid": null,
+    "failure_reason": "",
+    "candidate_count": 0,
+    "blocked": false
+  }
+}

@@ -62,6 +62,8 @@ class AgentContext(BaseModel):
     plan: PlannerResult | None = None
     tool_results: list[dict[str, Any]] = Field(default_factory=list)
     tool_runtime: Any | None = None
+    allowed_tool_names: set[str] = Field(default_factory=set)
+    agent_handoff: dict[str, Any] = Field(default_factory=dict)
     available_tools: list[ToolSpec] = Field(default_factory=list)
     retry_tool_errors: bool = False
     loop_turn: int = 0
